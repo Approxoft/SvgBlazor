@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.810.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgBlazor", "src\SvgBlazor\SvgBlazor.csproj", "{2FEF4A96-A24F-47BB-894A-D2A6ACD15E2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgBlazor.Docs", "SvgBlazor.Docs\SvgBlazor.Docs.csproj", "{A2C775BA-3B0A-470D-ADF5-80057C44D904}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgBlazor.Docs", "src\SvgBlazor.Docs\SvgBlazor.Docs.csproj", "{7D78592B-3B9F-49A4-AAE8-C01879273534}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{2FEF4A96-A24F-47BB-894A-D2A6ACD15E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FEF4A96-A24F-47BB-894A-D2A6ACD15E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FEF4A96-A24F-47BB-894A-D2A6ACD15E2F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A2C775BA-3B0A-470D-ADF5-80057C44D904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A2C775BA-3B0A-470D-ADF5-80057C44D904}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A2C775BA-3B0A-470D-ADF5-80057C44D904}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A2C775BA-3B0A-470D-ADF5-80057C44D904}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D78592B-3B9F-49A4-AAE8-C01879273534}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D78592B-3B9F-49A4-AAE8-C01879273534}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D78592B-3B9F-49A4-AAE8-C01879273534}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D78592B-3B9F-49A4-AAE8-C01879273534}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

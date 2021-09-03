@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\SvgBlazor\SvgBlazor.csproj">
+    <ProjectReference Include="..\SvgBlazor\SvgBlazor.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
