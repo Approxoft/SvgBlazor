@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace SvgBlazor
+namespace SvgBlazor.Elements
 {
     // TODO: use dynamic content for .net6
     /// <summary>
@@ -39,6 +39,7 @@ namespace SvgBlazor
             builder.AddAttribute(1, "viewBox", string.Format("0 0 {0} {1}", ViewBoxWidth ?? Width, ViewBoxHeight ?? Height)); // TODO: do better
             builder.AddAttribute(2, "width", Width);
             builder.AddAttribute(3, "height", Height);
+            builder.AddContent(4, ChildContent);
             builder.CloseComponent();
         }
 
