@@ -1,25 +1,5 @@
 ﻿@page "/elements/circle"
 
-<h1>Circle</h1>
-<p>SVG circle element.</p>
-
-<h2>Basic circle</h2>
 <SvgBlazor.Elements.Svg Width="200" Height="200">
     <SvgBlazor.Docs.Examples.CircleExample />
 </SvgBlazor.Elements.Svg>
-
-<h2>Example</h2>
-<textarea rows="4" cols="100" readonly>
-    @exampleCode
-</textarea>
-
-<h2>API</h2>
-<table>
-    <tr><td>CenterX</td><td>The x-axis coordinate of the center of the circle.</td></tr>
-    <tr><td>CenterY</td><td>The y-axis coordinate of the center of the circle.</td></tr>
-    <tr><td>Radius</td><td>The radius of the circle.</td></tr>
-</table>
-
-@code {
-    private const string exampleCode = "<SvgBlazor.Elements.Circle CenterX=\"40\" CenterY=\"40\" Radius=\"20\"></SvgBlazor.Elements.Circle>";
-}
