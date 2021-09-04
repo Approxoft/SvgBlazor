@@ -19,10 +19,10 @@ namespace SvgBlazor.Elements
         public double Height { get; set; }
 
         [Parameter]
-        public double? RX { get; set; }
+        public double? Rx { get; set; }
 
         [Parameter]
-        public double? RY { get; set; }
+        public double? Ry { get; set; }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -39,11 +39,11 @@ namespace SvgBlazor.Elements
             builder.AddAttribute(0, "width", Width);
             builder.AddAttribute(0, "height", Height);
 
-            if (RX.HasValue)
-                builder.AddAttribute(0, "rx", RX);
+            if (Rx.HasValue)
+                builder.AddAttribute(0, "rx", Rx);
 
-            if (RY.HasValue)
-                builder.AddAttribute(0, "ry", RY);
+            if (Ry.HasValue)
+                builder.AddAttribute(0, "ry", Ry);
 
             builder.CloseComponent();
         }
