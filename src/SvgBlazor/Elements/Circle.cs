@@ -12,17 +12,17 @@ namespace SvgBlazor.Elements
         /// <summary>
         /// The x-axis coordinate of the center of the circle.
         /// </summary>
-        [Parameter] public object CenterX { get; set; }
+        [Parameter] public SvgValue CenterX { get; set; }
 
         /// <summary>
         /// The y-axis coordinate of the center of the circle.
         /// </summary>
-        [Parameter] public object CenterY { get; set; }
+        [Parameter] public SvgValue CenterY { get; set; }
 
         /// <summary>
         /// The radius of the circle.
         /// </summary>
-        [Parameter] public object Radius { get; set; }
+        [Parameter] public SvgValue Radius { get; set; }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
