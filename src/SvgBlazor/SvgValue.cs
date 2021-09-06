@@ -6,113 +6,103 @@ namespace SvgBlazor
 {
     public class SvgValue
     {
-        public enum ValueType
+        private enum ValueType
         {
             Unknown,
             Double,
             String,
         }
 
-        public enum SpecialValue
-        {
-            Auto,
-        }
+        public static string Auto { get; } = "auto";
 
-        public enum Unit
-        {
-            NoUnit,
-            Em,
-            Ex,
-            Px,
-            In,
-            Cm,
-            Mm,
-            Pt,
-            Pc,
-        }
+        private double _doubleValue;
 
-        private readonly double? doubleValue;
+        private string _stringValue;
 
-        private readonly string stringValue;
+        private ValueType _valueType = ValueType.Unknown;
 
-        private readonly ValueType valueType = ValueType.Unknown;
+        private ValueUnit _unit = ValueUnit.NoUnit;
 
-        private readonly bool percentage = false;
-
-        private readonly Unit unit = Unit.NoUnit;
-
-        private readonly NumberFormatInfo numberFormatInfo;
+        private readonly NumberFormatInfo _numberFormatInfo;
 
         public SvgValue()
         {
-            numberFormatInfo = new NumberFormatInfo();
-            numberFormatInfo.NumberDecimalSeparator = ".";
+            _numberFormatInfo = new NumberFormatInfo();
+            _numberFormatInfo.NumberDecimalSeparator = ".";
         }
 
-        public SvgValue(double v):
+        public SvgValue(double value, ValueUnit unit = ValueUnit.NoUnit):
             this()
         {
-            doubleValue = v;
-            valueType = ValueType.Double;
+            SetValue(value, unit);
         }
 
-        public SvgValue(string v) :
+        public SvgValue(string value):
             this()
         {
-            stringValue = v;
-            valueType = ValueType.String;
+            SetValue(value);
         }
 
-        public SvgValue(SpecialValue special) :
+        public SvgValue(SvgValue value):
             this()
         {
-            switch (special)
-            {
-                case SpecialValue.Auto:
-                    valueType = ValueType.String;
-                    stringValue = "auto";
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            _doubleValue = value._doubleValue;
+            _stringValue = value._stringValue;
+            _valueType = value._valueType;
+            _unit = value._unit;
         }
 
-        public static implicit operator SvgValue(int v)
+        public static implicit operator SvgValue(int value)
         {
-            return new SvgValue(v);
+            return new SvgValue(value);
         }
 
-        public static implicit operator SvgValue(double v)
+        public static implicit operator SvgValue(double value)
         {
-            return new SvgValue(v);
+            return new SvgValue(value);
         }
 
-        public static implicit operator SvgValue(SpecialValue special)
+        public static implicit operator SvgValue(string value)
         {
-            return new SvgValue(special);
+            return new SvgValue(value);
+        }
+
+        public void SetValue(double value, ValueUnit unit = ValueUnit.NoUnit)
+        {
+            _doubleValue = value;
+            _unit = unit;
+            _valueType = ValueType.Double;
+        }
+
+        public void SetValue(string value)
+        {
+            _stringValue = value;
+            _unit = ValueUnit.NoUnit;
+            _valueType = ValueType.String;
         }
 
         public override string ToString()
         {
-            switch (valueType)
+            switch (_valueType)
             {
                 case ValueType.Double:
                     {
                         StringBuilder sb = new StringBuilder();
-                        sb.Append(doubleValue.Value.ToString(numberFormatInfo));
-                        if (percentage)
+                        sb.Append(_doubleValue.ToString(_numberFormatInfo));
+
+                        if (_unit == ValueUnit.Percentage)
                         {
                             sb.Append('%');
                         }
-                        else if (unit!= Unit.NoUnit)
+                        else if (_unit != ValueUnit.NoUnit)
                         {
-                            sb.Append(' ');
-                            sb.Append(unit.ToString().ToLower());
+                            sb.Append(_unit.ToString().ToLower());
                         }
+
                         return sb.ToString();
                     }
                 case ValueType.String:
-                    return stringValue;
+                    return _stringValue;
                 default:
                     return String.Empty;
             }
