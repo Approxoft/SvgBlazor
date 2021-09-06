@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgBlazor", "src\SvgBlazor\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgBlazor.Docs", "src\SvgBlazor.Docs\SvgBlazor.Docs.csproj", "{7D78592B-3B9F-49A4-AAE8-C01879273534}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgBlazor.Tests", "tests\SvgBlazor.Tests\SvgBlazor.Tests.csproj", "{9DDD57DA-9F0B-4FFA-9E8C-8E3A8DDF99DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7D78592B-3B9F-49A4-AAE8-C01879273534}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D78592B-3B9F-49A4-AAE8-C01879273534}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D78592B-3B9F-49A4-AAE8-C01879273534}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DDD57DA-9F0B-4FFA-9E8C-8E3A8DDF99DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DDD57DA-9F0B-4FFA-9E8C-8E3A8DDF99DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DDD57DA-9F0B-4FFA-9E8C-8E3A8DDF99DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DDD57DA-9F0B-4FFA-9E8C-8E3A8DDF99DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
