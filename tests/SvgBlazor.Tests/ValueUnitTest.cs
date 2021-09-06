@@ -98,7 +98,7 @@ namespace SvgBlazor.Tests
         public void ReturnsEmptyString_AssignedDefaultSvgValue()
         {
             var value = new SvgValue();
-            Assert.Equal("", value.ToString());
+            Assert.Empty(value.ToString());
         }
     }
 }
