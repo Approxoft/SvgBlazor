@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace SvgBlazor.Elements
+namespace SvgBlazor
 {
     // TODO: use dynamic content for .net6
     /// <summary>
