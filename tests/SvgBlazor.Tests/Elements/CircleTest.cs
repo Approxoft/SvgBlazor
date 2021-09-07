@@ -10,7 +10,7 @@ namespace SvgBlazor.Tests
         [Fact]
         public void RendersSvgCircle_GivenSvgBlazorCircle()
         {
-            var comp = RenderComponent<Circle>(parameters => parameters
+            var comp = RenderComponent<SvgCircle>(parameters => parameters
                 .Add(p => p.CenterX, 1)
                 .Add(p => p.CenterY, 2)
                 .Add(p => p.Radius, 3)
@@ -25,7 +25,7 @@ namespace SvgBlazor.Tests
         [Fact]
         public void RendersSvgCircleWithoutParameters_GivenSvgBlazorCircleWithoutParameters()
         {
-            var comp = RenderComponent<Circle>();
+            var comp = RenderComponent<SvgCircle>();
 
             Assert.Equal("<circle></circle>", comp.Markup.Trim());
         }

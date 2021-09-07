@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace SvgBlazor.Elements
+namespace SvgBlazor
 {
     /// <summary>
     /// SVG circle element.
     /// </summary>
-    public class Circle : ComponentBase
+    public class SvgCircle : ComponentBase
     {
         /// <summary>
         /// The x-axis coordinate of the center of the circle.
