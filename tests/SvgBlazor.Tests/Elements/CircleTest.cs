@@ -1,6 +1,5 @@
 ﻿using System;
 using Xunit;
-using SvgBlazor.Elements;
 using Bunit;
 
 namespace SvgBlazor.Tests
@@ -8,7 +7,7 @@ namespace SvgBlazor.Tests
     public class CircleTest : TestContext
     {
         [Fact]
-        public void RendersSvgCircle_GivenSvgBlazorCircle()
+        public void RendersSvgCircleWithParameters()
         {
             var comp = RenderComponent<SvgCircle>(parameters => parameters
                 .Add(p => p.CenterX, 1)
@@ -23,7 +22,7 @@ namespace SvgBlazor.Tests
         }
 
         [Fact]
-        public void RendersSvgCircleWithoutParameters_GivenSvgBlazorCircleWithoutParameters()
+        public void RendersSvgCircleWithoutParameters()
         {
             var comp = RenderComponent<SvgCircle>();
 
