@@ -44,35 +44,35 @@ namespace SvgBlazor.Tests
         }
 
         [Fact]
-        public void AssigningDouble()
+        public void AssignsDouble()
         {
             SvgValue value = 1.1;
             Assert.Equal("1.1", value.ToString());
         }
 
         [Fact]
-        public void AssigningString()
+        public void AssignsString()
         {
             SvgValue value = "test";
             Assert.Equal("test", value.ToString());
         }
 
         [Fact]
-        public void AssigningInt()
+        public void AssignsInt()
         {
             SvgValue value = 1;
             Assert.Equal("1", value.ToString());
         }
 
         [Fact]
-        public void AssigningSvgValueAuto()
+        public void AssignsSvgValueAuto()
         {
             SvgValue value = SvgValue.Auto;
             Assert.Equal("auto", value.ToString());
         }
 
         [Fact]
-        public void AssigningDefaultSvgValue()
+        public void AssignsDefaultSvgValue()
         {
             var value = new SvgValue();
             Assert.Empty(value.ToString());
