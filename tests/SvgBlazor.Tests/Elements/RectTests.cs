@@ -28,16 +28,11 @@ namespace SvgBlazor.Tests
         }
 
         [Fact]
-        public void RendersSvgRectWihWidthAndHeight()
+        public void RendersSvgRectWithoutParameters()
         {
-            var comp = RenderComponent<SvgRect>(parameters => parameters
-            .Add(p => p.Width, 100)
-            .Add(p => p.Height, 200)
-            );
+            var comp = RenderComponent<SvgRect>();
 
-            Assert.StartsWith("<rect", comp.Markup.Trim());
-            Assert.Contains("width=\"100\"", comp.Markup);
-            Assert.Contains("height=\"200\"", comp.Markup);
+            Assert.Equal("<rect></rect>", comp.Markup.Trim());
         }
     }
 }

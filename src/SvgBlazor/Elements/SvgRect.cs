@@ -10,12 +10,12 @@ namespace SvgBlazor
     public class SvgRect : ComponentBase
     {
         /// <summary>
-        /// The x coordinate of the rect. Optional. Defaults to 0.
+        /// The x coordinate of the rect. Defaults to 0.
         /// </summary>
         [Parameter] public SvgValue X { get; set; }
 
         /// <summary>
-        /// The y coordinate of the rect. Optional. Defaults to 0.
+        /// The y coordinate of the rect. Defaults to 0.
         /// </summary>
         [Parameter] public SvgValue Y { get; set; }
 
@@ -30,12 +30,12 @@ namespace SvgBlazor
         [Parameter] public SvgValue Height { get; set; }
 
         /// <summary>
-        /// The horizontal corner radius of the rect. Optional. Defaults to Ry (if specified).
+        /// The horizontal corner radius of the rect. Defaults to Ry (if specified).
         /// </summary>
         [Parameter] public SvgValue Rx { get; set; }
 
         /// <summary>
-        /// The vertical corner radius of the rect. Optional. Defaults to Rx (if specified).
+        /// The vertical corner radius of the rect. Defaults to Rx (if specified).
         /// </summary>
         [Parameter] public SvgValue Ry { get; set; }
 
@@ -44,22 +44,12 @@ namespace SvgBlazor
             base.BuildRenderTree(builder);
 
             builder.OpenElement(0, "rect");
-
-            if (X is not null)
-                builder.AddAttribute(1, "x", X);
-
-            if (Y is not null)
-                builder.AddAttribute(2, "y", Y);
-
+            builder.AddAttribute(1, "x", X);
+            builder.AddAttribute(2, "y", Y);
             builder.AddAttribute(3, "width", Width);
             builder.AddAttribute(4, "height", Height);
-
-            if (Rx is not null)
-                builder.AddAttribute(5, "rx", Rx);
-
-            if (Ry is not null)
-                builder.AddAttribute(6, "ry", Ry);
-
+            builder.AddAttribute(5, "rx", Rx);
+            builder.AddAttribute(6, "ry", Ry);
             builder.CloseComponent();
         }
     }
