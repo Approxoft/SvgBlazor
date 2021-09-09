@@ -20,7 +20,8 @@ namespace SvgBlazor
             {
                 builder.AddAttribute(10, attribute.Key, attribute.Value);
             }
-            builder.CloseComponent();
+
+            builder.CloseElement();
         }
     }
 }
