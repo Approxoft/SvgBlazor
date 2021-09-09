@@ -7,7 +7,7 @@ namespace SvgBlazor
     /// <summary>
     /// SVG circle element.
     /// </summary>
-    public class SvgCircle : ComponentBase
+    public class SvgCircle : SvgElement
     {
         /// <summary>
         /// The x-axis coordinate of the center of the circle.
@@ -24,15 +24,16 @@ namespace SvgBlazor
         /// </summary>
         [Parameter] public SvgValue Radius { get; set; }
 
-        protected override void BuildRenderTree(RenderTreeBuilder builder)
+        protected override string Tag()
         {
-            base.BuildRenderTree(builder);
+            return "circle";
+        }
 
-            builder.OpenElement(0, "circle");
-            builder.AddAttribute(1, "cx", CenterX);
-            builder.AddAttribute(2, "cy", CenterY);
-            builder.AddAttribute(3, "r", Radius);
-            builder.CloseComponent();
+        protected override void AddAttributes(RenderTreeBuilder builder)
+        {
+            builder.AddAttribute(10, "cx", CenterX);
+            builder.AddAttribute(11, "cy", CenterY);
+            builder.AddAttribute(12, "r", Radius);
         }
     }
 }
