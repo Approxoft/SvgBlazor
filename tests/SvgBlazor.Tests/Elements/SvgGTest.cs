@@ -1,6 +1,8 @@
 ﻿using System;
 using Xunit;
 using Bunit;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
 
 namespace SvgBlazor.Tests
 {
@@ -9,18 +11,11 @@ namespace SvgBlazor.Tests
         [Fact]
         public void RendersSvgGWithChildContent()
         {
-            var child = RenderComponent<SvgCircle>(parameters => parameters
-                .Add(p => p.CenterX, 1)
-                .Add(p => p.CenterY, 2)
-                .Add(p => p.Radius, 3));
-
             var comp = RenderComponent<SvgG>(parameters => parameters
-                .AddChildContent<SvgCircle>(circleParameters => circleParameters
-                    .Add(p => p.CenterX, "10")
-                    .Add(p => p.CenterY, "20")
-                    .Add(p => p.Radius, "3")));
+                .AddChildContent<ChildComponent>());
 
-            Assert.Equal("<g><circle cx=\"10\" cy=\"20\" r=\"3\"></circle></g>", comp.Markup.Trim());
+            Assert.StartsWith("<g", comp.Markup.Trim());
+            Assert.Contains("<child", comp.Markup);
         }
 
         [Fact]
@@ -29,6 +24,17 @@ namespace SvgBlazor.Tests
             var comp = RenderComponent<SvgG>();
 
             Assert.Equal("<g></g>", comp.Markup.Trim());
+        }
+
+        private class ChildComponent : ComponentBase
+        {
+            protected override void BuildRenderTree(RenderTreeBuilder builder)
+            {
+                base.BuildRenderTree(builder);
+
+                builder.OpenElement(0, "child");
+                builder.CloseComponent();
+            }
         }
     }
 }
