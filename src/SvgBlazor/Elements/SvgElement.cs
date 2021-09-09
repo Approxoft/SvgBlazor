@@ -18,7 +18,7 @@ namespace SvgBlazor
 
             foreach (var attribute in Attributes)
             {
-                builder.AddAttribute(10, attribute.Key, attribute.Value);
+                builder.AddAttribute(4, attribute.Key, attribute.Value);
             }
 
             builder.CloseElement();

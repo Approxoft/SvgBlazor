@@ -7,7 +7,7 @@ namespace SvgBlazor
 {
     public class SvgElementBase: ComponentBase
     {
-        [Parameter] public string SvgTag { get; set; } = "svn";
+        [Parameter] public string SvgTag { get; set; } = "svg";
 
         [Parameter] public SvgValue Id { get; set; }
 
