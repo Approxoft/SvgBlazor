@@ -22,10 +22,5 @@ namespace SvgBlazor
             }
             builder.CloseComponent();
         }
-
-        protected void addAttributes(RenderTreeBuilder builder)
-        {
-            builder.AddAttribute(1, "id", Id);
-        }
     }
 }
