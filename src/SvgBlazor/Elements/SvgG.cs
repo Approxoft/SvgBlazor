@@ -9,8 +9,10 @@ namespace SvgBlazor
     /// </summary>
     public class SvgG : ComponentBase
     {
-        [Parameter]
-        public RenderFragment ChildContent { get; set; }
+        /// <summary>
+        /// The child content.
+        /// </summary>
+        [Parameter] public RenderFragment ChildContent { get; set; }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
