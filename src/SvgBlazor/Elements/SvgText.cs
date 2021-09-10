@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace SvgBlazor
 {
-    // TODO: implement the rest of attributes: https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text
     public class SvgText : ComponentBase
     {
         /// <summary>
