@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace SvgBlazor
 {
-    public class SvgText : ComponentBase
+    public partial class SvgText : SvgElementBase
     {
         /// <summary>
         /// The x coordinate of the starting point of the text baseline.
@@ -20,16 +20,5 @@ namespace SvgBlazor
         /// The child content.
         /// </summary>
         [Parameter] public RenderFragment ChildContent { get; set; }
-
-        protected override void BuildRenderTree(RenderTreeBuilder builder)
-        {
-            base.BuildRenderTree(builder);
-
-            builder.OpenElement(0, "text");
-            builder.AddAttribute(1, "x", X);
-            builder.AddAttribute(2, "y", Y);
-            builder.AddContent(3, ChildContent);
-            builder.CloseComponent();
-        }
     }
 }
