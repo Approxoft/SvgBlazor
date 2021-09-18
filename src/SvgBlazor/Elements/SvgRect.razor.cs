@@ -7,7 +7,7 @@ namespace SvgBlazor
     /// <summary>
     /// SVG rect element.
     /// </summary>
-    public class SvgRect : ComponentBase
+    public partial class SvgRect : SvgElementBase
     {
         /// <summary>
         /// The x coordinate of the rect. Defaults to 0.
@@ -38,19 +38,5 @@ namespace SvgBlazor
         /// The vertical corner radius of the rect. Defaults to Rx (if specified).
         /// </summary>
         [Parameter] public SvgValue Ry { get; set; }
-
-        protected override void BuildRenderTree(RenderTreeBuilder builder)
-        {
-            base.BuildRenderTree(builder);
-
-            builder.OpenElement(0, "rect");
-            builder.AddAttribute(1, "x", X);
-            builder.AddAttribute(2, "y", Y);
-            builder.AddAttribute(3, "width", Width);
-            builder.AddAttribute(4, "height", Height);
-            builder.AddAttribute(5, "rx", Rx);
-            builder.AddAttribute(6, "ry", Ry);
-            builder.CloseComponent();
-        }
     }
 }

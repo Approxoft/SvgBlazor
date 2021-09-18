@@ -8,7 +8,7 @@ namespace SvgBlazor
     /// <summary>
     /// The root class for svg drawings
     /// </summary>
-    public class Svg : ComponentBase
+    public partial class Svg : SvgElementBase
     {
         [Parameter]
         public double Width { get; set; }
@@ -30,18 +30,6 @@ namespace SvgBlazor
         /// </summary>
         [Parameter]
         public double? ViewBoxHeight { get; set; }
-
-        protected override void BuildRenderTree(RenderTreeBuilder builder)
-        {
-            base.BuildRenderTree(builder);
-
-            builder.OpenElement(0, "svg");
-            builder.AddAttribute(1, "viewBox", string.Format("0 0 {0} {1}", ViewBoxWidth ?? Width, ViewBoxHeight ?? Height)); // TODO: do better
-            builder.AddAttribute(2, "width", Width);
-            builder.AddAttribute(3, "height", Height);
-            builder.AddContent(4, ChildContent);
-            builder.CloseComponent();
-        }
 
         /// <summary>
         /// Sets the size of the viewbox and redraws the svg
