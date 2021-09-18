@@ -6,6 +6,7 @@
      style="@Style"
      viewBox="@(string.Format("0 0 {0} {1}", ViewBoxWidth ?? Width, ViewBoxHeight ?? Height))"
      width="@Width"
-     height="@Height">
+     height="@Height"
+     @onclick="OnClick" >
     @ChildContent
 </svg>

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace SvgBlazor
 {
@@ -12,5 +13,7 @@ namespace SvgBlazor
         [Parameter] public string Class { get; set; }
 
         [Parameter] public string Style { get; set; }
+
+        [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
     }
 }
