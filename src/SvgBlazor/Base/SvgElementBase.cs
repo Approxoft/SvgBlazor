@@ -15,5 +15,30 @@ namespace SvgBlazor
         [Parameter] public string Style { get; set; }
 
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+        List<SvgElementBase> elements = new List<SvgElementBase>();
+
+        public void Add(SvgElementBase element)
+        {
+            elements.Add(element);
+            StateHasChanged();
+        }
+
+        public void Remove(SvgElementBase element)
+        {
+            elements.Remove(element);
+        }
+
+        protected void BuildElements(RenderTreeBuilder builder)
+        {
+            foreach (var e in elements)
+            {
+                RenderFragment renderFragment = (builder) =>
+                {
+                    e.BuildRenderTree(builder);
+                };
+                builder.AddContent(6, renderFragment);
+            }
+        }
     }
 }

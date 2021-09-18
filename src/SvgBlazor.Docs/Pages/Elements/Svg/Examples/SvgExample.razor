@@ -1,0 +1,32 @@
+﻿@namespace SvgBlazor.Docs.Examples
+
+<Svg @ref="svgref" Width="500" Height="500" OnClick="OnSvgClicked" />
+
+<button @onclick="OnAddCircle">Add circle</button>
+
+@code {
+    Svg svgref;
+
+    private void OnAddCircle()
+    {
+        var c = new SvgCircle()
+        {
+            CenterX = new Random().Next(25, 475),
+            CenterY = new Random().Next(25, 475),
+            Radius = new Random().Next(10, 25),
+        };
+
+        c.OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, args =>
+        {
+            Console.WriteLine("Circle clicked");
+            svgref.Remove(c);
+        });
+
+        svgref.Add(c);
+    }
+
+    private void OnSvgClicked(MouseEventArgs args)
+    {
+        Console.WriteLine("Svg clicked");
+    }
+}

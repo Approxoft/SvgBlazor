@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -30,6 +31,18 @@ namespace SvgBlazor
         /// </summary>
         [Parameter]
         public double? ViewBoxHeight { get; set; }
+
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
+        {
+            builder.OpenElement(0, "svg");
+            builder.AddAttribute(1, "viewBox", string.Format("0 0 {0} {1}", ViewBoxWidth ?? Width, ViewBoxHeight ?? Height)); // TODO: do better
+            builder.AddAttribute(2, "width", Width);
+            builder.AddAttribute(3, "height", Height);
+            builder.AddAttribute(4, "onclick", OnClick);
+            builder.AddContent(5, ChildContent);
+            BuildElements(builder);
+            builder.CloseComponent();
+        }
 
         /// <summary>
         /// Sets the size of the viewbox and redraws the svg
