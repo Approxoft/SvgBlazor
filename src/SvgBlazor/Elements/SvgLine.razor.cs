@@ -28,5 +28,10 @@ namespace SvgBlazor
         /// End point y-axis coordinate.
         /// </summary>
         [Parameter] public SvgValue Y2 { get; set; }
+
+        /// <summary>
+        /// The color used to paint the outline of the shape.
+        /// </summary>
+        [Parameter] public string Stroke { get; set; }
     }
 }
