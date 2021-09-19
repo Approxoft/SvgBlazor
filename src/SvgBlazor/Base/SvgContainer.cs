@@ -19,8 +19,6 @@ namespace SvgBlazor
             elements.Remove(element);
         }
 
-        public override string Tag() => "";
-
         public override void AddElements(RenderTreeBuilder builder)
         {
             base.AddElements(builder);

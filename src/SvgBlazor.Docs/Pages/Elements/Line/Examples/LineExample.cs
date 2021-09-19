@@ -1,13 +1,11 @@
-﻿@namespace SvgBlazor.Docs.Examples
+﻿using System;
+using SvgBlazor.Docs.Interfaces;
 
-<SvgComponent @ref="svg" Width="200" Height="200" />
-
-@code {
-    SvgComponent svg;
-
-    protected override void OnAfterRender(bool firstRender)
+namespace SvgBlazor.Docs.Examples
+{
+    public class LineExample : IExampleCode
     {
-        if (firstRender)
+        public void Example(SvgComponent svg)
         {
             var line = new SvgLine()
             {
@@ -17,7 +15,6 @@
                 Y2 = new Random().Next(0, 200)
             };
             svg.Add(line);
-            StateHasChanged();
         }
     }
 }

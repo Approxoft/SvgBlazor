@@ -1,13 +1,11 @@
-﻿@namespace SvgBlazor.Docs.Examples
+﻿using System;
+using SvgBlazor.Docs.Interfaces;
 
-<SvgComponent @ref="svg" Width="200" Height="200" />
-
-@code {
-    SvgComponent svg;
-
-    protected override void OnAfterRender(bool firstRender)
+namespace SvgBlazor.Docs.Examples
+{
+    public class CircleExample: IExampleCode
     {
-        if (firstRender)
+        public void Example(SvgComponent svg)
         {
             var circle = new SvgCircle()
             {

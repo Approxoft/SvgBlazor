@@ -54,11 +54,13 @@ namespace SvgBlazor
         public void Add(SvgElement element)
         {
             svg.Add(element);
+            StateHasChanged();
         }
 
         public void Remove(SvgElement element)
         {
             svg.Remove(element);
+            StateHasChanged();
         }
     }
 }
