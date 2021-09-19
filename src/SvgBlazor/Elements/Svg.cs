@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.AspNetCore.Components.Web;
+using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
@@ -9,41 +11,33 @@ namespace SvgBlazor
     /// <summary>
     /// The root class for svg drawings
     /// </summary>
-    public partial class Svg : SvgElementBase
+    public partial class Svg : SvgContainer
     {
-        [Parameter]
         public double Width { get; set; }
 
-        [Parameter]
         public double Height { get; set; }
-
-        [Parameter]
-        public RenderFragment ChildContent { get; set; }
 
         /// <summary>
         /// The optional width of the viewbox. If not set, the `Width` value will be used
         /// </summary>
-        [Parameter]
         public double? ViewBoxWidth { get; set; }
 
         /// <summary>
         /// The optional height of the viewbox. If not set, the `Height` value will be used
         /// </summary>
-        [Parameter]
         public double? ViewBoxHeight { get; set; }
 
-        protected override void BuildRenderTree(RenderTreeBuilder builder)
+
+        public override string Tag() => "svg";
+
+        public override void AddAttributes(RenderTreeBuilder builder)
         {
-            builder.OpenElement(0, "svg");
+            base.AddAttributes(builder);
             builder.AddAttribute(1, "viewBox", string.Format("0 0 {0} {1}", ViewBoxWidth ?? Width, ViewBoxHeight ?? Height)); // TODO: do better
             builder.AddAttribute(2, "width", Width);
             builder.AddAttribute(3, "height", Height);
-            builder.AddAttribute(4, "onclick", OnClick);
-            builder.AddContent(5, ChildContent);
-            BuildElements(builder);
-            builder.CloseComponent();
         }
-
+ 
         /// <summary>
         /// Sets the size of the viewbox and redraws the svg
         /// </summary>
@@ -53,8 +47,6 @@ namespace SvgBlazor
         {
             ViewBoxWidth = width;
             ViewBoxHeight = height;
-
-            Refresh();
         }
 
         /// <summary>
@@ -66,16 +58,6 @@ namespace SvgBlazor
         {
             Width = width;
             Height = height;
-
-            Refresh();
-        }
-
-        /// <summary>
-        /// Redraws the svg
-        /// </summary>
-        public void Refresh()
-        {
-            StateHasChanged();
         }
     }
 }

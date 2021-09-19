@@ -1,16 +1,21 @@
 ﻿@namespace SvgBlazor.Docs.Examples
 
-<SvgCircle CenterX="100" CenterY="100" Radius="radius" OnClick="OnClicked" />
+<SvgComponent @ref="svg" Width="200" Height="200" />
 
 @code {
-    int radius = 20;
+    SvgComponent svg;
 
-    void OnClicked(MouseEventArgs args)
+    protected override void OnAfterRender(bool firstRender)
     {
-        radius+=10;
-        if (radius>90)
+        if (firstRender)
         {
-            radius = 20;
+            var circle = new SvgCircle()
+            {
+                CenterX = 100,
+                CenterY = 100,
+                Radius = 20
+            };
+            svg.Add(circle);
         }
     }
 }

@@ -35,10 +35,18 @@ namespace SvgBlazor
             {
                 RenderFragment renderFragment = (builder) =>
                 {
+                    //builder.OpenComponent(0, e.GetType());
+                    //builder.CloseComponent();
                     e.BuildRenderTree(builder);
                 };
                 builder.AddContent(6, renderFragment);
             }
+        }
+
+        public void OnClickHandler(MouseEventArgs arg)
+        {
+            Console.WriteLine("OnClickHandler");
+            OnClick.InvokeAsync();
         }
     }
 }
