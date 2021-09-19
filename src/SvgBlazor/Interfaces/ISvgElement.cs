@@ -9,5 +9,8 @@ namespace SvgBlazor.Interfaces
         void BuildElement(RenderTreeBuilder builder);
         void AddElements(RenderTreeBuilder builder);
         void AddAttributes(RenderTreeBuilder builder);
+        void SetParent(ISvgContainer parent);
+        ISvgContainer Parent();
+        void Refresh();
     }
 }

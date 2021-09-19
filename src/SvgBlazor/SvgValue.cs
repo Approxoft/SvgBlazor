@@ -107,5 +107,10 @@ namespace SvgBlazor
                     return String.Empty;
             }
         }
+
+        public double ToDouble()
+        {
+            return _doubleValue;
+        }
     }
 }

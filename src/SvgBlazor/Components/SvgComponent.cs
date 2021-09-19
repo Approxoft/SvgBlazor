@@ -32,6 +32,9 @@ namespace SvgBlazor
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 
+        SvgElement _selectedElement;
+        bool _mouseDown = false;
+
         private readonly Svg svg = new();
 
         protected override void OnParametersSet()
@@ -40,11 +43,25 @@ namespace SvgBlazor
             svg.Height = Height;
             svg.ViewBoxHeight = ViewBoxHeight;
             svg.ViewBoxWidth = ViewBoxWidth;
+
+            svg.SetParent(this);
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             builder.OpenElement(0, "svg");
+            var onClickHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnClickHandler);
+            builder.AddAttribute(1, "onclick", onClickHandler);
+
+            var onMouseDownHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseDownHandler);
+            builder.AddAttribute(2, "onmousedown", onMouseDownHandler);
+
+            var onMouseMoveHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseMoveHandler);
+            builder.AddAttribute(3, "onmousemove", onMouseMoveHandler);
+
+            var onMouseUpHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseUpHandler);
+            builder.AddAttribute(4, "onmouseup", onMouseUpHandler);
+
             svg.AddAttributes(builder);
             svg.AddElements(builder);
             builder.CloseComponent();
@@ -52,6 +69,7 @@ namespace SvgBlazor
 
         public ISvgContainer Add(SvgElement element)
         {
+            element.SetParent(this);
             svg.Add(element);
             StateHasChanged();
             return this;
@@ -62,6 +80,55 @@ namespace SvgBlazor
             svg.Remove(element);
             StateHasChanged();
             return this;
+        }
+
+        public void Refresh()
+        {
+            StateHasChanged();
+        }
+
+        public void ElementMouseOver(SvgElement element, MouseEventArgs args)
+        {
+            if (_mouseDown)
+            {
+                return;
+            }
+
+            if (element is not ISvgContainer)
+            {
+                _selectedElement = element;
+            }
+        }
+
+        public void ElementMouseOut(SvgElement element, MouseEventArgs args)
+        {
+            if (_mouseDown)
+            {
+                return;
+            }
+            _selectedElement = null;    
+        }
+
+        public void OnClickHandler(MouseEventArgs args)
+        {
+            _selectedElement?.OnClickHandler(args);
+        }
+
+        public void OnMouseDownHandler(MouseEventArgs args)
+        {
+            _selectedElement?.OnMouseDownHandler(args);
+            _mouseDown = true;
+        }
+
+        public void OnMouseMoveHandler(MouseEventArgs args)
+        {
+            _selectedElement?.OnMouseMoveHandler(args);
+        }
+
+        public void OnMouseUpHandler(MouseEventArgs args)
+        {
+            _selectedElement?.OnMouseUpHandler(args);
+            _mouseDown = false;
         }
     }
 }
