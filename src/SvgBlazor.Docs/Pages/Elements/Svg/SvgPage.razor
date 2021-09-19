@@ -1,6 +1,6 @@
 ﻿@page "/elements/svg"
 
-<SvgComponent @ref="svgref" Width="500" Height="500" />
+<SvgComponent @ref="svgref" Width="500" Height="500" OnClick="OnSvgClicked" />
 
 <button @onclick="OnAddElement">Add random element</button>
 <p>Click an element to remove</p>
@@ -43,7 +43,20 @@
         }
 
         SvgContainer g = new SvgG();
+
+        c.OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, args =>
+        {
+            Console.WriteLine("Element clicked " + c.Tag());
+            g.Remove(c);
+            StateHasChanged();
+        });
+
         g.Add(c);
         svgref.Add(g);
+    }
+
+    private void OnSvgClicked(MouseEventArgs args)
+    {
+        Console.WriteLine("Svg clicked");
     }
 }
