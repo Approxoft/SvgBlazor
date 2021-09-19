@@ -8,23 +8,20 @@ namespace SvgBlazor.Tests
         [Fact]
         public void RendersSvgTextWithParameters()
         {
-            var comp = RenderComponent<SvgText>(parameters => parameters
-                .Add(p => p.X, 1)
-                .Add(p => p.Y, 2)
-                .AddChildContent("Test string"));
+            var comp = RenderComponent<SvgComponent>();
 
-            Assert.StartsWith("<text", comp.Markup.Trim());
-            Assert.Contains("x=\"1\"", comp.Markup);
-            Assert.Contains("y=\"2\"", comp.Markup);
-            Assert.Contains("Test string", comp.Markup);
-        }
+            comp.InvokeAsync(() => comp.Instance.Add(new SvgText()
+            {
+                X = 1,
+                Y = 2,
+                Text = "Test string"
+            }));
 
-        [Fact]
-        public void RendersSvgTextWithoutParameters()
-        {
-            var comp = RenderComponent<SvgText>();
-
-            Assert.Equal("<text></text>", comp.Markup.Trim());
+            comp.Render();
+            var element = comp.Find("text");
+            Assert.Contains("1", element.GetAttribute("x"));
+            Assert.Contains("2", element.GetAttribute("y"));
+            Assert.Contains("Test string", element.TextContent);
         }
     }
 }

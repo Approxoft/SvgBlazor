@@ -1,8 +1,5 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 using Bunit;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Rendering;
 
 namespace SvgBlazor.Tests
 {
@@ -11,30 +8,21 @@ namespace SvgBlazor.Tests
         [Fact]
         public void RendersSvgGWithChildContent()
         {
-            var comp = RenderComponent<SvgG>(parameters => parameters
-                .AddChildContent<ChildComponent>());
+            var comp = RenderComponent<SvgComponent>();
 
-            Assert.StartsWith("<g", comp.Markup.Trim());
-            Assert.Contains("<child", comp.Markup);
+            var group = new SvgG();
+            group.Add(new ChildElement());
+            comp.InvokeAsync(() => comp.Instance.Add(group));
+
+            comp.Render();
+
+            var element = comp.Find("g");
+            Assert.Equal("tester", element.Children[0].TagName);
         }
 
-        [Fact]
-        public void RendersSvgGWithoutParameters()
+        private class ChildElement : SvgElement
         {
-            var comp = RenderComponent<SvgG>();
-
-            Assert.Equal("<g></g>", comp.Markup.Trim());
-        }
-
-        private class ChildComponent : ComponentBase
-        {
-            protected override void BuildRenderTree(RenderTreeBuilder builder)
-            {
-                base.BuildRenderTree(builder);
-
-                builder.OpenElement(0, "child");
-                builder.CloseComponent();
-            }
+            public override string Tag() => "tester";
         }
     }
 }

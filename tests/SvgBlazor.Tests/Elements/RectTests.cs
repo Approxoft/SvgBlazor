@@ -9,30 +9,27 @@ namespace SvgBlazor.Tests
         [Fact]
         public void RendersSvgRectWithParameters()
         {
-            var comp = RenderComponent<SvgRect>(parameters => parameters
-                .Add(p => p.X, 1)
-                .Add(p => p.Y, 2)
-                .Add(p => p.Width, 3)
-                .Add(p => p.Height, 4)
-                .Add(p => p.Rx, 5)
-                .Add(p => p.Ry, 6)
-            );
+            var comp = RenderComponent<SvgComponent>();
 
-            Assert.StartsWith("<rect", comp.Markup.Trim());
-            Assert.Contains("x=\"1\"", comp.Markup);
-            Assert.Contains("y=\"2\"", comp.Markup);
-            Assert.Contains("width=\"3\"", comp.Markup);
-            Assert.Contains("height=\"4\"", comp.Markup);
-            Assert.Contains("rx=\"5\"", comp.Markup);
-            Assert.Contains("ry=\"6\"", comp.Markup);
-        }
+            comp.InvokeAsync(() => comp.Instance.Add(new SvgRect()
+            {
+                X = 1,
+                Y = 2,
+                Width = 3,
+                Height = 4,
+                Rx = 5,
+                Ry = 6
+            }));
 
-        [Fact]
-        public void RendersSvgRectWithoutParameters()
-        {
-            var comp = RenderComponent<SvgRect>();
+            comp.Render();
 
-            Assert.Equal("<rect></rect>", comp.Markup.Trim());
+            var element = comp.Find("rect");
+            Assert.Contains("1", element.GetAttribute("x"));
+            Assert.Contains("2", element.GetAttribute("y"));
+            Assert.Contains("3", element.GetAttribute("width"));
+            Assert.Contains("4", element.GetAttribute("height"));
+            Assert.Contains("5", element.GetAttribute("rx"));
+            Assert.Contains("6", element.GetAttribute("ry"));
         }
     }
 }
