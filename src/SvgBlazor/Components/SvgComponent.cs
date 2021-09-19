@@ -27,6 +27,9 @@ namespace SvgBlazor
         public double? ViewBoxHeight { get; set; }
 
         [Parameter]
+        public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+        [Parameter]
         public RenderFragment ChildContent { get; set; }
 
         private readonly Svg svg = new();
