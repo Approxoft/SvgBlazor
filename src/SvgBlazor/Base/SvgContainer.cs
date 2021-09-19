@@ -9,14 +9,16 @@ namespace SvgBlazor
     {
         readonly List<SvgElement> elements = new();
 
-        public void Add(SvgElement element)
+        public ISvgContainer Add(SvgElement element)
         {
             elements.Add(element);
+            return this;
         }
 
-        public void Remove(SvgElement element)
+        public ISvgContainer Remove(SvgElement element)
         {
             elements.Remove(element);
+            return this;
         }
 
         public override void AddElements(RenderTreeBuilder builder)

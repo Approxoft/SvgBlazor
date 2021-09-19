@@ -51,16 +51,18 @@ namespace SvgBlazor
             builder.CloseComponent();
         }
 
-        public void Add(SvgElement element)
+        public ISvgContainer Add(SvgElement element)
         {
             svg.Add(element);
             StateHasChanged();
+            return this;
         }
 
-        public void Remove(SvgElement element)
+        public ISvgContainer Remove(SvgElement element)
         {
             svg.Remove(element);
             StateHasChanged();
+            return this;
         }
     }
 }
