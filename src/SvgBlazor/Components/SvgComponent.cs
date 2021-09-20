@@ -27,9 +27,6 @@ namespace SvgBlazor
         public double? ViewBoxHeight { get; set; }
 
         [Parameter]
-        public EventCallback<MouseEventArgs> OnClick { get; set; }
-
-        [Parameter]
         public RenderFragment ChildContent { get; set; }
 
         private readonly Svg svg = new();
@@ -40,7 +37,6 @@ namespace SvgBlazor
             svg.Height = Height;
             svg.ViewBoxHeight = ViewBoxHeight;
             svg.ViewBoxWidth = ViewBoxWidth;
-            svg.OnClick = OnClick;
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
