@@ -22,7 +22,9 @@
             svgref.Remove(c);
         });
 
-        svgref.Add(c);
+        var g = new SvgG();
+        g.Add(c);
+        svgref.Add(g);
     }
 
     private void OnSvgClicked(MouseEventArgs args)
