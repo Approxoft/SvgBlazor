@@ -32,8 +32,9 @@ namespace SvgBlazor
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 
-        SvgElement _selectedElement;
-        bool _mouseDown = false;
+        private SvgElement _overElement;
+
+        private bool _mouseDown = false;
 
         private readonly Svg svg = new();
 
@@ -71,14 +72,14 @@ namespace SvgBlazor
         {
             element.SetParent(this);
             svg.Add(element);
-            StateHasChanged();
+            Refresh();
             return this;
         }
 
         public ISvgContainer Remove(SvgElement element)
         {
             svg.Remove(element);
-            StateHasChanged();
+            Refresh();
             return this;
         }
 
@@ -96,7 +97,7 @@ namespace SvgBlazor
 
             if (element is not ISvgContainer)
             {
-                _selectedElement = element;
+                _overElement = element;
             }
         }
 
@@ -106,28 +107,28 @@ namespace SvgBlazor
             {
                 return;
             }
-            _selectedElement = null;    
+            _overElement = null;    
         }
 
         public void OnClickHandler(MouseEventArgs args)
         {
-            _selectedElement?.OnClickHandler(args);
+            _overElement?.OnClickHandler(args);
         }
 
         public void OnMouseDownHandler(MouseEventArgs args)
         {
-            _selectedElement?.OnMouseDownHandler(args);
+            _overElement?.OnMouseDownHandler(args);
             _mouseDown = true;
         }
 
         public void OnMouseMoveHandler(MouseEventArgs args)
         {
-            _selectedElement?.OnMouseMoveHandler(args);
+            _overElement?.OnMouseMoveHandler(args);
         }
 
         public void OnMouseUpHandler(MouseEventArgs args)
         {
-            _selectedElement?.OnMouseUpHandler(args);
+            _overElement?.OnMouseUpHandler(args);
             _mouseDown = false;
         }
     }

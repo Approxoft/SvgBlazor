@@ -47,49 +47,22 @@ namespace SvgBlazor
             builder.AddAttribute(5, "onmouseout", onMouseOutHandler);
         }
 
-        public virtual void OnMouseOverHandler(MouseEventArgs args)
-        {
-            _parent.ElementMouseOver(this, args);
-        }
+        public virtual void OnMouseOverHandler(MouseEventArgs args) => _parent.ElementMouseOver(this, args);
 
-        public virtual void OnMouseOutHandler(MouseEventArgs args)
-        {
-            _parent.ElementMouseOut(this, args);
-        }
+        public virtual void OnMouseOutHandler(MouseEventArgs args) => _parent.ElementMouseOut(this, args);
 
-        public virtual void OnClickHandler(MouseEventArgs args)
-        {
-            OnClick.InvokeAsync(args);
-        }
+        public virtual void OnClickHandler(MouseEventArgs args) => OnClick.InvokeAsync(args);
 
-        public virtual void OnMouseDownHandler(MouseEventArgs args)
-        {            
-            OnMouseDown.InvokeAsync(args);
-        }
+        public virtual void OnMouseDownHandler(MouseEventArgs args) => OnMouseDown.InvokeAsync(args);
 
-        public virtual void OnMouseMoveHandler(MouseEventArgs args)
-        {
-            OnMouseMove.InvokeAsync(args);
-        }
+        public virtual void OnMouseMoveHandler(MouseEventArgs args) => OnMouseMove.InvokeAsync(args);
 
-        public virtual void OnMouseUpHandler(MouseEventArgs args)
-        {
-            OnMouseUp.InvokeAsync(args);
-        }
+        public virtual void OnMouseUpHandler(MouseEventArgs args) => OnMouseUp.InvokeAsync(args);
 
-        public virtual void SetParent(ISvgContainer svgContainer)
-        {
-            _parent = svgContainer;
-        }
+        public virtual void SetParent(ISvgContainer svgContainer) => _parent = svgContainer;
 
-        public virtual ISvgContainer Parent()
-        {
-            return _parent;
-        }
+        public virtual ISvgContainer Parent() => _parent;
 
-        public virtual void Refresh()
-        {
-            _parent.Refresh();
-        }
+        public virtual void Refresh() => _parent.Refresh();
     }
 }

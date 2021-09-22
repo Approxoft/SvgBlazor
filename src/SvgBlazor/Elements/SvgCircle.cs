@@ -25,11 +25,6 @@ namespace SvgBlazor
         /// </summary>
         public SvgValue Radius { get; set; }
 
-        private bool mouseDown = false;
-
-        private double DiffX = 0;
-        private double DiffY = 0;
-
         public override string Tag() => "circle";
 
         public override void AddAttributes(RenderTreeBuilder builder)
@@ -38,29 +33,6 @@ namespace SvgBlazor
             builder.AddAttribute(0, "cx", CenterX);
             builder.AddAttribute(1, "cy", CenterY);
             builder.AddAttribute(2, "r", Radius);
-        }
-
-        public override void OnMouseDownHandler(MouseEventArgs args)
-        {
-            mouseDown = true;
-            DiffX = args.OffsetX - CenterX.ToDouble();
-            DiffY = args.OffsetY - CenterY.ToDouble();
-        }
-
-        public override void OnMouseMoveHandler(MouseEventArgs args)
-        {
-            if (mouseDown)
-            {
-                CenterX = args.OffsetX - DiffX;
-                CenterY = args.OffsetY - DiffY;
-            }
-            OnMouseMove.InvokeAsync(args);
-        }
-
-        public override void OnMouseUpHandler(MouseEventArgs args)
-        {
-            mouseDown = false;
-            OnMouseUp.InvokeAsync(args);
         }
     }
 }
