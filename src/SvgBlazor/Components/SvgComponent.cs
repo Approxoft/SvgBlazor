@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
@@ -28,6 +29,15 @@ namespace SvgBlazor
 
         [Parameter]
         public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+        [Parameter]
+        public EventCallback<MouseEventArgs> OnMouseDown { get; set; }
+
+        [Parameter]
+        public EventCallback<MouseEventArgs> OnMouseMove { get; set; }
+
+        [Parameter]
+        public EventCallback<MouseEventArgs> OnMouseUp { get; set; }
 
         [Parameter]
         public RenderFragment ChildContent { get; set; }
@@ -110,26 +120,30 @@ namespace SvgBlazor
             _overElement = null;    
         }
 
-        public void OnClickHandler(MouseEventArgs args)
+        public async Task OnClickHandler(MouseEventArgs args)
         {
             _overElement?.OnClickHandler(args);
+            await OnClick.InvokeAsync();
         }
 
-        public void OnMouseDownHandler(MouseEventArgs args)
+        public async Task OnMouseDownHandler(MouseEventArgs args)
         {
-            _overElement?.OnMouseDownHandler(args);
             _mouseDown = true;
+            _overElement?.OnMouseDownHandler(args);
+            await OnMouseDown.InvokeAsync();
         }
 
-        public void OnMouseMoveHandler(MouseEventArgs args)
+        public async Task OnMouseMoveHandler(MouseEventArgs args)
         {
             _overElement?.OnMouseMoveHandler(args);
+            await OnMouseMove.InvokeAsync();
         }
 
-        public void OnMouseUpHandler(MouseEventArgs args)
+        public async Task OnMouseUpHandler(MouseEventArgs args)
         {
-            _overElement?.OnMouseUpHandler(args);
             _mouseDown = false;
+            _overElement?.OnMouseUpHandler(args);
+            await OnMouseUp.InvokeAsync();
         }
     }
 }
