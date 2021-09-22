@@ -15,4 +15,12 @@
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Pages\Elements\Ellipse\" />
+    <None Remove="Pages\Elements\Ellipse\Examples\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\Elements\Ellipse\" />
+    <Folder Include="Pages\Elements\Ellipse\Examples\" />
+  </ItemGroup>
 </Project>
