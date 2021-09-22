@@ -1,5 +1,4 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 using Bunit;
 
 namespace SvgBlazor.Tests
@@ -9,26 +8,23 @@ namespace SvgBlazor.Tests
         [Fact]
         public void RendersSvgCircleWithParameters()
         {
-            var comp = RenderComponent<SvgLine>(parameters => parameters
-                .Add(p => p.X1, 1)
-                .Add(p => p.Y1, 2)
-                .Add(p => p.X2, 3)
-                .Add(p => p.Y2, 4)
-            );
+            var comp = RenderComponent<SvgComponent>();
 
-            Assert.StartsWith("<line", comp.Markup.Trim());
-            Assert.Contains("x1=\"1\"", comp.Markup);
-            Assert.Contains("y1=\"2\"", comp.Markup);
-            Assert.Contains("x2=\"3\"", comp.Markup);
-            Assert.Contains("y2=\"4\"", comp.Markup);
-        }
+            comp.InvokeAsync(() => comp.Instance.Add(new SvgLine()
+            {
+                X1 = 1,
+                Y1 = 2,
+                X2 = 3,
+                Y2 = 4,
+            }));
 
-        [Fact]
-        public void RendersSvgCircleWithoutParameters()
-        {
-            var comp = RenderComponent<SvgLine>();
+            comp.Render();
 
-            Assert.Equal("<line></line>", comp.Markup.Trim());
+            var element = comp.Find("line");
+            Assert.Contains("1", element.GetAttribute("x1"));
+            Assert.Contains("2", element.GetAttribute("y1"));
+            Assert.Contains("3", element.GetAttribute("x2"));
+            Assert.Contains("4", element.GetAttribute("y2"));
         }
     }
 }

@@ -1,0 +1,18 @@
+﻿@using SvgBlazor.Docs.Interfaces
+ 
+<SvgComponent @ref="svg" Width="200" Height="200" />
+
+@code {
+    [Parameter]
+    public IExampleCode ExampleCode { get; set; }
+
+    private SvgComponent svg;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            ExampleCode?.Example(svg);
+        }
+    }
+}

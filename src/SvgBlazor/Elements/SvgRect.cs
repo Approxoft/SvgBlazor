@@ -7,36 +7,49 @@ namespace SvgBlazor
     /// <summary>
     /// SVG rect element.
     /// </summary>
-    public partial class SvgRect : SvgElementBase
+    public class SvgRect : SvgElement
     {
         /// <summary>
         /// The x coordinate of the rect. Defaults to 0.
         /// </summary>
-        [Parameter] public SvgValue X { get; set; }
+        public SvgValue X { get; set; }
 
         /// <summary>
         /// The y coordinate of the rect. Defaults to 0.
         /// </summary>
-        [Parameter] public SvgValue Y { get; set; }
+        public SvgValue Y { get; set; }
 
         /// <summary>
         /// The width of the rect.
         /// </summary>
-        [Parameter] public SvgValue Width { get; set; }
+        public SvgValue Width { get; set; }
 
         /// <summary>
         /// The height of the rect.
         /// </summary>
-        [Parameter] public SvgValue Height { get; set; }
+        public SvgValue Height { get; set; }
 
         /// <summary>
         /// The horizontal corner radius of the rect. Defaults to Ry (if specified).
         /// </summary>
-        [Parameter] public SvgValue Rx { get; set; }
+        public SvgValue Rx { get; set; }
 
         /// <summary>
         /// The vertical corner radius of the rect. Defaults to Rx (if specified).
         /// </summary>
-        [Parameter] public SvgValue Ry { get; set; }
+        public SvgValue Ry { get; set; }
+
+        public override string Tag() => "rect";
+
+        public override void AddAttributes(RenderTreeBuilder builder)
+        {
+            base.AddAttributes(builder);
+            builder.AddAttribute(0, "x", X);
+            builder.AddAttribute(1, "y", Y);
+            builder.AddAttribute(2, "width", Width);
+            builder.AddAttribute(3, "height", Height);
+            builder.AddAttribute(4, "rx", Rx);
+            builder.AddAttribute(5, "ry", Ry);
+        }
     }
 }

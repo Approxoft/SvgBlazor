@@ -7,11 +7,8 @@ namespace SvgBlazor
     /// <summary>
     /// Svg G element
     /// </summary>
-    public partial class SvgG : SvgElementBase
+    public partial class SvgG : SvgContainer
     {
-        /// <summary>
-        /// The child content.
-        /// </summary>
-        [Parameter] public RenderFragment ChildContent { get; set; }
+        public override string Tag() => "g";
     }
 }
