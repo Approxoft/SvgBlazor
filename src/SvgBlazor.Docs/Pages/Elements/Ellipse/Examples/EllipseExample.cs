@@ -12,7 +12,7 @@ namespace SvgBlazor.Docs.Examples
                 CenterX = 100,
                 CenterY = 100,
                 RadiusX = 40,
-                RadiusY = 20
+                RadiusY = 20,
             };
             svg.Add(ellipse);
         }
