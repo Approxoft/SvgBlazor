@@ -32,14 +32,10 @@ namespace SvgBlazor
             }
         }
 
-        public void ElementMouseOver(SvgElement element, MouseEventArgs args)
-        {
+        public void ElementMouseOver(SvgElement element, MouseEventArgs args) =>
             Parent().ElementMouseOver(element, args);
-        }
 
-        public void ElementMouseOut(SvgElement element, MouseEventArgs args)
-        {
+        public void ElementMouseOut(SvgElement element, MouseEventArgs args) =>
             Parent().ElementMouseOut(element, args);
-        }
     }
 }
