@@ -11,7 +11,7 @@ namespace SvgBlazor.Docs.Examples
             {
                 X = 10,
                 Y = 20,
-                Text = "This is just awesome!"
+                Text = "This is just awesome!",
             };
             svg.Add(text);
         }

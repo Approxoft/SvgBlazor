@@ -12,7 +12,7 @@ namespace SvgBlazor.Docs.Examples
                 X1 = new Random().Next(0, 200),
                 Y1 = new Random().Next(0, 200),
                 X2 = new Random().Next(0, 200),
-                Y2 = new Random().Next(0, 200)
+                Y2 = new Random().Next(0, 200),
             };
             svg.Add(line);
         }

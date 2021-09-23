@@ -12,7 +12,7 @@ namespace SvgBlazor.Docs.Examples
                 X = 10,
                 Y = 20,
                 Width = 180,
-                Height = 180
+                Height = 180,
             };
             svg.Add(rect);
         }

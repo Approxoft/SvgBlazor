@@ -9,20 +9,17 @@ namespace SvgBlazor.Tests
         [Fact]
         public void RendersSvgPolygonWithParameters()
         {
-            var comp = RenderComponent<SvgPolygon>(parameters => parameters
-                .Add(p => p.Points, "0 0 200 200")
-            );
+            var comp = RenderComponent<SvgComponent>();
 
-            Assert.StartsWith("<polygon", comp.Markup.Trim());
-            Assert.Contains("points=\"0 0 200 200\"", comp.Markup);
-        }
+            comp.InvokeAsync(() => comp.Instance.Add(new SvgPolygon()
+            {
+                Points = "0 0 200 200",
+            }));
 
-        [Fact]
-        public void RendersSvgPolygonWithoutParameters()
-        {
-            var comp = RenderComponent<SvgPolygon>();
+            comp.Render();
 
-            Assert.Equal("<polygon></polygon>", comp.Markup.Trim());
+            var element = comp.Find("polygon");
+            Assert.Contains("0 0 200 200", element.GetAttribute("points"));
         }
     }
 }

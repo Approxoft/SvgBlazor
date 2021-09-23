@@ -9,7 +9,7 @@ namespace SvgBlazor.Docs.Examples
         {
             var polygon = new SvgPolygon()
             {
-                Points = "0 0 50 50 100 50"
+                Points = "0 0 50 50 100 50",
             };
             svg.Add(polygon);
         }

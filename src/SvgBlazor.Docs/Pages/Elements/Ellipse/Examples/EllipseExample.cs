@@ -3,17 +3,18 @@ using SvgBlazor.Docs.Interfaces;
 
 namespace SvgBlazor.Docs.Examples
 {
-    public class CircleExample: IExampleCode
+    public class EllipseExample: IExampleCode
     {
         public void Example(SvgComponent svg)
         {
-            var circle = new SvgCircle()
+            var ellipse = new SvgEllipse
             {
                 CenterX = 100,
                 CenterY = 100,
-                Radius = 20,
+                RadiusX = 40,
+                RadiusY = 20,
             };
-            svg.Add(circle);
+            svg.Add(ellipse);
         }
     }
 }
