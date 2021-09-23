@@ -6,7 +6,7 @@ namespace SvgBlazor.Tests
     public class LineTest : TestContext
     {
         [Fact]
-        public void RendersSvgCircleWithParameters()
+        public void RendersSvgLineWithParameters()
         {
             var comp = RenderComponent<SvgComponent>();
 

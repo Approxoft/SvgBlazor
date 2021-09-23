@@ -6,7 +6,7 @@ namespace SvgBlazor.Tests
     public class EllipseTest : TestContext
     {
         [Fact]
-        public void RendersSvgCircleWithParameters()
+        public void RendersSvgEllipseWithParameters()
         {
             var comp = RenderComponent<SvgComponent>();
 
