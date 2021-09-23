@@ -93,10 +93,7 @@ namespace SvgBlazor
             return this;
         }
 
-        public void Refresh()
-        {
-            StateHasChanged();
-        }
+        public void Refresh() => StateHasChanged();
 
         public void ElementMouseOver(SvgElement element, MouseEventArgs args)
         {
