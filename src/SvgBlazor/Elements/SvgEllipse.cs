@@ -5,17 +5,17 @@ using Microsoft.AspNetCore.Components.Rendering;
 namespace SvgBlazor
 {
     /// <summary>
-    /// SVG circle element.
+    /// SVG ellipse element.
     /// </summary>
     public class SvgEllipse : SvgElement
     {
         /// <summary>
-        /// The x-axis coordinate of the center of the circle.
+        /// The x-axis coordinate of the center of the ellipse.
         /// </summary>
         public SvgValue CenterX { get; set; }
 
         /// <summary>
-        /// The y-axis coordinate of the center of the circle.
+        /// The y-axis coordinate of the center of the ellipse.
         /// </summary>
         public SvgValue CenterY { get; set; }
 

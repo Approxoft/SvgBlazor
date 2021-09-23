@@ -7,7 +7,7 @@ namespace SvgBlazor.Docs.Examples
     {
         public void Example(SvgComponent svg)
         {
-            var circle = new SvgCircle()
+            var circle = new SvgCircle
             {
                 CenterX = 100,
                 CenterY = 100,
