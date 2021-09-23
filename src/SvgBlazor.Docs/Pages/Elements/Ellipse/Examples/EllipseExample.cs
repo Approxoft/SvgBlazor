@@ -7,7 +7,7 @@ namespace SvgBlazor.Docs.Examples
     {
         public void Example(SvgComponent svg)
         {
-            var ellipse = new SvgEllipse()
+            var ellipse = new SvgEllipse
             {
                 CenterX = 100,
                 CenterY = 100,
