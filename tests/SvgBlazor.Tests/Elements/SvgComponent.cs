@@ -73,7 +73,7 @@ namespace SvgBlazor.Tests
             Assert.True(eventHandled);
         }
 
-        class DummyElement : SvgElement
+        private class DummyElement : SvgElement
         {
             public override string Tag() => "dummy";
         }
