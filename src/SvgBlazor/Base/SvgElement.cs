@@ -27,12 +27,7 @@ namespace SvgBlazor
         {
             builder.OpenElement(0, Tag());
             AddAttributes(builder);
-            AddElements(builder);
             builder.CloseElement();
-        }
-
-        public virtual void AddElements(RenderTreeBuilder builder)
-        {
         }
 
         public virtual void AddAttributes(RenderTreeBuilder builder)

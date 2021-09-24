@@ -60,6 +60,11 @@ namespace SvgBlazor
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
+            BuildElement(builder);
+        }
+
+        public virtual void BuildElement(RenderTreeBuilder builder)
+        {
             builder.OpenElement(0, "svg");
             var onClickHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnClickHandler);
             builder.AddAttribute(1, "onclick", onClickHandler);
@@ -74,8 +79,12 @@ namespace SvgBlazor
             builder.AddAttribute(4, "onmouseup", onMouseUpHandler);
 
             svg.AddAttributes(builder);
-            svg.AddElements(builder);
+            AddElements(builder);
             builder.CloseComponent();
+        }
+        public void AddElements(RenderTreeBuilder builder)
+        {
+            svg.AddElements(builder);
         }
 
         public ISvgContainer Add(SvgElement element)

@@ -22,10 +22,16 @@ namespace SvgBlazor
             elements.Remove(element);
             return this;
         }
-
-        public override void AddElements(RenderTreeBuilder builder)
+        public override void BuildElement(RenderTreeBuilder builder)
         {
-            base.AddElements(builder);
+            builder.OpenElement(0, Tag());
+            AddAttributes(builder);
+            AddElements(builder);
+            builder.CloseElement();
+        }
+
+        public virtual void AddElements(RenderTreeBuilder builder)
+        {
             foreach (var element in elements)
             {
                 element.BuildElement(builder);
