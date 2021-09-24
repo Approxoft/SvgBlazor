@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.AspNetCore.Components.Web;
 using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
@@ -11,6 +12,7 @@ namespace SvgBlazor
 
         public ISvgContainer Add(SvgElement element)
         {
+            element.SetParent(this);
             elements.Add(element);
             return this;
         }
@@ -29,5 +31,11 @@ namespace SvgBlazor
                 element.BuildElement(builder);
             }
         }
+
+        public void ElementMouseOver(SvgElement element, MouseEventArgs args) =>
+            Parent().ElementMouseOver(element, args);
+
+        public void ElementMouseOut(SvgElement element, MouseEventArgs args) =>
+            Parent().ElementMouseOut(element, args);
     }
 }
