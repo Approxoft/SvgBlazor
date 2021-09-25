@@ -65,7 +65,7 @@ namespace SvgBlazor
 
         public virtual void BuildElement(RenderTreeBuilder builder)
         {
-            builder.OpenElement(0, "svg");
+            builder.OpenElement(0, Tag());
             var onClickHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnClickHandler);
             builder.AddAttribute(1, "onclick", onClickHandler);
 
@@ -78,7 +78,7 @@ namespace SvgBlazor
             var onMouseUpHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseUpHandler);
             builder.AddAttribute(4, "onmouseup", onMouseUpHandler);
 
-            svg.AddAttributes(builder);
+            AddAttributes(builder);
             AddElements(builder);
             builder.CloseComponent();
         }
@@ -150,6 +150,26 @@ namespace SvgBlazor
             _mouseDown = false;
             _overElement?.OnMouseUpHandler(args);
             await OnMouseUp.InvokeAsync();
+        }
+
+        public string Tag()
+        {
+            return "svg";
+        }
+
+        public void AddAttributes(RenderTreeBuilder builder)
+        {
+            svg.AddAttributes(builder);
+        }
+
+        public void SetParent(ISvgContainer parent)
+        {
+            throw new Exception("Can not set parent! It is a top most element.");
+        }
+
+        public ISvgContainer Parent()
+        {
+            return null;
         }
     }
 }
