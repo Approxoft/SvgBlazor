@@ -8,16 +8,16 @@ namespace SvgBlazor
 {
     public abstract class SvgContainer: SvgElement, ISvgContainer
     {
-        readonly List<SvgElement> elements = new();
+        readonly List<ISvgElement> elements = new();
 
-        public ISvgContainer Add(SvgElement element)
+        public ISvgContainer Add(ISvgElement element)
         {
             element.SetParent(this);
             elements.Add(element);
             return this;
         }
 
-        public ISvgContainer Remove(SvgElement element)
+        public ISvgContainer Remove(ISvgElement element)
         {
             elements.Remove(element);
             return this;
@@ -38,10 +38,10 @@ namespace SvgBlazor
             }
         }
 
-        public void ElementMouseOver(SvgElement element, MouseEventArgs args) =>
+        public void ElementMouseOver(ISvgElement element, MouseEventArgs args) =>
             Parent().ElementMouseOver(element, args);
 
-        public void ElementMouseOut(SvgElement element, MouseEventArgs args) =>
+        public void ElementMouseOut(ISvgElement element, MouseEventArgs args) =>
             Parent().ElementMouseOut(element, args);
     }
 }

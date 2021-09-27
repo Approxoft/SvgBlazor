@@ -42,7 +42,7 @@ namespace SvgBlazor
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 
-        private SvgElement _overElement;
+        private ISvgElement _overElement;
 
         private bool _mouseDown = false;
 
@@ -65,7 +65,7 @@ namespace SvgBlazor
 
         public virtual void BuildElement(RenderTreeBuilder builder)
         {
-            builder.OpenElement(0, Tag());
+            builder.OpenElement(0, svg.Tag());
             var onClickHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnClickHandler);
             builder.AddAttribute(1, "onclick", onClickHandler);
 
@@ -78,16 +78,17 @@ namespace SvgBlazor
             var onMouseUpHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseUpHandler);
             builder.AddAttribute(4, "onmouseup", onMouseUpHandler);
 
-            AddAttributes(builder);
-            AddElements(builder);
+            svg.AddAttributes(builder);
+            svg.AddElements(builder);
             builder.CloseComponent();
         }
-        public void AddElements(RenderTreeBuilder builder)
+
+        public virtual void SetOnClick(Action<MouseEventArgs> action)
         {
-            svg.AddElements(builder);
+            OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, action);
         }
 
-        public ISvgContainer Add(SvgElement element)
+        public ISvgContainer Add(ISvgElement element)
         {
             element.SetParent(this);
             svg.Add(element);
@@ -95,7 +96,7 @@ namespace SvgBlazor
             return this;
         }
 
-        public ISvgContainer Remove(SvgElement element)
+        public ISvgContainer Remove(ISvgElement element)
         {
             svg.Remove(element);
             Refresh();
@@ -104,7 +105,7 @@ namespace SvgBlazor
 
         public void Refresh() => StateHasChanged();
 
-        public void ElementMouseOver(SvgElement element, MouseEventArgs args)
+        public void ElementMouseOver(ISvgElement element, MouseEventArgs args)
         {
             if (_mouseDown)
             {
@@ -117,7 +118,7 @@ namespace SvgBlazor
             }
         }
 
-        public void ElementMouseOut(SvgElement element, MouseEventArgs args)
+        public void ElementMouseOut(ISvgElement element, MouseEventArgs args)
         {
             if (_mouseDown)
             {
@@ -150,26 +151,6 @@ namespace SvgBlazor
             _mouseDown = false;
             _overElement?.OnMouseUpHandler(args);
             await OnMouseUp.InvokeAsync();
-        }
-
-        public string Tag()
-        {
-            return "svg";
-        }
-
-        public void AddAttributes(RenderTreeBuilder builder)
-        {
-            svg.AddAttributes(builder);
-        }
-
-        public void SetParent(ISvgContainer parent)
-        {
-            throw new Exception("Can not set parent! It is a top most element.");
-        }
-
-        public ISvgContainer Parent()
-        {
-            return null;
         }
     }
 }
