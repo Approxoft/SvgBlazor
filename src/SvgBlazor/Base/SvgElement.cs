@@ -19,7 +19,7 @@ namespace SvgBlazor
         public Action<MouseEventArgs> OnMouseMove { get; set; }
         public Action<MouseEventArgs> OnMouseUp { get; set; }
 
-        private ISvgContainer _parent;
+        private ISvgElement _parent;
 
         public abstract string Tag();
 
@@ -51,14 +51,24 @@ namespace SvgBlazor
 
         public virtual void OnMouseUpHandler(MouseEventArgs args) => OnMouseUp?.Invoke(args);
 
-        public virtual void SetParent(ISvgContainer svgContainer) => _parent = svgContainer;
+        public virtual void SetParent(ISvgElement svgContainer) => _parent = svgContainer;
 
-        public virtual ISvgContainer Parent() => _parent;
+        public virtual ISvgElement Parent() => _parent;
 
         public virtual void Refresh() => _parent.Refresh();
 
-        protected virtual void OnMouseOverHandler(MouseEventArgs args) => _parent.ElementMouseOver(this, args);
+        protected virtual void OnMouseOverHandler(MouseEventArgs args) => ElementMouseOver(this, args);
 
-        protected virtual void OnMouseOutHandler(MouseEventArgs args) => _parent.ElementMouseOut(this, args);
+        protected virtual void OnMouseOutHandler(MouseEventArgs args) => ElementMouseOut(this, args);
+
+        public virtual void ElementMouseOver(ISvgElement element, MouseEventArgs args)
+        {
+            _parent.ElementMouseOver(element, args);
+        }
+
+        public virtual void ElementMouseOut(ISvgElement element, MouseEventArgs args)
+        {
+            _parent.ElementMouseOut(element, args);
+        }
     }
 }

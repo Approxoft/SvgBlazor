@@ -8,8 +8,5 @@ namespace SvgBlazor.Interfaces
     {
         ISvgContainer Add(ISvgElement element);
         ISvgContainer Remove(ISvgElement element);
-        void ElementMouseOver(ISvgElement element, MouseEventArgs args);
-        void ElementMouseOut(ISvgElement element, MouseEventArgs args);
-        void Refresh();
     }
 }

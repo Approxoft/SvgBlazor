@@ -9,12 +9,15 @@ namespace SvgBlazor.Interfaces
     {
         string Tag();
         void BuildElement(RenderTreeBuilder builder);
-        void SetParent(ISvgContainer parent);
-        ISvgContainer Parent();
+        void SetParent(ISvgElement parent);
+        ISvgElement Parent();
         void Refresh();
         void OnClickHandler(MouseEventArgs args);
         void OnMouseDownHandler(MouseEventArgs args);
         void OnMouseMoveHandler(MouseEventArgs args);
         void OnMouseUpHandler(MouseEventArgs args);
+
+        void ElementMouseOver(ISvgElement element, MouseEventArgs args);
+        void ElementMouseOut(ISvgElement element, MouseEventArgs args);
     }
 }

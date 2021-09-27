@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
@@ -7,7 +8,7 @@ using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
-    public class SvgComponent: ComponentBase, ISvgContainer
+    public class SvgComponent: ComponentBase, ISvgElement, ISvgContainer
     {
         [Parameter]
         public double Width { get; set; }
@@ -124,7 +125,11 @@ namespace SvgBlazor
             {
                 return;
             }
-            _overElement = null;    
+
+            if (element is not ISvgContainer)
+            {
+                _overElement = null;
+            }
         }
 
         public async Task OnClickHandler(MouseEventArgs args)
@@ -151,6 +156,41 @@ namespace SvgBlazor
             _mouseDown = false;
             _overElement?.OnMouseUpHandler(args);
             await OnMouseUp.InvokeAsync();
+        }
+
+        public string Tag()
+        {
+            return svg.Tag();
+        }
+
+        public void SetParent(ISvgElement parent)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ISvgElement Parent()
+        {
+            throw new NotImplementedException();
+        }
+
+        void ISvgElement.OnClickHandler(MouseEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        void ISvgElement.OnMouseDownHandler(MouseEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        void ISvgElement.OnMouseMoveHandler(MouseEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        void ISvgElement.OnMouseUpHandler(MouseEventArgs args)
+        {
+            throw new NotImplementedException();
         }
     }
 }
