@@ -8,7 +8,45 @@ using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
-    public class SvgComponent: ComponentBase, ISvgElement, ISvgContainer
+    class SvgAdapter: Svg
+    {
+        public bool MouseDown { get; set; } = false;
+        public ISvgElement OverElement { get; set; }
+        public SvgComponent SvgComponent { get; set; }
+
+        public override void ElementMouseOver(ISvgElement element, MouseEventArgs args)
+        {
+            if (MouseDown)
+            {
+                return;
+            }
+
+            if (element is not ISvgContainer)
+            {
+                OverElement = element;
+            }
+        }
+
+        public override void ElementMouseOut(ISvgElement element, MouseEventArgs args)
+        {
+            if (MouseDown)
+            {
+                return;
+            }
+
+            if (element is not ISvgContainer)
+            {
+                OverElement = null;
+            }
+        }
+
+        public override void Refresh()
+        {
+            SvgComponent.Refresh();
+        }
+    }
+
+    public class SvgComponent: ComponentBase
     {
         [Parameter]
         public double Width { get; set; }
@@ -43,11 +81,7 @@ namespace SvgBlazor
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 
-        private ISvgElement _overElement;
-
-        private bool _mouseDown = false;
-
-        private readonly Svg svg = new();
+        private readonly SvgAdapter svg = new();
 
         protected override void OnParametersSet()
         {
@@ -55,8 +89,6 @@ namespace SvgBlazor
             svg.Height = Height;
             svg.ViewBoxHeight = ViewBoxHeight;
             svg.ViewBoxWidth = ViewBoxWidth;
-
-            svg.SetParent(this);
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -89,108 +121,46 @@ namespace SvgBlazor
             OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, action);
         }
 
+        public void Refresh() => StateHasChanged();
+
         public ISvgContainer Add(ISvgElement element)
         {
-            element.SetParent(this);
             svg.Add(element);
             Refresh();
-            return this;
+            return svg;
         }
 
         public ISvgContainer Remove(ISvgElement element)
         {
             svg.Remove(element);
             Refresh();
-            return this;
-        }
-
-        public void Refresh() => StateHasChanged();
-
-        public void ElementMouseOver(ISvgElement element, MouseEventArgs args)
-        {
-            if (_mouseDown)
-            {
-                return;
-            }
-
-            if (element is not ISvgContainer)
-            {
-                _overElement = element;
-            }
-        }
-
-        public void ElementMouseOut(ISvgElement element, MouseEventArgs args)
-        {
-            if (_mouseDown)
-            {
-                return;
-            }
-
-            if (element is not ISvgContainer)
-            {
-                _overElement = null;
-            }
+            return svg;
         }
 
         public async Task OnClickHandler(MouseEventArgs args)
         {
-            _overElement?.OnClickHandler(args);
+            svg.OverElement?.OnClickHandler(args);
             await OnClick.InvokeAsync();
         }
 
         public async Task OnMouseDownHandler(MouseEventArgs args)
         {
-            _mouseDown = true;
-            _overElement?.OnMouseDownHandler(args);
+            svg.MouseDown = true;
+            svg.OverElement?.OnMouseDownHandler(args);
             await OnMouseDown.InvokeAsync();
         }
 
         public async Task OnMouseMoveHandler(MouseEventArgs args)
         {
-            _overElement?.OnMouseMoveHandler(args);
+            svg.OverElement?.OnMouseMoveHandler(args);
             await OnMouseMove.InvokeAsync();
         }
 
         public async Task OnMouseUpHandler(MouseEventArgs args)
         {
-            _mouseDown = false;
-            _overElement?.OnMouseUpHandler(args);
+            svg.MouseDown = false;
+            svg.OverElement?.OnMouseUpHandler(args);
             await OnMouseUp.InvokeAsync();
-        }
-
-        public string Tag()
-        {
-            return svg.Tag();
-        }
-
-        public void SetParent(ISvgElement parent)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ISvgElement Parent()
-        {
-            throw new NotImplementedException();
-        }
-
-        void ISvgElement.OnClickHandler(MouseEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        void ISvgElement.OnMouseDownHandler(MouseEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        void ISvgElement.OnMouseMoveHandler(MouseEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        void ISvgElement.OnMouseUpHandler(MouseEventArgs args)
-        {
-            throw new NotImplementedException();
         }
     }
 }
