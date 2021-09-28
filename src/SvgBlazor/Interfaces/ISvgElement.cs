@@ -12,10 +12,11 @@ namespace SvgBlazor.Interfaces
         void SetParent(ISvgElement parent);
         ISvgElement Parent();
         void Refresh();
-        void OnClickHandler(MouseEventArgs args);
-        void OnMouseDownHandler(MouseEventArgs args);
-        void OnMouseMoveHandler(MouseEventArgs args);
-        void OnMouseUpHandler(MouseEventArgs args);
+
+        Task OnClickHandler(MouseEventArgs args);
+        Task OnMouseDownHandler(MouseEventArgs args);
+        Task OnMouseMoveHandler(MouseEventArgs args);
+        Task OnMouseUpHandler(MouseEventArgs args);
 
         void ElementMouseOver(ISvgElement element, MouseEventArgs args);
         void ElementMouseOut(ISvgElement element, MouseEventArgs args);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
@@ -14,10 +15,10 @@ namespace SvgBlazor
 
         public string Style { get; set; }
 
-        public Action<MouseEventArgs> OnClick { get; set; }
-        public Action<MouseEventArgs> OnMouseDown { get; set; }
-        public Action<MouseEventArgs> OnMouseMove { get; set; }
-        public Action<MouseEventArgs> OnMouseUp { get; set; }
+        public EventCallback<MouseEventArgs> OnClick { get; set; }
+        public EventCallback<MouseEventArgs> OnMouseDown { get; set; }
+        public EventCallback<MouseEventArgs> OnMouseMove { get; set; }
+        public EventCallback<MouseEventArgs> OnMouseUp { get; set; }
 
         private ISvgElement _parent;
 
@@ -43,13 +44,18 @@ namespace SvgBlazor
             builder.AddAttribute(5, "onmouseout", onMouseOutHandler);
         }
 
-        public virtual void OnClickHandler(MouseEventArgs args) => OnClick?.Invoke(args);
+        public virtual void SetOnClick(Action<MouseEventArgs> action)
+        {
+            OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, action);
+        }
 
-        public virtual void OnMouseDownHandler(MouseEventArgs args) => OnMouseDown?.Invoke(args);
+        public virtual async Task OnClickHandler(MouseEventArgs args) => await OnClick.InvokeAsync(args);
 
-        public virtual void OnMouseMoveHandler(MouseEventArgs args) => OnMouseMove?.Invoke(args);
+        public virtual async Task OnMouseDownHandler(MouseEventArgs args) => await OnMouseDown.InvokeAsync(args);
 
-        public virtual void OnMouseUpHandler(MouseEventArgs args) => OnMouseUp?.Invoke(args);
+        public virtual async Task OnMouseMoveHandler(MouseEventArgs args) => await OnMouseMove.InvokeAsync(args);
+
+        public virtual async Task OnMouseUpHandler(MouseEventArgs args) => await OnMouseUp.InvokeAsync(args);
 
         public virtual void SetParent(ISvgElement svgContainer) => _parent = svgContainer;
 

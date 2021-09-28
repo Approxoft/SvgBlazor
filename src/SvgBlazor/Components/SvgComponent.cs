@@ -10,39 +10,70 @@ namespace SvgBlazor
 {
     class SvgAdapter: Svg
     {
-        public bool MouseDown { get; set; } = false;
-        public ISvgElement OverElement { get; set; }
-        public SvgComponent SvgComponent { get; set; }
+        private bool _mouseDown = false;
+        private ISvgElement _overElement;
+        private readonly SvgComponent _svgComponent;
+
+        public SvgAdapter(SvgComponent component)
+        {
+            _svgComponent = component;
+        }
 
         public override void ElementMouseOver(ISvgElement element, MouseEventArgs args)
         {
-            if (MouseDown)
+            if (_mouseDown)
             {
                 return;
             }
 
             if (element is not ISvgContainer)
             {
-                OverElement = element;
+                _overElement = element;
             }
         }
 
         public override void ElementMouseOut(ISvgElement element, MouseEventArgs args)
         {
-            if (MouseDown)
+            if (_mouseDown)
             {
                 return;
             }
 
             if (element is not ISvgContainer)
             {
-                OverElement = null;
+                _overElement = null;
             }
         }
 
         public override void Refresh()
         {
-            SvgComponent.Refresh();
+            _svgComponent.Refresh();
+        }
+
+        public override async Task OnClickHandler(MouseEventArgs args)
+        {
+            await (_overElement?.OnClickHandler(args) ?? Task.CompletedTask);
+            await _svgComponent.OnClick.InvokeAsync();
+        }
+
+        public override async Task OnMouseDownHandler(MouseEventArgs args)
+        {
+            _mouseDown = true;
+            await (_overElement?.OnMouseDownHandler(args) ?? Task.CompletedTask);
+            await _svgComponent.OnMouseDown.InvokeAsync();
+        }
+
+        public override async Task OnMouseMoveHandler(MouseEventArgs args)
+        {
+            await (_overElement?.OnMouseMoveHandler(args) ?? Task.CompletedTask);
+            await _svgComponent.OnMouseMove.InvokeAsync();
+        }
+
+        public override async Task OnMouseUpHandler(MouseEventArgs args)
+        {
+            _mouseDown = false;
+            await (_overElement?.OnMouseUpHandler(args) ?? Task.CompletedTask);
+            await _svgComponent.OnMouseUp.InvokeAsync();
         }
     }
 
@@ -81,7 +112,12 @@ namespace SvgBlazor
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 
-        private readonly SvgAdapter svg = new();
+        private readonly SvgAdapter svg;
+
+        public SvgComponent()
+        {
+            svg = new(this);
+        }
 
         protected override void OnParametersSet()
         {
@@ -93,32 +129,22 @@ namespace SvgBlazor
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            BuildElement(builder);
-        }
-
-        public virtual void BuildElement(RenderTreeBuilder builder)
-        {
             builder.OpenElement(0, svg.Tag());
-            var onClickHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnClickHandler);
+            var onClickHandler = EventCallback.Factory.Create<MouseEventArgs>(this, svg.OnClickHandler);
             builder.AddAttribute(1, "onclick", onClickHandler);
 
-            var onMouseDownHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseDownHandler);
+            var onMouseDownHandler = EventCallback.Factory.Create<MouseEventArgs>(this, svg.OnMouseDownHandler);
             builder.AddAttribute(2, "onmousedown", onMouseDownHandler);
 
-            var onMouseMoveHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseMoveHandler);
+            var onMouseMoveHandler = EventCallback.Factory.Create<MouseEventArgs>(this, svg.OnMouseMoveHandler);
             builder.AddAttribute(3, "onmousemove", onMouseMoveHandler);
 
-            var onMouseUpHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseUpHandler);
+            var onMouseUpHandler = EventCallback.Factory.Create<MouseEventArgs>(this, svg.OnMouseUpHandler);
             builder.AddAttribute(4, "onmouseup", onMouseUpHandler);
 
             svg.AddAttributes(builder);
             svg.AddElements(builder);
             builder.CloseComponent();
-        }
-
-        public virtual void SetOnClick(Action<MouseEventArgs> action)
-        {
-            OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, action);
         }
 
         public void Refresh() => StateHasChanged();
@@ -135,32 +161,6 @@ namespace SvgBlazor
             svg.Remove(element);
             Refresh();
             return svg;
-        }
-
-        public async Task OnClickHandler(MouseEventArgs args)
-        {
-            svg.OverElement?.OnClickHandler(args);
-            await OnClick.InvokeAsync();
-        }
-
-        public async Task OnMouseDownHandler(MouseEventArgs args)
-        {
-            svg.MouseDown = true;
-            svg.OverElement?.OnMouseDownHandler(args);
-            await OnMouseDown.InvokeAsync();
-        }
-
-        public async Task OnMouseMoveHandler(MouseEventArgs args)
-        {
-            svg.OverElement?.OnMouseMoveHandler(args);
-            await OnMouseMove.InvokeAsync();
-        }
-
-        public async Task OnMouseUpHandler(MouseEventArgs args)
-        {
-            svg.MouseDown = false;
-            svg.OverElement?.OnMouseUpHandler(args);
-            await OnMouseUp.InvokeAsync();
         }
     }
 }
