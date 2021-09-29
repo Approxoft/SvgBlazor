@@ -39,11 +39,6 @@ namespace SvgBlazor
             builder.AddAttribute(5, "onmouseout", onMouseOutHandler);
         }
 
-        public virtual void SetOnClick(Action<MouseEventArgs> action)
-        {
-            OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, action);
-        }
-
         public virtual void SetParent(ISvgElement svgContainer) => _parent = svgContainer;
 
         public virtual ISvgElement Parent() => _parent;

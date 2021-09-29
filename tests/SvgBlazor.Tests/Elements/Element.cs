@@ -1,5 +1,7 @@
 ﻿using Xunit;
 using Bunit;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components;
 
 namespace SvgBlazor.Tests
 {
@@ -33,7 +35,7 @@ namespace SvgBlazor.Tests
             bool elementEventHandled = false;
             comp.InvokeAsync(() => comp.Instance.Add(new DummyElement()
             {
-                OnClick = (args) => { elementEventHandled = true; }
+                OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, (args) => { elementEventHandled = true; })
             }));
 
             comp.Render();
@@ -57,7 +59,7 @@ namespace SvgBlazor.Tests
             bool elementEventHandled = false;
             comp.InvokeAsync(() => comp.Instance.Add(new DummyElement()
             {
-                OnClick = (args) => { elementEventHandled = true; }
+                OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, (args) => { elementEventHandled = true; })
             }));
 
             comp.Render();
@@ -75,7 +77,7 @@ namespace SvgBlazor.Tests
             bool elementEventHandled = false;
             comp.InvokeAsync(() => comp.Instance.Add(new DummyElement()
             {
-                OnMouseDown = (args) => { elementEventHandled = true; }
+                OnMouseDown = EventCallback.Factory.Create<MouseEventArgs>(this, (args) => { elementEventHandled = true; })
             }));
 
             comp.Render();
@@ -93,7 +95,7 @@ namespace SvgBlazor.Tests
             bool elementEventHandled = false;
             comp.InvokeAsync(() => comp.Instance.Add(new DummyElement()
             {
-                OnMouseUp = (args) => { elementEventHandled = true; }
+                OnMouseUp = EventCallback.Factory.Create<MouseEventArgs>(this, (args) => { elementEventHandled = true; })
             }));
 
             comp.Render();
@@ -111,7 +113,7 @@ namespace SvgBlazor.Tests
             bool elementEventHandled = false;
             comp.InvokeAsync(() => comp.Instance.Add(new DummyElement()
             {
-                OnMouseMove = (args) => { elementEventHandled = true; }
+                OnMouseMove = EventCallback.Factory.Create<MouseEventArgs>(this, (args) => { elementEventHandled = true; })
             }));
 
             comp.Render();
