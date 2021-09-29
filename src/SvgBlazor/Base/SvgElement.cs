@@ -7,18 +7,13 @@ using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
-    public abstract class SvgElement: ISvgElement
+    public abstract class SvgElement : SvgEventHandler, ISvgElement
     {
         public SvgValue Id { get; set; }
 
         public string Class { get; set; }
 
         public string Style { get; set; }
-
-        public EventCallback<MouseEventArgs> OnClick { get; set; }
-        public EventCallback<MouseEventArgs> OnMouseDown { get; set; }
-        public EventCallback<MouseEventArgs> OnMouseMove { get; set; }
-        public EventCallback<MouseEventArgs> OnMouseUp { get; set; }
 
         private ISvgElement _parent;
 
@@ -49,23 +44,23 @@ namespace SvgBlazor
             OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, action);
         }
 
-        public virtual async Task OnClickHandler(MouseEventArgs args) => await OnClick.InvokeAsync(args);
-
-        public virtual async Task OnMouseDownHandler(MouseEventArgs args) => await OnMouseDown.InvokeAsync(args);
-
-        public virtual async Task OnMouseMoveHandler(MouseEventArgs args) => await OnMouseMove.InvokeAsync(args);
-
-        public virtual async Task OnMouseUpHandler(MouseEventArgs args) => await OnMouseUp.InvokeAsync(args);
-
         public virtual void SetParent(ISvgElement svgContainer) => _parent = svgContainer;
 
         public virtual ISvgElement Parent() => _parent;
 
         public virtual void Refresh() => _parent.Refresh();
 
-        protected virtual void OnMouseOverHandler(MouseEventArgs args) => ElementMouseOver(this, args);
+        public override async Task OnMouseOverHandler(MouseEventArgs args)
+        {
+            ElementMouseOver(this, args);
+            await base.OnMouseOverHandler(args);
+        }
 
-        protected virtual void OnMouseOutHandler(MouseEventArgs args) => ElementMouseOut(this, args);
+        public override async Task OnMouseOutHandler(MouseEventArgs args)
+        {
+            ElementMouseOut(this, args);
+            await base.OnMouseOutHandler(args);
+        }
 
         public virtual void ElementMouseOver(ISvgElement element, MouseEventArgs args)
         {

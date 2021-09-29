@@ -5,20 +5,20 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace SvgBlazor.Interfaces
 {
-    public interface ISvgElement
+    public interface ISvgElement: ISvgEventHandler
     {
         string Tag();
+
         void BuildElement(RenderTreeBuilder builder);
+
         void SetParent(ISvgElement parent);
+
         ISvgElement Parent();
+
         void Refresh();
 
-        Task OnClickHandler(MouseEventArgs args);
-        Task OnMouseDownHandler(MouseEventArgs args);
-        Task OnMouseMoveHandler(MouseEventArgs args);
-        Task OnMouseUpHandler(MouseEventArgs args);
-
         void ElementMouseOver(ISvgElement element, MouseEventArgs args);
+
         void ElementMouseOut(ISvgElement element, MouseEventArgs args);
     }
 }
