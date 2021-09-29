@@ -45,10 +45,7 @@ namespace SvgBlazor
             }
         }
 
-        public override void Refresh()
-        {
-            _svgComponent.Refresh();
-        }
+        public override void Refresh() => _svgComponent.Refresh();
 
         public override async Task OnClickHandler(MouseEventArgs args)
         {

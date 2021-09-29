@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components.Rendering;
-using Microsoft.AspNetCore.Components.Web;
 using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
@@ -22,13 +21,6 @@ namespace SvgBlazor
             elements.Remove(element);
             return this;
         }
-        public override void BuildElement(RenderTreeBuilder builder)
-        {
-            builder.OpenElement(0, Tag());
-            AddAttributes(builder);
-            AddElements(builder);
-            builder.CloseElement();
-        }
 
         public virtual void AddElements(RenderTreeBuilder builder)
         {
@@ -36,6 +28,14 @@ namespace SvgBlazor
             {
                 element.BuildElement(builder);
             }
+        }
+
+        public override void BuildElement(RenderTreeBuilder builder)
+        {
+            builder.OpenElement(0, Tag());
+            AddAttributes(builder);
+            AddElements(builder);
+            builder.CloseElement();
         }
     }
 }

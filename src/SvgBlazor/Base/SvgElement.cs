@@ -45,6 +45,12 @@ namespace SvgBlazor
 
         public virtual void Refresh() => _parent.Refresh();
 
+        public virtual void ElementMouseOver(ISvgElement element, MouseEventArgs args)
+            => _parent?.ElementMouseOver(element, args);
+
+        public virtual void ElementMouseOut(ISvgElement element, MouseEventArgs args)
+            => _parent?.ElementMouseOut(element, args);
+
         public override async Task OnMouseOverHandler(MouseEventArgs args)
         {
             ElementMouseOver(this, args);
@@ -55,16 +61,6 @@ namespace SvgBlazor
         {
             ElementMouseOut(this, args);
             await base.OnMouseOutHandler(args);
-        }
-
-        public virtual void ElementMouseOver(ISvgElement element, MouseEventArgs args)
-        {
-            _parent.ElementMouseOver(element, args);
-        }
-
-        public virtual void ElementMouseOut(ISvgElement element, MouseEventArgs args)
-        {
-            _parent.ElementMouseOut(element, args);
         }
     }
 }
