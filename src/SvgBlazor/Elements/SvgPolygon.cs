@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -27,5 +28,7 @@ namespace SvgBlazor
             builder.AddAttribute(0, "points", Points);
             builder.AddAttribute(1, "stroke", Stroke);
         }
+
+        public override RectangleF BoundingRect() => throw new NotImplementedException();
     }
 }

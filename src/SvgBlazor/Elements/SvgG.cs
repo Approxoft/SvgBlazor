@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -10,5 +11,7 @@ namespace SvgBlazor
     public partial class SvgG : SvgContainer
     {
         public override string Tag() => "g";
+
+        public override RectangleF BoundingRect() => throw new NotImplementedException();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -12,12 +13,20 @@ namespace SvgBlazor
         /// <summary>
         /// Start point x-axis coordinate.
         /// </summary>
-        public SvgValue X1 { get; set; }
+        public SvgValue X1
+        {
+            get => X;
+            set => X = value;
+        }
 
         /// <summary>
         /// Start point y-axis coordinate.
         /// </summary>
-        public SvgValue Y1 { get; set; }
+        public SvgValue Y1
+        {
+            get => Y;
+            set => Y = value;
+        }
 
         /// <summary>
         /// End point x-axis coordinate.
@@ -44,6 +53,38 @@ namespace SvgBlazor
             builder.AddAttribute(2, "x2", X2);
             builder.AddAttribute(3, "y2", Y2);
             builder.AddAttribute(4, "stroke", Stroke);
+        }
+
+        public override RectangleF BoundingRect()
+        {
+            float x1, x2, y1, y2;
+            if (X1<X2)
+            {
+                x1=X1;
+                x2=X2;
+            }
+            else
+            {
+                x1=X2;
+                x2=X1;
+            }
+
+            if (Y1<Y2)
+            {
+                y1=Y1;
+                y2=Y2;
+            }
+            else
+            {
+                y1=Y2;
+                y2=Y1;
+            }
+
+            return new RectangleF(
+                x1,
+                y1,
+                x2 - x1,
+                y2 - y1);
         }
     }
 }

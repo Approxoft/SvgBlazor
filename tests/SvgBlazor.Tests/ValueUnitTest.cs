@@ -10,7 +10,7 @@ namespace SvgBlazor.Tests
         [InlineData(1.1, "1.1")]
         [InlineData(1, "1")]
         [InlineData(0, "0")]
-        public void ConstructorWithDoubleValue(double value, string expected)
+        public void ConstructorWithFloatValue(float value, string expected)
         {
             var svgValue = new SvgValue(value);
             Assert.Equal(expected, svgValue.ToString());
@@ -20,7 +20,7 @@ namespace SvgBlazor.Tests
         [InlineData(1.1, ValueUnit.Mm, "1.1mm")]
         [InlineData(1, ValueUnit.Percentage, "1%")]
         [InlineData(0, ValueUnit.NoUnit, "0")]
-        public void ConstructorWithDoubleValueAndUnit(double value, ValueUnit unit, string expected)
+        public void ConstructorWithFloatValueAndUnit(float value, ValueUnit unit, string expected)
         {
             var svgValue = new SvgValue(value, unit);
             Assert.Equal(expected, svgValue.ToString());
@@ -44,9 +44,9 @@ namespace SvgBlazor.Tests
         }
 
         [Fact]
-        public void AssignsDouble()
+        public void AssignsFloat()
         {
-            SvgValue value = 1.1;
+            SvgValue value = 1.1f;
             Assert.Equal("1.1", value.ToString());
         }
 

@@ -77,22 +77,22 @@ namespace SvgBlazor
     public class SvgComponent: ComponentBase
     {
         [Parameter]
-        public double Width { get; set; }
+        public float Width { get; set; }
 
         [Parameter]
-        public double Height { get; set; }
+        public float Height { get; set; }
 
         /// <summary>
         /// The optional width of the viewbox. If not set, the `Width` value will be used
         /// </summary>
         [Parameter]
-        public double? ViewBoxWidth { get; set; }
+        public float? ViewBoxWidth { get; set; }
 
         /// <summary>
         /// The optional height of the viewbox. If not set, the `Height` value will be used
         /// </summary>
         [Parameter]
-        public double? ViewBoxHeight { get; set; }
+        public float? ViewBoxHeight { get; set; }
 
         [Parameter]
         public EventCallback<MouseEventArgs> OnClick { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -9,16 +10,6 @@ namespace SvgBlazor
     /// </summary>
     public class SvgRect : SvgElement
     {
-        /// <summary>
-        /// The x coordinate of the rect. Defaults to 0.
-        /// </summary>
-        public SvgValue X { get; set; }
-
-        /// <summary>
-        /// The y coordinate of the rect. Defaults to 0.
-        /// </summary>
-        public SvgValue Y { get; set; }
-
         /// <summary>
         /// The width of the rect.
         /// </summary>
@@ -51,5 +42,7 @@ namespace SvgBlazor
             builder.AddAttribute(4, "rx", Rx);
             builder.AddAttribute(5, "ry", Ry);
         }
+
+        public override RectangleF BoundingRect() => new RectangleF(X, Y, Width, Height);
     }
 }

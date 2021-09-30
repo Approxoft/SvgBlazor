@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
@@ -9,6 +10,10 @@ namespace SvgBlazor
 {
     public abstract class SvgElement : SvgEventHandler, ISvgElement
     {
+        public SvgValue X { get; set; }
+
+        public SvgValue Y { get; set; }
+
         public string Id { get; set; }
 
         public string Class { get; set; }
@@ -62,5 +67,18 @@ namespace SvgBlazor
             ElementMouseOut(this, args);
             await base.OnMouseOutHandler(args);
         }
+
+        public virtual void SetPosition(PointF position)
+        {
+            X = position.X;
+            Y = position.Y;
+        }
+
+        public virtual PointF Position()
+        {
+            return new PointF(X, Y);
+        }
+
+        public virtual RectangleF BoundingRect() => new Rectangle();
     }
 }

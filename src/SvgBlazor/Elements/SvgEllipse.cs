@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -12,12 +13,20 @@ namespace SvgBlazor
         /// <summary>
         /// The x-axis coordinate of the center of the ellipse.
         /// </summary>
-        public SvgValue CenterX { get; set; }
+        public SvgValue CenterX
+        {
+            get => X;
+            set => X = value;
+        }
 
         /// <summary>
         /// The y-axis coordinate of the center of the ellipse.
         /// </summary>
-        public SvgValue CenterY { get; set; }
+        public SvgValue CenterY
+        {
+            get => Y;
+            set => Y = value;
+        }
 
         /// <summary>
         /// The radius on the x axis.
@@ -38,6 +47,15 @@ namespace SvgBlazor
             builder.AddAttribute(1, "cy", CenterY);
             builder.AddAttribute(2, "rx", RadiusX);
             builder.AddAttribute(3, "ry", RadiusY);
+        }
+
+        public override RectangleF BoundingRect()
+        {
+            return new RectangleF(
+                CenterX - RadiusX,
+                CenterY - RadiusY,
+                RadiusX*2,
+                RadiusY*2);
         }
     }
 }

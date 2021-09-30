@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.Drawing;
+using Xunit;
 using Bunit;
 
 namespace SvgBlazor.Tests

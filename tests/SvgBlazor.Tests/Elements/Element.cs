@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.Drawing;
+using Xunit;
 using Bunit;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components;

@@ -9,13 +9,13 @@ namespace SvgBlazor
         private enum ValueType
         {
             Unknown,
-            Double,
+            Float,
             String,
         }
 
         public static string Auto { get; } = "auto";
 
-        private double _doubleValue;
+        private float _floatValue;
 
         private string _stringValue;
 
@@ -31,7 +31,7 @@ namespace SvgBlazor
             _numberFormatInfo.NumberDecimalSeparator = ".";
         }
 
-        public SvgValue(double value, ValueUnit unit = ValueUnit.NoUnit):
+        public SvgValue(float value, ValueUnit unit = ValueUnit.NoUnit):
             this()
         {
             SetValue(value, unit);
@@ -46,7 +46,7 @@ namespace SvgBlazor
         public SvgValue(SvgValue value):
             this()
         {
-            _doubleValue = value._doubleValue;
+            _floatValue = value._floatValue;
             _stringValue = value._stringValue;
             _valueType = value._valueType;
             _unit = value._unit;
@@ -57,7 +57,7 @@ namespace SvgBlazor
             return new SvgValue(value);
         }
 
-        public static implicit operator SvgValue(double value)
+        public static implicit operator SvgValue(float value)
         {
             return new SvgValue(value);
         }
@@ -67,11 +67,11 @@ namespace SvgBlazor
             return new SvgValue(value);
         }
 
-        public void SetValue(double value, ValueUnit unit = ValueUnit.NoUnit)
+        public void SetValue(float value, ValueUnit unit = ValueUnit.NoUnit)
         {
-            _doubleValue = value;
+            _floatValue = value;
             _unit = unit;
-            _valueType = ValueType.Double;
+            _valueType = ValueType.Float;
         }
 
         public void SetValue(string value)
@@ -81,14 +81,21 @@ namespace SvgBlazor
             _valueType = ValueType.String;
         }
 
+        public float ToFloat()
+        {
+            return _floatValue;
+        }
+
+        public static implicit operator float(SvgValue d) => d.ToFloat();
+
         public override string ToString()
         {
             switch (_valueType)
             {
-                case ValueType.Double:
+                case ValueType.Float:
                     {
                         StringBuilder sb = new StringBuilder();
-                        sb.Append(_doubleValue.ToString(_numberFormatInfo));
+                        sb.Append(_floatValue.ToString(_numberFormatInfo));
 
                         if (_unit == ValueUnit.Percentage)
                         {
