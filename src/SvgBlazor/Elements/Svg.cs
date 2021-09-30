@@ -33,7 +33,7 @@ namespace SvgBlazor
         public override void AddAttributes(RenderTreeBuilder builder)
         {
             base.AddAttributes(builder);
-            builder.AddAttribute(1, "viewBox", string.Format("0 0 {0} {1}", ViewBoxWidth ?? Width, ViewBoxHeight ?? Height)); // TODO: do better
+            builder.AddAttribute(1, "viewBox", string.Format("0 0 {0} {1}", ViewBoxWidth ?? Width, ViewBoxHeight ?? Height));
             builder.AddAttribute(2, "width", Width);
             builder.AddAttribute(3, "height", Height);
         }

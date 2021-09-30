@@ -1,14 +1,13 @@
 ﻿using System;
+using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace SvgBlazor.Interfaces
 {
-    public interface ISvgContainer
+    public interface ISvgContainer: ISvgElement
     {
-        ISvgContainer Add(SvgElement element);
-        ISvgContainer Remove(SvgElement element);
-        void Refresh();
-        void ElementMouseOver(SvgElement element, MouseEventArgs args);
-        void ElementMouseOut(SvgElement element, MouseEventArgs args);
+        ISvgContainer Add(ISvgElement element);
+
+        ISvgContainer Remove(ISvgElement element);
     }
 }

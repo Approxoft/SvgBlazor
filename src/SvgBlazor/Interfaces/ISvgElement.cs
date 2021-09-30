@@ -1,16 +1,24 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace SvgBlazor.Interfaces
 {
-    public interface ISvgElement
+    public interface ISvgElement: ISvgEventHandler
     {
         string Tag();
+
         void BuildElement(RenderTreeBuilder builder);
-        void AddElements(RenderTreeBuilder builder);
-        void AddAttributes(RenderTreeBuilder builder);
-        void SetParent(ISvgContainer parent);
-        ISvgContainer Parent();
+
+        void SetParent(ISvgElement parent);
+
+        ISvgElement Parent();
+
         void Refresh();
+
+        void ElementMouseOver(ISvgElement element, MouseEventArgs args);
+
+        void ElementMouseOut(ISvgElement element, MouseEventArgs args);
     }
 }

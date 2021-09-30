@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
@@ -6,20 +7,15 @@ using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
-    public abstract class SvgElement: ISvgElement
+    public abstract class SvgElement : SvgEventHandler, ISvgElement
     {
-        public SvgValue Id { get; set; }
+        public string Id { get; set; }
 
         public string Class { get; set; }
 
         public string Style { get; set; }
 
-        public Action<MouseEventArgs> OnClick { get; set; }
-        public Action<MouseEventArgs> OnMouseDown { get; set; }
-        public Action<MouseEventArgs> OnMouseMove { get; set; }
-        public Action<MouseEventArgs> OnMouseUp { get; set; }
-
-        private ISvgContainer _parent;
+        private ISvgElement _parent;
 
         public abstract string Tag();
 
@@ -27,12 +23,7 @@ namespace SvgBlazor
         {
             builder.OpenElement(0, Tag());
             AddAttributes(builder);
-            AddElements(builder);
             builder.CloseElement();
-        }
-
-        public virtual void AddElements(RenderTreeBuilder builder)
-        {
         }
 
         public virtual void AddAttributes(RenderTreeBuilder builder)
@@ -48,22 +39,28 @@ namespace SvgBlazor
             builder.AddAttribute(5, "onmouseout", onMouseOutHandler);
         }
 
-        public virtual void OnClickHandler(MouseEventArgs args) => OnClick?.Invoke(args);
+        public virtual void SetParent(ISvgElement svgContainer) => _parent = svgContainer;
 
-        public virtual void OnMouseDownHandler(MouseEventArgs args) => OnMouseDown?.Invoke(args);
-
-        public virtual void OnMouseMoveHandler(MouseEventArgs args) => OnMouseMove?.Invoke(args);
-
-        public virtual void OnMouseUpHandler(MouseEventArgs args) => OnMouseUp?.Invoke(args);
-
-        public virtual void SetParent(ISvgContainer svgContainer) => _parent = svgContainer;
-
-        public virtual ISvgContainer Parent() => _parent;
+        public virtual ISvgElement Parent() => _parent;
 
         public virtual void Refresh() => _parent.Refresh();
 
-        protected virtual void OnMouseOverHandler(MouseEventArgs args) => _parent.ElementMouseOver(this, args);
+        public virtual void ElementMouseOver(ISvgElement element, MouseEventArgs args)
+            => _parent?.ElementMouseOver(element, args);
 
-        protected virtual void OnMouseOutHandler(MouseEventArgs args) => _parent.ElementMouseOut(this, args);
+        public virtual void ElementMouseOut(ISvgElement element, MouseEventArgs args)
+            => _parent?.ElementMouseOut(element, args);
+
+        public override async Task OnMouseOverHandler(MouseEventArgs args)
+        {
+            ElementMouseOver(this, args);
+            await base.OnMouseOverHandler(args);
+        }
+
+        public override async Task OnMouseOutHandler(MouseEventArgs args)
+        {
+            ElementMouseOut(this, args);
+            await base.OnMouseOutHandler(args);
+        }
     }
 }
