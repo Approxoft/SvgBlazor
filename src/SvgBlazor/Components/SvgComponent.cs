@@ -111,10 +111,7 @@ namespace SvgBlazor
 
         private readonly SvgElementConnector svg;
 
-        public SvgComponent()
-        {
-            svg = new(this);
-        }
+        public SvgComponent() => svg = new(this);
 
         protected override void OnParametersSet()
         {
