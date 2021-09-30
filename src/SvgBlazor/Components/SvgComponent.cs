@@ -8,13 +8,13 @@ using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
-    class SvgAdapter: Svg
+    class SvgElementConnector: Svg
     {
         private bool _mouseDown = false;
         private ISvgElement _overElement;
         private readonly SvgComponent _svgComponent;
 
-        public SvgAdapter(SvgComponent component)
+        public SvgElementConnector(SvgComponent component)
         {
             _svgComponent = component;
         }
@@ -109,7 +109,7 @@ namespace SvgBlazor
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 
-        private readonly SvgAdapter svg;
+        private readonly SvgElementConnector svg;
 
         public SvgComponent()
         {
