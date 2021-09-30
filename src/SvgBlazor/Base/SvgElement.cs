@@ -9,7 +9,7 @@ namespace SvgBlazor
 {
     public abstract class SvgElement : SvgEventHandler, ISvgElement
     {
-        public SvgValue Id { get; set; }
+        public string Id { get; set; }
 
         public string Class { get; set; }
 
