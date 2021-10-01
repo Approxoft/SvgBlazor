@@ -26,7 +26,7 @@ namespace SvgBlazor
                 return;
             }
 
-            if (element is not ISvgContainer)
+            if (element != this)
             {
                 _overElement = element;
             }
@@ -39,7 +39,7 @@ namespace SvgBlazor
                 return;
             }
 
-            if (element is not ISvgContainer)
+            if (element != this)
             {
                 _overElement = null;
             }
