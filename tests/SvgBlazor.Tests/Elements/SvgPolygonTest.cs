@@ -21,7 +21,7 @@ namespace SvgBlazor.Tests
             comp.Render();
 
             var element = comp.Find("polygon");
-            Assert.Contains("0 0 200 200", element.GetAttribute("points"));
+            Assert.Equal("0 0 200 200", element.GetAttribute("points"));
         }
 
         [Fact]
