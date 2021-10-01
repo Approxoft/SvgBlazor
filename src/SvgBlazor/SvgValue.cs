@@ -31,6 +31,12 @@ namespace SvgBlazor
             _numberFormatInfo.NumberDecimalSeparator = ".";
         }
 
+        public SvgValue(int value, ValueUnit unit = ValueUnit.NoUnit):
+            this()
+        {
+            SetValue((int)value, unit);
+        }
+
         public SvgValue(float value, ValueUnit unit = ValueUnit.NoUnit):
             this()
         {
