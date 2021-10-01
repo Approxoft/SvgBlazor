@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using Xunit;
 using Bunit;
 
@@ -11,10 +12,11 @@ namespace SvgBlazor.Tests
         {
             var comp = RenderComponent<SvgComponent>();
 
-            comp.InvokeAsync(() => comp.Instance.Add(new SvgPolygon()
-            {
-                Points = "0 0 200 200",
-            }));
+            var polygon = new SvgPolygon();
+            polygon.AddPoint(new PointF(0, 0));
+            polygon.AddPoint(new PointF(200, 200));
+
+            comp.InvokeAsync(() => comp.Instance.Add(polygon));
 
             comp.Render();
 

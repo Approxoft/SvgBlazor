@@ -17,7 +17,7 @@ namespace SvgBlazor
         /// </summary>
         public string Stroke { get; set; }
 
-        private List<PointF> _points;
+        private List<PointF> _points = new();
 
         private string _pointsString;
 

@@ -57,34 +57,13 @@ namespace SvgBlazor
 
         public override RectangleF BoundingRect()
         {
-            float x1, x2, y1, y2;
-            if (X1<X2)
-            {
-                x1=X1;
-                x2=X2;
-            }
-            else
-            {
-                x1=X2;
-                x2=X1;
-            }
+            float x1 = Math.Min(X1, X2);
+            float y1 = Math.Min(Y1, Y2);
 
-            if (Y1<Y2)
-            {
-                y1=Y1;
-                y2=Y2;
-            }
-            else
-            {
-                y1=Y2;
-                y2=Y1;
-            }
+            float width = Math.Abs(X2 - X1);
+            float height = Math.Abs(X2 - X1);
 
-            return new RectangleF(
-                x1,
-                y1,
-                x2 - x1,
-                y2 - y1);
+            return new RectangleF(x1, y1, width, height);
         }
     }
 }
