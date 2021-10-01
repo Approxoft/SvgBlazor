@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -12,12 +13,20 @@ namespace SvgBlazor
         /// <summary>
         /// The x-axis coordinate of the center of the circle.
         /// </summary>
-        public SvgValue CenterX { get; set; }
+        public SvgValue CenterX
+        {
+            get => X;
+            set => X = value;
+        }
 
         /// <summary>
         /// The y-axis coordinate of the center of the circle.
         /// </summary>
-        public SvgValue CenterY { get; set; }
+        public SvgValue CenterY
+        {
+            get => Y;
+            set => Y = value;
+        }
 
         /// <summary>
         /// The radius of the circle.
@@ -29,9 +38,19 @@ namespace SvgBlazor
         public override void AddAttributes(RenderTreeBuilder builder)
         {
             base.AddAttributes(builder);
-            builder.AddAttribute(0, "cx", CenterX);
-            builder.AddAttribute(1, "cy", CenterY);
+            builder.AddAttribute(0, "cx", X);
+            builder.AddAttribute(1, "cy", Y);
             builder.AddAttribute(2, "r", Radius);
+        }
+
+        public override RectangleF BoundingRect()
+        {
+            float size = Radius * 2f;
+            return new RectangleF(
+                CenterX - Radius,
+                CenterY - Radius,
+                size,
+                size);
         }
     }
 }

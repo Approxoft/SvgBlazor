@@ -10,11 +10,11 @@ namespace SvgBlazor.Tests
         {
             var comp = RenderComponent<SvgComponent>();
 
-            comp.InvokeAsync(() => comp.Instance.Add(new SvgText()
+            comp.InvokeAsync(() => comp.Instance.Add(new SvgText
             {
                 X = 1,
                 Y = 2,
-                Text = "Test string"
+                Text = "Test string",
             }));
 
             comp.Render();

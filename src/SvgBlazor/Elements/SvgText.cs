@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -6,16 +7,6 @@ namespace SvgBlazor
 {
     public partial class SvgText : SvgElement
     {
-        /// <summary>
-        /// The x coordinate of the starting point of the text baseline.
-        /// </summary>
-        public SvgValue X { get; set; }
-
-        /// <summary>
-        /// The y coordinate of the starting point of the text baseline.
-        /// </summary>
-        public SvgValue Y { get; set; }
-
         /// <summary>
         /// The child content.
         /// </summary>
@@ -30,5 +21,7 @@ namespace SvgBlazor
             builder.AddAttribute(1, "y", Y);
             builder.AddContent(2, Text);
         }
+
+        public override RectangleF BoundingRect() => throw new NotImplementedException();
     }
 }

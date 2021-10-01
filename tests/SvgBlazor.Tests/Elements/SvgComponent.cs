@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.Drawing;
+using Xunit;
 using Bunit;
 
 namespace SvgBlazor.Tests
@@ -76,6 +77,7 @@ namespace SvgBlazor.Tests
         private class DummyElement : SvgElement
         {
             public override string Tag() => "dummy";
+            public override RectangleF BoundingRect() => new RectangleF();
         }
     }
 }
