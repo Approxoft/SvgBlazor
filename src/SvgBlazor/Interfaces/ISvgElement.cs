@@ -26,10 +26,6 @@ namespace SvgBlazor.Interfaces
 
         void ElementMouseOut(ISvgElement element, MouseEventArgs args);
 
-        void SetPosition(PointF position);
-
-        PointF Position();
-
         RectangleF BoundingRect();
     }
 }

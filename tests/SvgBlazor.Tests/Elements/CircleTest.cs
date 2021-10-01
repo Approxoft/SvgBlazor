@@ -11,7 +11,7 @@ namespace SvgBlazor.Tests
         {
             var comp = RenderComponent<SvgComponent>();
 
-            comp.InvokeAsync(() => comp.Instance.Add(new SvgCircle() {
+            comp.InvokeAsync(() => comp.Instance.Add(new SvgCircle {
                 CenterX = 1,
                 CenterY = 2,
                 Radius = 3,
@@ -28,7 +28,7 @@ namespace SvgBlazor.Tests
         [Fact]
         public void SvgCircleBoundingBox()
         {
-            var element = new SvgCircle() {
+            var element = new SvgCircle {
                 CenterX = 1,
                 CenterY = 2,
                 Radius = 3,

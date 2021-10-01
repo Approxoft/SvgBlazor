@@ -19,7 +19,7 @@ namespace SvgBlazor.Tests
                 Width = 3,
                 Height = 4,
                 Rx = 5,
-                Ry = 6
+                Ry = 6,
             }));
 
             comp.Render();
@@ -34,13 +34,13 @@ namespace SvgBlazor.Tests
         }
 
         [Fact]
-        public void SvgEllipseBoundingBox()
+        public void SvgRectBoundingBox()
         {
-            var element = new SvgRect() {
+            var element = new SvgRect {
                 X = 1,
                 Y = 2,
                 Width = 3,
-                Height = 4
+                Height = 4,
             };
 
             var brect = element.BoundingRect();

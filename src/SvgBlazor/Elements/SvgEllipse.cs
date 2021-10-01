@@ -50,12 +50,9 @@ namespace SvgBlazor
         }
 
         public override RectangleF BoundingRect()
-        {
-            return new RectangleF(
-                CenterX - RadiusX,
-                CenterY - RadiusY,
-                RadiusX*2,
-                RadiusY*2);
-        }
+            => new RectangleF(CenterX - RadiusX,
+                              CenterY - RadiusY,
+                              RadiusX * 2,
+                              RadiusY * 2);
     }
 }

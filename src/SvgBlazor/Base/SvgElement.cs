@@ -68,17 +68,6 @@ namespace SvgBlazor
             await base.OnMouseOutHandler(args);
         }
 
-        public virtual void SetPosition(PointF position)
-        {
-            X = position.X;
-            Y = position.Y;
-        }
-
-        public virtual PointF Position()
-        {
-            return new PointF(X, Y);
-        }
-
         public abstract RectangleF BoundingRect();
     }
 }

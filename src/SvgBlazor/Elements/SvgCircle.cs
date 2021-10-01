@@ -45,12 +45,12 @@ namespace SvgBlazor
 
         public override RectangleF BoundingRect()
         {
-            float widthheight = Radius*2f;
+            float size = Radius * 2f;
             return new RectangleF(
                 CenterX - Radius,
                 CenterY - Radius,
-                widthheight,
-                widthheight);
+                size,
+                size);
         }
     }
 }

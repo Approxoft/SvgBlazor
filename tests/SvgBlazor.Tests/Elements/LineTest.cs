@@ -45,7 +45,7 @@ namespace SvgBlazor.Tests
 
         public void SvgLineBoundingBoxStartPointLargerThanEndPoint()
         {
-            var element = new SvgLine()
+            var element = new SvgLine
             {
                 X1 = 5,
                 Y1 = 5,

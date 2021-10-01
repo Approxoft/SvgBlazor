@@ -124,25 +124,6 @@ namespace SvgBlazor.Tests
             Assert.True(elementEventHandled);
         }
 
-        [Fact]
-        public void SvgElementSetPosition()
-        {
-            var element = new DummyElement()
-            {
-                X = 1f,
-                Y = 2f,
-            };
-
-            Assert.Equal(1f, element.X.ToFloat());
-            Assert.Equal(2f, element.Y.ToFloat());
-            Assert.Equal(new PointF(1, 2), element.Position());
-
-            element.SetPosition(new PointF(3, 4));
-            Assert.Equal(3f, element.X.ToFloat());
-            Assert.Equal(4f, element.Y.ToFloat());
-            Assert.Equal(new PointF(3, 4), element.Position());
-        }
-
         private class DummyElement : SvgElement
         {
             public override string Tag() => "dummy";

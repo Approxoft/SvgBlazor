@@ -30,7 +30,7 @@ namespace SvgBlazor.Tests
         [Fact]
         public void SvgEllipseBoundingBox()
         {
-            var element = new SvgEllipse() {
+            var element = new SvgEllipse {
                 CenterX = 1,
                 CenterY = 2,
                 RadiusX = 3,
