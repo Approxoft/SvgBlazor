@@ -32,22 +32,13 @@ namespace SvgBlazor
         }
 
         public SvgValue(int value, ValueUnit unit = ValueUnit.NoUnit):
-            this()
-        {
-            SetValue((int)value, unit);
-        }
+            this() => SetValue((int)value, unit);
 
         public SvgValue(float value, ValueUnit unit = ValueUnit.NoUnit):
-            this()
-        {
-            SetValue(value, unit);
-        }
+            this() => SetValue(value, unit);
 
         public SvgValue(string value):
-            this()
-        {
-            SetValue(value);
-        }
+            this() => SetValue(value);
 
         public SvgValue(SvgValue value):
             this()
@@ -58,20 +49,15 @@ namespace SvgBlazor
             _unit = value._unit;
         }
 
-        public static implicit operator SvgValue(int value)
-        {
-            return new SvgValue(value);
-        }
+        public static implicit operator SvgValue(int value) => new SvgValue(value);
 
-        public static implicit operator SvgValue(float value)
-        {
-            return new SvgValue(value);
-        }
+        public static implicit operator SvgValue(float value) => new SvgValue(value);
 
-        public static implicit operator SvgValue(string value)
-        {
-            return new SvgValue(value);
-        }
+        public static implicit operator SvgValue(string value) => new SvgValue(value);
+
+        public static implicit operator float(SvgValue d) => d.ToFloat();
+
+        public float ToFloat() =>_floatValue;
 
         public void SetValue(float value, ValueUnit unit = ValueUnit.NoUnit)
         {
@@ -86,13 +72,6 @@ namespace SvgBlazor
             _unit = ValueUnit.NoUnit;
             _valueType = ValueType.String;
         }
-
-        public float ToFloat()
-        {
-            return _floatValue;
-        }
-
-        public static implicit operator float(SvgValue d) => d.ToFloat();
 
         public override string ToString()
         {
