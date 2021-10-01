@@ -80,7 +80,7 @@ namespace SvgBlazor
 
         private void PointsToString()
         {
-            const int charactersPerPoint = 2*5;
+            const int charactersPerPoint = 10;
             StringBuilder sb = new StringBuilder(_points.Count*charactersPerPoint);
             for (int i=0; i<_points.Count; i++)
             {
