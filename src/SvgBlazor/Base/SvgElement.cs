@@ -79,6 +79,6 @@ namespace SvgBlazor
             return new PointF(X, Y);
         }
 
-        public virtual RectangleF BoundingRect() => new Rectangle();
+        public abstract RectangleF BoundingRect();
     }
 }

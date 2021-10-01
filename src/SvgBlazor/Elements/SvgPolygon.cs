@@ -62,8 +62,8 @@ namespace SvgBlazor
         {
             _boundingRectX1 = Math.Min(point.X, _boundingRectX1);
             _boundingRectY1 = Math.Min(point.Y, _boundingRectY1);
-            _boundingRectX2 = Math.Min(point.X, _boundingRectX2);
-            _boundingRectY2 = Math.Min(point.Y, _boundingRectY2);
+            _boundingRectX2 = Math.Max(point.X, _boundingRectX2);
+            _boundingRectY2 = Math.Max(point.Y, _boundingRectY2);
             _boundingRectWidth = _boundingRectX2 - _boundingRectX1;
             _boundingRectHeight = _boundingRectY2 - _boundingRectY1;
         }
