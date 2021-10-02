@@ -81,8 +81,8 @@ namespace SvgBlazor
                     _overElement.Y = (float)args.OffsetY - DiffY;
                 }
                 await _overElement.OnMouseMoveHandler(args);
+                await base.OnMouseMoveHandler(args);
             }
-            await base.OnMouseMoveHandler(args);
         }
 
         public override async Task OnMouseUpHandler(MouseEventArgs args)
