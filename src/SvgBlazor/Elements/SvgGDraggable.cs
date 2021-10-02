@@ -55,8 +55,8 @@ namespace SvgBlazor
             if (_overElement is not null)
             {
                 await _overElement.OnClickHandler(args);
+                await base.OnMouseDownHandler(args);
             }
-            await base.OnMouseDownHandler(args);
         }
 
         public override async Task OnMouseDownHandler(MouseEventArgs args)
@@ -67,8 +67,8 @@ namespace SvgBlazor
                 DiffX = (float)args.OffsetX - _overElement.X;
                 DiffY = (float)args.OffsetY - _overElement.Y;
                 await _overElement.OnMouseDownHandler(args);
+                await base.OnMouseDownHandler(args);
             }
-            await base.OnMouseDownHandler(args);
         }
 
         public override async Task OnMouseMoveHandler(MouseEventArgs args)
