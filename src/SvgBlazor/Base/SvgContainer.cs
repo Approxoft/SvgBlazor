@@ -7,24 +7,31 @@ namespace SvgBlazor
 {
     public abstract class SvgContainer: SvgElement, ISvgContainer
     {
-        readonly List<ISvgElement> elements = new();
+        public List<ISvgElement> Elements { get; set; } = new();
+
+        public ISvgLayout Layout { get; set; }
 
         public ISvgContainer Add(ISvgElement element)
         {
             element.SetParent(this);
-            elements.Add(element);
+            Elements.Add(element);
             return this;
+        }
+
+        public void UpdateLayout()
+        {
+            // update the layout? + get elements (containers) and update their layout as well
         }
 
         public ISvgContainer Remove(ISvgElement element)
         {
-            elements.Remove(element);
+            Elements.Remove(element);
             return this;
         }
 
         public virtual void AddElements(RenderTreeBuilder builder)
         {
-            foreach (var element in elements)
+            foreach (var element in Elements)
             {
                 element.BuildElement(builder);
             }

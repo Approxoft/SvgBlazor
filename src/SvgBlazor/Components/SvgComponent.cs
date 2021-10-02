@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
@@ -141,7 +142,14 @@ namespace SvgBlazor
             builder.CloseComponent();
         }
 
-        public void Refresh() => StateHasChanged();
+        public void Refresh()
+        {
+            svg.Elements
+                .OfType<ISvgContainer>()
+                .ToList()
+                .ForEach(c => c.UpdateLayout());
+            StateHasChanged();
+        }
 
         public ISvgContainer Add(ISvgElement element)
         {

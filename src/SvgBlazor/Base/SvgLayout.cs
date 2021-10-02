@@ -5,7 +5,9 @@ namespace SvgBlazor.Base
 {
     public abstract class SvgLayout: ISvgLayout
     {
-        private readonly List<ISvgElement> elements = new();
+        protected readonly List<ISvgElement> elements = new();
+
+        public float? FixedWidth { get; set; }
 
         public void AddElement(ISvgElement element)
         {

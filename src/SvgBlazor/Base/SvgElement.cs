@@ -22,8 +22,6 @@ namespace SvgBlazor
 
         private ISvgElement _parent;
 
-        private ISvgLayout _layout;
-
         public abstract string Tag();
 
         public virtual void BuildElement(RenderTreeBuilder builder)
@@ -71,10 +69,5 @@ namespace SvgBlazor
         }
 
         public abstract RectangleF BoundingRect();
-        
-        public void SetLayout(ISvgLayout layout)
-        {
-            _layout = layout;
-        }
     }
 }
