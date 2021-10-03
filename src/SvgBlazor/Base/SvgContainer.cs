@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.AspNetCore.Components.Web;
 using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
@@ -36,6 +38,75 @@ namespace SvgBlazor
             AddAttributes(builder);
             AddElements(builder);
             builder.CloseElement();
+        }
+
+        public bool MouseDown { get; private set; } = false;
+
+        public ISvgElement OverElement { get; private set; }
+
+        public override void ElementMouseOver(ISvgElement element, MouseEventArgs args)
+        {
+            if (MouseDown)
+            {
+                return;
+            }
+
+            if (element != this)
+            {
+                OverElement = element;
+            }
+
+            base.ElementMouseOver(element, args);
+        }
+
+        public override void ElementMouseOut(ISvgElement element, MouseEventArgs args)
+        {
+            if (MouseDown)
+            {
+                return;
+            }
+
+            if (element != this)
+            {
+                OverElement = null;
+            }
+
+            base.ElementMouseOut(element, args);
+        }
+
+        public override async Task OnClickHandler(MouseEventArgs args)
+        {
+            if (OverElement is not null)
+            {
+                await OverElement.OnClickHandler(args);
+                await base.OnMouseDownHandler(args);
+            }
+        }
+
+        public override async Task OnMouseDownHandler(MouseEventArgs args)
+        {
+            MouseDown = true;
+            if (OverElement is not null)
+            {
+                await OverElement.OnMouseDownHandler(args);
+                await base.OnMouseDownHandler(args);
+            }
+        }
+
+        public override async Task OnMouseMoveHandler(MouseEventArgs args)
+        {
+            if (OverElement is not null)
+            {
+                await OverElement.OnMouseMoveHandler(args);
+                await base.OnMouseMoveHandler(args);
+            }
+        }
+
+        public override async Task OnMouseUpHandler(MouseEventArgs args)
+        {
+            MouseDown = false;
+            await (OverElement?.OnMouseMoveHandler(args) ?? Task.CompletedTask);
+            await base.OnMouseUpHandler(args);
         }
     }
 }
