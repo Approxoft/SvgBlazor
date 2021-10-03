@@ -46,11 +46,6 @@ namespace SvgBlazor
 
         public override void ElementMouseOver(ISvgElement element, MouseEventArgs args)
         {
-            if (MouseDown)
-            {
-                return;
-            }
-
             if (element != this)
             {
                 OverElement = element;
@@ -61,11 +56,6 @@ namespace SvgBlazor
 
         public override void ElementMouseOut(ISvgElement element, MouseEventArgs args)
         {
-            if (MouseDown)
-            {
-                return;
-            }
-
             if (element != this)
             {
                 OverElement = null;
@@ -105,7 +95,7 @@ namespace SvgBlazor
         public override async Task OnMouseUpHandler(MouseEventArgs args)
         {
             MouseDown = false;
-            await (OverElement?.OnMouseMoveHandler(args) ?? Task.CompletedTask);
+            await (OverElement?.OnMouseUpHandler(args) ?? Task.CompletedTask);
             await base.OnMouseUpHandler(args);
         }
     }
