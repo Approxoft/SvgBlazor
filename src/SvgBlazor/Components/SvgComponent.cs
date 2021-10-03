@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
@@ -10,8 +11,6 @@ namespace SvgBlazor
 {
     class SvgElementConnector: Svg
     {
-        private bool _mouseDown = false;
-        private ISvgElement _overElement;
         private readonly SvgComponent _svgComponent;
 
         public SvgElementConnector(SvgComponent component)
@@ -19,57 +18,29 @@ namespace SvgBlazor
             _svgComponent = component;
         }
 
-        public override void ElementMouseOver(ISvgElement element, MouseEventArgs args)
-        {
-            if (_mouseDown)
-            {
-                return;
-            }
-
-            if (element != this)
-            {
-                _overElement = element;
-            }
-        }
-
-        public override void ElementMouseOut(ISvgElement element, MouseEventArgs args)
-        {
-            if (_mouseDown)
-            {
-                return;
-            }
-
-            if (element != this)
-            {
-                _overElement = null;
-            }
-        }
-
         public override void Refresh() => _svgComponent.Refresh();
 
         public override async Task OnClickHandler(MouseEventArgs args)
         {
-            await (_overElement?.OnClickHandler(args) ?? Task.CompletedTask);
+            await base.OnClickHandler(args);
             await _svgComponent.OnClick.InvokeAsync();
         }
 
         public override async Task OnMouseDownHandler(MouseEventArgs args)
         {
-            _mouseDown = true;
-            await (_overElement?.OnMouseDownHandler(args) ?? Task.CompletedTask);
+            await base.OnMouseDownHandler(args);
             await _svgComponent.OnMouseDown.InvokeAsync();
         }
 
         public override async Task OnMouseMoveHandler(MouseEventArgs args)
         {
-            await (_overElement?.OnMouseMoveHandler(args) ?? Task.CompletedTask);
+            await base.OnMouseMoveHandler(args);
             await _svgComponent.OnMouseMove.InvokeAsync();
         }
 
         public override async Task OnMouseUpHandler(MouseEventArgs args)
         {
-            _mouseDown = false;
-            await (_overElement?.OnMouseUpHandler(args) ?? Task.CompletedTask);
+            await base.OnMouseUpHandler(args);
             await _svgComponent.OnMouseUp.InvokeAsync();
         }
     }
