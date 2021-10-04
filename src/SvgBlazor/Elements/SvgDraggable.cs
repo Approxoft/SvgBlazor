@@ -11,12 +11,8 @@ namespace SvgBlazor
     /// <summary>
     /// Svg container with draggable elements.
     /// </summary>
-    public partial class SvgDraggable : SvgContainer
+    public partial class SvgDraggable : SvgG
     {
-        public override string Tag() => "g";
-
-        public override RectangleF BoundingRect() => throw new NotImplementedException();
-
         private float DiffX = 0;
         private float DiffY = 0;
 
