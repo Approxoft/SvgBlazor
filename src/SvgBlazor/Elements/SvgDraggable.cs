@@ -9,9 +9,9 @@ using SvgBlazor.Interfaces;
 namespace SvgBlazor
 {
     /// <summary>
-    /// Svg G element
+    /// Svg container with draggable elements.
     /// </summary>
-    public partial class SvgGDraggable : SvgContainer
+    public partial class SvgDraggable : SvgContainer
     {
         public override string Tag() => "g";
 
