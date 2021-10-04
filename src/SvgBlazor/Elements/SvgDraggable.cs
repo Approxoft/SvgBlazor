@@ -13,8 +13,8 @@ namespace SvgBlazor
     /// </summary>
     public partial class SvgDraggable : SvgG
     {
-        private float DiffX = 0;
-        private float DiffY = 0;
+        private float diffX = 0;
+        private float diffY = 0;
 
         public override void ElementMouseOver(ISvgElement element, MouseEventArgs args)
         {
@@ -38,8 +38,8 @@ namespace SvgBlazor
         {
             if (OverElement is not null)
             {
-                DiffX = (float)args.OffsetX - OverElement.X;
-                DiffY = (float)args.OffsetY - OverElement.Y;
+                diffX = (float)args.OffsetX - OverElement.X;
+                diffY = (float)args.OffsetY - OverElement.Y;
             }
             await base.OnMouseDownHandler(args);
         }
@@ -48,8 +48,8 @@ namespace SvgBlazor
         {
             if (MouseDown && OverElement is not null)
             {
-                OverElement.X = (float)args.OffsetX - DiffX;
-                OverElement.Y = (float)args.OffsetY - DiffY;
+                OverElement.X = (float)args.OffsetX - diffX;
+                OverElement.Y = (float)args.OffsetY - diffY;
             }
             await base.OnMouseMoveHandler(args);
         }
