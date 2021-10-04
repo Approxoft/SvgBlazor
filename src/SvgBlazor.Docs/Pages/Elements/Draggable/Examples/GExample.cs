@@ -8,8 +8,8 @@ namespace SvgBlazor.Docs.Examples
         public void Example(SvgComponent svg)
         {
             var group = new SvgDraggable();
-            group.Add(new SvgCircle() { CenterX = 100, CenterY = 100, Radius = 20 });
-            group.Add(new SvgCircle() { CenterX = 50, CenterY = 50, Radius = 10 });
+            group.Add(new SvgCircle { CenterX = 100, CenterY = 100, Radius = 20 });
+            group.Add(new SvgCircle { CenterX = 50, CenterY = 50, Radius = 10 });
             svg.Add(group);
         }
     }
