@@ -51,7 +51,7 @@ namespace SvgBlazor
                 OverElement = element;
             }
 
-            base.ElementMouseOver(element, args);
+            base.ElementMouseOver(this, args);
         }
 
         public override void ElementMouseOut(ISvgElement element, MouseEventArgs args)
@@ -61,7 +61,7 @@ namespace SvgBlazor
                 OverElement = null;
             }
 
-            base.ElementMouseOut(element, args);
+            base.ElementMouseOut(this, args);
         }
 
         public override async Task OnClickHandler(MouseEventArgs args)
