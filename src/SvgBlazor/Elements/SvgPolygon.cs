@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
@@ -18,6 +19,17 @@ namespace SvgBlazor
         public string Stroke { get; set; }
 
         private List<PointF> _points = new();
+        public List<PointF> Points
+        {
+            set
+            {
+                _points = value;
+                PointsToString();
+                UpdateBoundingRect();
+
+            }
+            get => _points;
+        }
 
         private string _pointsString;
 
@@ -47,7 +59,7 @@ namespace SvgBlazor
         public virtual void AddPoint(PointF point)
         {
             _points.Add(point);
-            UpdateBoundingRect(point);
+            UpdateBoundingRect();
             PointsToString();
         }
 
@@ -58,12 +70,17 @@ namespace SvgBlazor
             PointsToString();
         }
 
-        private void UpdateBoundingRect(PointF point)
+        private void UpdateBoundingRect()
         {
-            _boundingRectX1 = Math.Min(point.X, _boundingRectX1);
-            _boundingRectY1 = Math.Min(point.Y, _boundingRectY1);
-            _boundingRectX2 = Math.Max(point.X, _boundingRectX2);
-            _boundingRectY2 = Math.Max(point.Y, _boundingRectY2);
+            if (_points is null || _points.Count is 0)
+                return;
+
+            var lastPoint = _points.Last();
+
+            _boundingRectX1 = Math.Min(lastPoint.X, _boundingRectX1);
+            _boundingRectY1 = Math.Min(lastPoint.Y, _boundingRectY1);
+            _boundingRectX2 = Math.Max(lastPoint.X, _boundingRectX2);
+            _boundingRectY2 = Math.Max(lastPoint.Y, _boundingRectY2);
             _boundingRectWidth = _boundingRectX2 - _boundingRectX1;
             _boundingRectHeight = _boundingRectY2 - _boundingRectY1;
         }

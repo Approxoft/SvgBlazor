@@ -2,6 +2,7 @@
 using System.Drawing;
 using Xunit;
 using Bunit;
+using System.Collections.Generic;
 
 namespace SvgBlazor.Tests
 {
@@ -12,9 +13,14 @@ namespace SvgBlazor.Tests
         {
             var comp = RenderComponent<SvgComponent>();
 
-            var polygon = new SvgPolygon();
-            polygon.AddPoint(new PointF(0, 0));
-            polygon.AddPoint(new PointF(200, 200));
+            var polygon = new SvgPolygon
+            {
+                Points = new List<PointF>
+                {
+                    new(0, 0),
+                    new(200, 200),
+                },
+            };
 
             comp.InvokeAsync(() => comp.Instance.Add(polygon));
 
