@@ -24,9 +24,8 @@ namespace SvgBlazor
             set
             {
                 _points = value;
+                _points.ForEach(UpdateBoundingRect);
                 PointsToString();
-                UpdateBoundingRect();
-
             }
             get => _points;
         }
@@ -59,7 +58,7 @@ namespace SvgBlazor
         public virtual void AddPoint(PointF point)
         {
             _points.Add(point);
-            UpdateBoundingRect();
+            UpdateBoundingRect(point);
             PointsToString();
         }
 
@@ -70,17 +69,12 @@ namespace SvgBlazor
             PointsToString();
         }
 
-        private void UpdateBoundingRect()
+        private void UpdateBoundingRect(PointF point)
         {
-            if (_points is null || _points.Count is 0)
-                return;
-
-            var lastPoint = _points.Last();
-
-            _boundingRectX1 = Math.Min(lastPoint.X, _boundingRectX1);
-            _boundingRectY1 = Math.Min(lastPoint.Y, _boundingRectY1);
-            _boundingRectX2 = Math.Max(lastPoint.X, _boundingRectX2);
-            _boundingRectY2 = Math.Max(lastPoint.Y, _boundingRectY2);
+            _boundingRectX1 = Math.Min(point.X, _boundingRectX1);
+            _boundingRectY1 = Math.Min(point.Y, _boundingRectY1);
+            _boundingRectX2 = Math.Max(point.X, _boundingRectX2);
+            _boundingRectY2 = Math.Max(point.Y, _boundingRectY2);
             _boundingRectWidth = _boundingRectX2 - _boundingRectX1;
             _boundingRectHeight = _boundingRectY2 - _boundingRectY1;
         }

@@ -13,10 +13,10 @@ namespace SvgBlazor.Docs.Examples
             {
                 Points = new List<PointF>
                 {
-                    new(0, 0),
-                    new(50, 50),
-                    new(100, 50)
-                }
+                    new PointF(0, 0),
+                    new PointF(50, 50),
+                    new PointF(100, 50),
+                },
             };
 
             svg.Add(polygon);
