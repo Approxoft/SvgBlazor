@@ -9,7 +9,7 @@ namespace SvgBlazor
     /// <summary>
     /// SVG ellipse element.
     /// </summary>
-    public class SvgEllipse : SvgElement, ISvgFillable
+    public class SvgEllipse : SvgElement
     {
         /// <summary>
         /// The x-axis coordinate of the center of the ellipse.
@@ -38,11 +38,6 @@ namespace SvgBlazor
         /// The radius on the y axis.
         /// </summary>
         public SvgValue RadiusY { get; set; }
-
-        /// <summary>
-        /// The fill color of the ellipse.
-        /// </summary>
-        public SvgFill Fill { get; set; } = new SvgFill();
 
         public override string Tag() => "ellipse";
 

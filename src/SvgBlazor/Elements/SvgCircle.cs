@@ -2,7 +2,6 @@
 using System.Drawing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
-using SvgBlazor.Base;
 using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
@@ -10,7 +9,7 @@ namespace SvgBlazor
     /// <summary>
     /// SVG circle element.
     /// </summary>
-    public class SvgCircle : SvgElement, ISvgFillable
+    public class SvgCircle : SvgElement
     {
         /// <summary>
         /// The x-axis coordinate of the center of the circle.
@@ -35,11 +34,6 @@ namespace SvgBlazor
         /// </summary>
         public SvgValue Radius { get; set; }
 
-        /// <summary>
-        /// The fill color of the circle.
-        /// </summary>
-        public SvgFill Fill { get; set; } = new SvgFill();
-
         public override string Tag() => "circle";
 
         public override void AddAttributes(RenderTreeBuilder builder)
@@ -48,7 +42,6 @@ namespace SvgBlazor
             builder.AddAttribute(0, "cx", X);
             builder.AddAttribute(1, "cy", Y);
             builder.AddAttribute(2, "r", Radius);
-            Fill.RenderAttributes(builder);
         }
 
         public override RectangleF BoundingRect()

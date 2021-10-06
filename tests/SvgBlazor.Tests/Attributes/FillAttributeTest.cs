@@ -13,7 +13,7 @@ namespace SvgBlazor.Tests
         {
             var comp = RenderComponent<SvgComponent>();
 
-            comp.InvokeAsync(() => comp.Instance.Add(new DummyFillableElement {
+            comp.InvokeAsync(() => comp.Instance.Add(new DummyFillAttributesElement {
                 Fill = new SvgFill {
                     Fill = "green",
                     Opacity = 0.5f,
@@ -23,23 +23,16 @@ namespace SvgBlazor.Tests
 
             comp.Render();
 
-            var element = comp.Find("fillable");
+            var element = comp.Find("elementwithfill");
             Assert.Contains("green", element.GetAttribute("fill"));
             Assert.Contains("0.5", element.GetAttribute("fill-opacity"));
             Assert.Contains("evenodd", element.GetAttribute("fill-rule"));
         }
 
-        private class DummyFillableElement : SvgElement, ISvgFillable
+        private class DummyFillAttributesElement : SvgElement
         {
-            public override string Tag() => "fillable";
+            public override string Tag() => "elementwithfill";
             public override RectangleF BoundingRect() => new RectangleF();
-            public SvgFill Fill { get; set; } = new SvgFill();
-
-            public override void AddAttributes(RenderTreeBuilder builder)
-            {
-                base.AddAttributes(builder);
-                Fill.RenderAttributes(builder);
-            }
         }
     }
 }

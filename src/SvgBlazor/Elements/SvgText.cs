@@ -6,17 +6,12 @@ using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
-    public partial class SvgText : SvgElement, ISvgFillable
+    public partial class SvgText : SvgElement
     {
         /// <summary>
         /// The child content.
         /// </summary>
         public string Text { get; set; }
-
-        /// <summary>
-        /// The color of the text.
-        /// </summary>
-        public SvgFill Fill { get; set; } = new SvgFill();
 
         public override string Tag() => "text";
 
