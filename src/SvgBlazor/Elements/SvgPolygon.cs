@@ -19,11 +19,12 @@ namespace SvgBlazor
         public string Stroke { get; set; }
 
         private List<PointF> _points = new();
-        public List<PointF> Points
+        public IEnumerable<PointF> Points
         {
             set
             {
-                _points = value;
+                ClearPoints();
+                _points = value.ToList();
                 _points.ForEach(UpdateBoundingRect);
                 PointsToString();
             }
@@ -92,10 +93,11 @@ namespace SvgBlazor
         private void PointsToString()
         {
             const int charactersPerPoint = 10;
-            var sb = new StringBuilder(_points.Count*charactersPerPoint);
-            for (int i=0; i<_points.Count; i++)
+            var sb = new StringBuilder(_points.Count() * charactersPerPoint);
+
+            for (int i = 0; i < _points.Count(); i++)
             {
-                if (i>0) {
+                if (i > 0) {
                     sb.Append(' ');
                 }
                 var point = _points[i];

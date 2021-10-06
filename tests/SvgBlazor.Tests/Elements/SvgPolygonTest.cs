@@ -76,5 +76,28 @@ namespace SvgBlazor.Tests
             var brect = element.BoundingRect();
             Assert.Equal(new RectangleF(25, 10, 175, 70), brect);
         }
+
+        [Fact]
+        public void SvgPolygonBoundingBoxWhenPointsChanged()
+        {
+            var element = new SvgPolygon
+            {
+                Points = new List<PointF>
+                {
+                    new PointF(2000, 10),
+                }
+            };
+
+            element.Points = new List<PointF>
+            {
+                new PointF(25, 10),
+                new PointF(50, 20),
+                new PointF(100, 40),
+                new PointF(200, 80),
+            };
+
+            var brect = element.BoundingRect();
+            Assert.Equal(new RectangleF(25, 10, 175, 70), brect);
+        }
     }
 }
