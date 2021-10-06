@@ -12,10 +12,7 @@ namespace SvgBlazor.Docs.Examples
                 CenterX = 100,
                 CenterY = 100,
                 Radius = 20,
-                Fill = new SvgFill() {
-                    Fill = "blue",
-                    Opacity = 0.5f,
-                },
+                Fill = new SvgFill { Color="blue", Opacity = 0.5f },
             };
             svg.Add(circle);
         }

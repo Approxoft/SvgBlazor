@@ -14,11 +14,12 @@ namespace SvgBlazor.Tests
             var comp = RenderComponent<SvgComponent>();
 
             comp.InvokeAsync(() => comp.Instance.Add(new DummyFillAttributesElement {
-                Fill = new SvgFill {
-                    Fill = "green",
+                Fill = new SvgFill
+                {
+                    Color = "green",
                     Opacity = 0.5f,
                     Rule = FillRule.EvenOdd,
-                }
+                },
             }));
 
             comp.Render();

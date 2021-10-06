@@ -51,11 +51,10 @@
         });
 
         var colors = new string[] {"red", "green", "blue", "yellow", "purple"};
-
-        c.Fill = new SvgFill()
+        c.Fill = new SvgFill
         {
-            Fill = colors[new Random().Next(0, colors.Length)],
-            Opacity = 0.5f,
+            Color = colors[new Random().Next(0, colors.Length)],
+            Opacity = (float)new Random().NextDouble()
         };
 
         g.Add(c);

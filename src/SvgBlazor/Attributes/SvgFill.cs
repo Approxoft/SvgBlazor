@@ -4,7 +4,7 @@ namespace SvgBlazor
 {
     public class SvgFill
     {
-        public string Fill { get; set; }
+        public string Color { get; set; }
 
         public SvgValue Opacity { get; set; }
 
@@ -12,7 +12,7 @@ namespace SvgBlazor
 
         public void RenderAttributes(RenderTreeBuilder builder)
         {
-            builder.AddAttribute(0, "fill", Fill);
+            builder.AddAttribute(0, "fill", Color);
             builder.AddAttribute(1, "fill-opacity", Opacity);
             builder.AddAttribute(2, "fill-rule", Rule?.ToString().ToLower());
         }
