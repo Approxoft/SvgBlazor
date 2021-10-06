@@ -2,7 +2,6 @@
 using System.Drawing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
-using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
