@@ -5,8 +5,6 @@ namespace SvgBlazor.Interfaces
 {
     public interface ISvgFillable
     {
-        public string Fill { get; set; }
-
-        public void AddAttributes(RenderTreeBuilder builder);
+        SvgFill Fill { get; set; }
     }
 }

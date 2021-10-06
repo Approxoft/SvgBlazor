@@ -12,7 +12,7 @@ namespace SvgBlazor
     /// <summary>
     /// The root class for svg drawings
     /// </summary>
-    public partial class Svg : SvgContainer
+    public partial class Svg : SvgContainer, ISvgFillable
     {
         public float Width { get; set; }
 
@@ -28,6 +28,10 @@ namespace SvgBlazor
         /// </summary>
         public float? ViewBoxHeight { get; set; }
 
+        /// <summary>
+        /// The fill color of the SVG.
+        /// </summary>
+        public SvgFill Fill { get; set; } = new SvgFill();
 
         public override string Tag() => "svg";
 
@@ -37,6 +41,8 @@ namespace SvgBlazor
             builder.AddAttribute(1, "viewBox", string.Format("0 0 {0} {1}", ViewBoxWidth ?? Width, ViewBoxHeight ?? Height));
             builder.AddAttribute(2, "width", Width);
             builder.AddAttribute(3, "height", Height);
+
+            Fill.RenderAttributes(builder);
         }
 
         /// <summary>

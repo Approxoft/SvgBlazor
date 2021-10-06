@@ -6,11 +6,6 @@ namespace SvgBlazor.Base
 {
     public class SvgFillable: ISvgFillable
     {
-        public virtual string Fill { get; set; }
-
-        public virtual void AddAttributes(RenderTreeBuilder builder)
-        {
-            builder.AddAttribute(0, "fill", Fill);
-        }
+        public virtual SvgFill Fill { get; set; }
     }
 }

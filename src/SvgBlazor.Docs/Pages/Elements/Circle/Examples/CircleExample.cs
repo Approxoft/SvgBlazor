@@ -12,7 +12,6 @@ namespace SvgBlazor.Docs.Examples
                 CenterX = 100,
                 CenterY = 100,
                 Radius = 20,
-                Fill = "red",
             };
             svg.Add(circle);
         }

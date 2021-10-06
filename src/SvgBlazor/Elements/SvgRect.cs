@@ -2,13 +2,14 @@
 using System.Drawing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
     /// <summary>
     /// SVG rect element.
     /// </summary>
-    public class SvgRect : SvgElement
+    public class SvgRect : SvgElement, ISvgFillable
     {
         /// <summary>
         /// The width of the rect.
@@ -30,6 +31,11 @@ namespace SvgBlazor
         /// </summary>
         public SvgValue Ry { get; set; }
 
+        /// <summary>
+        /// The fill color of the rectangle.
+        /// </summary>
+        public SvgFill Fill { get; set; } = new SvgFill();
+
         public override string Tag() => "rect";
 
         public override void AddAttributes(RenderTreeBuilder builder)
@@ -41,6 +47,8 @@ namespace SvgBlazor
             builder.AddAttribute(3, "height", Height);
             builder.AddAttribute(4, "rx", Rx);
             builder.AddAttribute(5, "ry", Ry);
+
+            Fill.RenderAttributes(builder);
         }
 
         public override RectangleF BoundingRect() => new RectangleF(X, Y, Width, Height);

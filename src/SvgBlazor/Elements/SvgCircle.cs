@@ -35,11 +35,12 @@ namespace SvgBlazor
         /// </summary>
         public SvgValue Radius { get; set; }
 
-        public string Fill { get => _svgFillable.Fill; set => _svgFillable.Fill = value; }
+        /// <summary>
+        /// The fill color of the circle.
+        /// </summary>
+        public SvgFill Fill { get; set; } = new SvgFill();
 
         public override string Tag() => "circle";
-
-        private ISvgFillable _svgFillable = new SvgFillable();
 
         public override void AddAttributes(RenderTreeBuilder builder)
         {
@@ -48,7 +49,7 @@ namespace SvgBlazor
             builder.AddAttribute(1, "cy", Y);
             builder.AddAttribute(2, "r", Radius);
 
-            _svgFillable.AddAttributes(builder);
+            Fill.RenderAttributes(builder);
         }
 
         public override RectangleF BoundingRect()

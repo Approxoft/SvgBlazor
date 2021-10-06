@@ -2,13 +2,14 @@
 using System.Drawing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
     /// <summary>
     /// SVG ellipse element.
     /// </summary>
-    public class SvgEllipse : SvgElement
+    public class SvgEllipse : SvgElement, ISvgFillable
     {
         /// <summary>
         /// The x-axis coordinate of the center of the ellipse.
@@ -38,6 +39,11 @@ namespace SvgBlazor
         /// </summary>
         public SvgValue RadiusY { get; set; }
 
+        /// <summary>
+        /// The fill color of the ellipse.
+        /// </summary>
+        public SvgFill Fill { get; set; } = new SvgFill();
+
         public override string Tag() => "ellipse";
 
         public override void AddAttributes(RenderTreeBuilder builder)
@@ -47,6 +53,8 @@ namespace SvgBlazor
             builder.AddAttribute(1, "cy", CenterY);
             builder.AddAttribute(2, "rx", RadiusX);
             builder.AddAttribute(3, "ry", RadiusY);
+
+            Fill.RenderAttributes(builder);
         }
 
         public override RectangleF BoundingRect()

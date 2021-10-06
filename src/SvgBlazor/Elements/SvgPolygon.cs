@@ -5,18 +5,24 @@ using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
     /// <summary>
     /// SVG polygon element.
     /// </summary>
-    public class SvgPolygon : SvgElement
+    public class SvgPolygon : SvgElement, ISvgFillable
     {
         /// <summary>
         /// The color used to paint the outline of the shape.
         /// </summary>
         public string Stroke { get; set; }
+
+        /// <summary>
+        /// The fill color of the polygon.
+        /// </summary>
+        public SvgFill Fill { get; set; } = new SvgFill();
 
         private List<PointF> _points = new();
         public IEnumerable<PointF> Points
@@ -50,6 +56,8 @@ namespace SvgBlazor
             base.AddAttributes(builder);
             builder.AddAttribute(0, "points", _pointsString);
             builder.AddAttribute(1, "stroke", Stroke);
+
+            Fill.RenderAttributes(builder);
         }
 
         public override RectangleF BoundingRect() => new(_boundingRectX1,
