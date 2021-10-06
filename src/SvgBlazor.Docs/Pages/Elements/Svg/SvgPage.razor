@@ -50,6 +50,14 @@
             g.Remove(c);
         });
 
+        var colors = new string[] {"red", "green", "blue", "yellow", "purple"};
+
+        c.Fill = new SvgFill()
+        {
+            Fill = colors[new Random().Next(0, colors.Length)],
+            Opacity = 0.5f,
+        };
+
         g.Add(c);
         svgref.Add(g);
     }
