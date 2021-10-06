@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
@@ -18,6 +19,18 @@ namespace SvgBlazor
         public string Stroke { get; set; }
 
         private List<PointF> _points = new();
+        public IEnumerable<PointF> Points
+        {
+            set
+            {
+                _points = value.ToList();
+
+                ResetBoundingRect();
+                UpdateBoundingRectFromPoints();
+                PointsToString();
+            }
+            get => _points;
+        }
 
         private string _pointsString;
 
@@ -68,6 +81,11 @@ namespace SvgBlazor
             _boundingRectHeight = _boundingRectY2 - _boundingRectY1;
         }
 
+        private void UpdateBoundingRectFromPoints()
+        {
+            _points.ForEach(UpdateBoundingRect);
+        }
+
         private void ResetBoundingRect()
         {
             _boundingRectX1 = float.MaxValue;
@@ -81,10 +99,11 @@ namespace SvgBlazor
         private void PointsToString()
         {
             const int charactersPerPoint = 10;
-            var sb = new StringBuilder(_points.Count*charactersPerPoint);
-            for (int i=0; i<_points.Count; i++)
+            var sb = new StringBuilder(_points.Count * charactersPerPoint);
+
+            for (int i = 0; i < _points.Count; i++)
             {
-                if (i>0) {
+                if (i > 0) {
                     sb.Append(' ');
                 }
                 var point = _points[i];
