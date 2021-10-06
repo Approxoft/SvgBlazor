@@ -21,7 +21,14 @@ namespace SvgBlazor
         private List<PointF> _points = new();
         public IEnumerable<PointF> Points
         {
-            set => SetPoints(value);
+            set
+            {
+                _points = value.ToList();
+
+                ResetBoundingRect();
+                UpdateBoundingRectFromPoints();
+                PointsToString();
+            }
             get => _points;
         }
 
@@ -74,14 +81,9 @@ namespace SvgBlazor
             _boundingRectHeight = _boundingRectY2 - _boundingRectY1;
         }
 
-        private void SetPoints(IEnumerable<PointF> points)
+        private void UpdateBoundingRectFromPoints()
         {
-            ResetBoundingRect();
-
-            _points = points.ToList();
             _points.ForEach(UpdateBoundingRect);
-
-            PointsToString();
         }
 
         private void ResetBoundingRect()
