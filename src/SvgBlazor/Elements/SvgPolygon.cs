@@ -76,7 +76,7 @@ namespace SvgBlazor
 
         private void SetPoints(IEnumerable<PointF> points)
         {
-            ClearPoints();
+            ResetBoundingRect();
 
             _points = points.ToList();
             _points.ForEach(UpdateBoundingRect);
