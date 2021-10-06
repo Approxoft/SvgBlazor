@@ -47,7 +47,6 @@ namespace SvgBlazor
             builder.AddAttribute(3, "height", Height);
             builder.AddAttribute(4, "rx", Rx);
             builder.AddAttribute(5, "ry", Ry);
-
             Fill.RenderAttributes(builder);
         }
 

@@ -41,7 +41,6 @@ namespace SvgBlazor
             builder.AddAttribute(1, "viewBox", string.Format("0 0 {0} {1}", ViewBoxWidth ?? Width, ViewBoxHeight ?? Height));
             builder.AddAttribute(2, "width", Width);
             builder.AddAttribute(3, "height", Height);
-
             Fill.RenderAttributes(builder);
         }
 

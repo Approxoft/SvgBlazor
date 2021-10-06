@@ -48,7 +48,6 @@ namespace SvgBlazor
             builder.AddAttribute(0, "cx", X);
             builder.AddAttribute(1, "cy", Y);
             builder.AddAttribute(2, "r", Radius);
-
             Fill.RenderAttributes(builder);
         }
 

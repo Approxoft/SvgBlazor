@@ -56,7 +56,6 @@ namespace SvgBlazor
             base.AddAttributes(builder);
             builder.AddAttribute(0, "points", _pointsString);
             builder.AddAttribute(1, "stroke", Stroke);
-
             Fill.RenderAttributes(builder);
         }
 
