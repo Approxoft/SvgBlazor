@@ -17,6 +17,7 @@ namespace SvgBlazor.Docs.Examples
                     new PointF(50, 50),
                     new PointF(100, 50),
                 },
+                Fill = new SvgFill { Color = "#aabbcc", Opacity = 0.5f },
             };
 
             svg.Add(polygon);

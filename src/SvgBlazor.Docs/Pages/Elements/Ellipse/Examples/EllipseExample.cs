@@ -13,6 +13,7 @@ namespace SvgBlazor.Docs.Examples
                 CenterY = 100,
                 RadiusX = 40,
                 RadiusY = 20,
+                Fill = new SvgFill { Color = "orange" },
             };
             svg.Add(ellipse);
         }

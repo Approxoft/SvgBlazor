@@ -13,6 +13,7 @@ namespace SvgBlazor.Docs.Examples
                 Y = 20,
                 Width = 180,
                 Height = 180,
+                Fill = new SvgFill { Color = "purple", Opacity = 0.5f },
             };
             svg.Add(rect);
         }

@@ -12,6 +12,7 @@ namespace SvgBlazor.Docs.Examples
                 X = 10,
                 Y = 20,
                 Text = "This is just awesome!",
+                Fill = new SvgFill { Color = "gray" },
             };
             svg.Add(text);
         }
