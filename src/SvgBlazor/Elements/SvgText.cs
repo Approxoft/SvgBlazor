@@ -19,7 +19,6 @@ namespace SvgBlazor
             base.AddAttributes(builder);
             builder.AddAttribute(0, "x", X);
             builder.AddAttribute(1, "y", Y);
-            Fill.RenderAttributes(builder);
             builder.AddContent(2, Text);
         }
 
