@@ -15,7 +15,7 @@ namespace SvgBlazor.Docs.Examples
                 Stroke = new SvgStroke
                 {
                     Color = "blue",
-                    Width = new SvgValue(15),
+                    Width = 15,
                     LineCap = StrokeLineCapStyle.Butt,
                 },
             };
@@ -29,7 +29,7 @@ namespace SvgBlazor.Docs.Examples
                 Stroke = new SvgStroke
                 {
                     Color = "red",
-                    Width = new SvgValue(15),
+                    Width = 15,
                     LineCap = StrokeLineCapStyle.Square,
                 },
             };
