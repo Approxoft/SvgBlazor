@@ -48,6 +48,7 @@ namespace SvgBlazor
             builder.AddAttribute(5, "onmouseout", onMouseOutHandler);
 
             Fill.RenderAttributes(builder);
+            Stroke.RenderAttributes(builder);
         }
 
         public virtual void SetParent(ISvgElement svgContainer) => _parent = svgContainer;

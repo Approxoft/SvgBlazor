@@ -38,11 +38,6 @@ namespace SvgBlazor
         /// </summary>
         public SvgValue Y2 { get; set; }
 
-        /// <summary>
-        /// The color used to paint the outline of the shape.
-        /// </summary>
-        public string Stroke { get; set; } = "black";
-
         public override string Tag() => "line";
 
         public override void AddAttributes(RenderTreeBuilder builder)
@@ -52,7 +47,6 @@ namespace SvgBlazor
             builder.AddAttribute(1, "y1", Y1);
             builder.AddAttribute(2, "x2", X2);
             builder.AddAttribute(3, "y2", Y2);
-            builder.AddAttribute(4, "stroke", Stroke);
         }
 
         public override RectangleF BoundingRect()
