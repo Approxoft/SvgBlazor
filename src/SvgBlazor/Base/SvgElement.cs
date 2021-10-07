@@ -22,6 +22,8 @@ namespace SvgBlazor
 
         public SvgFill Fill { get; set; } = new SvgFill();
 
+        public SvgStroke Stroke { get; set; } = new();
+
         private ISvgElement _parent;
 
         public abstract string Tag();
