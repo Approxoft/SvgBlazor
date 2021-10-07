@@ -65,7 +65,7 @@ namespace SvgBlazor.Tests
         [InlineData(StrokeLineJoinStyle.Bevel, "bevel")]
         [InlineData(StrokeLineJoinStyle.Crop, "crop")]
         [InlineData(StrokeLineJoinStyle.Miter, "miter")]
-        public void RendersWitLineJoinAttribute(StrokeLineJoinStyle lineJoinStyle, string attributeValue)
+        public void RendersWithLineJoinAttribute(StrokeLineJoinStyle lineJoinStyle, string attributeValue)
         {
             var comp = RenderComponent<SvgComponent>();
 
