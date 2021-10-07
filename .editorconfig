@@ -1,0 +1,26 @@
+﻿[*.cs]
+
+# SA1600: Elements should be documented
+dotnet_diagnostic.SA1600.severity = silent
+
+# SA1200: Using directives should be placed correctly
+dotnet_diagnostic.SA1200.severity = silent
+
+# SA1101: Prefix local calls with this
+dotnet_diagnostic.SA1101.severity = silent
+
+# SA1309: Field names should not begin with underscore
+dotnet_diagnostic.SA1309.severity = silent
+
+[*.cshtml.cs]
+
+# SA1649: File name should match first type name
+dotnet_diagnostic.SA1649.severity = silent
+
+[**/Migrations/**.cs]
+
+# Default severity for analyzer diagnostics with category 'StyleCop.CSharp.ReadabilityRules'
+dotnet_analyzer_diagnostic.category-StyleCop.CSharp.ReadabilityRules.severity = silent
+
+# Default severity for analyzer diagnostics with category 'StyleCop.CSharp.DocumentationRules'
+dotnet_analyzer_diagnostic.category-StyleCop.CSharp.DocumentationRules.severity = silent
