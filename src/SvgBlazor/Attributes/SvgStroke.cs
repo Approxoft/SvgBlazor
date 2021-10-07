@@ -38,7 +38,7 @@ namespace SvgBlazor
         /// <summary>
         /// Sets the opacity of the stroke.
         /// </summary>
-        public float? Opacity { get; set; }
+        public SvgValue Opacity { get; set; }
 
         /// <summary>
         /// Sets the width of the stroke.
@@ -55,7 +55,6 @@ namespace SvgBlazor
             builder.AddAttribute(5, "stroke-miterlimit", MiterLimit);
             builder.AddAttribute(6, "stroke-opacity", Opacity);
             builder.AddAttribute(7, "stroke-width", Width);
-
         }
     }
 }

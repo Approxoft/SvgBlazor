@@ -14,7 +14,7 @@ namespace SvgBlazor.Docs.Examples
                 Stroke = new SvgStroke
                 {
                     Color = "green",
-                    Width = new SvgValue(15),
+                    Width = 15,
                     DashArray = "1 2",
                 },
             };

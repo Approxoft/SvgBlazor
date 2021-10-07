@@ -14,7 +14,7 @@ namespace SvgBlazor.Docs.Examples
                 Stroke = new SvgStroke
                 {
                     Color = "pink",
-                    Width = new SvgValue(15),
+                    Width = 15,
                 },
             };
             svg.Add(circle);

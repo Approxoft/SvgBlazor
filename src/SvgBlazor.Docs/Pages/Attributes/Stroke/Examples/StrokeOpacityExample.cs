@@ -14,7 +14,7 @@ namespace SvgBlazor.Docs.Examples
                 Stroke = new SvgStroke
                 {
                     Color = "yellow",
-                    Width = new SvgValue(15),
+                    Width = 15,
                     Opacity = 0.5f,
                 },
             };

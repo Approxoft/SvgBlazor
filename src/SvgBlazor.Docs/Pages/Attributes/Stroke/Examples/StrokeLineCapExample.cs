@@ -43,7 +43,7 @@ namespace SvgBlazor.Docs.Examples
                 Stroke = new SvgStroke
                 {
                     Color = "green",
-                    Width = new SvgValue(15),
+                    Width = 15,
                     LineCap = StrokeLineCapStyle.Round,
                 },
             };

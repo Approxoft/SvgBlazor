@@ -13,6 +13,7 @@ namespace SvgBlazor.Docs.Examples
                 Y1 = new Random().Next(0, 200),
                 X2 = new Random().Next(0, 200),
                 Y2 = new Random().Next(0, 200),
+                Stroke = new SvgStroke { Color = "red" },
             };
             svg.Add(line);
         }
