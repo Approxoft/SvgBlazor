@@ -12,7 +12,6 @@
     {
         SvgElement c;
         var colors = new string[] { "red", "green", "blue", "yellow", "purple" };
-        var color = colors[new Random().Next(0, colors.Length)];
 
         var id = new Random().Next(0, 3);
         switch (id)
@@ -32,7 +31,6 @@
                     Y1 = new Random().Next(25, 475),
                     X2 = new Random().Next(25, 475),
                     Y2 = new Random().Next(25, 475),
-                    Stroke = new SvgStroke { Color = color },
                 };
                 break;
             default:
@@ -56,8 +54,14 @@
 
         c.Fill = new SvgFill
         {
-            Color = color,
+            Color = colors[new Random().Next(0, colors.Length)],
             Opacity = (float)new Random().NextDouble()
+        };
+
+        c.Stroke = new SvgStroke
+        {
+            Color = colors[new Random().Next(0, colors.Length)],
+            Width = new Random().Next(1, 5),
         };
 
         g.Add(c);
