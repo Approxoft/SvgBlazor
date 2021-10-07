@@ -21,6 +21,7 @@ namespace SvgBlazor.Tests
                     DashArray = "1 2 3",
                     DashOffset = 2,
                     Opacity = 0.5f,
+                    MiterLimit = 5,
                     Width = 15,
                 },
             }));
@@ -32,6 +33,7 @@ namespace SvgBlazor.Tests
             Assert.Contains("1 2 3", element.GetAttribute("stroke-dasharray"));
             Assert.Contains("2", element.GetAttribute("stroke-dashoffset"));
             Assert.Contains("0.5", element.GetAttribute("stroke-opacity"));
+            Assert.Contains("5", element.GetAttribute("stroke-miterlimit"));
             Assert.Contains("15", element.GetAttribute("stroke-width"));
         }
 
@@ -55,6 +57,30 @@ namespace SvgBlazor.Tests
 
             var element = comp.Find("elementwithstroke");
             Assert.Contains(attributeValue, element.GetAttribute("stroke-linecap"));
+        }
+
+        [Theory]
+        [InlineData(StrokeLineJoinStyle.Arcs, "arcs")]
+        [InlineData(StrokeLineJoinStyle.Round, "round")]
+        [InlineData(StrokeLineJoinStyle.Bevel, "bevel")]
+        [InlineData(StrokeLineJoinStyle.Crop, "crop")]
+        [InlineData(StrokeLineJoinStyle.Miter, "miter")]
+        public void RendersWitLineJoinAttribute(StrokeLineJoinStyle lineJoinStyle, string attributeValue)
+        {
+            var comp = RenderComponent<SvgComponent>();
+
+            comp.InvokeAsync(() => comp.Instance.Add(new DummyStrokeAttributesElement
+            {
+                Stroke = new SvgStroke
+                {
+                    LineJoin = lineJoinStyle,
+                },
+            }));
+
+            comp.Render();
+
+            var element = comp.Find("elementwithstroke");
+            Assert.Contains(attributeValue, element.GetAttribute("stroke-linejoin"));
         }
 
         private class DummyStrokeAttributesElement : SvgElement
