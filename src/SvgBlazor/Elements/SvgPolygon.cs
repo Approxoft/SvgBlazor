@@ -13,11 +13,6 @@ namespace SvgBlazor
     /// </summary>
     public class SvgPolygon : SvgElement
     {
-        /// <summary>
-        /// The color used to paint the outline of the shape.
-        /// </summary>
-        public string Stroke { get; set; }
-
         private List<PointF> _points = new();
         public IEnumerable<PointF> Points
         {
@@ -49,7 +44,6 @@ namespace SvgBlazor
         {
             base.AddAttributes(builder);
             builder.AddAttribute(0, "points", _pointsString);
-            builder.AddAttribute(1, "stroke", Stroke);
         }
 
         public override RectangleF BoundingRect() => new(_boundingRectX1,

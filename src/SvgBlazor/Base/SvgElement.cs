@@ -22,6 +22,8 @@ namespace SvgBlazor
 
         public SvgFill Fill { get; set; } = new SvgFill();
 
+        public SvgStroke Stroke { get; set; } = new();
+
         private ISvgElement _parent;
 
         public abstract string Tag();
@@ -46,6 +48,7 @@ namespace SvgBlazor
             builder.AddAttribute(5, "onmouseout", onMouseOutHandler);
 
             Fill.RenderAttributes(builder);
+            Stroke.RenderAttributes(builder);
         }
 
         public virtual void SetParent(ISvgElement svgContainer) => _parent = svgContainer;
