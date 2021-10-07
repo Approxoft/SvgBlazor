@@ -28,7 +28,6 @@ namespace SvgBlazor
         /// </summary>
         public float? ViewBoxHeight { get; set; }
 
-
         public override string Tag() => "svg";
 
         public override void AddAttributes(RenderTreeBuilder builder)
