@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace SvgBlazor.Interfaces
 {
-    public interface ISvgContainer: ISvgElement
+    public interface ISvgContainer : ISvgElement
     {
         ISvgContainer Add(ISvgElement element);
 

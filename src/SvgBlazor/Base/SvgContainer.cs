@@ -7,26 +7,30 @@ using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
-    public abstract class SvgContainer: SvgElement, ISvgContainer
+    public abstract class SvgContainer : SvgElement, ISvgContainer
     {
-        readonly List<ISvgElement> elements = new();
+        private readonly List<ISvgElement> _elements = new ();
+
+        public bool MouseDown { get; private set; } = false;
+
+        public ISvgElement OverElement { get; private set; }
 
         public ISvgContainer Add(ISvgElement element)
         {
             element.SetParent(this);
-            elements.Add(element);
+            _elements.Add(element);
             return this;
         }
 
         public ISvgContainer Remove(ISvgElement element)
         {
-            elements.Remove(element);
+            _elements.Remove(element);
             return this;
         }
 
         public virtual void AddElements(RenderTreeBuilder builder)
         {
-            foreach (var element in elements)
+            foreach (var element in _elements)
             {
                 element.BuildElement(builder);
             }
@@ -39,10 +43,6 @@ namespace SvgBlazor
             AddElements(builder);
             builder.CloseElement();
         }
-
-        public bool MouseDown { get; private set; } = false;
-
-        public ISvgElement OverElement { get; private set; }
 
         public override void ElementMouseOver(ISvgElement element, MouseEventArgs args)
         {

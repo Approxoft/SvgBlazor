@@ -10,6 +10,8 @@ namespace SvgBlazor
 {
     public abstract class SvgElement : SvgEventHandler, ISvgElement
     {
+        private ISvgElement _parent;
+
         public SvgValue X { get; set; } = 0;
 
         public SvgValue Y { get; set; } = 0;
@@ -20,11 +22,9 @@ namespace SvgBlazor
 
         public string Style { get; set; }
 
-        public SvgFill Fill { get; set; } = new SvgFill();
+        public SvgFill Fill { get; set; } = new ();
 
-        public SvgStroke Stroke { get; set; } = new();
-
-        private ISvgElement _parent;
+        public SvgStroke Stroke { get; set; } = new ();
 
         public abstract string Tag();
 

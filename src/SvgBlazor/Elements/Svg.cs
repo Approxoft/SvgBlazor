@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Drawing;
 using System.Collections.Generic;
+using System.Drawing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
@@ -8,9 +8,8 @@ using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
-    // TODO: use dynamic content for .net6
     /// <summary>
-    /// The root class for svg drawings
+    /// The root class for svg drawings.
     /// </summary>
     public partial class Svg : SvgContainer
     {
@@ -19,12 +18,12 @@ namespace SvgBlazor
         public float Height { get; set; }
 
         /// <summary>
-        /// The optional width of the viewbox. If not set, the `Width` value will be used
+        /// Gets or sets the optional width of the viewbox. If not set, the 'Width' value will be used.
         /// </summary>
         public float? ViewBoxWidth { get; set; }
 
         /// <summary>
-        /// The optional height of the viewbox. If not set, the `Height` value will be used
+        /// Gets or sets the optional height of the viewbox. If not set, the 'Height' value will be used.
         /// </summary>
         public float? ViewBoxHeight { get; set; }
 
@@ -39,10 +38,10 @@ namespace SvgBlazor
         }
 
         /// <summary>
-        /// Sets the size of the viewbox and redraws the svg
+        /// Sets the size of the viewbox and redraws the svg.
         /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
+        /// <param name="width">Width of the viewbox.</param>
+        /// <param name="height">Height of the viewbox.</param>
         public void SetViewBox(float width, float height)
         {
             ViewBoxWidth = width;
@@ -50,16 +49,16 @@ namespace SvgBlazor
         }
 
         /// <summary>
-        /// Sets the size of the viewport and redraws the svg
+        /// Sets the size of the viewport and redraws the svg.
         /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
+        /// <param name="width">Width of the viewport.</param>
+        /// <param name="height">Height of the viewport.</param>
         public void SetSize(float width, float height)
         {
             Width = width;
             Height = height;
         }
 
-        public override RectangleF BoundingRect() => new RectangleF(X, Y, Width, Height);
+        public override RectangleF BoundingRect() => new (X, Y, Width, Height);
     }
 }
