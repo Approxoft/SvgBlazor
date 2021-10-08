@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace SvgBlazor
 {
-    public partial class SvgText : SvgElement
+    public class SvgText : SvgElement
     {
         /// <summary>
         /// The child content.
