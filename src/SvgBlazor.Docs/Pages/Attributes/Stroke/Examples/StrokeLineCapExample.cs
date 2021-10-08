@@ -4,53 +4,27 @@ namespace SvgBlazor.Docs.Examples
 {
     public class StrokeLineCapExample : IExampleCode
     {
+        private StrokeLineCapStyle? _strokeLineCapStyle;
+
+        public StrokeLineCapExample(StrokeLineCapStyle? strokeLineCapStyle = null) => _strokeLineCapStyle = strokeLineCapStyle;
+
         public void Example(SvgComponent svg)
         {
-            var buttLine = new SvgLine
+            var line = new SvgLine
             {
-                X1 = 20,
-                Y1 = 20,
+                X1 = 10,
+                Y1 = 5,
                 X2 = 175,
-                Y2 = 20,
+                Y2 = 5,
                 Stroke = new SvgStroke
                 {
-                    Color = "blue",
-                    Width = 15,
-                    LineCap = StrokeLineCapStyle.Butt,
+                    Color = "black",
+                    Width = 10,
+                    LineCap = _strokeLineCapStyle,
                 },
             };
 
-            var squareLine = new SvgLine
-            {
-                X1 = 20,
-                Y1 = 50,
-                X2 = 175,
-                Y2 = 50,
-                Stroke = new SvgStroke
-                {
-                    Color = "red",
-                    Width = 15,
-                    LineCap = StrokeLineCapStyle.Square,
-                },
-            };
-
-            var roundLine = new SvgLine
-            {
-                X1 = 20,
-                Y1 = 80,
-                X2 = 175,
-                Y2 = 80,
-                Stroke = new SvgStroke
-                {
-                    Color = "green",
-                    Width = 15,
-                    LineCap = StrokeLineCapStyle.Round,
-                },
-            };
-
-            svg.Add(buttLine);
-            svg.Add(squareLine);
-            svg.Add(roundLine);
+            svg.Add(line);
         }
     }
 }

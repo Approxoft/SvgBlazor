@@ -7,11 +7,25 @@
 <h4>Dash array example:</h4>
 <div><ExampleComponent ExampleCode="@(new StrokeDashArrayExample())" /></div>
 
-<h4>Dash offset example:</h4>
-<div><ExampleComponent ExampleCode="@(new StrokeDashOffsetExample())" /></div>
+<h4>Dash offset examples:</h4>
+<h5>Dash offset = 25</h5>
+<div><ExampleComponent Height="25" ExampleCode="@(new StrokeDashOffsetExample(25))" /></div>
 
-<h4>Stroke line cap example:</h4>
-<div><ExampleComponent ExampleCode="@(new StrokeLineCapExample())" /></div>
+<h5>Dash offset = 50</h5>
+<div><ExampleComponent Height="25" ExampleCode="@(new StrokeDashOffsetExample(50))" /></div>
+
+<h4>Stroke line cap examples:</h4>
+<h5>No line cap</h5>
+<div><ExampleComponent Height="20" ExampleCode="@(new StrokeLineCapExample())" /></div>
+
+<h5>Butt</h5>
+<div><ExampleComponent Height="20" ExampleCode="@(new StrokeLineCapExample(StrokeLineCapStyle.Butt))" /></div>
+
+<h5>Square</h5>
+<div><ExampleComponent Height="20" ExampleCode="@(new StrokeLineCapExample(StrokeLineCapStyle.Square))" /></div>
+
+<h5>Round</h5>
+<div><ExampleComponent Height="20" ExampleCode="@(new StrokeLineCapExample(StrokeLineCapStyle.Round))" /></div>
 
 <h4>Stroke opacity example:</h4>
 <div><ExampleComponent ExampleCode="@(new StrokeOpacityExample())" /></div>

@@ -4,9 +4,27 @@ namespace SvgBlazor.Docs.Examples
 {
     public class StrokeDashOffsetExample : IExampleCode
     {
+        private SvgValue _dashOffset;
+
+        public StrokeDashOffsetExample(SvgValue dashOffset) => _dashOffset = dashOffset;
+
         public void Example(SvgComponent svg)
         {
-            var lineWithOffset50 = new SvgLine
+            var referenceLine = new SvgLine
+            {
+                X1 = 20,
+                Y1 = 5,
+                X2 = 175,
+                Y2 = 5,
+                Stroke = new SvgStroke
+                {
+                    Color = "red",
+                    Width = 10,
+                    DashArray = "50",
+                },
+            };
+
+            var line = new SvgLine
             {
                 X1 = 20,
                 Y1 = 20,
@@ -15,29 +33,14 @@ namespace SvgBlazor.Docs.Examples
                 Stroke = new SvgStroke
                 {
                     Color = "blue",
-                    Width = 15,
+                    Width = 10,
                     DashArray = "50",
-                    DashOffset = 50,
+                    DashOffset = _dashOffset,
                 },
             };
 
-            var lineWithOffset0 = new SvgLine
-            {
-                X1 = 20,
-                Y1 = 50,
-                X2 = 175,
-                Y2 = 50,
-                Stroke = new SvgStroke
-                {
-                    Color = "red",
-                    Width = 15,
-                    DashArray = "50",
-                    DashOffset = 0,
-                },
-            };
-
-            svg.Add(lineWithOffset50);
-            svg.Add(lineWithOffset0);
+            svg.Add(referenceLine);
+            svg.Add(line);
         }
     }
 }
