@@ -11,7 +11,7 @@ namespace SvgBlazor
     public class SvgEllipse : SvgElement
     {
         /// <summary>
-        /// The x-axis coordinate of the center of the ellipse.
+        /// Gets or sets the x-axis coordinate of the center of the ellipse.
         /// </summary>
         public SvgValue CenterX
         {
@@ -20,7 +20,7 @@ namespace SvgBlazor
         }
 
         /// <summary>
-        /// The y-axis coordinate of the center of the ellipse.
+        /// Gets or sets the y-axis coordinate of the center of the ellipse.
         /// </summary>
         public SvgValue CenterY
         {
@@ -29,12 +29,12 @@ namespace SvgBlazor
         }
 
         /// <summary>
-        /// The radius on the x axis.
+        /// Gets or sets the radius on the x axis.
         /// </summary>
         public SvgValue RadiusX { get; set; }
 
         /// <summary>
-        /// The radius on the y axis.
+        /// Gets or sets the radius on the y axis.
         /// </summary>
         public SvgValue RadiusY { get; set; }
 
@@ -50,9 +50,10 @@ namespace SvgBlazor
         }
 
         public override RectangleF BoundingRect()
-            => new RectangleF(CenterX - RadiusX,
-                              CenterY - RadiusY,
-                              RadiusX * 2,
-                              RadiusY * 2);
+            => new (
+                CenterX - RadiusX,
+                CenterY - RadiusY,
+                RadiusX * 2,
+                RadiusY * 2);
     }
 }

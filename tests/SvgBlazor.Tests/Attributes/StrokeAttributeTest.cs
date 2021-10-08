@@ -63,7 +63,6 @@ namespace SvgBlazor.Tests
         [InlineData(StrokeLineJoinStyle.Arcs, "arcs")]
         [InlineData(StrokeLineJoinStyle.Round, "round")]
         [InlineData(StrokeLineJoinStyle.Bevel, "bevel")]
-        [InlineData(StrokeLineJoinStyle.Crop, "crop")]
         [InlineData(StrokeLineJoinStyle.Miter, "miter")]
         public void RendersWithLineJoinAttribute(StrokeLineJoinStyle lineJoinStyle, string attributeValue)
         {

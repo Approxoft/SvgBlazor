@@ -5,47 +5,16 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
 using SvgBlazor.Interfaces;
+using SvgBlazor.Interop;
 
 namespace SvgBlazor
 {
-    class SvgElementConnector: Svg
+    public class SvgComponent : ComponentBase
     {
-        private readonly SvgComponent _svgComponent;
+        private readonly SvgElementConnector svg;
 
-        public SvgElementConnector(SvgComponent component)
-        {
-            _svgComponent = component;
-        }
+        public SvgComponent() => svg = new (this);
 
-        public override void Refresh() => _svgComponent.Refresh();
-
-        public override async Task OnClickHandler(MouseEventArgs args)
-        {
-            await base.OnClickHandler(args);
-            await _svgComponent.OnClick.InvokeAsync();
-        }
-
-        public override async Task OnMouseDownHandler(MouseEventArgs args)
-        {
-            await base.OnMouseDownHandler(args);
-            await _svgComponent.OnMouseDown.InvokeAsync();
-        }
-
-        public override async Task OnMouseMoveHandler(MouseEventArgs args)
-        {
-            await base.OnMouseMoveHandler(args);
-            await _svgComponent.OnMouseMove.InvokeAsync();
-        }
-
-        public override async Task OnMouseUpHandler(MouseEventArgs args)
-        {
-            await base.OnMouseUpHandler(args);
-            await _svgComponent.OnMouseUp.InvokeAsync();
-        }
-    }
-
-    public class SvgComponent: ComponentBase
-    {
         [Parameter]
         public float Width { get; set; }
 
@@ -53,13 +22,13 @@ namespace SvgBlazor
         public float Height { get; set; }
 
         /// <summary>
-        /// The optional width of the viewbox. If not set, the `Width` value will be used
+        /// Gets or sets the optional width of the viewbox. If not set, the `Width` value will be used.
         /// </summary>
         [Parameter]
         public float? ViewBoxWidth { get; set; }
 
         /// <summary>
-        /// The optional height of the viewbox. If not set, the `Height` value will be used
+        /// Gets or sets the optional height of the viewbox. If not set, the `Height` value will be used.
         /// </summary>
         [Parameter]
         public float? ViewBoxHeight { get; set; }
@@ -79,9 +48,21 @@ namespace SvgBlazor
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 
-        private readonly SvgElementConnector svg;
+        public void Refresh() => StateHasChanged();
 
-        public SvgComponent() => svg = new(this);
+        public ISvgContainer Add(ISvgElement element)
+        {
+            svg.Add(element);
+            Refresh();
+            return svg;
+        }
+
+        public ISvgContainer Remove(ISvgElement element)
+        {
+            svg.Remove(element);
+            Refresh();
+            return svg;
+        }
 
         protected override void OnParametersSet()
         {
@@ -109,22 +90,6 @@ namespace SvgBlazor
             svg.AddAttributes(builder);
             svg.AddElements(builder);
             builder.CloseComponent();
-        }
-
-        public void Refresh() => StateHasChanged();
-
-        public ISvgContainer Add(ISvgElement element)
-        {
-            svg.Add(element);
-            Refresh();
-            return svg;
-        }
-
-        public ISvgContainer Remove(ISvgElement element)
-        {
-            svg.Remove(element);
-            Refresh();
-            return svg;
         }
     }
 }

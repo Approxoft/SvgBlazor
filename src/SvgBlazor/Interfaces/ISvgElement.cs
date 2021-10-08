@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace SvgBlazor.Interfaces
 {
-    public interface ISvgElement: ISvgEventHandler
+    public interface ISvgElement : ISvgEventHandler
     {
         SvgValue X { get; set; }
 

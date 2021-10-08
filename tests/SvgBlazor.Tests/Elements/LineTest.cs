@@ -43,6 +43,7 @@ namespace SvgBlazor.Tests
             Assert.Equal(new RectangleF(1, 1, 4, 4), rect);
         }
 
+        [Fact]
         public void SvgLineBoundingBoxStartPointLargerThanEndPoint()
         {
             var element = new SvgLine

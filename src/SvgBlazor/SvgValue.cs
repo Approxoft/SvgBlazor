@@ -6,14 +6,7 @@ namespace SvgBlazor
 {
     public class SvgValue
     {
-        private enum ValueType
-        {
-            Unknown,
-            Float,
-            String,
-        }
-
-        public static string Auto { get; } = "auto";
+        private readonly NumberFormatInfo _numberFormatInfo;
 
         private float _floatValue;
 
@@ -23,31 +16,38 @@ namespace SvgBlazor
 
         private ValueUnit _unit = ValueUnit.NoUnit;
 
-        private readonly NumberFormatInfo _numberFormatInfo;
-
         public SvgValue()
         {
             _numberFormatInfo = new NumberFormatInfo();
             _numberFormatInfo.NumberDecimalSeparator = ".";
         }
 
-        public SvgValue(int value, ValueUnit unit = ValueUnit.NoUnit):
-            this() => SetValue((int)value, unit);
+        public SvgValue(int value, ValueUnit unit = ValueUnit.NoUnit)
+            : this() => SetValue((int)value, unit);
 
-        public SvgValue(float value, ValueUnit unit = ValueUnit.NoUnit):
-            this() => SetValue(value, unit);
+        public SvgValue(float value, ValueUnit unit = ValueUnit.NoUnit)
+            : this() => SetValue(value, unit);
 
-        public SvgValue(string value):
-            this() => SetValue(value);
+        public SvgValue(string value)
+            : this() => SetValue(value);
 
-        public SvgValue(SvgValue value):
-            this()
+        public SvgValue(SvgValue value)
+            : this()
         {
             _floatValue = value._floatValue;
             _stringValue = value._stringValue;
             _valueType = value._valueType;
             _unit = value._unit;
         }
+
+        private enum ValueType
+        {
+            Unknown,
+            Float,
+            String,
+        }
+
+        public static string Auto { get; } = "auto";
 
         public static implicit operator SvgValue(int value) => new SvgValue(value);
 
@@ -57,7 +57,7 @@ namespace SvgBlazor
 
         public static implicit operator float(SvgValue d) => d.ToFloat();
 
-        public float ToFloat() =>_floatValue;
+        public float ToFloat() => _floatValue;
 
         public void SetValue(float value, ValueUnit unit = ValueUnit.NoUnit)
         {
@@ -93,10 +93,11 @@ namespace SvgBlazor
 
                         return sb.ToString();
                     }
+
                 case ValueType.String:
                     return _stringValue;
                 default:
-                    return String.Empty;
+                    return string.Empty;
             }
         }
     }

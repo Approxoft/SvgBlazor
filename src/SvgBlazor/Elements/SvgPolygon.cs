@@ -13,19 +13,7 @@ namespace SvgBlazor
     /// </summary>
     public class SvgPolygon : SvgElement
     {
-        private List<PointF> _points = new();
-        public IEnumerable<PointF> Points
-        {
-            set
-            {
-                _points = value.ToList();
-
-                ResetBoundingRect();
-                UpdateBoundingRectFromPoints();
-                PointsToString();
-            }
-            get => _points;
-        }
+        private List<PointF> _points = new ();
 
         private string _pointsString;
 
@@ -38,6 +26,19 @@ namespace SvgBlazor
 
         public SvgPolygon() => ResetBoundingRect();
 
+        public IEnumerable<PointF> Points
+        {
+            get => _points;
+            set
+            {
+                _points = value.ToList();
+
+                ResetBoundingRect();
+                UpdateBoundingRectFromPoints();
+                PointsToString();
+            }
+        }
+
         public override string Tag() => "polygon";
 
         public override void AddAttributes(RenderTreeBuilder builder)
@@ -46,10 +47,10 @@ namespace SvgBlazor
             builder.AddAttribute(0, "points", _pointsString);
         }
 
-        public override RectangleF BoundingRect() => new(_boundingRectX1,
-                                                         _boundingRectY1,
-                                                         _boundingRectWidth,
-                                                         _boundingRectHeight);
+        public override RectangleF BoundingRect() => new (_boundingRectX1,
+                                                          _boundingRectY1,
+                                                          _boundingRectWidth,
+                                                          _boundingRectHeight);
 
         public virtual void AddPoint(PointF point)
         {
@@ -97,14 +98,17 @@ namespace SvgBlazor
 
             for (int i = 0; i < _points.Count; i++)
             {
-                if (i > 0) {
+                if (i > 0)
+                {
                     sb.Append(' ');
                 }
+
                 var point = _points[i];
                 sb.Append(point.X);
                 sb.Append(' ');
                 sb.Append(point.Y);
             }
+
             _pointsString = sb.ToString();
         }
     }

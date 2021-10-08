@@ -6,7 +6,7 @@ using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
-    public class SvgEventHandler: ISvgEventHandler
+    public class SvgEventHandler : ISvgEventHandler
     {
         public EventCallback<MouseEventArgs> OnClick { get; set; }
 
