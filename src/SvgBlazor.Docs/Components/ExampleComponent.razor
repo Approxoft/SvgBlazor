@@ -1,10 +1,16 @@
 ﻿@using SvgBlazor.Docs.Interfaces
  
-<SvgComponent @ref="svg" Width="200" Height="200" />
+<SvgComponent @ref="svg" Width="Width" Height="Height" />
 
 @code {
     [Parameter]
     public IExampleCode ExampleCode { get; set; }
+
+    [Parameter]
+    public int Width { get; set; } = 200;
+
+    [Parameter]
+    public int Height { get; set; } = 200;
 
     private SvgComponent svg;
 
