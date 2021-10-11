@@ -3,7 +3,7 @@ using SvgBlazor.Docs.Interfaces;
 
 namespace SvgBlazor.Docs.Examples
 {
-    public class TextDxDyExample : IExampleCode
+    public class TextDxDyExample : TextBasicExample
     {
         private SvgValue _dx;
         private SvgValue _dy;
@@ -14,17 +14,13 @@ namespace SvgBlazor.Docs.Examples
             _dy = dy;
         }
 
-        public void Example(SvgComponent svg)
+        public override void Example(SvgComponent svg)
         {
-            var text = new SvgText
-            {
-                X = 10,
-                Y = 20,
-                DX = _dx,
-                DY = _dy,
-                Text = "This is just awesome!",
-                Fill = new SvgFill { Color = "red" },
-            };
+            base.Example(svg);
+
+            text.DX = _dx;
+            text.DY = _dy;
+
             svg.Add(text);
         }
     }

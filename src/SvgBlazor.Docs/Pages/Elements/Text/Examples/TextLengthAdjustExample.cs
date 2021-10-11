@@ -3,7 +3,7 @@ using SvgBlazor.Docs.Interfaces;
 
 namespace SvgBlazor.Docs.Examples
 {
-    public class TextLengthAdjustExample : IExampleCode
+    public class TextLengthAdjustExample : TextBasicExample
     {
         private TextLengthAdjust _adjust;
         private SvgValue _textLength;
@@ -14,17 +14,12 @@ namespace SvgBlazor.Docs.Examples
             _textLength = textLength;
         }
 
-        public void Example(SvgComponent svg)
+        public override void Example(SvgComponent svg)
         {
-            var text = new SvgText
-            {
-                X = 10,
-                Y = 20,
-                LengthAdjust = _adjust,
-                TextLength = _textLength,
-                Text = "This is just awesome!",
-                Fill = new SvgFill { Color = "blue" },
-            };
+            base.Example(svg);
+
+            text.LengthAdjust = _adjust;
+            text.TextLength = _textLength;
 
             svg.Add(text);
         }

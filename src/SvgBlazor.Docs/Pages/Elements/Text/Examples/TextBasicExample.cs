@@ -5,15 +5,16 @@ namespace SvgBlazor.Docs.Examples
 {
     public class TextBasicExample : IExampleCode
     {
-        public void Example(SvgComponent svg)
+        protected SvgText text = new SvgText
         {
-            var text = new SvgText
-            {
-                X = 10,
-                Y = 20,
-                Text = "This is just awesome!",
-                Fill = new SvgFill { Color = "gray" },
-            };
+            X = 10,
+            Y = 20,
+            Text = "This is just awesome!",
+            Fill = new SvgFill { Color = "black" },
+        };
+
+        public virtual void Example(SvgComponent svg)
+        {
             svg.Add(text);
         }
     }
