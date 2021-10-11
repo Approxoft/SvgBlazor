@@ -14,8 +14,8 @@ namespace SvgBlazor.Tests
             {
                 X = 1,
                 Y = 2,
-                DX = 20,
-                DY = 30,
+                ShiftX = 20,
+                ShiftY = 30,
                 TextLength = 123,
                 Text = "Test string",
             }));

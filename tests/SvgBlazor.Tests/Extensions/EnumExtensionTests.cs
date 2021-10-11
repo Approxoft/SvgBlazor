@@ -9,10 +9,11 @@ namespace SvgBlazor.Tests.Extensions
     public class EnumExtensionTests
     {
         [Fact]
-        public void RetursString()
+        public void ReturnsString()
         {
             Assert.Equal("dumb", Dummy.Dumb.ToStringValue());
             Assert.Equal("dumber", Dummy.Dumber.ToStringValue());
+            Assert.Equal("EvenMoreDumber", Dummy.EvenMoreDumber.ToStringValue());
         }
 
         private enum Dummy
@@ -22,6 +23,7 @@ namespace SvgBlazor.Tests.Extensions
 
             [Description("dumber")]
             Dumber,
+            EvenMoreDumber,
         }
     }
 }

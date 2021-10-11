@@ -17,14 +17,14 @@ namespace SvgBlazor
         public string Text { get; set; }
 
         /// <summary>
-        /// Gets or sets x-axis offset from the `X` coordinate.
+        /// Gets or sets x-axis shift from the `X` coordinate.
         /// </summary>
-        public SvgValue DX { get; set; }
+        public SvgValue ShiftX { get; set; }
 
         /// <summary>
-        /// Gets or sets y-axis offset from the `Y` coordinate.
+        /// Gets or sets y-axis shift from the `Y` coordinate.
         /// </summary>
-        public SvgValue DY { get; set; }
+        public SvgValue ShiftY { get; set; }
 
         /// <summary>
         /// Gets or sets rotation of each glyph.
@@ -48,8 +48,8 @@ namespace SvgBlazor
             base.AddAttributes(builder);
             builder.AddAttribute(0, "x", X);
             builder.AddAttribute(1, "y", Y);
-            builder.AddAttribute(2, "dx", DX);
-            builder.AddAttribute(3, "dy", DY);
+            builder.AddAttribute(2, "dx", ShiftX);
+            builder.AddAttribute(3, "dy", ShiftY);
             builder.AddAttribute(4, "rotate", Rotate);
             builder.AddAttribute(5, "lengthAdjust", LengthAdjust.ToStringValue());
             builder.AddAttribute(6, "textLength", TextLength);

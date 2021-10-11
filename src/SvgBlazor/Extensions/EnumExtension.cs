@@ -7,11 +7,14 @@ namespace SvgBlazor.Extensions
     {
         public static string ToStringValue(this Enum en)
         {
-            var type = en.GetType();
-            var memInfo = type.GetMember(en.ToString());
-            var attributes = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
-            var stringValue = ((DescriptionAttribute)attributes[0]).Description;
-            return stringValue;
+            var attributes = (DescriptionAttribute[])en
+                .GetType()
+                .GetField(en.ToString())
+                .GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            return attributes.Length > 0
+                ? attributes[0].Description
+                : en.ToString();
         }
     }
 }
