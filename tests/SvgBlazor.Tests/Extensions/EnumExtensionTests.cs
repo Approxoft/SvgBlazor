@@ -11,9 +11,9 @@ namespace SvgBlazor.Tests.Extensions
         [Fact]
         public void ReturnsString()
         {
-            Assert.Equal("dumb", Dummy.Dumb.ToStringValue());
-            Assert.Equal("dumber", Dummy.Dumber.ToStringValue());
-            Assert.Equal("EvenMoreDumber", Dummy.EvenMoreDumber.ToStringValue());
+            Assert.Equal("dumb", Dummy.Dumb.ToDescriptionString());
+            Assert.Equal("dumber", Dummy.Dumber.ToDescriptionString());
+            Assert.Equal("EvenMoreDumber", Dummy.EvenMoreDumber.ToDescriptionString());
         }
 
         private enum Dummy

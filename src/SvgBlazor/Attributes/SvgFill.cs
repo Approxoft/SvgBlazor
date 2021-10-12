@@ -15,7 +15,7 @@ namespace SvgBlazor
         {
             builder.AddAttribute(0, "fill", Color);
             builder.AddAttribute(1, "fill-opacity", Opacity);
-            builder.AddAttribute(2, "fill-rule", Rule?.ToStringValue());
+            builder.AddAttribute(2, "fill-rule", Rule?.ToDescriptionString());
         }
     }
 }

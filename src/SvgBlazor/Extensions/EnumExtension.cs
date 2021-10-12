@@ -5,7 +5,7 @@ namespace SvgBlazor.Extensions
 {
     public static class EnumExtension
     {
-        public static string ToStringValue(this Enum en)
+        public static string ToDescriptionString(this Enum en)
         {
             var attributes = (DescriptionAttribute[])en
                 .GetType()
