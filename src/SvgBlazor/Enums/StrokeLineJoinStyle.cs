@@ -21,6 +21,12 @@ namespace SvgBlazor
         Miter,
 
         /// <summary>
+        /// The sharp corner will be used to join path segments.
+        /// </summary>
+        [Description("miter-clip")]
+        MiterClip,
+
+        /// <summary>
         /// The bevelled corner will be used to join path segments.
         /// </summary>
         [Description("bevel")]
