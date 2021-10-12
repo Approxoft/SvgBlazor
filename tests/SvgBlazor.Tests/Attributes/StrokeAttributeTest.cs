@@ -64,6 +64,7 @@ namespace SvgBlazor.Tests
         [InlineData(StrokeLineJoinStyle.Round, "round")]
         [InlineData(StrokeLineJoinStyle.Bevel, "bevel")]
         [InlineData(StrokeLineJoinStyle.Miter, "miter")]
+        [InlineData(StrokeLineJoinStyle.MiterClip, "miter-clip")]
         public void RendersWithLineJoinAttribute(StrokeLineJoinStyle lineJoinStyle, string attributeValue)
         {
             var comp = RenderComponent<SvgComponent>();
