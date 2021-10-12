@@ -2,7 +2,7 @@
 
 namespace SvgBlazor.Docs.Examples
 {
-    public class StrokeBasicExample: IExampleCode
+    public class StrokeBasicExample : IExampleCode
     {
         public void Example(SvgComponent svg)
         {
