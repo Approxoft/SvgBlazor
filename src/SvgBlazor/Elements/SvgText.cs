@@ -51,7 +51,7 @@ namespace SvgBlazor
             builder.AddAttribute(2, "dx", ShiftX);
             builder.AddAttribute(3, "dy", ShiftY);
             builder.AddAttribute(4, "rotate", Rotate);
-            builder.AddAttribute(5, "lengthAdjust", LengthAdjust.ToStringValue());
+            builder.AddAttribute(5, "lengthAdjust", LengthAdjust.ToDescriptionString());
             builder.AddAttribute(6, "textLength", TextLength);
 
             builder.AddContent(7, Text);

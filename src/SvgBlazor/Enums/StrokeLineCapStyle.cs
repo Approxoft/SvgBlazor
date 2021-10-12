@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace SvgBlazor
 {
@@ -10,16 +11,19 @@ namespace SvgBlazor
         /// <summary>
         /// The end of each subpath will not be extended beyond its two endpoints.
         /// </summary>
+        [Description("butt")]
         Butt,
 
         /// <summary>
         /// The end of each subpath will be extended by a rectangle.
         /// </summary>
+        [Description("square")]
         Square,
 
         /// <summary>
         /// The end of each subpath will be extended by a half circle.
         /// </summary>
+        [Description("round")]
         Round,
     }
 }

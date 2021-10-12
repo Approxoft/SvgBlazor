@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Components.Rendering;
+using SvgBlazor.Extensions;
 
 namespace SvgBlazor
 {
@@ -50,8 +51,8 @@ namespace SvgBlazor
             builder.AddAttribute(0, "stroke", Color);
             builder.AddAttribute(1, "stroke-dasharray", DashArray);
             builder.AddAttribute(2, "stroke-dashoffset", DashOffset);
-            builder.AddAttribute(3, "stroke-linecap", LineCap?.ToString().ToLower());
-            builder.AddAttribute(4, "stroke-linejoin", LineJoin?.ToString().ToLower());
+            builder.AddAttribute(3, "stroke-linecap", LineCap?.ToDescriptionString());
+            builder.AddAttribute(4, "stroke-linejoin", LineJoin?.ToDescriptionString());
             builder.AddAttribute(5, "stroke-miterlimit", MiterLimit);
             builder.AddAttribute(6, "stroke-opacity", Opacity);
             builder.AddAttribute(7, "stroke-width", Width);
