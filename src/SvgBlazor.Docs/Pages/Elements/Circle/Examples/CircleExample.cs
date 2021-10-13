@@ -1,4 +1,6 @@
 ﻿using System;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using SvgBlazor.Docs.Interfaces;
 
 namespace SvgBlazor.Docs.Examples
@@ -14,6 +16,12 @@ namespace SvgBlazor.Docs.Examples
                 Radius = 20,
                 Fill = new SvgFill { Color = "blue", Opacity = 0.5f },
             };
+
+            circle.OnClick = EventCallback.Factory.Create<MouseEventArgs>(circle, async (args) =>
+            {
+                Console.WriteLine("Element clicked " + await circle.BoundingRect2());
+            });
+
             svg.Add(circle);
         }
     }

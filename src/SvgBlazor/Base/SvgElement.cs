@@ -84,6 +84,10 @@ namespace SvgBlazor
 
         public abstract RectangleF BoundingRect();
 
-        public async Task<RectangleF> BoundingRect2() => await JSRuntime.GetBBox(ElementReference);
+        public async Task<RectangleF> BoundingRect2()
+        {
+            var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./SvgBlazor.js");
+            return await module.InvokeAsync<RectangleF>("BBox", ElementReference);
+        }
     }
 }
