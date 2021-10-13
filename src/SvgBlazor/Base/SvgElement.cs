@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.JSInterop;
+using SvgBlazor.Extensions;
 using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
@@ -15,6 +17,10 @@ namespace SvgBlazor
         public SvgValue X { get; set; } = 0;
 
         public SvgValue Y { get; set; } = 0;
+
+        public ElementReference ElementReference { get; private set; }
+
+        public IJSRuntime JSRuntime { get; set; }
 
         public string Id { get; set; }
 
@@ -32,6 +38,7 @@ namespace SvgBlazor
         {
             builder.OpenElement(0, Tag());
             AddAttributes(builder);
+            builder.AddElementReferenceCapture(1, er => ElementReference = er);
             builder.CloseElement();
         }
 
@@ -76,5 +83,7 @@ namespace SvgBlazor
         }
 
         public abstract RectangleF BoundingRect();
+
+        public async Task<RectangleF> BoundingRect2() => await JSRuntime.GetBBox(ElementReference);
     }
 }

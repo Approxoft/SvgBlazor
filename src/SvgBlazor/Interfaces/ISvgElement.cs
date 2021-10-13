@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.JSInterop;
 
 namespace SvgBlazor.Interfaces
 {
@@ -11,6 +12,8 @@ namespace SvgBlazor.Interfaces
         SvgValue X { get; set; }
 
         SvgValue Y { get; set; }
+
+        IJSRuntime JSRuntime { get; set; }
 
         string Tag();
 

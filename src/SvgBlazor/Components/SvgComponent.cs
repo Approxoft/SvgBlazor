@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.JSInterop;
 using SvgBlazor.Interfaces;
 using SvgBlazor.Interop;
 
@@ -14,6 +15,9 @@ namespace SvgBlazor
         private readonly SvgElementConnector svg;
 
         public SvgComponent() => svg = new (this);
+
+        [Inject]
+        protected IJSRuntime JSRuntime { get; set; }
 
         [Parameter]
         public float Width { get; set; }
@@ -52,6 +56,7 @@ namespace SvgBlazor
 
         public ISvgContainer Add(ISvgElement element)
         {
+            element.JSRuntime = JSRuntime;
             svg.Add(element);
             Refresh();
             return svg;
