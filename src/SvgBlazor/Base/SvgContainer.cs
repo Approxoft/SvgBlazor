@@ -38,12 +38,9 @@ namespace SvgBlazor
             }
         }
 
-        public override void BuildElement(RenderTreeBuilder builder)
+        public override void BuildElementAdditionalSteps(RenderTreeBuilder builder)
         {
-            builder.OpenElement(0, Tag());
-            AddAttributes(builder);
             AddElements(builder);
-            builder.CloseElement();
         }
 
         public override void ElementMouseOver(ISvgElement element, MouseEventArgs args)

@@ -39,8 +39,13 @@ namespace SvgBlazor
         {
             builder.OpenElement(0, Tag());
             AddAttributes(builder);
+            BuildElementAdditionalSteps(builder);
             builder.AddElementReferenceCapture(1, er => ElementReference = er);
             builder.CloseElement();
+        }
+
+        public virtual void BuildElementAdditionalSteps(RenderTreeBuilder builder)
+        {
         }
 
         public virtual void AddAttributes(RenderTreeBuilder builder)
