@@ -19,13 +19,13 @@ namespace SvgBlazor.Interfaces
 
         SvgValue Y { get; set; }
 
+        void SetBoundingBoxable(IBoundingBoxable boundingBoxable);
+
         string Tag();
 
         void BuildElement(RenderTreeBuilder builder);
 
         void SetParent(ISvgElement parent);
-
-        void SetBoundingBoxable(IBoundingBoxable boundingBoxable);
 
         ISvgElement Parent();
 

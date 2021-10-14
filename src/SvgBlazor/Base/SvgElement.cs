@@ -13,6 +13,7 @@ namespace SvgBlazor
     public abstract class SvgElement : SvgEventHandler, ISvgElement, ISvgElementReferenceable
     {
         private ISvgElement _parent;
+        private IBoundingBoxable _boundingBoxable;
 
         public SvgValue X { get; set; } = 0;
 
@@ -21,8 +22,6 @@ namespace SvgBlazor
         public ElementReference ElementReference { get; set; }
 
         public IJSRuntime JSRuntime { get; set; }
-
-        private IBoundingBoxable _boundingBoxable; 
 
         public string Id { get; set; }
 
@@ -62,8 +61,6 @@ namespace SvgBlazor
 
         public virtual void SetParent(ISvgElement svgContainer) => _parent = svgContainer;
 
-        public virtual void SetBoundingBoxable(IBoundingBoxable boundingBoxable) => _boundingBoxable = boundingBoxable;
-
         public virtual ISvgElement Parent() => _parent;
 
         public virtual void Refresh() => _parent.Refresh();
@@ -89,5 +86,7 @@ namespace SvgBlazor
         public abstract RectangleF BoundingRect();
 
         public async Task<RectangleF> BoundingRect2() => await _boundingBoxable.GetBoundingBox(this);
+
+        public virtual void SetBoundingBoxable(IBoundingBoxable boundingBoxable) => _boundingBoxable = boundingBoxable;
     }
 }

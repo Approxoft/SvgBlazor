@@ -63,8 +63,8 @@ namespace SvgBlazor
 
         public ISvgContainer Add(ISvgElement element)
         {
-            element.SetBoundingBoxable(this);
             svg.Add(element);
+            ReassignBoundingBoxable();
             Refresh();
             return svg;
         }
@@ -112,6 +112,13 @@ namespace SvgBlazor
             svg.AddAttributes(builder);
             svg.AddElements(builder);
             builder.CloseComponent();
+        }
+
+        private void ReassignBoundingBoxable()
+        {
+            svg
+                .GetElements()
+                .ForEach(e => e.SetBoundingBoxable(this));
         }
     }
 }

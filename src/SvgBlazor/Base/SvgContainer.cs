@@ -11,6 +11,8 @@ namespace SvgBlazor
     {
         private readonly List<ISvgElement> _elements = new ();
 
+        public List<ISvgElement> GetElements() => _elements;
+
         public bool MouseDown { get; private set; } = false;
 
         public ISvgElement OverElement { get; private set; }
@@ -97,6 +99,13 @@ namespace SvgBlazor
             MouseDown = false;
             await (OverElement?.OnMouseUpHandler(args) ?? Task.CompletedTask);
             await base.OnMouseUpHandler(args);
+        }
+
+        public override void SetBoundingBoxable(IBoundingBoxable boundingBoxable)
+        {
+            base.SetBoundingBoxable(boundingBoxable);
+
+            _elements.ForEach(e => e.SetBoundingBoxable(boundingBoxable));
         }
     }
 }
