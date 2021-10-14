@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
@@ -10,9 +11,15 @@ using SvgBlazor.Interop;
 
 namespace SvgBlazor
 {
-    public class SvgComponent : ComponentBase
+    public interface IBoundingBoxable
+    {
+        Task<RectangleF> GetBoundingBox(ISvgElementReferenceable element);
+    }
+
+    public class SvgComponent : ComponentBase, IBoundingBoxable
     {
         private readonly SvgElementConnector svg;
+        private IJSObjectReference _module;
 
         public SvgComponent() => svg = new (this);
 
@@ -56,7 +63,7 @@ namespace SvgBlazor
 
         public ISvgContainer Add(ISvgElement element)
         {
-            element.JSRuntime = JSRuntime;
+            element.SetBoundingBoxable(this);
             svg.Add(element);
             Refresh();
             return svg;
@@ -67,6 +74,16 @@ namespace SvgBlazor
             svg.Remove(element);
             Refresh();
             return svg;
+        }
+
+        public async Task<RectangleF> GetBoundingBox(ISvgElementReferenceable element)
+        {
+            if (_module is null)
+            {
+                _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./SvgBlazor.js");
+            }
+
+            return await _module.InvokeAsync<RectangleF>("BBox", element.ElementReference);
         }
 
         protected override void OnParametersSet()
