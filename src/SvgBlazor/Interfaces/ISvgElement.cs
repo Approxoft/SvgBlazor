@@ -8,22 +8,21 @@ using Microsoft.JSInterop;
 
 namespace SvgBlazor.Interfaces
 {
-    public interface ISvgElementReferenceable
-    {
-        public ElementReference ElementReference { get; set; }
-    }
-
     public interface ISvgElement : ISvgEventHandler
     {
         SvgValue X { get; set; }
 
         SvgValue Y { get; set; }
 
-        void SetBoundingBoxable(IBoundingBoxable boundingBoxable);
+        ElementReference ElementReference { get; set; }
+
+        void SetComponent(ISvgComponent svgComponent);
 
         string Tag();
 
         void BuildElement(RenderTreeBuilder builder);
+
+        void BuildElementAdditionalSteps(RenderTreeBuilder builder);
 
         void SetParent(ISvgElement parent);
 

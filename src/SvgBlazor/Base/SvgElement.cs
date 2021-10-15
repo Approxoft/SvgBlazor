@@ -10,18 +10,16 @@ using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
-    public abstract class SvgElement : SvgEventHandler, ISvgElement, ISvgElementReferenceable
+    public abstract class SvgElement : SvgEventHandler, ISvgElement
     {
         private ISvgElement _parent;
-        private IBoundingBoxable _boundingBoxable;
+        private ISvgComponent _svgComponent;
 
         public SvgValue X { get; set; } = 0;
 
         public SvgValue Y { get; set; } = 0;
 
         public ElementReference ElementReference { get; set; }
-
-        public IJSRuntime JSRuntime { get; set; }
 
         public string Id { get; set; }
 
@@ -90,8 +88,13 @@ namespace SvgBlazor
 
         public abstract RectangleF BoundingRect();
 
-        public async Task<RectangleF> BoundingRect2() => await _boundingBoxable.GetBoundingBox(this);
+        public async Task<RectangleF> BoundingRect2()
+        {
+            var module = await _svgComponent.GetModule();
 
-        public virtual void SetBoundingBoxable(IBoundingBoxable boundingBoxable) => _boundingBoxable = boundingBoxable;
+            return await module.InvokeAsync<RectangleF>("BBox", ElementReference);
+        }
+
+        public virtual void SetComponent(ISvgComponent svgComponent) => _svgComponent = svgComponent;
     }
 }

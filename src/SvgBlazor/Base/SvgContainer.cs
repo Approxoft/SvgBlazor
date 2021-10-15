@@ -38,10 +38,7 @@ namespace SvgBlazor
             }
         }
 
-        public override void BuildElementAdditionalSteps(RenderTreeBuilder builder)
-        {
-            AddElements(builder);
-        }
+        public override void BuildElementAdditionalSteps(RenderTreeBuilder builder) => AddElements(builder);
 
         public override void ElementMouseOver(ISvgElement element, MouseEventArgs args)
         {
@@ -98,11 +95,11 @@ namespace SvgBlazor
             await base.OnMouseUpHandler(args);
         }
 
-        public override void SetBoundingBoxable(IBoundingBoxable boundingBoxable)
+        public override void SetComponent(ISvgComponent svgComponent)
         {
-            base.SetBoundingBoxable(boundingBoxable);
+            base.SetComponent(svgComponent);
 
-            _elements.ForEach(e => e.SetBoundingBoxable(boundingBoxable));
+            _elements.ForEach(e => e.SetComponent(svgComponent));
         }
     }
 }

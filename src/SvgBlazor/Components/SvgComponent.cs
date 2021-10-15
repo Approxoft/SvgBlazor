@@ -11,12 +11,7 @@ using SvgBlazor.Interop;
 
 namespace SvgBlazor
 {
-    public interface IBoundingBoxable
-    {
-        Task<RectangleF> GetBoundingBox(ISvgElementReferenceable element);
-    }
-
-    public class SvgComponent : ComponentBase, IBoundingBoxable
+    public class SvgComponent : ComponentBase, ISvgComponent
     {
         private readonly SvgElementConnector svg;
         private IJSObjectReference _module;
@@ -76,14 +71,14 @@ namespace SvgBlazor
             return svg;
         }
 
-        public async Task<RectangleF> GetBoundingBox(ISvgElementReferenceable element)
+        public async Task<IJSObjectReference> GetModule()
         {
             if (_module is null)
             {
                 _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./SvgBlazor.js");
             }
 
-            return await _module.InvokeAsync<RectangleF>("BBox", element.ElementReference);
+            return _module;
         }
 
         protected override void OnParametersSet()
@@ -111,6 +106,7 @@ namespace SvgBlazor
 
             svg.AddAttributes(builder);
             svg.AddElements(builder);
+            svg.BuildElementAdditionalSteps(builder);
             builder.CloseComponent();
         }
 
@@ -118,7 +114,7 @@ namespace SvgBlazor
         {
             svg
                 .GetElements()
-                .ForEach(e => e.SetBoundingBoxable(this));
+                .ForEach(e => e.SetComponent(this));
         }
     }
 }
