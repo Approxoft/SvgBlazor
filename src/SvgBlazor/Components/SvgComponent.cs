@@ -14,7 +14,8 @@ namespace SvgBlazor
     public class SvgComponent : ComponentBase, ISvgComponent
     {
         private readonly SvgElementConnector svg;
-        private IJSObjectReference _module;
+
+        public IJSObjectReference Module { get; private set; }
 
         public SvgComponent() => svg = new (this);
 
@@ -71,14 +72,10 @@ namespace SvgBlazor
             return svg;
         }
 
-        public async Task<IJSObjectReference> GetModule()
+        protected override async Task OnInitializedAsync()
         {
-            if (_module is null)
-            {
-                _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./SvgBlazor.js");
-            }
-
-            return _module;
+            await base.OnInitializedAsync();
+            await LoadModule();
         }
 
         protected override void OnParametersSet()
@@ -109,6 +106,8 @@ namespace SvgBlazor
             svg.BuildElementAdditionalSteps(builder);
             builder.CloseComponent();
         }
+
+        private async Task LoadModule() => Module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./SvgBlazor.js");
 
         private void ReassignBoundingBoxable()
         {

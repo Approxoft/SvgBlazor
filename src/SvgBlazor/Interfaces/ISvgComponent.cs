@@ -7,8 +7,8 @@ namespace SvgBlazor.Interfaces
 {
     public interface ISvgComponent
     {
-        void Refresh();
+        IJSObjectReference Module { get; }
 
-        Task<IJSObjectReference> GetModule();
+        void Refresh();
     }
 }

@@ -90,9 +90,9 @@ namespace SvgBlazor
 
         public async Task<RectangleF> BoundingRect2()
         {
-            var module = await _svgComponent.GetModule();
-
-            return await module.InvokeAsync<RectangleF>("BBox", ElementReference);
+            return await _svgComponent
+                .Module
+                .InvokeAsync<RectangleF>("BBox", ElementReference);
         }
 
         public virtual void SetComponent(ISvgComponent svgComponent) => _svgComponent = svgComponent;
