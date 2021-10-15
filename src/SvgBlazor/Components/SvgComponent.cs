@@ -11,7 +11,7 @@ using SvgBlazor.Interop;
 
 namespace SvgBlazor
 {
-    public class SvgComponent : ComponentBase, ISvgComponent
+    public class SvgComponent : ComponentBase, ISvgComponent, IAsyncDisposable
     {
         private readonly SvgElementConnector svg;
 
@@ -57,6 +57,8 @@ namespace SvgBlazor
 
         public void Refresh() => StateHasChanged();
 
+        public async ValueTask DisposeAsync() => await Module.DisposeAsync();
+
         public ISvgContainer Add(ISvgElement element)
         {
             svg.Add(element);
@@ -72,10 +74,12 @@ namespace SvgBlazor
             return svg;
         }
 
-        protected override async Task OnInitializedAsync()
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            await base.OnInitializedAsync();
-            await LoadModule();
+            if (firstRender)
+            {
+                await LoadModule();
+            }
         }
 
         protected override void OnParametersSet()

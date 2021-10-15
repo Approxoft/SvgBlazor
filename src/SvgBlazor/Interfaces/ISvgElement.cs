@@ -35,5 +35,7 @@ namespace SvgBlazor.Interfaces
         void ElementMouseOut(ISvgElement element, MouseEventArgs args);
 
         RectangleF BoundingRect();
+
+        Task<RectangleF> GetBoundingBox();
     }
 }

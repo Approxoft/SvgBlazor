@@ -88,8 +88,13 @@ namespace SvgBlazor
 
         public abstract RectangleF BoundingRect();
 
-        public async Task<RectangleF> BoundingRect2()
+        public async Task<RectangleF> GetBoundingBox()
         {
+            if (_svgComponent.Module is null)
+            {
+                throw new Exception("Sorry, getting bounding box is available after first render.");
+            }
+
             return await _svgComponent
                 .Module
                 .InvokeAsync<RectangleF>("BBox", ElementReference);

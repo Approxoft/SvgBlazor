@@ -19,7 +19,7 @@ namespace SvgBlazor.Docs.Examples
 
             circle.OnClick = EventCallback.Factory.Create<MouseEventArgs>(circle, async (args) =>
             {
-                Console.WriteLine("Element clicked " + await circle.BoundingRect2());
+                Console.WriteLine("Element clicked " + await circle.GetBoundingBox());
             });
 
             svg.Add(circle);

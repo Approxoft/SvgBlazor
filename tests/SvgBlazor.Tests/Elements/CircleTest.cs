@@ -65,7 +65,7 @@ namespace SvgBlazor.Tests
             await comp.InvokeAsync(() => comp.Instance.Add(circle));
             comp.Render();
 
-            var brect = await circle.BoundingRect2();
+            var brect = await circle.GetBoundingBox();
 
             Assert.Equal(new RectangleF(0, 0, 6, 6), brect);
         }
