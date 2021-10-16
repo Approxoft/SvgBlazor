@@ -13,7 +13,17 @@ namespace SvgBlazor
     public abstract class SvgElement : SvgEventHandler, ISvgElement
     {
         private ISvgElement _parent;
-        private ISvgComponent _svgComponent;
+        private SvgBlazorJsModule _module;
+
+        public SvgElement(SvgBlazorJsModule module)
+        {
+            _module = module;
+        }
+
+        public SvgElement()
+            : this(SvgBlazorJsModule.Shared)
+        {
+        }
 
         public SvgValue X { get; set; } = 0;
 
@@ -90,16 +100,27 @@ namespace SvgBlazor
 
         public async Task<RectangleF> GetBoundingBox()
         {
-            if (_svgComponent.Module is null)
+            //if (_svgComponent.Module is null)
+            //{
+            //    throw new Exception("Sorry, getting bounding box is available after first render.");
+            //}
+
+            //return await _svgComponent
+            //    .Module
+            //    .InvokeAsync<RectangleF>("BBox", ElementReference);
+
+            if (_module is null)
             {
                 throw new Exception("Sorry, getting bounding box is available after first render.");
             }
 
-            return await _svgComponent
-                .Module
+            return await _module.Module
                 .InvokeAsync<RectangleF>("BBox", ElementReference);
         }
 
-        public virtual void SetComponent(ISvgComponent svgComponent) => _svgComponent = svgComponent;
+        public virtual void SetComponent(ISvgComponent svgComponent)
+        {
+            //_svgComponent = svgComponent;
+        }
     }
 }

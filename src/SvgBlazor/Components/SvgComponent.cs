@@ -11,11 +11,16 @@ using SvgBlazor.Interop;
 
 namespace SvgBlazor
 {
+    public class SvgBlazorJsModule
+    {
+        public IJSObjectReference Module { get; set; }
+
+        public static SvgBlazorJsModule Shared = new();
+    }
+
     public class SvgComponent : ComponentBase, ISvgComponent, IAsyncDisposable
     {
         private readonly SvgElementConnector svg;
-
-        public IJSObjectReference Module { get; private set; }
 
         public SvgComponent() => svg = new (this);
 
@@ -57,12 +62,15 @@ namespace SvgBlazor
 
         public void Refresh() => StateHasChanged();
 
-        public async ValueTask DisposeAsync() => await Module.DisposeAsync();
+        public async ValueTask DisposeAsync()
+        {
+            // await Module.DisposeAsync();
+        }
 
         public ISvgContainer Add(ISvgElement element)
         {
             svg.Add(element);
-            ReassignBoundingBoxable();
+            //ReassignBoundingBoxable();
             Refresh();
             return svg;
         }
@@ -111,13 +119,14 @@ namespace SvgBlazor
             builder.CloseComponent();
         }
 
-        private async Task LoadModule() => Module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./SvgBlazor.js");
+        private async Task LoadModule() =>
+            SvgBlazorJsModule.Shared.Module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/SvgBlazor/SvgBlazor.js");
 
-        private void ReassignBoundingBoxable()
-        {
-            svg
-                .GetElements()
-                .ForEach(e => e.SetComponent(this));
-        }
+        //private void ReassignBoundingBoxable()
+        //{
+        //    svg
+        //        .GetElements()
+        //        .ForEach(e => e.SetComponent(this));
+        //}
     }
 }
