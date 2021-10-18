@@ -11,7 +11,7 @@ using SvgBlazor.Interop;
 
 namespace SvgBlazor
 {
-    public class SvgComponent : ComponentBase, ISvgComponent, IAsyncDisposable
+    public class SvgComponent : ComponentBase, IAsyncDisposable
     {
         private readonly SvgElementConnector svg;
 
@@ -91,7 +91,7 @@ namespace SvgBlazor
         {
             if (firstRender)
             {
-                await LoadModule();
+                await LoadSvgBlazorJsModule();
             }
         }
 
@@ -124,7 +124,7 @@ namespace SvgBlazor
             builder.CloseComponent();
         }
 
-        private async Task LoadModule() =>
+        private async Task LoadSvgBlazorJsModule() =>
             _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/SvgBlazor/SvgBlazor.js");
     }
 }

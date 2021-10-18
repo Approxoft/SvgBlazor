@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace SvgBlazor.Tests
 {
-    public class ElementTest : TestContext
+    public class ElementTest : SvgBlazorJsModuleTestContext
     {
         [Fact]
         public void RendersSvgElementWithParameters()
@@ -127,7 +127,6 @@ namespace SvgBlazor.Tests
         private class DummyElement : SvgElement
         {
             public override string Tag() => "dummy";
-            public override RectangleF BoundingRect() => new RectangleF();
         }
     }
 }

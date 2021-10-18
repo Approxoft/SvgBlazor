@@ -4,7 +4,7 @@ using Bunit;
 
 namespace SvgBlazor.Tests
 {
-    public class EllipseTest : TestContext
+    public class EllipseTest : SvgBlazorJsModuleTestContext
     {
         [Fact]
         public void RendersSvgEllipseWithParameters()
@@ -25,20 +25,6 @@ namespace SvgBlazor.Tests
             Assert.Contains("2", element.GetAttribute("cy"));
             Assert.Contains("3", element.GetAttribute("rx"));
             Assert.Contains("4", element.GetAttribute("ry"));
-        }
-
-        [Fact]
-        public void SvgEllipseBoundingBox()
-        {
-            var element = new SvgEllipse {
-                CenterX = 1,
-                CenterY = 2,
-                RadiusX = 3,
-                RadiusY = 4,
-            };
-
-            var brect = element.BoundingRect();
-            Assert.Equal(new RectangleF(-2, -2, 6, 8), brect);
         }
     }
 }

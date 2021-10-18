@@ -4,7 +4,7 @@ using Bunit;
 
 namespace SvgBlazor.Tests
 {
-    public class SvgGTest : TestContext
+    public class SvgGTest : SvgBlazorJsModuleTestContext
     {
         [Fact]
         public void RendersSvgGWithChildContent()
@@ -24,7 +24,6 @@ namespace SvgBlazor.Tests
         private class ChildElement : SvgElement
         {
             public override string Tag() => "tester";
-            public override RectangleF BoundingRect() => new RectangleF();
         }
     }
 }

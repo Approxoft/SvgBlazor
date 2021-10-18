@@ -26,8 +26,11 @@
   <ItemGroup>
     <None Remove="Components\" />
     <None Remove="bunit" />
+    <None Remove="Base\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Elements\" />
+    <Folder Include="Components\" />
+    <Folder Include="Base\" />
   </ItemGroup>
 </Project>

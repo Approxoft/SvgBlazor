@@ -11,8 +11,6 @@ namespace SvgBlazor
     {
         private readonly List<ISvgElement> _elements = new ();
 
-        public List<ISvgElement> GetElements() => _elements;
-
         public bool MouseDown { get; private set; } = false;
 
         public ISvgElement OverElement { get; private set; }
