@@ -56,7 +56,5 @@ namespace SvgBlazor
 
             builder.AddContent(7, Text);
         }
-
-        public override RectangleF BoundingRect() => throw new NotImplementedException();
     }
 }

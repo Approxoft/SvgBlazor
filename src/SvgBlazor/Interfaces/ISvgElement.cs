@@ -16,8 +16,6 @@ namespace SvgBlazor.Interfaces
 
         ElementReference ElementReference { get; set; }
 
-        void SetComponent(ISvgComponent svgComponent);
-
         string Tag();
 
         void BuildElement(RenderTreeBuilder builder);
@@ -33,9 +31,5 @@ namespace SvgBlazor.Interfaces
         void ElementMouseOver(ISvgElement element, MouseEventArgs args);
 
         void ElementMouseOut(ISvgElement element, MouseEventArgs args);
-
-        RectangleF BoundingRect();
-
-        Task<RectangleF> GetBoundingBox();
     }
 }

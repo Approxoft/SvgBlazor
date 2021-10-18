@@ -94,12 +94,5 @@ namespace SvgBlazor
             await (OverElement?.OnMouseUpHandler(args) ?? Task.CompletedTask);
             await base.OnMouseUpHandler(args);
         }
-
-        public override void SetComponent(ISvgComponent svgComponent)
-        {
-            base.SetComponent(svgComponent);
-
-            _elements.ForEach(e => e.SetComponent(svgComponent));
-        }
     }
 }

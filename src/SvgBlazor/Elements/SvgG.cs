@@ -11,7 +11,5 @@ namespace SvgBlazor
     public partial class SvgG : SvgContainer
     {
         public override string Tag() => "g";
-
-        public override RectangleF BoundingRect() => throw new NotImplementedException();
     }
 }

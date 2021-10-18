@@ -42,7 +42,5 @@ namespace SvgBlazor
             builder.AddAttribute(4, "rx", Rx);
             builder.AddAttribute(5, "ry", Ry);
         }
-
-        public override RectangleF BoundingRect() => new RectangleF(X, Y, Width, Height);
     }
 }

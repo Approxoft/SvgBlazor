@@ -47,8 +47,8 @@
         c.OnClick = EventCallback.Factory.Create<MouseEventArgs>(c,async (args) =>
         {
             Console.WriteLine("Element clicked " + c.Tag());
-            Console.WriteLine("Element clicked " + await c.GetBoundingBox());
-            Console.WriteLine("Element clicked " + await g.GetBoundingBox());
+            Console.WriteLine("Element clicked " + await svgref.GetBoundingBox(g));
+            Console.WriteLine("Element clicked " + await svgref.GetBoundingBox(c));
 
         });
 

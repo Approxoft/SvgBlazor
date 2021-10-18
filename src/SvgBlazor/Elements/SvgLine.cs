@@ -48,16 +48,5 @@ namespace SvgBlazor
             builder.AddAttribute(2, "x2", X2);
             builder.AddAttribute(3, "y2", Y2);
         }
-
-        public override RectangleF BoundingRect()
-        {
-            float x1 = Math.Min(X1, X2);
-            float y1 = Math.Min(Y1, Y2);
-
-            float width = Math.Abs(X2 - X1);
-            float height = Math.Abs(X2 - X1);
-
-            return new RectangleF(x1, y1, width, height);
-        }
     }
 }

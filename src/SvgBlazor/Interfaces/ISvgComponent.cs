@@ -7,7 +7,7 @@ namespace SvgBlazor.Interfaces
 {
     public interface ISvgComponent
     {
-        //IJSObjectReference Module { get; }
+        Task<RectangleF> GetBoundingBox(ISvgElement element);
 
         void Refresh();
     }

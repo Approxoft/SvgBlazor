@@ -11,13 +11,6 @@ using SvgBlazor.Interop;
 
 namespace SvgBlazor
 {
-    public class SvgBlazorJsModule
-    {
-        public IJSObjectReference Module { get; set; }
-
-        public static SvgBlazorJsModule Shared = new();
-    }
-
     public class SvgComponent : ComponentBase, ISvgComponent, IAsyncDisposable
     {
         private readonly SvgElementConnector svg;
@@ -26,6 +19,8 @@ namespace SvgBlazor
 
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
+
+        private IJSObjectReference _module { get; set; }
 
         [Parameter]
         public float Width { get; set; }
@@ -64,13 +59,12 @@ namespace SvgBlazor
 
         public async ValueTask DisposeAsync()
         {
-            // await Module.DisposeAsync();
+             await _module.DisposeAsync();
         }
 
         public ISvgContainer Add(ISvgElement element)
         {
             svg.Add(element);
-            //ReassignBoundingBoxable();
             Refresh();
             return svg;
         }
@@ -80,6 +74,17 @@ namespace SvgBlazor
             svg.Remove(element);
             Refresh();
             return svg;
+        }
+
+        public async Task<RectangleF> GetBoundingBox(ISvgElement element)
+        {
+            if (_module is null)
+            {
+                throw new Exception("Sorry, getting bounding box is available after first render.");
+            }
+
+            return await _module
+                .InvokeAsync<RectangleF>("BBox", element.ElementReference);
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -120,13 +125,6 @@ namespace SvgBlazor
         }
 
         private async Task LoadModule() =>
-            SvgBlazorJsModule.Shared.Module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/SvgBlazor/SvgBlazor.js");
-
-        //private void ReassignBoundingBoxable()
-        //{
-        //    svg
-        //        .GetElements()
-        //        .ForEach(e => e.SetComponent(this));
-        //}
+            _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/SvgBlazor/SvgBlazor.js");
     }
 }
