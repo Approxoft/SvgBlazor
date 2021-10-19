@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgBlazor.Tests", "tests\Sv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgBlazor.Docs.Generator", "src\SvgBlazor.Docs.Generator\SvgBlazor.Docs.Generator.csproj", "{FFA512DA-CAC8-4344-9211-751A52C467D5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{57B99570-1E88-4A9F-99E2-BF0C99D0BEB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgBlazor.Docs.Generator.Tests", "tests\SvgBlazor.Docs.Generator.Tests\SvgBlazor.Docs.Generator.Tests.csproj", "{8F5DD64E-0CF6-430E-9DDE-BF980D3A5F9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,11 +37,18 @@ Global
 		{FFA512DA-CAC8-4344-9211-751A52C467D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFA512DA-CAC8-4344-9211-751A52C467D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFA512DA-CAC8-4344-9211-751A52C467D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F5DD64E-0CF6-430E-9DDE-BF980D3A5F9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F5DD64E-0CF6-430E-9DDE-BF980D3A5F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F5DD64E-0CF6-430E-9DDE-BF980D3A5F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F5DD64E-0CF6-430E-9DDE-BF980D3A5F9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {314B00A4-A5F8-4CD0-9E8E-D35FFE123F7A}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8F5DD64E-0CF6-430E-9DDE-BF980D3A5F9C} = {57B99570-1E88-4A9F-99E2-BF0C99D0BEB9}
 	EndGlobalSection
 EndGlobal
