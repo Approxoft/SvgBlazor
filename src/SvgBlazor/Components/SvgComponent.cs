@@ -118,7 +118,6 @@ namespace SvgBlazor
             builder.AddAttribute(4, "onmouseup", onMouseUpHandler);
 
             svg.AddAttributes(builder);
-            svg.AddElements(builder);
             svg.BuildElementAdditionalSteps(builder);
             builder.CloseComponent();
         }

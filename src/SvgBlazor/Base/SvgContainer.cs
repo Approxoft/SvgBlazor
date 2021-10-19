@@ -28,7 +28,7 @@ namespace SvgBlazor
             return this;
         }
 
-        public virtual void AddElements(RenderTreeBuilder builder)
+        protected virtual void AddElements(RenderTreeBuilder builder)
         {
             foreach (var element in _elements)
             {
