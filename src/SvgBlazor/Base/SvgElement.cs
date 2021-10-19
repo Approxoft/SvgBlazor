@@ -1,10 +1,7 @@
-﻿using System;
-using System.Drawing;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
-using SvgBlazor.Extensions;
 using SvgBlazor.Interfaces;
 
 namespace SvgBlazor

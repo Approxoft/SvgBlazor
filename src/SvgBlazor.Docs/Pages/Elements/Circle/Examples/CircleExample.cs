@@ -17,11 +17,6 @@ namespace SvgBlazor.Docs.Examples
                 Fill = new SvgFill { Color = "blue", Opacity = 0.5f },
             };
 
-            circle.OnClick = EventCallback.Factory.Create<MouseEventArgs>(circle, async (args) =>
-            {
-                Console.WriteLine("Element clicked " + await svg.GetBoundingBox(circle));
-            });
-
             svg.Add(circle);
         }
     }

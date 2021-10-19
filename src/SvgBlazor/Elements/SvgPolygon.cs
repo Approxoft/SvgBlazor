@@ -17,13 +17,6 @@ namespace SvgBlazor
 
         private string _pointsString;
 
-        private float _boundingRectX1;
-        private float _boundingRectY1;
-        private float _boundingRectX2;
-        private float _boundingRectY2;
-        private float _boundingRectWidth;
-        private float _boundingRectHeight;
-
         public IEnumerable<PointF> Points
         {
             get => _points;
