@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace SvgBlazor.Tests
 {
-    public class SvgPolygonTest : SvgBlazorJsModuleTestContext
+    public class SvgPolygonTest : TestContextWithSvgBlazorJsModule
     {
         [Fact]
         public void RendersSvgPolygonWithParameters()

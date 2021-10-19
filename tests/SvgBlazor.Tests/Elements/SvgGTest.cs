@@ -4,7 +4,7 @@ using Bunit;
 
 namespace SvgBlazor.Tests
 {
-    public class SvgGTest : SvgBlazorJsModuleTestContext
+    public class SvgGTest : TestContextWithSvgBlazorJsModule
     {
         [Fact]
         public void RendersSvgGWithChildContent()

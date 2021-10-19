@@ -14,13 +14,12 @@ namespace SvgBlazor
     public class SvgComponent : ComponentBase, IAsyncDisposable
     {
         private readonly SvgElementConnector svg;
+        private IJSObjectReference _module;
 
         public SvgComponent() => svg = new (this);
 
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
-
-        private IJSObjectReference _module { get; set; }
 
         [Parameter]
         public float Width { get; set; }

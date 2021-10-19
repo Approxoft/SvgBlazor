@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace SvgBlazor.Tests
 {
-    public class CircleTest : SvgBlazorJsModuleTestContext
+    public class CircleTest : TestContextWithSvgBlazorJsModule
     {
         [Fact]
         public void RendersSvgCircleWithParameters()

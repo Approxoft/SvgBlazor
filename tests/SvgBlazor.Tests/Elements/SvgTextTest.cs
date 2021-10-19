@@ -3,7 +3,7 @@ using Bunit;
 
 namespace SvgBlazor.Tests
 {
-    public class SvgTextTest : SvgBlazorJsModuleTestContext
+    public class SvgTextTest : TestContextWithSvgBlazorJsModule
     {
         [Fact]
         public void RendersSvgTextWithParameters()

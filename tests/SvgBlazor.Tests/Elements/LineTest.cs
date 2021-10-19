@@ -4,7 +4,7 @@ using Bunit;
 
 namespace SvgBlazor.Tests
 {
-    public class LineTest : SvgBlazorJsModuleTestContext
+    public class LineTest : TestContextWithSvgBlazorJsModule
     {
         [Fact]
         public void RendersSvgLineWithParameters()

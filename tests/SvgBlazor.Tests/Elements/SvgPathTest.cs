@@ -5,7 +5,7 @@ using Xunit;
 
 namespace SvgBlazor.Tests.Elements
 {
-    public class SvgPathTest : SvgBlazorJsModuleTestContext
+    public class SvgPathTest : TestContextWithSvgBlazorJsModule
     {
         [Fact]
         public void RendersAttributes()

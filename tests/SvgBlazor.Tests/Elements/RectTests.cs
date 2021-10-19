@@ -5,7 +5,7 @@ using Bunit;
 
 namespace SvgBlazor.Tests
 {
-    public class RectTest : SvgBlazorJsModuleTestContext
+    public class RectTest : TestContextWithSvgBlazorJsModule
     {
         [Fact]
         public void RendersSvgRectWithParameters()

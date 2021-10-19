@@ -6,7 +6,7 @@ using SvgBlazor.Interfaces;
 
 namespace SvgBlazor.Tests
 {
-    public class StrokeAttributeTest : SvgBlazorJsModuleTestContext
+    public class StrokeAttributeTest : TestContextWithSvgBlazorJsModule
     {
         [Fact]
         public void RendersAttributes()

@@ -5,7 +5,7 @@ using Xunit;
 
 namespace SvgBlazor.Tests.Components
 {
-    public class SvgComponentTests : SvgBlazorJsModuleTestContext
+    public class SvgComponentTests : TestContextWithSvgBlazorJsModule
     {
         [Fact]
         public async void CalculatesBoudingBox()

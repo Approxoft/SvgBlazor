@@ -4,9 +4,14 @@ using Bunit;
 
 namespace SvgBlazor.Tests
 {
-    public class SvgBlazorJsModuleTestContext : TestContext
+    public class TestContextWithSvgBlazorJsModule : TestContext
     {
-        public SvgBlazorJsModuleTestContext()
+        public TestContextWithSvgBlazorJsModule()
+        {
+            SetupJSInterop();
+        }
+
+        private void SetupJSInterop()
         {
             JSInterop
                 .SetupModule("./_content/SvgBlazor/SvgBlazor.js")

@@ -4,7 +4,7 @@ using Bunit;
 
 namespace SvgBlazor.Tests
 {
-    public class EllipseTest : SvgBlazorJsModuleTestContext
+    public class EllipseTest : TestContextWithSvgBlazorJsModule
     {
         [Fact]
         public void RendersSvgEllipseWithParameters()

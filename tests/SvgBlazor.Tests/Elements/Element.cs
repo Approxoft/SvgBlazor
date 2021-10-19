@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace SvgBlazor.Tests
 {
-    public class ElementTest : SvgBlazorJsModuleTestContext
+    public class ElementTest : TestContextWithSvgBlazorJsModule
     {
         [Fact]
         public void RendersSvgElementWithParameters()

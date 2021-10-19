@@ -6,7 +6,7 @@ using SvgBlazor.Interfaces;
 
 namespace SvgBlazor.Tests
 {
-    public class FillAttributeTest : SvgBlazorJsModuleTestContext
+    public class FillAttributeTest : TestContextWithSvgBlazorJsModule
     {
         [Fact]
         public void RendersAttributes()
