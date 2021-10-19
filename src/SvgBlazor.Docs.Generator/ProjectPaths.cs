@@ -33,28 +33,10 @@ namespace SvgBlazor.Docs.Generator
             }
         }
 
-        public static string DocsDirectoryPath
-        {
-            get
-            {
-                return Path.Combine(SourcePath, DocsDirectory);
-            }
-        }
+        public static string DocsDirectoryPath => Path.Combine(SourcePath, DocsDirectory);
 
-        public static string DocsAttributesDirectoryPath
-        {
-            get
-            {
-                return Path.Combine(DocsDirectoryPath, DocsPagesDirectory, DocsAttributesDirectory);
-            }
-        }
+        public static string DocsAttributesDirectoryPath => Path.Combine(DocsDirectoryPath, DocsPagesDirectory, DocsAttributesDirectory);
 
-        public static string DocsElementsDirectoryPath
-        {
-            get
-            {
-                return Path.Combine(DocsDirectoryPath, DocsPagesDirectory, DocsElementsDirectory);
-            }
-        }
+        public static string DocsElementsDirectoryPath => Path.Combine(DocsDirectoryPath, DocsPagesDirectory, DocsElementsDirectory);
     }
 }
