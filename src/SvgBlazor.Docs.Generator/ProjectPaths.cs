@@ -17,7 +17,7 @@ namespace SvgBlazor.Docs.Generator
 
         private const string DocsElementsDirectory = "Elements";
 
-        public const string ExampleIdentifier = "Example";
+        private const string ExampleIdentifier = "Example";
 
         public static string SourcePath
         {
