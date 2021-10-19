@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using ColorCode;
 
 namespace SvgBlazor.Docs.Generator
 {
@@ -50,13 +52,20 @@ namespace SvgBlazor.Docs.Generator
         private void GenerateItem(DirectoryInfo itemDirectory)
         {
             var itemName = Path.GetFileName(itemDirectory.FullName);
-            Console.WriteLine($"Examples for: {itemName}");
 
             foreach (var itemExample in itemDirectory.GetFiles("*Example.cs", SearchOption.AllDirectories))
             {
                 string code = GetCodeFromFile(itemExample.FullName);
-                Console.WriteLine(code.ToString());
+                var outputPath = itemExample.FullName.Replace(".cs", ".html");
+                SaveAsHtml(code, outputPath);
             }
+        }
+
+        private void SaveAsHtml(string code, string outputPath)
+        {
+            var formatter = new HtmlFormatter();
+            var html = formatter.GetHtmlString(code, Languages.CSharp);
+            File.WriteAllText(outputPath, html);
         }
 
         private string SeekToLineContainingText(StreamReader sr, string text)
