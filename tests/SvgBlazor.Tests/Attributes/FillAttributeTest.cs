@@ -6,7 +6,7 @@ using SvgBlazor.Interfaces;
 
 namespace SvgBlazor.Tests
 {
-    public class FillAttributeTest : TestContext
+    public class FillAttributeTest : TestContextWithSvgBlazorJsModule
     {
         [Fact]
         public void RendersAttributes()
@@ -33,7 +33,6 @@ namespace SvgBlazor.Tests
         private class DummyFillAttributesElement : SvgElement
         {
             public override string Tag() => "elementwithfill";
-            public override RectangleF BoundingRect() => new RectangleF();
         }
     }
 }

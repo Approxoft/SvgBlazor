@@ -14,8 +14,6 @@ namespace SvgBlazor.Elements
         /// </summary>
         public string Path { get; set; }
 
-        public override RectangleF BoundingRect() => throw new NotImplementedException();
-
         public override string Tag() => "path";
 
         public override void AddAttributes(RenderTreeBuilder builder)

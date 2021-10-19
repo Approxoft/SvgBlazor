@@ -44,10 +44,11 @@
 
         SvgContainer g = new SvgG();
 
-        c.OnClick = EventCallback.Factory.Create<MouseEventArgs>(c, (args) =>
+        c.OnClick = EventCallback.Factory.Create<MouseEventArgs>(c, async (args) =>
         {
-            Console.WriteLine("Element clicked " + c.Tag());
-            g.Remove(c);
+            Console.WriteLine("Element clicked: " + c.Tag());
+            Console.WriteLine("Svg container (g) bounding box: " + await svgref.GetBoundingBox(g));
+            Console.WriteLine("Element bounding box: " + await svgref.GetBoundingBox(c));
         });
 
         var colors = new string[] { "red", "green", "blue", "yellow", "purple" };

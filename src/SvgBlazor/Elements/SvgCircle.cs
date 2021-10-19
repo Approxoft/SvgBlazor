@@ -42,15 +42,5 @@ namespace SvgBlazor
             builder.AddAttribute(1, "cy", Y);
             builder.AddAttribute(2, "r", Radius);
         }
-
-        public override RectangleF BoundingRect()
-        {
-            float size = Radius * 2f;
-            return new RectangleF(
-                CenterX - Radius,
-                CenterY - Radius,
-                size,
-                size);
-        }
     }
 }

@@ -23,11 +23,4 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\SvgBlazor\SvgBlazor.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Remove="Components\" />
-    <None Remove="bunit" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Elements\" />
-  </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@ using Bunit;
 
 namespace SvgBlazor.Tests
 {
-    public class SvgComponentTest : TestContext
+    public class SvgComponentTest : TestContextWithSvgBlazorJsModule
     {
         [Fact]
         public void SvgComponentOnClick()
@@ -77,7 +77,6 @@ namespace SvgBlazor.Tests
         private class DummyElement : SvgElement
         {
             public override string Tag() => "dummy";
-            public override RectangleF BoundingRect() => new RectangleF();
         }
     }
 }

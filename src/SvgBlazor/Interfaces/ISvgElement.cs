@@ -1,6 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -12,9 +10,13 @@ namespace SvgBlazor.Interfaces
 
         SvgValue Y { get; set; }
 
+        ElementReference ElementReference { get; set; }
+
         string Tag();
 
         void BuildElement(RenderTreeBuilder builder);
+
+        void BuildElementAdditionalSteps(RenderTreeBuilder builder);
 
         void SetParent(ISvgElement parent);
 
@@ -25,7 +27,5 @@ namespace SvgBlazor.Interfaces
         void ElementMouseOver(ISvgElement element, MouseEventArgs args);
 
         void ElementMouseOut(ISvgElement element, MouseEventArgs args);
-
-        RectangleF BoundingRect();
     }
 }

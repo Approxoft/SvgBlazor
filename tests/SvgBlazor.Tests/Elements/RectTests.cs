@@ -5,7 +5,7 @@ using Bunit;
 
 namespace SvgBlazor.Tests
 {
-    public class RectTest : TestContext
+    public class RectTest : TestContextWithSvgBlazorJsModule
     {
         [Fact]
         public void RendersSvgRectWithParameters()
@@ -31,20 +31,6 @@ namespace SvgBlazor.Tests
             Assert.Contains("4", element.GetAttribute("height"));
             Assert.Contains("5", element.GetAttribute("rx"));
             Assert.Contains("6", element.GetAttribute("ry"));
-        }
-
-        [Fact]
-        public void SvgRectBoundingBox()
-        {
-            var element = new SvgRect {
-                X = 1,
-                Y = 2,
-                Width = 3,
-                Height = 4,
-            };
-
-            var brect = element.BoundingRect();
-            Assert.Equal(new RectangleF(1, 2, 3, 4), brect);
         }
     }
 }

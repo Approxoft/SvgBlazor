@@ -58,7 +58,5 @@ namespace SvgBlazor
             Width = width;
             Height = height;
         }
-
-        public override RectangleF BoundingRect() => new (X, Y, Width, Height);
     }
 }

@@ -28,7 +28,7 @@ namespace SvgBlazor
             return this;
         }
 
-        public virtual void AddElements(RenderTreeBuilder builder)
+        protected virtual void AddElements(RenderTreeBuilder builder)
         {
             foreach (var element in _elements)
             {
@@ -36,13 +36,7 @@ namespace SvgBlazor
             }
         }
 
-        public override void BuildElement(RenderTreeBuilder builder)
-        {
-            builder.OpenElement(0, Tag());
-            AddAttributes(builder);
-            AddElements(builder);
-            builder.CloseElement();
-        }
+        public override void BuildElementAdditionalSteps(RenderTreeBuilder builder) => AddElements(builder);
 
         public override void ElementMouseOver(ISvgElement element, MouseEventArgs args)
         {

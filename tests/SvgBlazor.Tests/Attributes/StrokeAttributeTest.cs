@@ -6,7 +6,7 @@ using SvgBlazor.Interfaces;
 
 namespace SvgBlazor.Tests
 {
-    public class StrokeAttributeTest : TestContext
+    public class StrokeAttributeTest : TestContextWithSvgBlazorJsModule
     {
         [Fact]
         public void RendersAttributes()
@@ -86,7 +86,6 @@ namespace SvgBlazor.Tests
         private class DummyStrokeAttributesElement : SvgElement
         {
             public override string Tag() => "elementwithstroke";
-            public override RectangleF BoundingRect() => new RectangleF();
         }
     }
 }

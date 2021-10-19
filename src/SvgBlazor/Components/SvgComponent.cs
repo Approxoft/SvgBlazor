@@ -1,19 +1,25 @@
 ﻿using System;
+using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.JSInterop;
 using SvgBlazor.Interfaces;
 using SvgBlazor.Interop;
 
 namespace SvgBlazor
 {
-    public class SvgComponent : ComponentBase
+    public class SvgComponent : ComponentBase, IAsyncDisposable
     {
         private readonly SvgElementConnector svg;
+        private IJSObjectReference _module;
 
         public SvgComponent() => svg = new (this);
+
+        [Inject]
+        private IJSRuntime JSRuntime { get; set; }
 
         [Parameter]
         public float Width { get; set; }
@@ -50,6 +56,11 @@ namespace SvgBlazor
 
         public void Refresh() => StateHasChanged();
 
+        public async ValueTask DisposeAsync()
+        {
+             await _module.DisposeAsync();
+        }
+
         public ISvgContainer Add(ISvgElement element)
         {
             svg.Add(element);
@@ -62,6 +73,25 @@ namespace SvgBlazor
             svg.Remove(element);
             Refresh();
             return svg;
+        }
+
+        public async Task<RectangleF> GetBoundingBox(ISvgElement element)
+        {
+            if (_module is null)
+            {
+                throw new Exception("Sorry, getting the bounding box is only available after the first render.");
+            }
+
+            return await _module
+                .InvokeAsync<RectangleF>("BBox", element.ElementReference);
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await LoadSvgBlazorJsModule();
+            }
         }
 
         protected override void OnParametersSet()
@@ -88,8 +118,11 @@ namespace SvgBlazor
             builder.AddAttribute(4, "onmouseup", onMouseUpHandler);
 
             svg.AddAttributes(builder);
-            svg.AddElements(builder);
+            svg.BuildElementAdditionalSteps(builder);
             builder.CloseComponent();
         }
+
+        private async Task LoadSvgBlazorJsModule() =>
+            _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/SvgBlazor/SvgBlazor.js");
     }
 }
