@@ -19,7 +19,7 @@ namespace SvgBlazor
         public SvgComponent() => svg = new (this);
 
         [Inject]
-        protected IJSRuntime JSRuntime { get; set; }
+        private IJSRuntime JSRuntime { get; set; }
 
         [Parameter]
         public float Width { get; set; }
@@ -79,7 +79,7 @@ namespace SvgBlazor
         {
             if (_module is null)
             {
-                throw new Exception("Sorry, getting bounding box is available after first render.");
+                throw new Exception("Sorry, getting the bounding box is only available after the first render.");
             }
 
             return await _module
