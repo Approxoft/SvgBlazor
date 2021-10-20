@@ -3,7 +3,7 @@ using SvgBlazor.Docs.Interfaces;
 
 namespace SvgBlazor.Docs.Examples
 {
-    public class EllipseExample: IExampleCode
+    public class EllipseExample : IExampleCode
     {
         public void Example(SvgComponent svg)
         {

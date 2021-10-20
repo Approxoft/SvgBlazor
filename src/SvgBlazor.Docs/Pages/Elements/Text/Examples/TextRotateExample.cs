@@ -13,7 +13,7 @@ namespace SvgBlazor.Docs.Examples
         {
             base.Example(svg);
 
-            text.Rotate = _rotate;
+            Text.Rotate = _rotate;
         }
     }
 }

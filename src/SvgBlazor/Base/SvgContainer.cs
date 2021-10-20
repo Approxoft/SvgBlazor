@@ -28,14 +28,6 @@ namespace SvgBlazor
             return this;
         }
 
-        protected virtual void AddElements(RenderTreeBuilder builder)
-        {
-            foreach (var element in _elements)
-            {
-                element.BuildElement(builder);
-            }
-        }
-
         public override void BuildElementAdditionalSteps(RenderTreeBuilder builder) => AddElements(builder);
 
         public override void ElementMouseOver(ISvgElement element, MouseEventArgs args)
@@ -91,6 +83,14 @@ namespace SvgBlazor
             MouseDown = false;
             await (OverElement?.OnMouseUpHandler(args) ?? Task.CompletedTask);
             await base.OnMouseUpHandler(args);
+        }
+
+        protected virtual void AddElements(RenderTreeBuilder builder)
+        {
+            foreach (var element in _elements)
+            {
+                element.BuildElement(builder);
+            }
         }
     }
 }
