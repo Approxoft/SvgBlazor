@@ -18,9 +18,6 @@ namespace SvgBlazor
 
         public SvgComponent() => svg = new (this);
 
-        [Inject]
-        private IJSRuntime JSRuntime { get; set; }
-
         [Parameter]
         public float Width { get; set; }
 
@@ -53,6 +50,9 @@ namespace SvgBlazor
 
         [Parameter]
         public RenderFragment ChildContent { get; set; }
+
+        [Inject]
+        private IJSRuntime JSRuntime { get; set; }
 
         public void Refresh() => StateHasChanged();
 

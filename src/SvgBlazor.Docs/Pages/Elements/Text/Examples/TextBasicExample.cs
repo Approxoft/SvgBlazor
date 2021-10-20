@@ -5,7 +5,7 @@ namespace SvgBlazor.Docs.Examples
 {
     public class TextBasicExample : IExampleCode
     {
-        protected SvgText text = new SvgText
+        private SvgText _text = new SvgText
         {
             X = 10,
             Y = 20,
@@ -13,9 +13,14 @@ namespace SvgBlazor.Docs.Examples
             Fill = new SvgFill { Color = "black" },
         };
 
+        public SvgText Text
+        {
+            get => _text;
+        }
+
         public virtual void Example(SvgComponent svg)
         {
-            svg.Add(text);
+            svg.Add(_text);
         }
     }
 }

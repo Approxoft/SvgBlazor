@@ -5,7 +5,7 @@ using SvgBlazor.Docs.Interfaces;
 
 namespace SvgBlazor.Docs.Examples
 {
-    public class CircleExample: IExampleCode
+    public class CircleExample : IExampleCode
     {
         public void Example(SvgComponent svg)
         {

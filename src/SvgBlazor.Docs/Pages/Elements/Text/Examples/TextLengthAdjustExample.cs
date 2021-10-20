@@ -18,10 +18,10 @@ namespace SvgBlazor.Docs.Examples
         {
             base.Example(svg);
 
-            text.LengthAdjust = _adjust;
-            text.TextLength = _textLength;
+            Text.LengthAdjust = _adjust;
+            Text.TextLength = _textLength;
 
-            svg.Add(text);
+            svg.Add(Text);
         }
     }
 }

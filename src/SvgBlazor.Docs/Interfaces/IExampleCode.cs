@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace SvgBlazor.Docs.Interfaces
 {
     public interface IExampleCode

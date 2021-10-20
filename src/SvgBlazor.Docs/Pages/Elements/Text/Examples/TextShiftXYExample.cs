@@ -18,10 +18,8 @@ namespace SvgBlazor.Docs.Examples
         {
             base.Example(svg);
 
-            text.ShiftX = _shiftX;
-            text.ShiftY = _shiftY;
-
-            svg.Add(text);
+            Text.ShiftX = _shiftX;
+            Text.ShiftY = _shiftY;
         }
     }
 }
