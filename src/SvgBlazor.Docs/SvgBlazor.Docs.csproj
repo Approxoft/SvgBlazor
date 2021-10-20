@@ -12,10 +12,16 @@
     <ProjectDocsCompiler>dotnet run --configuration release --project "$(SolutionDir)src/SvgBlazor.Docs.Generator/SvgBlazor.Docs.Generator.csproj"</ProjectDocsCompiler>
   </PropertyGroup>
 
-  <Target Name="CompileDocs" BeforeTargets="BeforeBuild">
+  <Target Name="GenerateDocs" BeforeTargets="BeforeBuild">
     <Message Text="Generating docs..." Importance="high" />
     <Exec Command="dotnet &quot;$(BinDocsCompiler)&quot;" Condition="Exists('$(BinDocsCompiler)')" />
     <Exec Command="$(ProjectDocsCompiler)" Condition="!Exists('$(BinDocsCompiler)')" />
+  </Target>
+
+  <Target Name="IncludeGeneratedFiles" BeforeTargets="BeforeBuild" DependsOnTargets="GenerateDocs">
+    <ItemGroup>
+      <EmbeddedResource Include="Pages\**\*.html" />
+    </ItemGroup>
   </Target>
 
   <ItemGroup>
