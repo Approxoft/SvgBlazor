@@ -13,6 +13,12 @@
     protected override void OnInitialized()
     {
         var resourceName = typeof(ExampleCode).Assembly.GetManifestResourceNames().FirstOrDefault(x => x.Contains($"{ItemName}Example.html"));
+        if (resourceName is null)
+        {
+            codeMarkup = "<p>No code</p>";
+            return;
+        }
+
         using (var resourceStream = typeof(ExampleCode).Assembly.GetManifestResourceStream(resourceName))
         {
             using (var reader = new StreamReader(resourceStream))
