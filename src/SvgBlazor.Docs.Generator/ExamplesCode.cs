@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
-using System.Text.RegularExpressions;
 using ColorCode;
 
 namespace SvgBlazor.Docs.Generator
@@ -51,8 +47,6 @@ namespace SvgBlazor.Docs.Generator
 
         private void GenerateItem(DirectoryInfo itemDirectory)
         {
-            var itemName = Path.GetFileName(itemDirectory.FullName);
-
             foreach (var itemExample in itemDirectory.GetFiles("*Example.cs", SearchOption.AllDirectories))
             {
                 string code = GetCodeFromFile(itemExample.FullName);
