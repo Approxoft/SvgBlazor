@@ -19,19 +19,7 @@ namespace SvgBlazor.Docs.Generator
 
         private const string ExampleIdentifier = "Example";
 
-        public static string SourcePath
-        {
-            get
-            {
-                var workingPath = Path.GetFullPath(".");
-                while (Path.GetFileName(workingPath) != "src" && !string.IsNullOrWhiteSpace(workingPath))
-                {
-                    workingPath = Path.GetFullPath(Path.Combine(workingPath, @".."));
-                }
-
-                return workingPath;
-            }
-        }
+        public static string SourcePath { get; set; }
 
         public static string DocsDirectoryPath => Path.Combine(SourcePath, DocsDirectory);
 

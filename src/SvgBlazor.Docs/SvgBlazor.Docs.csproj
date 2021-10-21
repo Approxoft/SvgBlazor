@@ -1,32 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
-    <BinDocsCompiler>$(SolutionDir)/src/SvgBlazor.Docs.Generator/bin/Debug/net5.0/SvgBlazor.Docs.Generator.dll</BinDocsCompiler>
+    <BinDocsCompiler>$(SolutionDir)src/SvgBlazor.Docs.Generator/bin/$(Configuration)/net5.0/SvgBlazor.Docs.Generator.dll</BinDocsCompiler>
   </PropertyGroup>
-
-  <PropertyGroup>
-    <ProjectDocsCompiler>dotnet run --configuration release --project "$(SolutionDir)src/SvgBlazor.Docs.Generator/SvgBlazor.Docs.Generator.csproj"</ProjectDocsCompiler>
-  </PropertyGroup>
-
+	
   <Target Name="GenerateDocs" BeforeTargets="BeforeBuild">
     <Message Text="Generating docs..." Importance="high" />
-    <Exec Command="dotnet &quot;$(BinDocsCompiler)&quot;" Condition="Exists('$(BinDocsCompiler)')" />
-    <Exec Command="$(ProjectDocsCompiler)" Condition="!Exists('$(BinDocsCompiler)')" />
+    <Exec Command="dotnet &quot;$(BinDocsCompiler)&quot; $(SolutionDir)"/>
+	<ItemGroup>
+	  <EmbeddedResource Include="Pages\**\*.html" Exclude="@(EmbeddedResource)" />
+	</ItemGroup>
   </Target>
-
-  <Target Name="IncludeGeneratedFiles" BeforeTargets="BeforeBuild" DependsOnTargets="GenerateDocs">
-    <ItemGroup>
-      <EmbeddedResource Include="Pages\**\*.html" />
-    </ItemGroup>
-  </Target>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\**\*.html" />
-  </ItemGroup>
 
   <Target Name="CleanGeneratedDocsFiles" BeforeTargets="Clean">
     <ItemGroup>
