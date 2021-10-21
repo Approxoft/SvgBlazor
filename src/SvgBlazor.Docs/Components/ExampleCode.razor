@@ -13,7 +13,7 @@
         var resourceName = typeof(ExampleCode)
             .Assembly
             .GetManifestResourceNames()
-            .FirstOrDefault(x => x.Contains($"{ItemName}Example.html"));
+            .FirstOrDefault(x => x.Contains($"{ItemName}.html"));
 
         if (resourceName is null)
         {
