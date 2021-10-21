@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <SolutionDir Condition="'$(SolutionDir)' == ''">$(MSBuildThisFileDirectory)../../</SolutionDir>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <BinDocsCompiler>$(SolutionDir)src/SvgBlazor.Docs.Generator/bin/$(Configuration)/net5.0/SvgBlazor.Docs.Generator.dll</BinDocsCompiler>
   </PropertyGroup>
 	
