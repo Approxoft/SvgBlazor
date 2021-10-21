@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgBlazor", "src\SvgBlazor\SvgBlazor.csproj", "{2FEF4A96-A24F-47BB-894A-D2A6ACD15E2F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgBlazor.Docs", "src\SvgBlazor.Docs\SvgBlazor.Docs.csproj", "{7D78592B-3B9F-49A4-AAE8-C01879273534}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FFA512DA-CAC8-4344-9211-751A52C467D5} = {FFA512DA-CAC8-4344-9211-751A52C467D5}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgBlazor.Tests", "tests\SvgBlazor.Tests\SvgBlazor.Tests.csproj", "{9DDD57DA-9F0B-4FFA-9E8C-8E3A8DDF99DE}"
 EndProject
@@ -13,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgBlazor.Docs.Generator", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{57B99570-1E88-4A9F-99E2-BF0C99D0BEB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgBlazor.Docs.Generator.Tests", "tests\SvgBlazor.Docs.Generator.Tests\SvgBlazor.Docs.Generator.Tests.csproj", "{8F5DD64E-0CF6-430E-9DDE-BF980D3A5F9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgBlazor.Docs.Generator.Tests", "tests\SvgBlazor.Docs.Generator.Tests\SvgBlazor.Docs.Generator.Tests.csproj", "{8F5DD64E-0CF6-430E-9DDE-BF980D3A5F9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +48,10 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {314B00A4-A5F8-4CD0-9E8E-D35FFE123F7A}
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8F5DD64E-0CF6-430E-9DDE-BF980D3A5F9C} = {57B99570-1E88-4A9F-99E2-BF0C99D0BEB9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {314B00A4-A5F8-4CD0-9E8E-D35FFE123F7A}
 	EndGlobalSection
 EndGlobal

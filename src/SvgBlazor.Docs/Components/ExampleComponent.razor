@@ -2,6 +2,9 @@
  
 <SvgComponent @ref="svg" Width="Width" Height="Height" />
 
+<h5>Code:</h5>
+<ExampleCode ItemName="@GetItemName()"/>
+
 @code {
     [Parameter]
     public IExampleCode ExampleCode { get; set; }
@@ -21,4 +24,6 @@
             ExampleCode?.Example(svg);
         }
     }
+
+    private string GetItemName() => ExampleCode?.GetType().Name;
 }
