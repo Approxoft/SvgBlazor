@@ -1,4 +1,4 @@
-﻿@page "/elements/svg"
+@page "/elements/svg"
 
 <ExampleTitle>Svg</ExampleTitle>
 <ElementDescription ElementType="@typeof(Svg)" />
@@ -8,6 +8,16 @@
 <ElementApiDocs ElementType="@typeof(Svg)" />
 
 @code {
+    MarkupString markupString => (MarkupString)description;
+
+    string description = $@"<b>SvgComponent</b> is the main class of the library.
+It provides context allowing <b>ISvgElement</b> type objects to be added, removed and etc.
+Although, SvgComponent allows using <b>ChildContent (RenderFragment)</b> as it's content it was designed mainly to use
+pure C# code with absolute minimum use of JavaScript.
+<br />
+To start working with the library first, create <b>SvgComponent</b> like so:
+<SvgComponent @ref=""svgref"" Width=""500"" Height=""500""";
+
     SvgComponent svgref;
 
     private void OnAddElement()
