@@ -1,5 +1,14 @@
 ﻿@page "/elements/ellipse"
 @using SvgBlazor.Docs.Components
+@using SvgBlazor.Docs.Extensions
 
 <ExampleTitle>Ellipse</ExampleTitle>
 <ExampleComponent ExampleCode="@(new EllipseExample())" />
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        ReflectionTypesExtensions.LoadXmlDocumentation(typeof(EllipseExample).Assembly);
+    }
+}
