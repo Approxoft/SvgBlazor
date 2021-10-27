@@ -1,0 +1,39 @@
+@using System
+@using System.Reflection
+@using SvgBlazor.Docs.Models
+
+<h2>@ElementType.Name API</h2>
+
+<table>
+    <thead>
+        <th>Name</th><th>Type</th><th>Description</th>
+    </thead>
+    @foreach (var item in GetElementApiProperties())
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Type</td>
+            <td>@item.Description</td>
+        </tr>
+    }
+</table>
+
+@code {
+    [Parameter]
+    public Type ElementType { get; set; }
+
+    private IEnumerable<ElementApiProperty> GetElementApiProperties()
+    {
+        foreach (var propertyInfo in ElementType.GetProperties(
+            BindingFlags.Instance |
+            BindingFlags.Static |
+            BindingFlags.Public ))
+        {
+            yield return new ElementApiProperty {
+                Name = propertyInfo.Name,
+                Type = propertyInfo.PropertyType.Name,
+                DeclaringType = propertyInfo.DeclaringType.Name,
+            };
+        }
+    }
+}
