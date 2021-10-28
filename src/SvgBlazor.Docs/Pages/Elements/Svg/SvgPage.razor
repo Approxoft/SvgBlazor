@@ -1,23 +1,29 @@
 @page "/elements/svg"
+@using SvgBlazor.Docs.Components
+@using SvgBlazor.Docs.Pages.Elements.Svg.Examples
 
 <ExampleTitle>Svg</ExampleTitle>
 <ElementDescription ElementType="@typeof(Svg)" />
+<p>SvgComponent is the main class of the library. It provides a context for displaying basic svg elements. SvgComponent also allows direct display of content between SvgComponent tags but this is just a convenience for the user. The main idea of both the component and the library is to allow creating and operating on svg elements directly from C# code.</p>
+<p>SvgComponent can be created as follows:</p>
+<p>@("<SvgComponent @ref=\"svgref\" Width=\"500\" Height=\"500\"/>")</p>
+<p>Used parameters:</p>
+<ul>
+    <li>@("Width - width of the SvgComponent")</li>
+    <li>@("Height - height of the SvgComponent")</li>
+    <li>@("@ref - reference to the SvgComponent in C# code")</li>
+</ul>
+
+<h1>Adding elements</h1>
+<p>Adding an element is done by creating one of the available elements and then passing it to the Add method on an existing SvgComponent reference:</p>
+<SvgComponentSimpleAddExample></SvgComponentSimpleAddExample>
+
 <SvgComponent @ref="svgref" Width="500" Height="500" OnClick="OnSvgClicked" />
 <button @onclick="OnAddElement">Add random element</button>
 <p>Click an element to remove</p>
 <ElementApiDocs ElementType="@typeof(Svg)" />
 
 @code {
-    MarkupString markupString => (MarkupString)description;
-
-    string description = $@"<b>SvgComponent</b> is the main class of the library.
-It provides context allowing <b>ISvgElement</b> type objects to be added, removed and etc.
-Although, SvgComponent allows using <b>ChildContent (RenderFragment)</b> as it's content it was designed mainly to use
-pure C# code with absolute minimum use of JavaScript.
-<br />
-To start working with the library first, create <b>SvgComponent</b> like so:
-<SvgComponent @ref=""svgref"" Width=""500"" Height=""500""";
-
     SvgComponent svgref;
 
     private void OnAddElement()
