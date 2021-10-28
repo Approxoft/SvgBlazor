@@ -10,8 +10,7 @@ namespace SvgBlazor.Docs.Extensions
 {
     public static class ReflectionTypesExtensions
     {
-        private static readonly Dictionary<string, string> LoadedXmlDocumentation =
-            new Dictionary<string, string>();
+        private static readonly Dictionary<string, string> LoadedXmlDocumentation = new ();
 
         private static readonly HashSet<Assembly> LoadedAssemblies = new ();
 
@@ -58,8 +57,20 @@ namespace SvgBlazor.Docs.Extensions
 
         public static string GetDocumentation(this PropertyInfo propertyInfo)
         {
-            string key = "P:" + FormatKeyString(
-              propertyInfo.DeclaringType.FullName, propertyInfo.Name);
+            string key = "P:" + FormatKeyString(propertyInfo.DeclaringType.FullName, propertyInfo.Name);
+            LoadedXmlDocumentation.TryGetValue(key, out string documentation);
+            return StripXmlTags(documentation);
+        }
+
+        public static string GetDocumentation(this MethodInfo methodInfo)
+        {
+            var parametersTypes = methodInfo.GetParameters().Select(x => x.ParameterType.FullName).ToArray();
+            string parameters = string.Join(",", parametersTypes);
+
+            string key = "M:"
+                + FormatKeyString(methodInfo.DeclaringType.FullName, methodInfo.Name)
+                + $"({parameters})";
+
             LoadedXmlDocumentation.TryGetValue(key, out string documentation);
             return StripXmlTags(documentation);
         }
@@ -72,11 +83,12 @@ namespace SvgBlazor.Docs.Extensions
                 string.Empty).Trim();
         }
 
-        private static string FormatKeyString(
-            string typeFullNameString, string memberNameString)
+        private static string FormatKeyString(string typeFullNameString, string memberNameString)
         {
             string key = Regex.Replace(
-                typeFullNameString, @"\[.*\]", string.Empty).Replace('+', '.');
+                typeFullNameString,
+                @"\[.*\]",
+                string.Empty).Replace('+', '.');
 
             if (memberNameString != null)
             {
