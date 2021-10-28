@@ -10,25 +10,30 @@ namespace SvgBlazor.Docs.Extensions
 {
     public static class ReflectionTypesExtensions
     {
-        private static Dictionary<string, string> loadedXmlDocumentation =
+        private static readonly Dictionary<string, string> LoadedXmlDocumentation =
             new Dictionary<string, string>();
 
-        private static HashSet<Assembly> loadedAssemblies = new HashSet<Assembly>();
+        private static readonly HashSet<Assembly> LoadedAssemblies = new ();
 
         public static void LoadXmlDocumentation(Assembly assembly)
         {
-            if (loadedAssemblies.Contains(assembly))
+            if (LoadedAssemblies.Contains(assembly))
             {
-                return; // Already loaded
+                return;
             }
 
-            string xmlFilePath = assembly.GetManifestResourceNames().FirstOrDefault(x => x.Contains($"SvgBlazor.xml"));
+            string resourceName = assembly.GetManifestResourceNames().FirstOrDefault(x => x.Contains($"SvgBlazor.xml"));
 
-            if (File.Exists(xmlFilePath))
+            if (resourceName is null)
             {
-                LoadXmlDocumentation(File.ReadAllText(xmlFilePath));
-                loadedAssemblies.Add(assembly);
+                throw new Exception("Couldn't load documentation XML:" + resourceName);
             }
+
+            using var resourceStream = assembly.GetManifestResourceStream(resourceName);
+            using var reader = new StreamReader(resourceStream);
+
+            LoadXmlDocumentation(reader.ReadToEnd());
+            LoadedAssemblies.Add(assembly);
         }
 
         public static void LoadXmlDocumentation(string xmlDocumentation)
@@ -39,28 +44,35 @@ namespace SvgBlazor.Docs.Extensions
                 if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "member")
                 {
                     string raw_name = xmlReader["name"];
-                    loadedXmlDocumentation[raw_name] = xmlReader.ReadInnerXml();
+                    LoadedXmlDocumentation[raw_name] = xmlReader.ReadInnerXml();
                 }
             }
         }
 
         public static string GetDocumentation(this Type type)
         {
-            string key = "T:" + XmlDocumentationKeyHelper(type.FullName, null);
-            loadedXmlDocumentation.TryGetValue(key, out string documentation);
-            return documentation;
+            string key = "T:" + FormatKeyString(type.FullName, null);
+            LoadedXmlDocumentation.TryGetValue(key, out string documentation);
+            return StripXmlTags(documentation);
         }
 
         public static string GetDocumentation(this PropertyInfo propertyInfo)
         {
-            string key = "P:" + XmlDocumentationKeyHelper(
+            string key = "P:" + FormatKeyString(
               propertyInfo.DeclaringType.FullName, propertyInfo.Name);
-            loadedXmlDocumentation.TryGetValue(key, out string documentation);
-            return documentation;
+            LoadedXmlDocumentation.TryGetValue(key, out string documentation);
+            return StripXmlTags(documentation);
         }
 
-        // Helper method to format the key strings
-        private static string XmlDocumentationKeyHelper(
+        private static string StripXmlTags(string xml)
+        {
+            return Regex.Replace(
+                xml ?? string.Empty,
+                @"<[^>]+>",
+                string.Empty).Trim();
+        }
+
+        private static string FormatKeyString(
             string typeFullNameString, string memberNameString)
         {
             string key = Regex.Replace(

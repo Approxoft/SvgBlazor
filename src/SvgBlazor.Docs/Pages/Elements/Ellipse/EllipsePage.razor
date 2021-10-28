@@ -10,5 +10,7 @@
     protected override void OnInitialized()
     {
         ReflectionTypesExtensions.LoadXmlDocumentation(typeof(EllipseExample).Assembly);
+
+        Console.WriteLine("doc: " + typeof(SvgEllipse).GetDocumentation());
     }
 }
