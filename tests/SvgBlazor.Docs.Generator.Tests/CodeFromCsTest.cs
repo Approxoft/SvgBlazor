@@ -73,7 +73,7 @@ namespace SvgBlazor.Docs.Examples
 
     }
 }";
-            ExamplesCode ec = new();
+            ExamplesCode ec = new ();
             using var stream = GenerateStreamFromString(exampleCode);
             string code = ec.GetCodeFromStream(new StreamReader(stream));
             string expectedCode =
@@ -84,6 +84,16 @@ namespace SvgBlazor.Docs.Examples
 CenterX = 100,
 Fill = new SvgFill { Color = ""blue"", Opacity = 0.5f },";
             Assert.Equal(expectedCode, code);
+        }
+
+        [Fact]
+        public void ReturnsAllCodeWhenNoCompleteTagsFound()
+        {
+            const string exampleCode = @"TestLine1\r\n{\r\n//#example-code-start\r\nvoid Test()\r\n{\r\n}\r\n}";
+            using var stream = GenerateStreamFromString(exampleCode);
+            ExamplesCode ec = new ();
+            string code = ec.GetCodeFromStream(new StreamReader(stream));
+            Assert.Equal(exampleCode, code);
         }
 
         private static MemoryStream GenerateStreamFromString(string value)
