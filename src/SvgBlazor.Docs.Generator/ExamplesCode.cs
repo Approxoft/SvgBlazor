@@ -40,10 +40,7 @@ namespace SvgBlazor.Docs.Generator
             {
                 if (i > 0)
                 {
-                    sb.AppendLine();
-                    sb.AppendLine();
-                    sb.AppendLine("...");
-                    sb.AppendLine();
+                    AddCodesSeparator(sb);
                 }
 
                 if (matches[i].Groups.Count < 2)
@@ -59,12 +56,21 @@ namespace SvgBlazor.Docs.Generator
             return sb.ToString();
         }
 
+        private void AddCodesSeparator(StringBuilder sb)
+        {
+            sb.AppendLine();
+            sb.AppendLine();
+            sb.AppendLine("...");
+            sb.AppendLine();
+        }
+
         private void GenerateItems(string path)
         {
             var directoryInfo = new DirectoryInfo(path);
 
             foreach (var entry in directoryInfo.GetDirectories())
             {
+                Console.WriteLine(entry);
                 GenerateItem(entry);
             }
         }
@@ -72,7 +78,9 @@ namespace SvgBlazor.Docs.Generator
         private void GenerateItem(DirectoryInfo itemDirectory)
         {
             var files = itemDirectory.EnumerateFiles("*.*", SearchOption.AllDirectories)
-                        .Where(s => s.Name.EndsWith(".cs") || s.Name.EndsWith(".razor"));
+                        .Where(s =>
+                            (s.Name.EndsWith(".cs") || s.Name.EndsWith(".razor"))
+                            && s.DirectoryName.Contains(ProjectPaths.ExampleIdentifier));
 
             foreach (var itemExample in files)
             {
@@ -87,20 +95,6 @@ namespace SvgBlazor.Docs.Generator
             var formatter = new HtmlFormatter();
             var html = formatter.GetHtmlString(code, Languages.CSharp);
             File.WriteAllText(outputPath, html);
-        }
-
-        private string SeekToLineContainingText(StreamReader sr, string text)
-        {
-            while (sr.Peek() >= 0)
-            {
-                string line = sr.ReadLine();
-                if (line.Contains(text))
-                {
-                    return line;
-                }
-            }
-
-            return string.Empty;
         }
 
         private string CorrectIndentations(string code)

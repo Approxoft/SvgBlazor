@@ -9,6 +9,8 @@ namespace SvgBlazor.Docs.Generator
 {
     public class ProjectPaths
     {
+        public const string ExampleIdentifier = "Example";
+
         private const string DocsDirectory = "SvgBlazor.Docs";
 
         private const string DocsPagesDirectory = "Pages";
@@ -16,8 +18,6 @@ namespace SvgBlazor.Docs.Generator
         private const string DocsAttributesDirectory = "Attributes";
 
         private const string DocsElementsDirectory = "Elements";
-
-        private const string ExampleIdentifier = "Example";
 
         public static string SourcePath { get; set; }
 
