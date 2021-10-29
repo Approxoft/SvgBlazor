@@ -1,8 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using Xunit;
-using SvgBlazor.Docs.Generator;
 
 namespace SvgBlazor.Docs.Generator.Tests
 {
@@ -11,8 +9,6 @@ namespace SvgBlazor.Docs.Generator.Tests
         [Fact]
         public void ReturnsExampleCodeFromFullCode()
         {
-            ExamplesCode ec = new ();
-
             const string exampleCode =
 @"using System;
 using SvgBlazor.Docs.Interfaces;
@@ -21,6 +17,7 @@ namespace SvgBlazor.Docs.Examples
 {
     public class CircleExample: IExampleCode
     {
+//#example-code-start
         public void Example(SvgComponent svg)
         {
             var circle = new SvgCircle()
@@ -30,12 +27,13 @@ namespace SvgBlazor.Docs.Examples
             };
             svg.Add(circle);
         }
+//#example-code-end
     }
 }";
-            using (var stream = GenerateStreamFromString(exampleCode))
-            {
-                string code = ec.GetCodeFromStream(new StreamReader(stream));
-                const string expectedCode =
+            ExamplesCode ec = new ();
+            using var stream = GenerateStreamFromString(exampleCode);
+            string code = ec.GetCodeFromStream(new StreamReader(stream));
+            const string expectedCode =
 @"public void Example(SvgComponent svg)
 {
     var circle = new SvgCircle()
@@ -45,31 +43,52 @@ namespace SvgBlazor.Docs.Examples
     };
     svg.Add(circle);
 }";
-                Assert.Equal(expectedCode, code);
-            }
+            Assert.Equal(expectedCode, code);
         }
 
         [Fact]
-        public void ReturnsExampleCodeWhenBracesShareMethodNameLine()
+        public void ReturnsExampleCodeWithTwoExamples()
         {
-            ExamplesCode ec = new ();
-
             const string exampleCode =
-@"public void Example(SvgComponent svg) {
-    var circle = new SvgCircle() {
-        Fill = new SvgFill { Color = ""blue"", Opacity = 0.5f },
-    };
-}";
-            using (var stream = GenerateStreamFromString(exampleCode))
+@"using System;
+using SvgBlazor.Docs.Interfaces;
+
+namespace SvgBlazor.Docs.Examples
+{
+    public class CircleExample: IExampleCode
+    {
+//#example-code-start
+        public void Example(SvgComponent svg)
+//#example-code-end
+        {
+            var circle = new SvgCircle()
             {
-                string code = ec.GetCodeFromStream(new StreamReader(stream));
-                Assert.Equal(exampleCode, code);
-            }
+//#example-code-start
+                CenterX = 100,
+                Fill = new SvgFill { Color = ""blue"", Opacity = 0.5f },
+//#example-code-end
+            };
+            svg.Add(circle);
+        }
+
+    }
+}";
+            ExamplesCode ec = new();
+            using var stream = GenerateStreamFromString(exampleCode);
+            string code = ec.GetCodeFromStream(new StreamReader(stream));
+            string expectedCode =
+@"public void Example(SvgComponent svg)
+
+...
+
+CenterX = 100,
+Fill = new SvgFill { Color = ""blue"", Opacity = 0.5f },";
+            Assert.Equal(expectedCode, code);
         }
 
         private static MemoryStream GenerateStreamFromString(string value)
         {
-            return new MemoryStream(Encoding.UTF8.GetBytes(value ?? ""));
+            return new MemoryStream(Encoding.UTF8.GetBytes(value ?? string.Empty));
         }
     }
 }
