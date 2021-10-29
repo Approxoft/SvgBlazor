@@ -4,7 +4,7 @@ using Xunit;
 
 namespace SvgBlazor.Docs.Generator.Tests
 {
-    public class CodeFromCsTest
+    public class CodeFromExampleTest
     {
         [Fact]
         public void ReturnsExampleCodeFromFullCode()
