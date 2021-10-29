@@ -9,6 +9,7 @@ namespace SvgBlazor.Docs.Examples
     {
         public void Example(SvgComponent svg)
         {
+            /* #example-code-start */
             var polygon = new SvgPolygon
             {
                 Points = new List<PointF>
@@ -19,6 +20,7 @@ namespace SvgBlazor.Docs.Examples
                 },
                 Fill = new SvgFill { Color = "#aabbcc", Opacity = 0.5f },
             };
+            /* #example-code-end */
 
             svg.Add(polygon);
         }

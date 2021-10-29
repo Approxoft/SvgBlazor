@@ -11,9 +11,11 @@ namespace SvgBlazor.Docs.Examples
 
         public override void Example(SvgComponent svg)
         {
+            /* #example-code-start */
             base.Example(svg);
 
             Text.Rotate = _rotate;
+            /* #example-code-end */
         }
     }
 }

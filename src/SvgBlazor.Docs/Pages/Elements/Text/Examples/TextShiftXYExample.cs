@@ -16,10 +16,12 @@ namespace SvgBlazor.Docs.Examples
 
         public override void Example(SvgComponent svg)
         {
+            /* #example-code-start */
             base.Example(svg);
 
             Text.ShiftX = _shiftX;
             Text.ShiftY = _shiftY;
+            /* #example-code-end */
         }
     }
 }

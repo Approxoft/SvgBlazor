@@ -5,6 +5,7 @@ namespace SvgBlazor.Docs.Examples
 {
     public class TextBasicExample : IExampleCode
     {
+        /* #example-code-start */
         private SvgText _text = new SvgText
         {
             X = 10,
@@ -12,6 +13,7 @@ namespace SvgBlazor.Docs.Examples
             Text = "This is just awesome!",
             Fill = new SvgFill { Color = "black" },
         };
+        /* #example-code-end */
 
         public SvgText Text
         {

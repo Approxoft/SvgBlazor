@@ -10,6 +10,7 @@ namespace SvgBlazor.Docs.Examples
 
         public void Example(SvgComponent svg)
         {
+            /* #example-code-start */
             var referenceLine = new SvgLine
             {
                 X1 = 20,
@@ -38,6 +39,7 @@ namespace SvgBlazor.Docs.Examples
                     DashOffset = _dashOffset,
                 },
             };
+            /* #example-code-end */
 
             svg.Add(referenceLine);
             svg.Add(line);

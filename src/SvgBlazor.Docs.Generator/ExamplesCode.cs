@@ -70,7 +70,6 @@ namespace SvgBlazor.Docs.Generator
 
             foreach (var entry in directoryInfo.GetDirectories())
             {
-                Console.WriteLine(entry);
                 GenerateItem(entry);
             }
         }

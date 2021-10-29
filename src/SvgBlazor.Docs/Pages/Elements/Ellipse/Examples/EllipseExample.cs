@@ -7,6 +7,7 @@ namespace SvgBlazor.Docs.Examples
     {
         public void Example(SvgComponent svg)
         {
+            /* #example-code-start */
             var ellipse = new SvgEllipse
             {
                 CenterX = 100,
@@ -15,6 +16,8 @@ namespace SvgBlazor.Docs.Examples
                 RadiusY = 20,
                 Fill = new SvgFill { Color = "orange" },
             };
+            /* #example-code-end */
+
             svg.Add(ellipse);
         }
     }

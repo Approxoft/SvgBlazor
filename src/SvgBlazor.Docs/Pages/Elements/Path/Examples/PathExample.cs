@@ -8,6 +8,7 @@ namespace SvgBlazor.Docs.Examples
     {
         public void Example(SvgComponent svg)
         {
+            /* #example-code-start */
             var line = new SvgPath()
             {
                 Path = "M 10, 30 " +
@@ -18,6 +19,8 @@ namespace SvgBlazor.Docs.Examples
                 Fill = new SvgFill { Color = "pink" },
                 Stroke = new SvgStroke { Color = "red" },
             };
+            /* #example-code-end */
+
             svg.Add(line);
         }
     }
