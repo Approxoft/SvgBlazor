@@ -10,6 +10,7 @@ namespace SvgBlazor.Docs.Examples
 
         public void Example(SvgComponent svg)
         {
+            /* #example-code-start */
             var line = new SvgLine
             {
                 X1 = 10,
@@ -23,6 +24,7 @@ namespace SvgBlazor.Docs.Examples
                     LineCap = _strokeLineCapStyle,
                 },
             };
+            /* #example-code-end */
 
             svg.Add(line);
         }

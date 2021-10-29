@@ -7,6 +7,7 @@ namespace SvgBlazor.Docs.Examples
     {
         public void Example(SvgComponent svg)
         {
+            /* #example-code-start */
             var rect = new SvgRect()
             {
                 X = 10,
@@ -15,6 +16,8 @@ namespace SvgBlazor.Docs.Examples
                 Height = 180,
                 Fill = new SvgFill { Color = "purple", Opacity = 0.5f },
             };
+            /* #example-code-end */
+
             svg.Add(rect);
         }
     }

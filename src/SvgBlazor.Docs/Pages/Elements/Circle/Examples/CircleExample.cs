@@ -9,6 +9,7 @@ namespace SvgBlazor.Docs.Examples
     {
         public void Example(SvgComponent svg)
         {
+            /* #example-code-start */
             var circle = new SvgCircle()
             {
                 CenterX = 100,
@@ -16,6 +17,7 @@ namespace SvgBlazor.Docs.Examples
                 Radius = 20,
                 Fill = new SvgFill { Color = "blue", Opacity = 0.5f },
             };
+            /* #example-code-end */
 
             svg.Add(circle);
         }

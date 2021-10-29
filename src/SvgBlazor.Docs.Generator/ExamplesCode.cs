@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using ColorCode;
 
 namespace SvgBlazor.Docs.Generator
@@ -24,15 +25,43 @@ namespace SvgBlazor.Docs.Generator
 
         public string GetCodeFromStream(StreamReader sr)
         {
-            var line = SeekToLineContainingText(sr, "void Example");
+            var allCode = sr.ReadToEnd();
 
-            StringBuilder exampleCode = new ();
-            exampleCode.AppendLine(line);
+            MatchCollection matches = Regex.Matches(allCode, @"(#example-code-start.*?\n)([\s\S]*?)(.*?#example-code-end)");
 
-            int initialIndentLevel = line.Count(c => c == '{');
-            ReadCodeBetweenBrackets(initialIndentLevel, sr, exampleCode);
+            if (matches.Count == 0)
+            {
+                return allCode;
+            }
 
-            return CorrectIndentations(exampleCode.ToString());
+            StringBuilder sb = new ();
+
+            for (int i = 0; i < matches.Count; i++)
+            {
+                if (i > 0)
+                {
+                    AddCodesSeparator(sb);
+                }
+
+                if (matches[i].Groups.Count < 2)
+                {
+                    break;
+                }
+
+                var exampleCode = matches[i].Groups[2].Value;
+
+                sb.Append(CorrectIndentations(exampleCode));
+            }
+
+            return sb.ToString();
+        }
+
+        private void AddCodesSeparator(StringBuilder sb)
+        {
+            sb.AppendLine();
+            sb.AppendLine();
+            sb.AppendLine("...");
+            sb.AppendLine();
         }
 
         private void GenerateItems(string path)
@@ -47,10 +76,15 @@ namespace SvgBlazor.Docs.Generator
 
         private void GenerateItem(DirectoryInfo itemDirectory)
         {
-            foreach (var itemExample in itemDirectory.GetFiles("*Example.cs", SearchOption.AllDirectories))
+            var files = itemDirectory.EnumerateFiles("*.*", SearchOption.AllDirectories)
+                        .Where(s =>
+                            (s.Name.EndsWith(".cs") || s.Name.EndsWith(".razor"))
+                            && s.DirectoryName.Contains(ProjectPaths.ExampleIdentifier));
+
+            foreach (var itemExample in files)
             {
                 string code = GetCodeFromFile(itemExample.FullName);
-                var outputPath = itemExample.FullName.Replace(".cs", ".html");
+                var outputPath = itemExample.FullName.Replace(itemExample.Extension, ".html");
                 SaveAsHtml(code, outputPath);
             }
         }
@@ -60,42 +94,6 @@ namespace SvgBlazor.Docs.Generator
             var formatter = new HtmlFormatter();
             var html = formatter.GetHtmlString(code, Languages.CSharp);
             File.WriteAllText(outputPath, html);
-        }
-
-        private string SeekToLineContainingText(StreamReader sr, string text)
-        {
-            while (sr.Peek() >= 0)
-            {
-                string line = sr.ReadLine();
-                if (line.Contains(text))
-                {
-                    return line;
-                }
-            }
-
-            return string.Empty;
-        }
-
-        private void ReadCodeBetweenBrackets(int initialIndentation, StreamReader sr, StringBuilder code)
-        {
-            while (sr.Peek() >= 0)
-            {
-                char c = (char)sr.Read();
-                code.Append(c);
-
-                if (c == '{')
-                {
-                    initialIndentation++;
-                }
-                else if (c == '}')
-                {
-                    initialIndentation--;
-                    if (initialIndentation == 0)
-                    {
-                        break;
-                    }
-                }
-            }
         }
 
         private string CorrectIndentations(string code)

@@ -12,6 +12,7 @@ namespace SvgBlazor.Docs.Examples
 
         public void Example(SvgComponent svg)
         {
+            /* #example-code-start */
             var path = new SvgPath
             {
                 Path = "m3,85 c5,-3 90,0 90,-73 c0,0 100,75 100,75",
@@ -26,6 +27,7 @@ namespace SvgBlazor.Docs.Examples
                     Color = "none",
                 },
             };
+            /* #example-code-end */
 
             svg.Add(path);
         }

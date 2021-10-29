@@ -16,10 +16,12 @@ namespace SvgBlazor.Docs.Examples
 
         public override void Example(SvgComponent svg)
         {
+            /* #example-code-start */
             base.Example(svg);
 
             Text.LengthAdjust = _adjust;
             Text.TextLength = _textLength;
+            /* #example-code-end */
 
             svg.Add(Text);
         }

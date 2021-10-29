@@ -6,6 +6,7 @@ namespace SvgBlazor.Docs.Examples
     {
         public void Example(SvgComponent svg)
         {
+            /* #example-code-start */
             var circle = new SvgCircle
             {
                 CenterX = 100,
@@ -17,6 +18,8 @@ namespace SvgBlazor.Docs.Examples
                     Width = 15,
                 },
             };
+            /* #example-code-end */
+
             svg.Add(circle);
         }
     }
