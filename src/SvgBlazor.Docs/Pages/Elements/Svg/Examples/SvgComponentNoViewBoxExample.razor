@@ -2,6 +2,12 @@
 
 @code
 {
+    [Parameter]
+    public SvgValue ViewBoxHeight { get; set; }
+
+    [Parameter]
+    public SvgValue ViewBoxWidth { get; set; }
+
     private SvgComponent svgref;
 
     protected override void OnAfterRender(bool firstRender)

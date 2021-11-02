@@ -1,0 +1,30 @@
+﻿@using System.Drawing
+
+<SvgComponent @ref="svgref" Width="100" Height="100" />
+<p>Boudning box: @boundingBox</p>
+
+@code
+{
+    private RectangleF boundingBox;
+
+    private SvgComponent svgref;
+    private SvgCircle circle;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            circle = new SvgCircle
+            {
+                CenterX = 50,
+                CenterY = 50,
+                Radius = 25,
+            };
+
+            svgref.Add(circle);
+
+            boundingBox = await svgref.GetBoundingBox(circle);
+            StateHasChanged();
+        }
+    }
+}

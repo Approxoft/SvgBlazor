@@ -1,27 +1,5 @@
-@page "/elements/svg"
-@using SvgBlazor.Docs.Components
-@using SvgBlazor.Docs.Pages.Elements.Svg.Examples
-
-<ExampleTitle>Svg</ExampleTitle>
-<ElementDescription ElementType="@typeof(Svg)" />
-<p>SvgComponent is the main class of the library. It provides a context for displaying basic svg elements. SvgComponent also allows direct display of content between SvgComponent tags but this is just a convenience for the user. The main idea of both the component and the library is to allow creating and operating on svg elements directly from C# code.</p>
-<p>SvgComponent can be created as follows:</p>
-<p>@("<SvgComponent @ref=\"svgref\" Width=\"500\" Height=\"500\"/>")</p>
-<p>Parameters:</p>
-<ul>
-    <li>@("Width - width of the SvgComponent")</li>
-    <li>@("Height - height of the SvgComponent")</li>
-    <li>@("@ref - reference to the SvgComponent in C# code")</li>
-</ul>
-
-<h1>Adding elements</h1>
-<p>Adding an element is done by creating one of the available elements and then passing it to the Add method on an existing SvgComponent reference:</p>
-<SvgComponentSimpleAddExample></SvgComponentSimpleAddExample>
-
-<SvgComponent @ref="svgref" Width="500" Height="500" OnClick="OnSvgClicked" />
+﻿<SvgComponent @ref="svgref" Width="500" Height="500" OnClick="OnSvgClicked" />
 <button @onclick="OnAddElement">Add random element</button>
-<p>Click an element to remove</p>
-<ElementApiDocs ElementType="@typeof(Svg)" />
 
 @code {
     SvgComponent svgref;
@@ -60,13 +38,10 @@
                 break;
         }
 
-        SvgContainer g = new SvgG();
-
-        c.OnClick = EventCallback.Factory.Create<MouseEventArgs>(c, async (args) =>
+        c.OnClick = EventCallback.Factory.Create<MouseEventArgs>(c, (args) =>
         {
             Console.WriteLine("Element clicked: " + c.Tag());
-            Console.WriteLine("Svg container (g) bounding box: " + await svgref.GetBoundingBox(g));
-            Console.WriteLine("Element bounding box: " + await svgref.GetBoundingBox(c));
+            svgref.Remove(c);
         });
 
         var colors = new string[] { "red", "green", "blue", "yellow", "purple" };
@@ -83,8 +58,7 @@
             Width = new Random().Next(1, 5),
         };
 
-        g.Add(c);
-        svgref.Add(g);
+        svgref.Add(c);
     }
 
     private void OnSvgClicked(MouseEventArgs args)

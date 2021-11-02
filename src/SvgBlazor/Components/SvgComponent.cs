@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
@@ -131,23 +131,13 @@ namespace SvgBlazor
         {
             if (_module is null)
             {
-                throw new Exception("Sorry, getting the bounding box is only available after the first render.");
+                await LoadSvgBlazorJsModule();
             }
 
             return await _module
                 .InvokeAsync<RectangleF>("BBox", element.ElementReference);
         }
 
-        /// <inheritdoc/>
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                await LoadSvgBlazorJsModule();
-            }
-        }
-
-        /// <inheritdoc/>
         protected override void OnParametersSet()
         {
             svg.Width = Width;
