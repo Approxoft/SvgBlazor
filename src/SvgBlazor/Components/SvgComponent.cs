@@ -131,11 +131,21 @@ namespace SvgBlazor
         {
             if (_module is null)
             {
-                await LoadSvgBlazorJsModule();
+                throw new Exception("Sorry, getting the bounding box is only available after the first render.");
             }
 
             return await _module
                 .InvokeAsync<RectangleF>("BBox", element.ElementReference);
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await LoadSvgBlazorJsModule();
+            }
+
+            await base.OnAfterRenderAsync(firstRender);
         }
 
         protected override void OnParametersSet()
