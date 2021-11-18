@@ -9,9 +9,9 @@ namespace SvgBlazor.Docs.Examples
             /* #example-code-start */
             var circle = new SvgCircle
             {
-                CenterX = 100,
-                CenterY = 100,
-                Radius = 20,
+                CenterX = 50,
+                CenterY = 50,
+                Radius = 50,
                 Fill = new SvgFill { Color = "#27ba0d" },
             };
             /* #example-code-end */
