@@ -87,8 +87,6 @@
         };
     }
 
-    private IEnumerable<string> ParametersToString(ParameterInfo[] parameters)
-    {
-        return parameters.Select(x => (x.ParameterType.FullName + " " + x.Name)).ToArray();
-    }
+    private IEnumerable<string> ParametersToString(ParameterInfo[] parameters) =>
+        parameters.Select(x => (x.ParameterType.FullName + " " + x.Name)).ToArray();
 }
