@@ -43,8 +43,5 @@
     <ProjectReference Include="..\SvgBlazor\SvgBlazor.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
-    <ProjectReference Include="..\SvgBlazor.Docs.Generator\SvgBlazor.Docs.Generator.csproj">
-      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
-    </ProjectReference>
   </ItemGroup>
 </Project>
