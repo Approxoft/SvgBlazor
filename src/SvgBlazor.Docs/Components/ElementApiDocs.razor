@@ -1,0 +1,92 @@
+@using System
+@using System.Reflection
+@using SvgBlazor.Docs.Models
+@using SvgBlazor.Docs.Extensions
+
+<h2>@ElementType.Name API</h2>
+<h3>Properties</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    @foreach (var property in GetElementApiProperties())
+    {
+        <tr>
+            <td>@property.Name</td>
+            <td>@property.Type</td>
+            <td>@property.Description</td>
+        </tr>
+    }
+</table>
+
+<h3>Methods</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Parameters</th>
+            <th>Return value</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    @foreach (var method in GetElementApiMethods())
+    {
+        <tr>
+            <td>@method.Name</td>
+            <td>
+                @foreach (var p in method.Parameters)
+                {
+                    <p>@p</p>
+                }
+            </td>
+            <td>@method.ReturnValue</td>
+            <td>@method.Description</td>
+        </tr>
+    }
+</table>
+
+@code {
+    [Parameter]
+    public Type ElementType { get; set; }
+
+    private IEnumerable<ElementApiProperty> GetElementApiProperties()
+    {
+        foreach (var propertyInfo in ElementType.GetProperties(
+            BindingFlags.Instance |
+            BindingFlags.Static |
+            BindingFlags.Public))
+        {
+            yield return new ElementApiProperty
+            {
+                Name = propertyInfo.Name,
+                Type = propertyInfo.PropertyType.Name,
+                DeclaringType = propertyInfo.DeclaringType.Name,
+                Description = propertyInfo.GetDocumentation(),
+            };
+        };
+    }
+
+    private IEnumerable<ElementApiMethod> GetElementApiMethods()
+    {
+        foreach (var methodInfo in ElementType.GetMethods(
+            BindingFlags.Instance |
+            BindingFlags.Static |
+            BindingFlags.Public).Where(m => !m.IsSpecialName))
+        {
+            yield return new ElementApiMethod
+            {
+                Name = methodInfo.Name,
+                Parameters = ParametersToString(methodInfo.GetParameters()),
+                ReturnValue = methodInfo.ReturnType.Name,
+                Description = methodInfo.GetDocumentation(),
+            };
+        };
+    }
+
+    private IEnumerable<string> ParametersToString(ParameterInfo[] parameters) =>
+        parameters.Select(x => (x.ParameterType.FullName + " " + x.Name)).ToArray();
+}
