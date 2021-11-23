@@ -8,13 +8,13 @@ namespace SvgBlazor.Docs.Examples
         public void Example(SvgComponent svg)
         {
             /* #example-code-start */
-            var rect = new SvgRect()
+            var rect = new SvgRect
             {
                 X = 10,
                 Y = 20,
                 Width = 180,
                 Height = 180,
-                Fill = new SvgFill { Color = "purple", Opacity = 0.5f },
+                Fill = new SvgFill { Color = "purple" },
             };
             /* #example-code-end */
 
