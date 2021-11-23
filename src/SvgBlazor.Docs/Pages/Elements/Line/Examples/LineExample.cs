@@ -8,12 +8,12 @@ namespace SvgBlazor.Docs.Examples
         public void Example(SvgComponent svg)
         {
             /* #example-code-start */
-            var line = new SvgLine()
+            var line = new SvgLine
             {
-                X1 = new Random().Next(0, 200),
-                Y1 = new Random().Next(0, 200),
-                X2 = new Random().Next(0, 200),
-                Y2 = new Random().Next(0, 200),
+                X1 = 0,
+                Y1 = 0,
+                X2 = 200,
+                Y2 = 200,
                 Stroke = new SvgStroke { Color = "red" },
             };
             /* #example-code-end */
