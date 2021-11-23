@@ -14,11 +14,14 @@ namespace SvgBlazor.Docs.Examples
             {
                 Points = new List<PointF>
                 {
-                    new PointF(0, 0),
-                    new PointF(50, 50),
-                    new PointF(100, 50),
+                    new PointF(160, 200),
+                    new PointF(40, 200),
+                    new PointF(0, 80),
+                    new PointF(100, 0),
+                    new PointF(200, 80),
+
                 },
-                Fill = new SvgFill { Color = "#aabbcc", Opacity = 0.5f },
+                Fill = new SvgFill { Color = "#aabbcc" },
             };
             /* #example-code-end */
 
