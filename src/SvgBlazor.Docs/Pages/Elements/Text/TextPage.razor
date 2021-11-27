@@ -2,20 +2,21 @@
 @using SvgBlazor.Docs.Components
 
 <ExampleTitle>Text</ExampleTitle>
+<p>The SvgText class is responsible for providing the svg @("<text>") element.</p>
 <h4>Text examples:</h4>
 <h5>Basic</h5>
 <ExampleComponent Height="50" ExampleCode="@(new TextBasicExample())" />
 
-<h5>ShiftX = 20, ShiftY = 20</h5>
-<ExampleComponent Height="50" ExampleCode="@(new TextShiftXYExample(20, 20))" />
+<h5>Shift X,Y</h5>
+<ExampleComponent Height="50" ExampleCode="@(new TextShiftXYExample())" />
 
-<h5>rotate: 20 0 20</h5>
-<ExampleComponent Height="50" ExampleCode="@(new TextRotateExample("20 0 20"))" />
+<h5>Rotate</h5>
+<ExampleComponent Height="50" ExampleCode="@(new TextRotateExample())" />
 
-<h5>TextLength: 100, lengthAdjust = spacing</h5>
-<ExampleComponent Height="50" ExampleCode="@(new TextLengthAdjustExample(TextLengthAdjust.Spacing, 100))" />
+<h5>TextLength with spacing adjust</h5>
+<ExampleComponent Height="50" ExampleCode="@(new TextLengthAdjustSpacingExample())" />
 
-<h5>TextLength: 100, lengthAdjust = spacingAndGlyphs</h5>
-<ExampleComponent Height="50" ExampleCode="@(new TextLengthAdjustExample(TextLengthAdjust.SpacingAndGlyphs, 100))" />
+<h5>TextLength spacing and glyphs adjust</h5>
+<ExampleComponent Height="50" ExampleCode="@(new TextLengthAdjustSpacingAndGlyphsExample())" />
 
 <ElementApiDocs ElementType="@typeof(SvgText)" />
