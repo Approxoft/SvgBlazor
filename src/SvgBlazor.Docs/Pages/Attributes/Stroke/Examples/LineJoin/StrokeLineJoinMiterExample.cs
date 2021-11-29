@@ -4,33 +4,38 @@ using SvgBlazor.Elements;
 
 namespace SvgBlazor.Docs.Examples
 {
-    public class StrokeMiterLimitExample : IExampleCode
+    public class StrokeLineJoinMiterExample : IExampleCode
     {
-        private int? _miterLimit;
-
-        public StrokeMiterLimitExample(int? miterLimit = null) => _miterLimit = miterLimit;
-
         public void Example(SvgComponent svg)
         {
             /* #example-code-start */
+            var d = "m28, 177 c46, -17 60, -77 30, -120c 50, 2 110, 35 114, 66";
+
             var path = new SvgPath
             {
-                Path = "m3,85 c5,-3 90,-73 90,-73 c0,0 100,75 100,75",
+                Path = d,
                 Stroke = new SvgStroke
                 {
                     Color = "black",
+                    Width = 35,
                     LineJoin = StrokeLineJoinStyle.Miter,
-                    MiterLimit = _miterLimit,
-                    Width = 15,
                 },
-                Fill = new SvgFill
+                Fill = new SvgFill { Color = "none" },
+            };
+
+            var highlightPath = new SvgPath
+            {
+                Path = d,
+                Stroke = new SvgStroke
                 {
-                    Color = "none",
+                    Color = "gold",
+                    Width = 5,
                 },
+                Fill = new SvgFill { Color = "none" },
             };
             /* #example-code-end */
-
             svg.Add(path);
+            svg.Add(highlightPath);
         }
     }
 }

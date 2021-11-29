@@ -7,19 +7,21 @@ namespace SvgBlazor.Docs.Examples
         public void Example(SvgComponent svg)
         {
             /* #example-code-start */
+            var stroke = new SvgStroke
+            {
+                Color = "yellow",
+                Width = 15,
+                Opacity = 0.5f,
+            };
+            /* #example-code-end */
+
             var circle = new SvgCircle
             {
                 CenterX = 100,
                 CenterY = 100,
                 Radius = 75,
-                Stroke = new SvgStroke
-                {
-                    Color = "yellow",
-                    Width = 15,
-                    Opacity = 0.5f,
-                },
+                Stroke = stroke,
             };
-            /* #example-code-end */
 
             svg.Add(circle);
         }

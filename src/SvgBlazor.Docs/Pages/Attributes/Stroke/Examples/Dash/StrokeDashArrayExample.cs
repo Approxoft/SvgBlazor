@@ -7,19 +7,21 @@ namespace SvgBlazor.Docs.Examples
         public void Example(SvgComponent svg)
         {
             /* #example-code-start */
+            var dashArrayStroke = new SvgStroke
+            {
+                Color = "green",
+                Width = 15,
+                DashArray = "1 2",
+            };
+            /* #example-code-end */
+
             var circle = new SvgCircle
             {
                 CenterX = 100,
                 CenterY = 100,
                 Radius = 75,
-                Stroke = new SvgStroke
-                {
-                    Color = "green",
-                    Width = 15,
-                    DashArray = "1 2",
-                },
+                Stroke = dashArrayStroke,
             };
-            /* #example-code-end */
 
             svg.Add(circle);
         }

@@ -2,59 +2,57 @@
 @using SvgBlazor.Docs.Components
 
 <ExampleTitle>Stroke</ExampleTitle>
-<h4>Basic example:</h4>
+<p>The SvgStroke class is responsible for providing the paint of the outline of an svg element.</p>
+
 <div><ExampleComponent ExampleCode="@(new StrokeBasicExample())" /></div>
 
-<h4>Dash array example:</h4>
+<h5>DashArray</h5>
+<p>To present stroke as a pattern of dashes and gaps, assign properly formatted string to DashArray property:</p>
 <div><ExampleComponent ExampleCode="@(new StrokeDashArrayExample())" /></div>
 
-<h4>Dash offset examples:</h4>
-<h5>Dash offset = 25</h5>
-<div><ExampleComponent Height="25" ExampleCode="@(new StrokeDashOffsetExample(25))" /></div>
+<h5>DashOffset</h5>
+<p>To render offset, assign value to DashOffset property. However, this will only work when DashArray is assigned as well:</p>
+<div><ExampleComponent Height="25" ExampleCode="@(new StrokeDashOffsetExample())" /></div>
 
-<h5>Dash offset = 50</h5>
-<div><ExampleComponent Height="25" ExampleCode="@(new StrokeDashOffsetExample(50))" /></div>
+<h5>LineCap</h5>
+<p>The following examples show how to define different stroke endings for open shapes:</p>
+<h6>Butt</h6>
+<div><ExampleComponent Height="40" ExampleCode="@(new StrokeLineCapButtExample())" /></div>
+<h6>Square</h6>
+<div><ExampleComponent Height="40" ExampleCode="@(new StrokeLineCapSquareExample())" /></div>
+<h6>Round</h6>
+<div><ExampleComponent Height="40" ExampleCode="@(new StrokeLineCapRoundExample())" /></div>
 
-<h4>Stroke line cap examples:</h4>
-<h5>No line cap</h5>
-<div><ExampleComponent Height="20" ExampleCode="@(new StrokeLineCapExample())" /></div>
+<h5>LineJoin</h5>
+<p>The following examples show how to define different stroke shapes for corners:</p>
+<h6>Miter</h6>
+<div><ExampleComponent ExampleCode="@(new StrokeLineJoinMiterExample())" /></div>
 
-<h5>Butt</h5>
-<div><ExampleComponent Height="20" ExampleCode="@(new StrokeLineCapExample(StrokeLineCapStyle.Butt))" /></div>
+<h6>Round</h6>
+<div><ExampleComponent ExampleCode="@(new StrokeLineJoinRoundExample())" /></div>
 
-<h5>Square</h5>
-<div><ExampleComponent Height="20" ExampleCode="@(new StrokeLineCapExample(StrokeLineCapStyle.Square))" /></div>
+<h6>Bevel</h6>
+<div><ExampleComponent ExampleCode="@(new StrokeLineJoinBevelExample())" /></div>
 
-<h5>Round</h5>
-<div><ExampleComponent Height="20" ExampleCode="@(new StrokeLineCapExample(StrokeLineCapStyle.Round))" /></div>
+<h6>Miter clip</h6>
+<div><ExampleComponent ExampleCode="@(new StrokeLineJoinMiterClipExample())" /></div>
 
-<h4>Stroke line join example:</h4>
-<h5>Miter</h5>
-<div><ExampleComponent ExampleCode="@(new StrokeLineJoinExample(StrokeLineJoinStyle.Miter))" /></div>
+<h6>Arcs</h6>
+<div><ExampleComponent ExampleCode="@(new StrokeLineJoinArcsExample())" /></div>
 
-<h5>Round</h5>
-<div><ExampleComponent ExampleCode="@(new StrokeLineJoinExample(StrokeLineJoinStyle.Round))" /></div>
-
-<h5>Bevel</h5>
-<div><ExampleComponent ExampleCode="@(new StrokeLineJoinExample(StrokeLineJoinStyle.Bevel))" /></div>
-
-<h5>Miter clip</h5>
-<div><ExampleComponent ExampleCode="@(new StrokeLineJoinExample(StrokeLineJoinStyle.MiterClip))" /></div>
-
-<h5>Arcs</h5>
-<div><ExampleComponent ExampleCode="@(new StrokeLineJoinExample(StrokeLineJoinStyle.Arcs))" /></div>
-
-<h4>Stroke opacity example:</h4>
+<h5>Opacity</h5>
+<p>To change the opacity of the stroke, assign value to Opacity property:</p>
 <div><ExampleComponent ExampleCode="@(new StrokeOpacityExample())" /></div>
 
-<h4>Stroke miter limit examples</h4>
-<h5>No miter limit</h5>
+<h5>MiterLimits</h5>
+<p>The following examples show how to set miter length limit:</p>
+<h6>No limit</h6>
 <div><ExampleComponent ExampleCode="@(new StrokeMiterLimitExample())" /></div>
 
-<h5>Miter limit = 1:</h5>
-<div><ExampleComponent ExampleCode="@(new StrokeMiterLimitExample(1))" /></div>
+<h6>MiterLimit 1</h6>
+<div><ExampleComponent ExampleCode="@(new StrokeMiterLimit1Example())" /></div>
 
-<h5>Miter limit = 2 example:</h5>
-<div><ExampleComponent ExampleCode="@(new StrokeMiterLimitExample(2))" /></div>
+<h6>MiterLimit 2</h6>
+<div><ExampleComponent ExampleCode="@(new StrokeMiterLimit2Example())" /></div>
 
 <ElementApiDocs ElementType="@typeof(SvgStroke)" />
