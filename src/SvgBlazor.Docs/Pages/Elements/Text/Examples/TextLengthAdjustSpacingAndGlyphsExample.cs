@@ -3,7 +3,7 @@ using SvgBlazor.Docs.Interfaces;
 
 namespace SvgBlazor.Docs.Examples
 {
-    public class TextBasicExample : IExampleCode
+    public class TextLengthAdjustSpacingAndGlyphsExample : IExampleCode
     {
         public void Example(SvgComponent svg)
         {
@@ -12,7 +12,9 @@ namespace SvgBlazor.Docs.Examples
             {
                 X = 10,
                 Y = 20,
-                Text = "This is just awesome!",
+                Text = "I wish there was more space here...",
+                LengthAdjust = TextLengthAdjust.SpacingAndGlyphs,
+                TextLength = 200,
             };
             /* #example-code-end */
             svg.Add(text);

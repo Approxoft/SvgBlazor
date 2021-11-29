@@ -2,20 +2,23 @@
 @using SvgBlazor.Docs.Components
 
 <ExampleTitle>Text</ExampleTitle>
-<h4>Text examples:</h4>
-<h5>Basic</h5>
+<p>The SvgText class is responsible for providing the svg @("<text>") element.</p>
 <ExampleComponent Height="50" ExampleCode="@(new TextBasicExample())" />
 
-<h5>ShiftX = 20, ShiftY = 20</h5>
-<ExampleComponent Height="50" ExampleCode="@(new TextShiftXYExample(20, 20))" />
+<h5>Shift</h5>
+<p>To shift the position of the text assign values to ShiftX and ShiftY properties:</p>
+<ExampleComponent Height="50" ExampleCode="@(new TextShiftXYExample())" />
 
-<h5>rotate: 20 0 20</h5>
-<ExampleComponent Height="50" ExampleCode="@(new TextRotateExample("20 0 20"))" />
+<h5>Rotate</h5>
+<p>Text rotation can be achieved by assigning properly formatted string to Rotate property:</p>
+<ExampleComponent Height="50" ExampleCode="@(new TextRotateExample())" />
 
-<h5>TextLength: 100, lengthAdjust = spacing</h5>
-<ExampleComponent Height="50" ExampleCode="@(new TextLengthAdjustExample(TextLengthAdjust.Spacing, 100))" />
+<h5>LengthAdjust</h5>
+<p>The following examples show how to control the text stretch based on its length:</p>
+<h6>Spacing</h6>
+<ExampleComponent Height="50" ExampleCode="@(new TextLengthAdjustSpacingExample())" />
 
-<h5>TextLength: 100, lengthAdjust = spacingAndGlyphs</h5>
-<ExampleComponent Height="50" ExampleCode="@(new TextLengthAdjustExample(TextLengthAdjust.SpacingAndGlyphs, 100))" />
+<h6>SpacingAndGlyphs</h6>
+<ExampleComponent Height="50" ExampleCode="@(new TextLengthAdjustSpacingAndGlyphsExample())" />
 
 <ElementApiDocs ElementType="@typeof(SvgText)" />
