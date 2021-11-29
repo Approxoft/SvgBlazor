@@ -3,15 +3,21 @@ using SvgBlazor.Docs.Interfaces;
 
 namespace SvgBlazor.Docs.Examples
 {
-    public class TextShiftXYExample : TextBasicExample
+    public class TextShiftXYExample : IExampleCode
     {
-        public override void Example(SvgComponent svg)
+        public void Example(SvgComponent svg)
         {
-            base.Example(svg);
             /* #example-code-start */
-            Text.ShiftX = 20;
-            Text.ShiftY = 10;
+            var text = new SvgText
+            {
+                X = 10,
+                Y = 20,
+                Text = "That's a nice shift!",
+                ShiftX = 20,
+                ShiftY = 10,
+            };
             /* #example-code-end */
+            svg.Add(text);
         }
     }
 }

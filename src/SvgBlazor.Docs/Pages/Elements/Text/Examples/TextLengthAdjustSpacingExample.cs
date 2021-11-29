@@ -3,16 +3,21 @@ using SvgBlazor.Docs.Interfaces;
 
 namespace SvgBlazor.Docs.Examples
 {
-    public class TextLengthAdjustSpacingExample : TextBasicExample
+    public class TextLengthAdjustSpacingExample : IExampleCode
     {
-        public override void Example(SvgComponent svg)
+        public void Example(SvgComponent svg)
         {
-            base.Example(svg);
             /* #example-code-start */
-            Text.LengthAdjust = TextLengthAdjust.Spacing;
-            Text.TextLength = 100;
+            var text = new SvgText
+            {
+                X = 10,
+                Y = 20,
+                Text = "I wish there was more space here...",
+                LengthAdjust = TextLengthAdjust.Spacing,
+                TextLength = 200,
+            };
             /* #example-code-end */
-            svg.Add(Text);
+            svg.Add(text);
         }
     }
 }

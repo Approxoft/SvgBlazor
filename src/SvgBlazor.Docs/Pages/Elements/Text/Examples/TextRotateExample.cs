@@ -3,14 +3,20 @@ using SvgBlazor.Docs.Interfaces;
 
 namespace SvgBlazor.Docs.Examples
 {
-    public class TextRotateExample : TextBasicExample
+    public class TextRotateExample : IExampleCode
     {
-        public override void Example(SvgComponent svg)
+        public void Example(SvgComponent svg)
         {
-            base.Example(svg);
             /* #example-code-start */
-            Text.Rotate = "20 0 20";
+            var text = new SvgText
+            {
+                X = 10,
+                Y = 20,
+                Text = "Whoa! Nice rotation!",
+                Rotate = "20 0 20",
+            };
             /* #example-code-end */
+            svg.Add(text);
         }
     }
 }
