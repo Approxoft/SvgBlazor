@@ -12,8 +12,20 @@ namespace SvgBlazor.Docs.Examples
             {
                 Fill = new SvgFill { Color = "red" },
             };
-            group.Add(new SvgCircle() { CenterX = "10", CenterY = "10", Radius = "10" });
-            group.Add(new SvgCircle() { CenterX = "20", CenterY = "20", Radius = "5" });
+
+            group.Add(new SvgCircle
+            {
+                CenterX = 50,
+                CenterY = 50,
+                Radius = 50,
+            });
+
+            group.Add(new SvgCircle
+            {
+                CenterX = 150,
+                CenterY = 150,
+                Radius = 50,
+            });
             /* #example-code-end */
 
             svg.Add(group);
