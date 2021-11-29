@@ -112,10 +112,8 @@ namespace SvgBlazor.Docs.Generator
             StringBuilder exampleCode = new ();
             foreach (var line in lines)
             {
-                if (line.Length >= indentChars)
-                {
-                    exampleCode.AppendLine(line.Remove(0, indentChars));
-                }
+                int charsToRemove = Math.Min(indentChars, line.Length);
+                exampleCode.AppendLine(line.Remove(0, charsToRemove));
             }
 
             return exampleCode.ToString().Trim();

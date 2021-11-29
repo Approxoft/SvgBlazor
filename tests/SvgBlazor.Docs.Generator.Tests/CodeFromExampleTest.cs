@@ -25,6 +25,7 @@ namespace SvgBlazor.Docs.Examples
                 CenterX = 100,
                 Fill = new SvgFill { Color = ""blue"", Opacity = 0.5f },
             };
+
             svg.Add(circle);
         }
 //#example-code-end
@@ -41,6 +42,7 @@ namespace SvgBlazor.Docs.Examples
         CenterX = 100,
         Fill = new SvgFill { Color = ""blue"", Opacity = 0.5f },
     };
+
     svg.Add(circle);
 }";
             Assert.Equal(expectedCode, code);
