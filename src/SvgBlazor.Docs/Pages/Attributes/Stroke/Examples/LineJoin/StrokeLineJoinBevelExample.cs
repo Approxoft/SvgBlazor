@@ -8,7 +8,7 @@ namespace SvgBlazor.Docs.Examples
         public void Example(SvgComponent svg)
         {
             /* #example-code-start */
-            var d = "m28, 177 c46, -17 60, -77 30, -120c 50, 2 110, 35 114, 66";
+            var d = "m28, 177c 46, -17 60, -77 30, -120c 50, 2 110, 35 114, 66";
 
             var path = new SvgPath
             {
@@ -28,7 +28,7 @@ namespace SvgBlazor.Docs.Examples
                 Stroke = new SvgStroke
                 {
                     Color = "gold",
-                    Width = 5,
+                    Width = 1,
                 },
                 Fill = new SvgFill { Color = "none" },
             };

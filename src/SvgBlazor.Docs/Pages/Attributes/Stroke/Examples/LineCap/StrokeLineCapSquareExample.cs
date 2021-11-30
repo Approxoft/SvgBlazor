@@ -15,16 +15,6 @@ namespace SvgBlazor.Docs.Examples
                 LineCap = StrokeLineCapStyle.Square,
             };
 
-            var path = new SvgPath
-            {
-                Path = "M15, 20 h170",
-                Stroke = new SvgStroke
-                {
-                    Color = "gold",
-                    Width = 5,
-                },
-            };
-
             var line = new SvgLine
             {
                 X1 = 15,
@@ -33,10 +23,20 @@ namespace SvgBlazor.Docs.Examples
                 Y2 = 20,
                 Stroke = lineCapSquare,
             };
+
+            var highlight = new SvgPath
+            {
+                Path = "M15, 20h 170",
+                Stroke = new SvgStroke
+                {
+                    Color = "gold",
+                    Width = 1,
+                },
+            };
             /* #example-code-end */
 
             svg.Add(line);
-            svg.Add(path);
+            svg.Add(highlight);
         }
     }
 }

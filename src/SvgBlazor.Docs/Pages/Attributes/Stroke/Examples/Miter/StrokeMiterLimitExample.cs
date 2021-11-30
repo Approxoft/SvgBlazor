@@ -16,7 +16,7 @@ namespace SvgBlazor.Docs.Examples
                 Width = 15,
             };
 
-            var d = "m20, 172 c46, -77 76, -140 76, -140 c0, 0 23, 40 90, 140";
+            var d = "m20, 172c 46, -77 76, -140 76, -140c 0, 0 23, 40 90, 140";
 
             var path = new SvgPath
             {
@@ -34,7 +34,7 @@ namespace SvgBlazor.Docs.Examples
                 Stroke = new SvgStroke
                 {
                     Color = "gold",
-                    Width = 2,
+                    Width = 1,
                 },
                 Fill = new SvgFill { Color = "none" },
             };
