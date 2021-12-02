@@ -50,95 +50,11 @@ namespace SvgBlazor.Docs.Examples
                     LineCap = StrokeLineCapStyle.Square,
                 },
             };
-
-            var highlight = new SvgPath
-            {
-                Path = "M 15 15 H 185 M 15 75 H 185 M 15 135 H 185",
-                Stroke = new SvgStroke
-                {
-                    Color = "darkgrey",
-                    Width = 1,
-                },
-            };
-
-            var line1circle1 = new SvgCircle
-            {
-                CenterX = 15,
-                CenterY = 15,
-                Radius = 2,
-                Fill = new SvgFill
-                {
-                    Color = "darkgrey",
-                },
-            };
-
-            var line1circle2 = new SvgCircle
-            {
-                CenterX = 185,
-                CenterY = 15,
-                Radius = 2,
-                Fill = new SvgFill
-                {
-                    Color = "darkgrey",
-                },
-            };
-
-            var line2circle1 = new SvgCircle
-            {
-                CenterX = 15,
-                CenterY = 75,
-                Radius = 2,
-                Fill = new SvgFill
-                {
-                    Color = "darkgrey",
-                },
-            };
-
-            var line2circle2 = new SvgCircle
-            {
-                CenterX = 185,
-                CenterY = 75,
-                Radius = 2,
-                Fill = new SvgFill
-                {
-                    Color = "darkgrey",
-                },
-            };
-
-            var line3circle1 = new SvgCircle
-            {
-                CenterX = 15,
-                CenterY = 135,
-                Radius = 2,
-                Fill = new SvgFill
-                {
-                    Color = "darkgrey",
-                },
-            };
-
-            var line3circle2 = new SvgCircle
-            {
-                CenterX = 185,
-                CenterY = 135,
-                Radius = 2,
-                Fill = new SvgFill
-                {
-                    Color = "darkgrey",
-                },
-            };
-
             /* #example-code-end */
 
             svg.Add(lineButt);
             svg.Add(lineRound);
             svg.Add(lineSquare);
-            svg.Add(highlight);
-            svg.Add(line1circle1);
-            svg.Add(line1circle2);
-            svg.Add(line2circle1);
-            svg.Add(line2circle2);
-            svg.Add(line3circle1);
-            svg.Add(line3circle2);
         }
     }
 }
