@@ -11,7 +11,7 @@
 <div><ExampleComponent ExampleCode="@(new StrokeDashArrayExample())" /></div>
 
 <h5>DashOffset</h5>
-<p>To render offset, assign value to DashOffset property. However, this will only work when DashArray is assigned as well:</p>
+<p>To render offset, assign value to DashOffset property. However, this will only work if a DashArray is assigned:</p>
 <div><ExampleComponent Height="25" ExampleCode="@(new StrokeDashOffsetExample())" /></div>
 
 <h5>LineCap</h5>
@@ -28,7 +28,6 @@
 
 <h5>MiterLimits</h5>
 <p>The following examples show how to set miter length limit:</p>
-<h6>No limit</h6>
 <div><ExampleComponent Height=250 ExampleCode="@(new StrokeMiterLimitExamples())" /></div>
 
 <ElementApiDocs ElementType="@typeof(SvgStroke)" />
