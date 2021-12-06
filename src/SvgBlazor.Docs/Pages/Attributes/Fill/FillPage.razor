@@ -1,0 +1,21 @@
+﻿@page "/attributes/fill"
+@using SvgBlazor.Docs.Components
+
+<ExampleTitle>Fill</ExampleTitle>
+<p>The SvgStroke class is responsible for providing the paint of the outline of an svg element.</p>
+
+<h5>Color</h5>
+<div><ExampleComponent Width="400" ExampleCode="@(new FillColorExample())" /></div>
+
+<h5>Opacity</h5>
+<p></p>
+<div><ExampleComponent Width="400" ExampleCode="@(new FillOpacityExample())" /></div>
+
+<h5>Fill rule</h5>
+<p></p>
+<h6>NonZero</h6>
+<div><ExampleComponent Width="400" ExampleCode="@(new FillRuleNonZeroExample())" /></div>
+<h6>EvenOdd</h6>
+<div><ExampleComponent Width="400" ExampleCode="@(new FillRuleEvenOddExample())" /></div>
+
+<ElementApiDocs ElementType="@typeof(SvgFill)" />
