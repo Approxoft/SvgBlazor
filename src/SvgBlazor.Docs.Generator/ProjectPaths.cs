@@ -15,16 +15,10 @@ namespace SvgBlazor.Docs.Generator
 
         private const string DocsPagesDirectory = "Pages";
 
-        private const string DocsAttributesDirectory = "Attributes";
-
-        private const string DocsElementsDirectory = "Elements";
-
         public static string SourcePath { get; set; }
 
         public static string DocsDirectoryPath => Path.Combine(SourcePath, DocsDirectory);
 
-        public static string DocsAttributesDirectoryPath => Path.Combine(DocsDirectoryPath, DocsPagesDirectory, DocsAttributesDirectory);
-
-        public static string DocsElementsDirectoryPath => Path.Combine(DocsDirectoryPath, DocsPagesDirectory, DocsElementsDirectory);
+        public static string PagesDirectoryPath => Path.Combine(DocsDirectoryPath, DocsPagesDirectory);
     }
 }

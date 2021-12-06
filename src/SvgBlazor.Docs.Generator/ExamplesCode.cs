@@ -11,8 +11,7 @@ namespace SvgBlazor.Docs.Generator
     {
         public void Generate()
         {
-            GenerateItems(ProjectPaths.DocsAttributesDirectoryPath);
-            GenerateItems(ProjectPaths.DocsElementsDirectoryPath);
+            GenerateItems(ProjectPaths.PagesDirectoryPath);
         }
 
         public string GetCodeFromFile(string filepath)
