@@ -3,5 +3,19 @@
 
 @code {
     private SvgComponent svgComponent;
+
+    protected override void OnInitialized()
+    {
+        var circle = new SvgCircle
+        {
+            Fill = new SvgFill
+            {
+                Color = "#FF2800",
+            },
+        };
+
+        svgComponent.Add(circle);
+    }
 }
+
 @*#example-code-end*@
