@@ -1,20 +1,26 @@
 ﻿@*#example-code-start*@
-<SvgComponent @ref="svgComponent" />
+<SvgComponent Width="200" Height="200" @ref="svgComponent" />
 
 @code {
     private SvgComponent svgComponent;
 
-    protected override void OnInitialized()
+    protected override void OnAfterRender(bool firstRender)
     {
-        var circle = new SvgCircle
+        if (firstRender)
         {
-            Fill = new SvgFill
+            var circle = new SvgCircle
             {
-                Color = "#FF2800",
-            },
-        };
+                CenterX = 100,
+                CenterY = 100,
+                Radius = 100,
+                Fill = new SvgFill
+                {
+                    Color = "#FF2800",
+                },
+            };
 
-        svgComponent.Add(circle);
+            svgComponent.Add(circle);
+        }
     }
 }
 
