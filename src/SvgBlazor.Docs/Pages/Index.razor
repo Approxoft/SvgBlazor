@@ -1,7 +1,44 @@
 ﻿@page "/"
+@using Markdig
+@using System.IO;
 
-<h1>Hello, world!</h1>
+@((MarkupString)_htmlReadme)
 
-Welcome to your new app.
+@code {
+    string _htmlReadme;
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    protected override void OnInitialized()
+    {
+        var readmeContent = loadFromResources("README.md");
+
+        if (!String.IsNullOrEmpty(readmeContent))
+        {
+            _htmlReadme = Markdown.ToHtml(readmeContent);
+        }
+    }
+
+    private string loadFromResources(string name)
+    {
+        var assembly = typeof(Index).Assembly;
+        var resourceName = assembly
+            .GetManifestResourceNames()
+            .FirstOrDefault(x => x.Contains(name));
+
+        if (resourceName is null)
+        {
+            return String.Empty;
+        }
+
+        string readmeContent = String.Empty;
+
+        using (var resourceStream = assembly.GetManifestResourceStream(resourceName))
+        {
+            using (var reader = new StreamReader(resourceStream))
+            {
+                readmeContent = reader.ReadToEnd();
+            }
+        }
+
+        return readmeContent;
+    }
+}
