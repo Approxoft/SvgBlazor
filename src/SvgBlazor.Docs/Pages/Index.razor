@@ -29,16 +29,9 @@
             return String.Empty;
         }
 
-        string readmeContent = String.Empty;
+        using var resourceStream = assembly.GetManifestResourceStream(resourceName);
+        using var reader = new StreamReader(resourceStream);
 
-        using (var resourceStream = assembly.GetManifestResourceStream(resourceName))
-        {
-            using (var reader = new StreamReader(resourceStream))
-            {
-                readmeContent = reader.ReadToEnd();
-            }
-        }
-
-        return readmeContent;
+        return reader.ReadToEnd();
     }
 }
