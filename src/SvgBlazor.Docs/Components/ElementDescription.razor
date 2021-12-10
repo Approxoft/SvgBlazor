@@ -1,0 +1,8 @@
+﻿@using SvgBlazor.Docs.Extensions
+
+<p>@(ElementType.GetDocumentation())</p>
+
+@code {
+    [Parameter]
+    public Type ElementType { get; set; }
+}
