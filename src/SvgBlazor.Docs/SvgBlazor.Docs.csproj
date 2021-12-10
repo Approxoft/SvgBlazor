@@ -11,6 +11,7 @@
   <PropertyGroup>
     <BinDocsCompiler>$(SolutionDir)src/SvgBlazor.Docs.Generator/bin/$(Configuration)/net5.0/SvgBlazor.Docs.Generator.dll</BinDocsCompiler>
     <XmlDocumentation>$(SolutionDir)src/SvgBlazor/obj/$(Configuration)/net5.0/SvgBlazor.xml</XmlDocumentation>
+    <ReadmeMd>$(SolutionDir)README.md</ReadmeMd>
   </PropertyGroup>
 	
   <Target Name="GenerateDocs" BeforeTargets="BeforeBuild">
@@ -30,6 +31,10 @@
   </Target>
 
   <ItemGroup>
+    <EmbeddedResource Include="$(ReadmeMd)" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.9" PrivateAssets="all" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
@@ -37,11 +42,15 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+    <PackageReference Include="Markdig.Signed" Version="0.26.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SvgBlazor\SvgBlazor.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Markdig.Signed" />
   </ItemGroup>
 </Project>
