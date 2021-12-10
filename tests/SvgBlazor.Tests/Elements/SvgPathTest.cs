@@ -1,6 +1,5 @@
 ﻿using System;
 using Bunit;
-using SvgBlazor.Elements;
 using Xunit;
 
 namespace SvgBlazor.Tests.Elements

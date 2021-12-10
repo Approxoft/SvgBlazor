@@ -1,8 +1,9 @@
 ﻿@page "/attributes/stroke"
 @using SvgBlazor.Docs.Components
+@using SvgBlazor.Docs.Extensions
 
 <ExampleTitle>Stroke</ExampleTitle>
-<p>The SvgStroke class is responsible for providing the paint of the outline of an svg element.</p>
+<p>@( typeof(SvgStroke).GetDocumentation() )</p>
 
 <div><ExampleComponent ExampleCode="@(new StrokeBasicExample())" /></div>
 

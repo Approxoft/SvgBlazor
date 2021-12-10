@@ -1,7 +1,8 @@
 ﻿@page "/elements/rect"
 @using SvgBlazor.Docs.Components
+@using SvgBlazor.Docs.Extensions
 
 <ExampleTitle>Rect</ExampleTitle>
-<p>The SvgRect class is responsible for providing the svg @("<rect>") element.</p>
+<p>@( typeof(SvgRect).GetDocumentation() )</p>
 <ExampleComponent ExampleCode="@(new RectExample())" />
 <ElementApiDocs ElementType="@typeof(SvgRect)" />

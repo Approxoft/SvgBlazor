@@ -1,6 +1,5 @@
 ﻿using System;
 using SvgBlazor.Docs.Interfaces;
-using SvgBlazor.Elements;
 
 namespace SvgBlazor.Docs.Examples
 {

@@ -1,8 +1,9 @@
 ﻿@page "/elements/text"
 @using SvgBlazor.Docs.Components
+@using SvgBlazor.Docs.Extensions
 
 <ExampleTitle>Text</ExampleTitle>
-<p>The SvgText class is responsible for providing the svg @("<text>") element.</p>
+<p>@( typeof(SvgText).GetDocumentation() )</p>
 <ExampleComponent Height="50" ExampleCode="@(new TextBasicExample())" />
 
 <h5>Shift</h5>

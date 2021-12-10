@@ -4,6 +4,9 @@ using SvgBlazor.Extensions;
 
 namespace SvgBlazor
 {
+    /// <summary>
+    /// The SvgStroke class is responsible for providing the paint of the outline of an svg element.
+    /// </summary>
     public class SvgStroke
     {
         /// <summary>

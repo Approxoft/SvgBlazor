@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 namespace SvgBlazor
 {
     /// <summary>
-    /// SVG ellipse element.
+    /// The SvgEllipse class is responsible for providing the SVG ellipse element.
     /// </summary>
     public class SvgEllipse : SvgElement
     {

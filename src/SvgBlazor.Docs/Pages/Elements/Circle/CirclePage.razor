@@ -1,7 +1,8 @@
 ﻿@page "/elements/circle"
 @using SvgBlazor.Docs.Components
+@using SvgBlazor.Docs.Extensions
 
 <ExampleTitle>Circle</ExampleTitle>
-<p>The SvgCircle class is responsible for providing the svg @("<circle>") element.</p>
+<p>@( typeof(SvgCircle).GetDocumentation() )</p>
 <ExampleComponent Width=100 Height=100 ExampleCode="@(new CircleExample())" />
 <ElementApiDocs ElementType="@typeof(SvgCircle)" />

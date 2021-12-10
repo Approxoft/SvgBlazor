@@ -1,7 +1,8 @@
 ﻿@page "/elements/line"
 @using SvgBlazor.Docs.Components
+@using SvgBlazor.Docs.Extensions
 
 <ExampleTitle>Line</ExampleTitle>
-<p>The SvgLine class is responsible for providing the svg @("<line>") element.</p>
+<p>@( typeof(SvgLine).GetDocumentation() )</p>
 <ExampleComponent ExampleCode="@(new LineExample())" />
 <ElementApiDocs ElementType="@typeof(SvgLine)" />

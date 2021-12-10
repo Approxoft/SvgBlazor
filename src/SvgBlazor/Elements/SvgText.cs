@@ -7,7 +7,7 @@ using SvgBlazor.Extensions;
 namespace SvgBlazor
 {
     /// <summary>
-    /// SVG text element.
+    /// The SvgText class is responsible for providing the SVG text element.
     /// </summary>
     public class SvgText : SvgElement
     {

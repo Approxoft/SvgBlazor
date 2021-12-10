@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 namespace SvgBlazor
 {
     /// <summary>
-    /// SVG circle element.
+    /// The SvgCircle class is responsible for providing the SVG circle element.
     /// </summary>
     public class SvgCircle : SvgElement
     {
