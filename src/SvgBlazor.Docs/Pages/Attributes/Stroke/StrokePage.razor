@@ -1,32 +1,34 @@
 ﻿@page "/attributes/stroke"
+@using SvgBlazor.Docs.Extensions
 
 <ExampleTitle>Stroke</ExampleTitle>
 <ElementDescription ElementType="@typeof(SvgStroke)" />
 
+<h5>Basic example</h5>
 <div><ExampleComponent ExampleCode="@(new StrokeBasicExample())" /></div>
 
-<h5>DashArray</h5>
-<p>To present stroke as a pattern of dashes and gaps, assign properly formatted string to DashArray property:</p>
+<h5>DashArray property</h5>
+<p>@( typeof(SvgStroke).GetProperty("DashArray").GetDocumentation() )</p>
 <div><ExampleComponent ExampleCode="@(new StrokeDashArrayExample())" /></div>
 
-<h5>DashOffset</h5>
-<p>To render offset, assign value to DashOffset property. However, this will only work if a DashArray is assigned:</p>
+<h5>DashOffset property</h5>
+<p>@( typeof(SvgStroke).GetProperty("DashOffset").GetDocumentation() )</p>
 <div><ExampleComponent Height="25" ExampleCode="@(new StrokeDashOffsetExample())" /></div>
 
-<h5>LineCap</h5>
-<p>The following examples show how to define different stroke endings for open shapes:</p>
+<h5>LineCap property</h5>
+<p>@( typeof(SvgStroke).GetProperty("LineCap").GetDocumentation() )</p>
 <div><ExampleComponent ExampleCode="@(new StrokeLineCapExamples())" /></div>
 
-<h5>LineJoin</h5>
-<p>The following examples show how to define different stroke shapes for corners:</p>
+<h5>LineJoin property</h5>
+<p>@( typeof(SvgStroke).GetProperty("LineJoin").GetDocumentation() )</p>
 <div><ExampleComponent Height=520 ExampleCode="@(new StrokeLineJoinExamples())" /></div>
 
-<h5>Opacity</h5>
-<p>To change the opacity of the stroke, assign value to Opacity property:</p>
+<h5>Opacity property</h5>
+<p>@( typeof(SvgStroke).GetProperty("Opacity").GetDocumentation() )</p>
 <div><ExampleComponent ExampleCode="@(new StrokeOpacityExample())" /></div>
 
-<h5>MiterLimits</h5>
-<p>The following examples show how to set miter length limit:</p>
+<h5>MiterLimit property</h5>
+<p>@( typeof(SvgStroke).GetProperty("MiterLimit").GetDocumentation() )</p>
 <div><ExampleComponent Height=250 ExampleCode="@(new StrokeMiterLimitExamples())" /></div>
 
 <ElementApiDocs ElementType="@typeof(SvgStroke)" />

@@ -10,42 +10,42 @@ namespace SvgBlazor
     public class SvgStroke
     {
         /// <summary>
-        /// The appearance of the Stroke. Can be color, pattern or gradient (e.g. url(#pattern)).
+        /// Gets or sets the appearance of the Stroke. Can be color, pattern or gradient (e.g. url(#pattern)).
         /// </summary>
         public string Color { get; set; }
 
         /// <summary>
-        /// The stroke dash array.
+        /// Gets or sets the stroke dash array. To present stroke as a pattern of dashes and gaps, assign properly formatted string.
         /// </summary>
         public string DashArray { get; set; }
 
         /// <summary>
-        /// The dash offset.
+        /// Gets or sets the dash offset. To render offset, assign value to DashOffset property. However, this will only work if a DashArray is assigned.
         /// </summary>
         public SvgValue DashOffset { get; set; }
 
         /// <summary>
-        /// Sets the style of the stroke at the start and end of an open subpath.
+        /// Gets or sets the style of the stroke at the start and end of an open subpath.
         /// </summary>
         public StrokeLineCapStyle? LineCap { get; set; }
 
         /// <summary>
-        /// Sets the appearance at the join point of two lines.
+        /// Gets or sets the shape definition at the join point of two lines.
         /// </summary>
         public StrokeLineJoinStyle? LineJoin { get; set; }
 
         /// <summary>
-        /// Sets the miter limit. Must be greater then or equal to 1.
+        /// Gets or sets the miter limit. Must be greater then or equal to 1.
         /// </summary>
         public int? MiterLimit { get; set; }
 
         /// <summary>
-        /// Sets the opacity of the stroke.
+        /// Gets or sets the opacity of the stroke.
         /// </summary>
         public SvgValue Opacity { get; set; }
 
         /// <summary>
-        /// Sets the width of the stroke.
+        /// Gets or sets the width of the stroke.
         /// </summary>
         public SvgValue Width { get; set; }
 
