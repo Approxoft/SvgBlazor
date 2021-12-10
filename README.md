@@ -1,5 +1,5 @@
 # About
-SvgBlazor is a simple library, allowing you to write c# code that's being transformed directly to svg elements. Thanks to its simple, yet powerful API, you can compose beautiful svg drawings with ease.
+SvgBlazor is a simple library that allows you to write C# code that is transformed directly into svg elements. Thanks to its simple, yet powerful API, you can easily compose beautiful svg drawings.
 
 # Getting started
 ## 1. Package installation
@@ -47,7 +47,7 @@ Add a SvgComponent tag in your .razor file and capture it's reference by using @
 
 ## 4. Enjoy the library!
 
-# License
+# MIT License
 Copyright 2021 <COPYRIGHT HOLDER>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
