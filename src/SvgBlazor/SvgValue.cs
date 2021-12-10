@@ -4,6 +4,9 @@ using System.Text;
 
 namespace SvgBlazor
 {
+    /// <summary>
+    /// The SvgValue class is responsible for providing value for certain elements.
+    /// </summary>
     public class SvgValue
     {
         private readonly NumberFormatInfo _numberFormatInfo;
