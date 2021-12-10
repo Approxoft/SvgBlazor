@@ -1,12 +1,11 @@
 ﻿@page "/elements/svg"
-@using SvgBlazor.Docs.Components
 
 <ExampleTitle>Svg</ExampleTitle>
+<ElementDescription ElementType="@typeof(Svg)" />
 <SvgComponent @ref="svgref" Width="500" Height="500" OnClick="OnSvgClicked" />
-<ElementApiDocs ElementType="@typeof(Svg)" />
-
 <button @onclick="OnAddElement">Add random element</button>
 <p>Click an element to remove</p>
+<ElementApiDocs ElementType="@typeof(Svg)" />
 
 @code {
     SvgComponent svgref;

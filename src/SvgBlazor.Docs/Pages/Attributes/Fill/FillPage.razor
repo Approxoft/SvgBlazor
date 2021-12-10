@@ -1,10 +1,8 @@
 ﻿@page "/attributes/fill"
-@using SvgBlazor.Docs.Components
 @using SvgBlazor.Docs.Extensions
-@using SvgBlazor
 
 <ExampleTitle>Fill</ExampleTitle>
-<p>@( typeof(SvgFill).GetDocumentation() )</p>
+<ElementDescription ElementType="@typeof(SvgFill)" />
 
 <h5>Color property</h5>
 <p>@( typeof(SvgFill).GetProperty("Color").GetDocumentation() )</p>

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 namespace SvgBlazor
 {
     /// <summary>
-    /// Svg G element
+    /// The SvgG class is responsible for providing the SVG group element.
     /// </summary>
     public partial class SvgG : SvgContainer
     {

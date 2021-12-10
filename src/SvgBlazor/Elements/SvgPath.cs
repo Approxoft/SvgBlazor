@@ -2,10 +2,10 @@
 using System.Drawing;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace SvgBlazor.Elements
+namespace SvgBlazor
 {
     /// <summary>
-    /// The path element.
+    /// The SvgPath class is responsible for providing the SVG path element.
     /// </summary>
     public class SvgPath : SvgElement
     {

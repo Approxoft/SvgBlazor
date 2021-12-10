@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 namespace SvgBlazor
 {
     /// <summary>
-    /// SVG rect element.
+    /// The SvgRect class is responsible for providing the SVG rect element.
     /// </summary>
     public class SvgRect : SvgElement
     {

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 namespace SvgBlazor
 {
     /// <summary>
-    /// SVG polygon element.
+    /// The SvgPolygon class is responsible for providing the SVG polygon element.
     /// </summary>
     public class SvgPolygon : SvgElement
     {
