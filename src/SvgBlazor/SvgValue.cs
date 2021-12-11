@@ -5,7 +5,7 @@ using System.Text;
 namespace SvgBlazor
 {
     /// <summary>
-    /// The SvgValue class is responsible for providing value for certain elements.
+    /// The SvgValue class is responsible for storing the values of the different types used in SVG.
     /// </summary>
     public class SvgValue
     {

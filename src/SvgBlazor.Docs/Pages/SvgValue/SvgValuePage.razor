@@ -4,9 +4,9 @@
 
 <ExampleTitle>SvgValue</ExampleTitle>
 <p>@( typeof(SvgValue).GetDocumentation() )</p>
-<p>The simplest way to create a SvgValue is to leverage the provided implicit operators:</p>
+<p>The simplest way to create a SvgValue is to use the provided implicit operators:</p>
 <ExampleCode ItemName="SvgValueImplicitOperatorsExample" />
 <p>In the above example a SvgValue from int, float and string will be created respectively.</p>
-<p>Please note that when using implicit operator initialization, no unit type will be added. If you wish to provide a unit type, use one of the dedicated constructs:</p>
+<p>Please note that when using implicit operator initialization, no unit type will be added. If you wish to provide a unit type, use one of the dedicated constructors:</p>
 <ExampleComponent ExampleCode="@(new SvgValueUnitTypeExample())" />
 <ElementApiDocs ElementType="@typeof(SvgValue)" />
