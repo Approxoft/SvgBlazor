@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using Microsoft.AspNetCore.Components;
@@ -26,8 +26,14 @@ namespace SvgBlazor
             ViewBoxHeight = svg.ViewBoxHeight;
         }
 
+        /// <summary>
+        /// Gets or sets the width of the svg element.
+        /// </summary>
         public float Width { get; set; }
 
+        /// <summary>
+        /// Gets or sets the height of the svg element.
+        /// </summary>
         public float Height { get; set; }
 
         /// <summary>
