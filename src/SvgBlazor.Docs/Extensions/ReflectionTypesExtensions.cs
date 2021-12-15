@@ -62,6 +62,13 @@ namespace SvgBlazor.Docs.Extensions
             return StripXmlTags(documentation);
         }
 
+        public static string GetSignature(this MethodInfo methodInfo)
+        {
+            var parametersTypes = methodInfo.GetParameters().Select(x => x.ParameterType.FullName).ToArray();
+            string parameters = string.Join(",", parametersTypes);
+            return $"{methodInfo.Name}({parameters})";
+        }
+
         public static string GetDocumentation(this MethodInfo methodInfo)
         {
             var parametersTypes = methodInfo.GetParameters().Select(x => x.ParameterType.FullName).ToArray();
