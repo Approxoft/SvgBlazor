@@ -8,6 +8,17 @@ namespace SvgBlazor
     /// </summary>
     public class SvgFill
     {
+        public SvgFill()
+        {
+        }
+
+        public SvgFill(SvgFill svgfill)
+        {
+            Color = svgfill.Color;
+            Opacity = svgfill.Opacity;
+            Rule = svgfill.Rule;
+        }
+
         /// <summary>
         /// Gets or sets the paint used to render the interior of shapes. This can be a color, pattern or gradient (e.g. url(#pattern)).
         /// </summary>

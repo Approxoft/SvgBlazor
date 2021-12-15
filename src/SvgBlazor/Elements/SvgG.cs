@@ -10,6 +10,15 @@ namespace SvgBlazor
     /// </summary>
     public partial class SvgG : SvgContainer
     {
+        public SvgG()
+        {
+        }
+
+        public SvgG(SvgG svgg)
+            : base(svgg)
+        {
+        }
+
         public override string Tag() => "g";
     }
 }

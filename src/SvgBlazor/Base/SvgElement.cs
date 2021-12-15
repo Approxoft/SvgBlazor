@@ -10,6 +10,21 @@ namespace SvgBlazor
     {
         private ISvgElement _parent;
 
+        public SvgElement()
+        {
+        }
+
+        public SvgElement(SvgElement element)
+            : base(element)
+        {
+            X = element.X;
+            Y = element.Y;
+            Id = element.Id;
+            Class = element.Class;
+            Style = element.Style;
+            Fill = element.Fill;
+        }
+
         public SvgValue X { get; set; } = 0;
 
         public SvgValue Y { get; set; } = 0;

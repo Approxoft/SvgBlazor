@@ -10,6 +10,19 @@ namespace SvgBlazor
     /// </summary>
     public class SvgEllipse : SvgElement
     {
+        public SvgEllipse()
+        {
+        }
+
+        public SvgEllipse(SvgEllipse svgellipse)
+            : base(svgellipse)
+        {
+            CenterX = svgellipse.CenterX;
+            CenterY = svgellipse.CenterY;
+            RadiusX = svgellipse.RadiusX;
+            RadiusY = svgellipse.RadiusY;
+        }
+
         /// <summary>
         /// Gets or sets the x-axis coordinate of the center of the ellipse.
         /// </summary>

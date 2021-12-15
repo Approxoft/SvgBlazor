@@ -9,6 +9,16 @@ namespace SvgBlazor
     /// </summary>
     public class SvgPath : SvgElement
     {
+        public SvgPath()
+        {
+        }
+
+        public SvgPath(SvgPath svgpath)
+            : base(svgpath)
+        {
+            Path = svgpath.Path;
+        }
+
         /// <summary>
         /// Gets or sets the d string representing the actual path.
         /// </summary>

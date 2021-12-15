@@ -17,6 +17,17 @@ namespace SvgBlazor
 
         private string _pointsString;
 
+        public SvgPolygon()
+        {
+        }
+
+        public SvgPolygon(SvgPolygon svgpolygon)
+            : base(svgpolygon)
+        {
+            _points = new List<PointF>(svgpolygon._points);
+            _pointsString = svgpolygon._pointsString;
+        }
+
         public IEnumerable<PointF> Points
         {
             get => _points;

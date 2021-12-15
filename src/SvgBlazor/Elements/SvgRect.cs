@@ -10,6 +10,19 @@ namespace SvgBlazor
     /// </summary>
     public class SvgRect : SvgElement
     {
+        public SvgRect()
+        {
+        }
+
+        public SvgRect(SvgRect svgrect)
+            : base(svgrect)
+        {
+            Width = svgrect.Width;
+            Height = svgrect.Height;
+            Rx = svgrect.Rx;
+            Ry = svgrect.Ry;
+        }
+
         /// <summary>
         /// The width of the rect.
         /// </summary>

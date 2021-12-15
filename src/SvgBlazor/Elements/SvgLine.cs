@@ -10,6 +10,19 @@ namespace SvgBlazor
     /// </summary>
     public partial class SvgLine : SvgElement
     {
+        public SvgLine()
+        {
+        }
+
+        public SvgLine(SvgLine svgline)
+            : base(svgline)
+        {
+            X1 = svgline.X1;
+            Y1 = svgline.Y1;
+            X2 = svgline.X2;
+            Y2 = svgline.Y2;
+        }
+
         /// <summary>
         /// Start point x-axis coordinate.
         /// </summary>

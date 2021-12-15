@@ -9,6 +9,22 @@ namespace SvgBlazor
     /// </summary>
     public class SvgStroke
     {
+        public SvgStroke()
+        {
+        }
+
+        public SvgStroke(SvgStroke svgstroke)
+        {
+            Color = svgstroke.Color;
+            DashArray = svgstroke.DashArray;
+            DashOffset = svgstroke.DashOffset;
+            LineCap = svgstroke.LineCap;
+            LineJoin = svgstroke.LineJoin;
+            MiterLimit = svgstroke.MiterLimit;
+            Opacity = svgstroke.Opacity;
+            Width = svgstroke.Width;
+        }
+
         /// <summary>
         /// Gets or sets the appearance of the Stroke. Can be color, pattern or gradient (e.g. url(#pattern)).
         /// </summary>
