@@ -83,6 +83,29 @@ namespace SvgBlazor.Tests
             Assert.Contains(attributeValue, element.GetAttribute("stroke-linejoin"));
         }
 
+        [Fact]
+        public void CopyConstructor()
+        {
+            var e1 = new SvgStroke()
+            {
+                Color = "red",
+                DashArray = "1 2 3",
+                DashOffset = 2,
+                Opacity = 0.5f,
+                MiterLimit = 5,
+                Width = 15f,
+            };
+
+            var e2 = new SvgStroke(e1);
+
+            Assert.Equal("green", e2.Color);
+            Assert.Equal("1 2 3", e2.DashArray);
+            Assert.Equal(2, e2.DashOffset);
+            Assert.Equal(0.5f, e2.Opacity.ToFloat());
+            Assert.Equal(5, e2.MiterLimit);
+            Assert.Equal(15f, e2.Width.ToFloat());
+        }
+
         private class DummyStrokeAttributesElement : SvgElement
         {
             public override string Tag() => "elementwithstroke";

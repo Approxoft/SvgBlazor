@@ -32,5 +32,28 @@ namespace SvgBlazor.Tests
             Assert.Contains("5", element.GetAttribute("rx"));
             Assert.Contains("6", element.GetAttribute("ry"));
         }
+
+        [Fact]
+        public void CopyConstructor()
+        {
+            var e1 = new SvgRect()
+            {
+                X = 1f,
+                Y = 2f,
+                Width = 3f,
+                Height = 4f,
+                Rx = 5f,
+                Ry = 6f,
+            };
+
+            var e2 = new SvgRect(e1);
+
+            Assert.Equal(1f, e2.X.ToFloat());
+            Assert.Equal(2f, e2.Y.ToFloat());
+            Assert.Equal(3f, e2.Width.ToFloat());
+            Assert.Equal(4f, e2.Height.ToFloat());
+            Assert.Equal(5f, e2.Rx.ToFloat());
+            Assert.Equal(6f, e2.Ry.ToFloat());
+        }
     }
 }

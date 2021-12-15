@@ -21,5 +21,18 @@ namespace SvgBlazor.Tests.Elements
             var element = comp.Find("path");
             Assert.Contains("M10 10", element.GetAttribute("d"));
         }
+
+        [Fact]
+        public void CopyConstructor()
+        {
+            var e1 = new SvgPath()
+            {
+                Path = "M10 10",
+            };
+
+            var e2 = new SvgPath(e1);
+
+            Assert.Equal("M10 10", e2.Path);
+        }
     }
 }
