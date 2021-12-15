@@ -98,9 +98,9 @@ namespace SvgBlazor.Tests
 
             var e2 = new SvgStroke(e1);
 
-            Assert.Equal("green", e2.Color);
+            Assert.Equal("red", e2.Color);
             Assert.Equal("1 2 3", e2.DashArray);
-            Assert.Equal(2, e2.DashOffset);
+            Assert.Equal(2f, e2.DashOffset.ToFloat());
             Assert.Equal(0.5f, e2.Opacity.ToFloat());
             Assert.Equal(5, e2.MiterLimit);
             Assert.Equal(15f, e2.Width.ToFloat());

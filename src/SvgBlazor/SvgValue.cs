@@ -62,20 +62,6 @@ namespace SvgBlazor
 
         public float ToFloat() => _floatValue;
 
-        public void SetValue(float value, ValueUnit unit = ValueUnit.NoUnit)
-        {
-            _floatValue = value;
-            _unit = unit;
-            _valueType = ValueType.Float;
-        }
-
-        public void SetValue(string value)
-        {
-            _stringValue = value;
-            _unit = ValueUnit.NoUnit;
-            _valueType = ValueType.String;
-        }
-
         public override string ToString()
         {
             switch (_valueType)
@@ -102,6 +88,20 @@ namespace SvgBlazor
                 default:
                     return string.Empty;
             }
+        }
+
+        private void SetValue(float value, ValueUnit unit = ValueUnit.NoUnit)
+        {
+            _floatValue = value;
+            _unit = unit;
+            _valueType = ValueType.Float;
+        }
+
+        private void SetValue(string value)
+        {
+            _stringValue = value;
+            _unit = ValueUnit.NoUnit;
+            _valueType = ValueType.String;
         }
     }
 }

@@ -54,11 +54,11 @@ namespace SvgBlazor.Tests
         {
             var e1 = new SvgText()
             {
-                X = 1,
-                Y = 2,
-                ShiftX = 20,
-                ShiftY = 30,
-                TextLength = 123,
+                X = 1f,
+                Y = 2f,
+                ShiftX = 20f,
+                ShiftY = 30f,
+                TextLength = 123f,
                 Text = "Test string",
             };
 
