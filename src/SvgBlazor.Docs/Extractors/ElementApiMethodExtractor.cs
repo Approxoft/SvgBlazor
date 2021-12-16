@@ -3,53 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using SvgBlazor.Docs.Extensions;
+using SvgBlazor.Docs.Models;
 
-namespace SvgBlazor.Docs.Models
+namespace SvgBlazor.Docs.Extractors
 {
     public class ElementApiMethodExtractor
     {
-        public Dictionary<string, ElementApiMethod> Extract(Type type)
+        public IEnumerable<ElementApiMethod> Extract(Type type)
         {
             var dict = new Dictionary<string, ElementApiMethod>();
 
-            ListMethods(dict, type);
+            ExtractMethods(dict, type);
 
-            Console.WriteLine("Finish! after merge");
-            foreach (var d in dict)
-            {
-                Console.WriteLine(d.Key + " " + d.Value.Description);
-            }
-
-            return dict;
+            return dict.Select(p => p.Value);
         }
 
-        private void ListMethods(Dictionary<string, ElementApiMethod> dict, Type type)
+        private void ExtractMethods(Dictionary<string, ElementApiMethod> dict, Type type)
         {
             foreach (var e in type.GetInterfaces())
             {
-                Console.WriteLine("##Going to interface - start");
-                ListMethods(dict, e);
-
-                Console.WriteLine("Dict after merge");
-                foreach (var d in dict)
-                {
-                    Console.WriteLine(d.Key + " " + d.Value.Description);
-                }
-
-                Console.WriteLine("##Going to interface - end");
+                ExtractMethods(dict, e);
             }
 
             if (type.BaseType is not null)
             {
-                Console.WriteLine("##Going to base - start: " + type.BaseType.Name);
-                ListMethods(dict, type.BaseType);
-                Console.WriteLine("Dict after merge");
-                foreach (var d in dict)
-                {
-                    Console.WriteLine(d.Key + " " + d.Value.Description);
-                }
-
-                Console.WriteLine("##Going to base - end: " + type.BaseType.Name);
+                ExtractMethods(dict, type.BaseType);
             }
 
             foreach (var methodInfo in type.GetMethods(

@@ -1,11 +1,12 @@
 ﻿using SvgBlazor.Docs.Extensions;
-using SvgBlazor.Docs.Models;
+using SvgBlazor.Docs.Extractors;
 using System;
+using System.Linq;
 using Xunit;
 
 namespace SvgBlazor.Docs.Tests
 {
-    public class ElementApiMethodExtractorTests
+    public class ElementApiMethodExtractorTests : IDisposable
     {
         private ElementApiMethodExtractor _tested;
 
@@ -15,16 +16,16 @@ namespace SvgBlazor.Docs.Tests
         }
 
         [Fact]
-        public void ExtractsMethodDescriptionFromOverrideWhenVirtualAndOverridenDescriptionsArePresent()
+        public void TakesMethodDescriptionFromOverrideWhenVirtualAndOverridenDescriptionsArePresent()
         {
             const string xml = "<?xml version=\"1.0\"?>" +
                         "<doc>" +
                         "<assembly><name>SvgBlazor</name></assembly>" +
                         "<members>" +
-                        "   <member name=\"M:SvgBlazor.Docs.Tests.ElementApiMethodExtractorTests.BaseClass1.Method()\">" +
+                        "   <member name=\"M:SvgBlazor.Docs.Tests.ElementApiMethodExtractorTests.BaseClass1.Method\">" +
                         "       <summary>Method description from the base class.</summary>" +
                         "   </member>" +
-                        "   <member name=\"M:SvgBlazor.Docs.Tests.ElementApiMethodExtractorTests.Class1.Method()\">" +
+                        "   <member name=\"M:SvgBlazor.Docs.Tests.ElementApiMethodExtractorTests.Class1.Method\">" +
                         "       <summary>Method description from the class.</summary>" +
                         "   </member>" +
                         "</members>" +
@@ -32,19 +33,21 @@ namespace SvgBlazor.Docs.Tests
 
             ReflectionTypesExtensions.LoadXmlDocumentation(xml);
 
-            var result = _tested.Extract(typeof(Class1));
+            var result = _tested
+                .Extract(typeof(Class1))
+                .FirstOrDefault(m => m.Name == "Method");
 
-            Assert.Equal("Method description from the class.", result["Method()"].Description);
+            Assert.Equal("Method description from the class.", result.Description);
         }
 
         [Fact]
-        public void ExtractsMethodDescriptionFromVirtualWhenOverridenIsNotPresent()
+        public void TakesMethodDescriptionFromVirtualWhenOverridenIsNotPresent()
         {
             const string xml = "<?xml version=\"1.0\"?>" +
                         "<doc>" +
                         "<assembly><name>SvgBlazor</name></assembly>" +
                         "<members>" +
-                        "   <member name=\"M:SvgBlazor.Docs.Tests.ElementApiMethodExtractorTests.BaseClass1.Method()\">" +
+                        "   <member name=\"M:SvgBlazor.Docs.Tests.ElementApiMethodExtractorTests.BaseClass1.Method\">" +
                         "       <summary>Method description from the base class.</summary>" +
                         "   </member>" +
                         "</members>" +
@@ -52,62 +55,114 @@ namespace SvgBlazor.Docs.Tests
 
             ReflectionTypesExtensions.LoadXmlDocumentation(xml);
 
-            var result = _tested.Extract(typeof(Class1));
+            var result = _tested
+                .Extract(typeof(Class1))
+                .FirstOrDefault(m => m.Name == "Method");
 
-            Assert.Equal("Method description from the base class.", result["Method()"].Description);
+            Assert.Equal("Method description from the base class.", result.Description);
         }
 
-        // rozróżnianie Method oraz method z parametrem
-        // sprawdzanie z uzyciem interface'u: gdy jest w interface a nie ma nigdzie wyżej
-        // sprawdzanie czy jest w interface i w base class - to ma wziąć z baseclass
-        // sprawdzanie czy jest w interface i base class i w derived - to ma wziąć z derived
-        // sprawdzenie gdy:
-        /*
-        public interface IA0{
-	
-        }
-
-        public interface IA : IA0 {
-	
-        }
-
-        class Clas1 : IA, IA0 {
-	
-        }
-
-        class Clas2: Clas1, IA {
-        }
-         */
-
-        public class BaseClass1
+        [Fact]
+        public void TakesCorrectDescriptionWhenOverloadedMethodIsPresent()
         {
-            public virtual void Method()
-            {
-            }
+            const string xml = "<?xml version=\"1.0\"?>" +
+                        "<doc>" +
+                        "<assembly><name>SvgBlazor</name></assembly>" +
+                        "<members>" +
+                        "   <member name=\"M:SvgBlazor.Docs.Tests.ElementApiMethodExtractorTests.BaseClass1.Method1\">" +
+                        "       <summary>Method description from the base class.</summary>" +
+                        "   </member>" +
+                        "   <member name=\"M:SvgBlazor.Docs.Tests.ElementApiMethodExtractorTests.Class1.Method1(System.Boolean)\">" +
+                        "       <summary>Method description from the class.</summary>" +
+                        "   </member>" +
+                        "</members>" +
+                        "</doc>";
+
+            ReflectionTypesExtensions.LoadXmlDocumentation(xml);
+
+            var baseClassMethod = _tested
+                .Extract(typeof(Class1))
+                .FirstOrDefault(m => m.Name == "Method1");
+
+            var classMethod = _tested
+                .Extract(typeof(Class1))
+                .FirstOrDefault(m => m.Name == "Method1" && m.Parameters.DefaultIfEmpty("").First() == "System.Boolean flag");
+
+            Assert.Equal("Method description from the base class.", baseClassMethod.Description);
+            Assert.Equal("Method description from the class.", classMethod.Description);
+        }
+
+        [Fact]
+        public void TakesDescriptionFromInterfaceIfNoOtherIsProvided()
+        {
+            const string xml = "<?xml version=\"1.0\"?>" +
+                        "<doc>" +
+                        "<assembly><name>SvgBlazor</name></assembly>" +
+                        "<members>" +
+                        "   <member name=\"M:SvgBlazor.Docs.Tests.ElementApiMethodExtractorTests.IBaseClass.BaseClassInterfaceMethod\">" +
+                        "       <summary>Method description for BaseClassInterfaceMethod.</summary>" +
+                        "   </member>" +
+                        "</members>" +
+                        "</doc>";
+
+            ReflectionTypesExtensions.LoadXmlDocumentation(xml);
+
+            var method = _tested
+                .Extract(typeof(Class1))
+                .FirstOrDefault(m => m.Name == "BaseClassInterfaceMethod");
+
+            Assert.Equal("Method description for BaseClassInterfaceMethod.", method.Description);
+        }
+
+        [Fact]
+        public void TakesDescriptionFromBaseClassWhenInterfaceDescriptionIsPresent()
+        {
+            const string xml = "<?xml version=\"1.0\"?>" +
+                        "<doc>" +
+                        "<assembly><name>SvgBlazor</name></assembly>" +
+                        "<members>" +
+                        "   <member name=\"M:SvgBlazor.Docs.Tests.ElementApiMethodExtractorTests.IBaseClass.BaseClassInterfaceMethod\">" +
+                        "       <summary>Method description for BaseClassInterfaceMethod.</summary>" +
+                        "   </member>" +
+                        "   <member name=\"M:SvgBlazor.Docs.Tests.ElementApiMethodExtractorTests.BaseClass1.BaseClassInterfaceMethod\">" +
+                        "       <summary>Interface method description from the base class.</summary>" +
+                        "   </member>" +
+                        "</members>" +
+                        "</doc>";
+
+            ReflectionTypesExtensions.LoadXmlDocumentation(xml);
+
+            var method = _tested
+                .Extract(typeof(Class1))
+                .FirstOrDefault(m => m.Name == "BaseClassInterfaceMethod");
+
+            Assert.Equal("Interface method description from the base class.", method.Description);
+        }
+
+        public void Dispose()
+        {
+            ReflectionTypesExtensions.ClearLoadedXmlDocumentation();
+        }
+
+        public interface IBaseClass
+        {
+            public void BaseClassInterfaceMethod();
+        }
+
+        public class BaseClass1 : IBaseClass
+        {
+            public void Method1() { }
+
+            public void BaseClassInterfaceMethod() { }
+
+            public virtual void Method() { }
         }
 
         public class Class1 : BaseClass1
         {
-            public override void Method()
-            {   
-            }
+            public override void Method() { }
+
+            public void Method1(bool flag) { }
         }
     }
 }
-
-/*
- <member name="P:SvgBlazor.Interfaces.ISvgElement.X">
-            <summary>
-            Test desc from ISvgEm
-            </summary>
-        </member>
-
-
- <member name="M:SvgBlazor.SvgEventHandler.OnClickHandler(Microsoft.AspNetCore.Components.Web.MouseEventArgs)">
-            <summary>
-            OnClickHandler virtual test.
-            </summary>
-            <param name="args"></param>
-            <returns></returns>
-        </member>
- */
