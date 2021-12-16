@@ -26,5 +26,24 @@ namespace SvgBlazor.Tests
             Assert.Contains("3", element.GetAttribute("rx"));
             Assert.Contains("4", element.GetAttribute("ry"));
         }
+
+        [Fact]
+        public void CopyConstructor()
+        {
+            var e1 = new SvgEllipse()
+            {
+                CenterX = 1f,
+                CenterY = 2f,
+                RadiusX = 3f,
+                RadiusY = 4f,
+            };
+
+            var e2 = new SvgEllipse(e1);
+
+            Assert.Equal(1f, e2.CenterX.ToFloat());
+            Assert.Equal(2f, e2.CenterY.ToFloat());
+            Assert.Equal(3f, e2.RadiusX.ToFloat());
+            Assert.Equal(4f, e2.RadiusY.ToFloat());
+        }
     }
 }

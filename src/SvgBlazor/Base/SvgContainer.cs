@@ -11,6 +11,17 @@ namespace SvgBlazor
     {
         private readonly List<ISvgElement> _elements = new ();
 
+        public SvgContainer()
+        {
+        }
+
+        public SvgContainer(SvgContainer svgcontainer)
+            : base(svgcontainer)
+        {
+            MouseDown = svgcontainer.MouseDown;
+            OverElement = svgcontainer.OverElement;
+        }
+
         public bool MouseDown { get; private set; } = false;
 
         public ISvgElement OverElement { get; private set; }

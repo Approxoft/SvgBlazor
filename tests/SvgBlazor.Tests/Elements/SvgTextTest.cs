@@ -48,5 +48,28 @@ namespace SvgBlazor.Tests
             Assert.Contains(expected, element.GetAttribute("lengthAdjust"));
             Assert.Contains("Test string", element.TextContent);
         }
+
+        [Fact]
+        public void CopyConstructor()
+        {
+            var e1 = new SvgText()
+            {
+                X = 1f,
+                Y = 2f,
+                ShiftX = 20f,
+                ShiftY = 30f,
+                TextLength = 123f,
+                Text = "Test string",
+            };
+
+            var e2 = new SvgText(e1);
+
+            Assert.Equal(1f, e2.X.ToFloat());
+            Assert.Equal(2f, e2.Y.ToFloat());
+            Assert.Equal(20f, e2.ShiftX.ToFloat());
+            Assert.Equal(30f, e2.ShiftY.ToFloat());
+            Assert.Equal(123f, e2.TextLength.ToFloat());
+            Assert.Equal("Test string", e2.Text);
+        }
     }
 }

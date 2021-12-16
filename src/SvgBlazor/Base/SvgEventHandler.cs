@@ -8,6 +8,20 @@ namespace SvgBlazor
 {
     public class SvgEventHandler : ISvgEventHandler
     {
+        public SvgEventHandler()
+        {
+        }
+
+        public SvgEventHandler(SvgEventHandler svgeventhandler)
+        {
+            OnClick = svgeventhandler.OnClick;
+            OnMouseDown = svgeventhandler.OnMouseDown;
+            OnMouseMove = svgeventhandler.OnMouseMove;
+            OnMouseUp = svgeventhandler.OnMouseUp;
+            OnMouseOver = svgeventhandler.OnMouseOver;
+            OnMouseOut = svgeventhandler.OnMouseOut;
+        }
+
         public EventCallback<MouseEventArgs> OnClick { get; set; }
 
         public EventCallback<MouseEventArgs> OnMouseDown { get; set; }

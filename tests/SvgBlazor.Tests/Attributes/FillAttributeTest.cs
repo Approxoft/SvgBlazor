@@ -30,6 +30,23 @@ namespace SvgBlazor.Tests
             Assert.Contains("evenodd", element.GetAttribute("fill-rule"));
         }
 
+        [Fact]
+        public void CopyConstructor()
+        {
+            var e1 = new SvgFill()
+            {
+                Color = "green",
+                Opacity = 0.5f,
+                Rule = FillRule.EvenOdd,
+            };
+
+            var e2 = new SvgFill(e1);
+
+            Assert.Equal("green", e2.Color);
+            Assert.Equal(0.5f, e2.Opacity.ToFloat());
+            Assert.Equal(FillRule.EvenOdd, e2.Rule);
+        }
+
         private class DummyFillAttributesElement : SvgElement
         {
             public override string Tag() => "elementwithfill";

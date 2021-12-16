@@ -13,6 +13,19 @@ namespace SvgBlazor
     /// </summary>
     public partial class Svg : SvgContainer
     {
+        public Svg()
+        {
+        }
+
+        public Svg(Svg svg)
+            : base(svg)
+        {
+            Width = svg.Width;
+            Height = svg.Height;
+            ViewBoxWidth = svg.ViewBoxWidth;
+            ViewBoxHeight = svg.ViewBoxHeight;
+        }
+
         public float Width { get; set; }
 
         public float Height { get; set; }

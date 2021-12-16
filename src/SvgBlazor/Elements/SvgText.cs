@@ -11,6 +11,21 @@ namespace SvgBlazor
     /// </summary>
     public class SvgText : SvgElement
     {
+        public SvgText()
+        {
+        }
+
+        public SvgText(SvgText svgtext)
+            : base(svgtext)
+        {
+            Text = svgtext.Text;
+            ShiftX = svgtext.ShiftX;
+            ShiftY = svgtext.ShiftY;
+            Rotate = svgtext.Rotate;
+            LengthAdjust = svgtext.LengthAdjust;
+            TextLength = svgtext.TextLength;
+        }
+
         /// <summary>
         /// Gets or sets the content.
         /// </summary>

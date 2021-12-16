@@ -10,6 +10,18 @@ namespace SvgBlazor
     /// </summary>
     public class SvgCircle : SvgElement
     {
+        public SvgCircle()
+        {
+        }
+
+        public SvgCircle(SvgCircle svgcircle)
+            : base(svgcircle)
+        {
+            CenterX = svgcircle.CenterX;
+            CenterY = svgcircle.CenterY;
+            Radius = svgcircle.Radius;
+        }
+
         /// <summary>
         /// The x-axis coordinate of the center of the circle.
         /// </summary>

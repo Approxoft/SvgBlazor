@@ -124,8 +124,40 @@ namespace SvgBlazor.Tests
             Assert.True(elementEventHandled);
         }
 
+        [Fact]
+        public void CopyConstructor()
+        {
+            var e1 = new DummyElement()
+            {
+                X = 1f,
+                Y = 2f,
+                Id = "3",
+                Class = "4",
+                Style = "5",
+                Fill = new SvgFill() { Color = "red" },
+            };
+
+            var e2 = new DummyElement(e1);
+
+            Assert.Equal(1f, e2.X.ToFloat());
+            Assert.Equal(2f, e2.Y.ToFloat());
+            Assert.Equal("3", e2.Id);
+            Assert.Equal("4", e2.Class);
+            Assert.Equal("5", e2.Style);
+            Assert.Equal("red", e2.Fill.Color);
+        }
+
         private class DummyElement : SvgElement
         {
+            public DummyElement()
+            {
+            }
+
+            public DummyElement(DummyElement dummyelement)
+                : base(dummyelement)
+            {
+            }
+
             public override string Tag() => "dummy";
         }
     }
