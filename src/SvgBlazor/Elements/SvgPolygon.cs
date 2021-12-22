@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Components;
@@ -13,6 +14,8 @@ namespace SvgBlazor
     /// </summary>
     public class SvgPolygon : SvgElement
     {
+        private readonly NumberFormatInfo _numberFormatInfo = new () { NumberDecimalSeparator = "." };
+
         private List<PointF> _points = new ();
 
         private string _pointsString;
@@ -72,9 +75,9 @@ namespace SvgBlazor
                 }
 
                 var point = _points[i];
-                sb.Append(point.X);
+                sb.Append(point.X.ToString(_numberFormatInfo));
                 sb.Append(' ');
-                sb.Append(point.Y);
+                sb.Append(point.Y.ToString(_numberFormatInfo));
             }
 
             _pointsString = sb.ToString();
