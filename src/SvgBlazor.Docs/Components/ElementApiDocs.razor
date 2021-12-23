@@ -54,30 +54,18 @@
     [Parameter]
     public Type ElementType { get; set; }
 
-    private ElementApiMethodExtractor elementApiMethodExtractor = new ();
-
-    private IEnumerable<ElementApiProperty> GetElementApiProperties()
-    {
-        foreach (var propertyInfo in ElementType.GetProperties(
-            BindingFlags.Instance |
-            BindingFlags.Static |
-            BindingFlags.Public))
-        {
-            yield return new ElementApiProperty
-            {
-                Name = propertyInfo.Name,
-                Type = propertyInfo.PropertyType.Name,
-                DeclaringType = propertyInfo.DeclaringType.Name,
-                Description = propertyInfo.GetDocumentation(),
-            };
-        };
-    }
+    private ElementApiExtractor elementApiExtractor = new ();
 
     private IEnumerable<ElementApiMethod> GetElementApiMethods()
     {
-        return elementApiMethodExtractor.ExtractMethods(ElementType);
+        return elementApiExtractor.ExtractApiMethods(ElementType);
+    }
+
+    private IEnumerable<ElementApiProperty> GetElementApiProperties()
+    {
+        return elementApiExtractor.ExtractApiProperties(ElementType);
     }
 
     private IEnumerable<string> ParametersToString(ParameterInfo[] parameters) =>
-        parameters.Select(x => (x.ParameterType.FullName + " " + x.Name)).ToArray();
+    parameters.Select(x => (x.ParameterType.FullName + " " + x.Name)).ToArray();
 }

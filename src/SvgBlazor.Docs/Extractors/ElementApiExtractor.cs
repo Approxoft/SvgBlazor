@@ -7,21 +7,22 @@ using SvgBlazor.Docs.Models;
 
 namespace SvgBlazor.Docs.Extractors
 {
-    public class ElementApiMethodExtractor
+    public class ElementApiExtractor
     {
-        public IEnumerable<ElementApiMethod> ExtractMethods(Type type)
+        public IEnumerable<ElementApiMethod> ExtractApiMethods(Type type)
         {
             var dict = new Dictionary<string, ElementApiMethod>();
 
-            Get(dict, type, () =>
+            Get(dict, type, t =>
             {
-                foreach (var methodInfo in type.GetMethods(
+                foreach (var methodInfo in t.GetMethods(
                     BindingFlags.Instance |
                     BindingFlags.Static |
                     BindingFlags.Public).Where(m => !m.IsSpecialName))
                 {
                     var signature = methodInfo.GetSignature();
                     var element = GetElementApiMethod(methodInfo);
+
                     AddOrReplaceEntry(signature, dict, element);
                 }
             });
@@ -29,7 +30,28 @@ namespace SvgBlazor.Docs.Extractors
             return dict.Select(p => p.Value);
         }
 
-        private void Get<T>(Dictionary<string, T> dict, Type type, Action action)
+        public IEnumerable<ElementApiProperty> ExtractApiProperties(Type type)
+        {
+            var dict = new Dictionary<string, ElementApiProperty>();
+
+            Get(dict, type, t =>
+            {
+                foreach (var propertyInfo in t.GetProperties(
+                    BindingFlags.Instance |
+                    BindingFlags.Static |
+                    BindingFlags.Public))
+                {
+                    var name = propertyInfo.Name;
+                    var element = GetElementApiProperty(propertyInfo);
+
+                    AddOrReplaceEntry(name, dict, element);
+                }
+            });
+
+            return dict.Select(p => p.Value);
+        }
+
+        private void Get<T>(Dictionary<string, T> dict, Type type, Action<Type> action)
             where T : IElementApiElement
         {
             foreach (var e in type.GetInterfaces())
@@ -42,7 +64,7 @@ namespace SvgBlazor.Docs.Extractors
                 Get(dict, type.BaseType, action);
             }
 
-            action?.Invoke();
+            action?.Invoke(type);
         }
 
         private void AddOrReplaceEntry<T>(
@@ -67,7 +89,16 @@ namespace SvgBlazor.Docs.Extractors
                 Description = info.GetDocumentation(),
             };
 
+        private ElementApiProperty GetElementApiProperty(PropertyInfo propertyInfo) =>
+            new ElementApiProperty
+            {
+                Name = propertyInfo.Name,
+                Type = propertyInfo.PropertyType.Name,
+                DeclaringType = propertyInfo.DeclaringType.Name,
+                Description = propertyInfo.GetDocumentation(),
+            };
+
         private IEnumerable<string> ParametersToString(ParameterInfo[] parameters) =>
-            parameters.Select(x => x.ParameterType.FullName + " " + x.Name).ToArray();
+                parameters.Select(x => x.ParameterType.FullName + " " + x.Name).ToArray();
     }
 }
