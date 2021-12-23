@@ -14,15 +14,15 @@ namespace SvgBlazor.Tests
             var comp = RenderComponent<SvgComponent>();
 
             var polygon = new SvgPolygon();
-            polygon.AddPoint(new PointF(0, 0));
-            polygon.AddPoint(new PointF(200, 200));
+            polygon.AddPoint(new PointF(0, 0.1f));
+            polygon.AddPoint(new PointF(200, 200.01f));
 
             comp.InvokeAsync(() => comp.Instance.Add(polygon));
 
             comp.Render();
 
             var element = comp.Find("polygon");
-            Assert.Equal("0 0 200 200", element.GetAttribute("points"));
+            Assert.Equal("0 0.1 200 200.01", element.GetAttribute("points"));
         }
 
         [Fact]
