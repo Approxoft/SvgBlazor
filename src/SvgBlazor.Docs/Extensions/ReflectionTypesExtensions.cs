@@ -69,14 +69,14 @@ namespace SvgBlazor.Docs.Extensions
 
         public static string GetSignature(this MethodInfo methodInfo)
         {
-            string parameters = GetParameters(methodInfo);
+            string parameters = GetParameterTypes(methodInfo);
 
             return $"{methodInfo.Name}({parameters})";
         }
 
         public static string GetDocumentation(this MethodInfo methodInfo)
         {
-            string parameters = GetParameters(methodInfo);
+            string parameters = GetParameterTypes(methodInfo);
 
             string key = "M:"
                 + FormatKeyString(methodInfo.DeclaringType.FullName, methodInfo.Name)
@@ -95,7 +95,7 @@ namespace SvgBlazor.Docs.Extensions
                 string.Empty).Trim();
         }
 
-        private static string GetParameters(MethodInfo methodInfo)
+        private static string GetParameterTypes(MethodInfo methodInfo)
         {
             var parametersTypes = methodInfo.GetParameters().Select(x => x.ParameterType.FullName).ToArray();
             return string.Join(",", parametersTypes);
