@@ -9,47 +9,52 @@ namespace SvgBlazor.Docs.Extractors
 {
     public class ElementApiMethodExtractor
     {
-        public IEnumerable<ElementApiMethod> Extract(Type type)
+        public IEnumerable<ElementApiMethod> ExtractMethods(Type type)
         {
             var dict = new Dictionary<string, ElementApiMethod>();
 
-            ExtractMethods(dict, type);
+            Get(dict, type, () =>
+            {
+                foreach (var methodInfo in type.GetMethods(
+                    BindingFlags.Instance |
+                    BindingFlags.Static |
+                    BindingFlags.Public).Where(m => !m.IsSpecialName))
+                {
+                    var signature = methodInfo.GetSignature();
+                    var element = GetElementApiMethod(methodInfo);
+                    AddOrReplaceEntry(signature, dict, element);
+                }
+            });
 
             return dict.Select(p => p.Value);
         }
 
-        private void ExtractMethods(Dictionary<string, ElementApiMethod> dict, Type type)
+        private void Get<T>(Dictionary<string, T> dict, Type type, Action action)
+            where T : IElementApiElement
         {
             foreach (var e in type.GetInterfaces())
             {
-                ExtractMethods(dict, e);
+                Get(dict, e, action);
             }
 
             if (type.BaseType is not null)
             {
-                ExtractMethods(dict, type.BaseType);
+                Get(dict, type.BaseType, action);
             }
 
-            foreach (var methodInfo in type.GetMethods(
-            BindingFlags.Instance |
-            BindingFlags.Static |
-            BindingFlags.Public).Where(m => !m.IsSpecialName))
-            {
-                AddOrReplaceEntry(dict, methodInfo);
-            }
+            action?.Invoke();
         }
 
-        private void AddOrReplaceEntry(
-            Dictionary<string, ElementApiMethod> dictionary,
-            MethodInfo methodInfo)
+        private void AddOrReplaceEntry<T>(
+            string key,
+            Dictionary<string, T> dictionary,
+            T element)
+            where T : IElementApiElement
         {
-            var signature = methodInfo.GetSignature();
-            var element = GetElementApiMethod(methodInfo);
-
-            if ((dictionary.ContainsKey(signature) && !string.IsNullOrWhiteSpace(element.Description)) ||
-                !dictionary.ContainsKey(signature))
+            if ((dictionary.ContainsKey(key) && !string.IsNullOrWhiteSpace(element.Description)) ||
+                !dictionary.ContainsKey(key))
             {
-                dictionary[signature] = element;
+                dictionary[key] = element;
             }
         }
 

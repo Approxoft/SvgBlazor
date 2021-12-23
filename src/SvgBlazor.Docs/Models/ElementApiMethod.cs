@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SvgBlazor.Docs.Models
 {
-    public class ElementApiMethod
+    public class ElementApiMethod : IElementApiElement
     {
         public string Name { get; set; }
 

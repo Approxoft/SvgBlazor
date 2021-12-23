@@ -75,7 +75,7 @@
 
     private IEnumerable<ElementApiMethod> GetElementApiMethods()
     {
-        return elementApiMethodExtractor.Extract(ElementType);
+        return elementApiMethodExtractor.ExtractMethods(ElementType);
     }
 
     private IEnumerable<string> ParametersToString(ParameterInfo[] parameters) =>

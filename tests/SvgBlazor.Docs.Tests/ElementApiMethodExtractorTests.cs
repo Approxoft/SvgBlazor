@@ -34,7 +34,7 @@ namespace SvgBlazor.Docs.Tests
             ReflectionTypesExtensions.LoadXmlDocumentation(xml);
 
             var result = _tested
-                .Extract(typeof(Class1))
+                .ExtractMethods(typeof(Class1))
                 .FirstOrDefault(m => m.Name == "Method");
 
             Assert.Equal("Method description from the class.", result.Description);
@@ -56,7 +56,7 @@ namespace SvgBlazor.Docs.Tests
             ReflectionTypesExtensions.LoadXmlDocumentation(xml);
 
             var result = _tested
-                .Extract(typeof(Class1))
+                .ExtractMethods(typeof(Class1))
                 .FirstOrDefault(m => m.Name == "Method");
 
             Assert.Equal("Method description from the base class.", result.Description);
@@ -81,11 +81,11 @@ namespace SvgBlazor.Docs.Tests
             ReflectionTypesExtensions.LoadXmlDocumentation(xml);
 
             var baseClassMethod = _tested
-                .Extract(typeof(Class1))
+                .ExtractMethods(typeof(Class1))
                 .FirstOrDefault(m => m.Name == "Method1");
 
             var classMethod = _tested
-                .Extract(typeof(Class1))
+                .ExtractMethods(typeof(Class1))
                 .FirstOrDefault(m => m.Name == "Method1" && m.Parameters.DefaultIfEmpty("").First() == "System.Boolean flag");
 
             Assert.Equal("Method description from the base class.", baseClassMethod.Description);
@@ -108,7 +108,7 @@ namespace SvgBlazor.Docs.Tests
             ReflectionTypesExtensions.LoadXmlDocumentation(xml);
 
             var method = _tested
-                .Extract(typeof(Class1))
+                .ExtractMethods(typeof(Class1))
                 .FirstOrDefault(m => m.Name == "BaseClassInterfaceMethod");
 
             Assert.Equal("Method description for BaseClassInterfaceMethod.", method.Description);
@@ -133,7 +133,7 @@ namespace SvgBlazor.Docs.Tests
             ReflectionTypesExtensions.LoadXmlDocumentation(xml);
 
             var method = _tested
-                .Extract(typeof(Class1))
+                .ExtractMethods(typeof(Class1))
                 .FirstOrDefault(m => m.Name == "BaseClassInterfaceMethod");
 
             Assert.Equal("Interface method description from the base class.", method.Description);
