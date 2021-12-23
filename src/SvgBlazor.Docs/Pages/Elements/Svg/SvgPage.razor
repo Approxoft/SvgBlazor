@@ -1,4 +1,6 @@
 ﻿@page "/elements/svg"
+@using System.Drawing;
+@using System.Timers;
 
 <ExampleTitle>Svg</ExampleTitle>
 <ElementDescription ElementType="@typeof(Svg)" />
@@ -8,67 +10,85 @@
 <ElementApiDocs ElementType="@typeof(Svg)" />
 
 @code {
+    class MyPolygon : SvgPolygon
+    {
+        List<PointF> _points = new();
+        List<PointF> _vects = new();
+
+        public void AddRandomPoint()
+        {
+            _points.Add(
+                new PointF(new Random().Next(100, 300), new Random().Next(100, 300))
+            );
+
+            _vects.Add(
+                new PointF(
+                    ((float)new Random().NextDouble()) * 4f - 2f,
+                    ((float)new Random().NextDouble()) * 4f - 2f));
+
+            Points = _points;
+        }
+
+        public void UpdatePoints()
+        {
+            for (int i=0; i<_points.Count; i++)
+            {
+                float new_x = _points[i].X + _vects[i].X;
+                float new_y = _points[i].Y + _vects[i].Y;
+
+                if (new_x>500 || new_x < 0)
+                {
+                    _vects[i] = new PointF(_vects[i].X * -1f, _vects[i].Y);
+                    new_x = _points[i].X + _vects[i].X;
+                }
+
+                if (new_y > 500 || new_y < 0)
+                {
+                    _vects[i] = new PointF(_vects[i].X, _vects[i].Y * -1);
+                    new_y = _points[i].Y + _vects[i].Y;
+                }
+                _points[i] = new PointF(new_x, new_y);
+            }
+
+            Points = _points;
+        }
+    }
+
     SvgComponent svgref;
+    private Timer _timer = new Timer(50.0);
+    List<MyPolygon> _polygons = new();
+    bool _clicked = false;
+
+    protected override void OnInitialized()
+    {
+        var timer = new Timer();
+        timer.Elapsed += new ElapsedEventHandler(UpdatePolygons);
+        timer.Interval = 30;
+        timer.Enabled = true;
+    }
 
     private void OnAddElement()
     {
-        SvgElement c;
+        var polygon = new MyPolygon();
+        polygon.Stroke = new SvgStroke { Color = "black", Opacity = 0.5f, Width = 3f, };
+        polygon.Fill = new SvgFill { Color = "#2e1", Opacity = 0.5f, };
+        polygon.AddRandomPoint();
+        polygon.AddRandomPoint();
+        polygon.AddRandomPoint();
+        _polygons.Add(polygon);
+        svgref.Add(polygon);
+    }
 
-        var id = new Random().Next(0, 3);
-        switch (id)
+    private async void UpdatePolygons(object source, ElapsedEventArgs e)
+    {
+        Console.WriteLine("Update");
+
+        foreach (var p in _polygons)
         {
-            case 0:
-                c = new SvgCircle()
-                {
-                    CenterX = new Random().Next(25, 475),
-                    CenterY = new Random().Next(25, 475),
-                    Radius = new Random().Next(5, 40),
-                };
-                break;
-            case 1:
-                c = new SvgLine()
-                {
-                    X1 = new Random().Next(25, 475),
-                    Y1 = new Random().Next(25, 475),
-                    X2 = new Random().Next(25, 475),
-                    Y2 = new Random().Next(25, 475),
-                };
-                break;
-            default:
-                c = new SvgText()
-                {
-                    X = new Random().Next(25, 475),
-                    Y = new Random().Next(25, 475),
-                    Text = "Test",
-                };
-                break;
+            p.UpdatePoints();
         }
 
-        SvgContainer g = new SvgG();
-
-        c.OnClick = EventCallback.Factory.Create<MouseEventArgs>(c, async (args) =>
-        {
-            Console.WriteLine("Element clicked: " + c.Tag());
-            Console.WriteLine("Svg container (g) bounding box: " + await svgref.GetBoundingBox(g));
-            Console.WriteLine("Element bounding box: " + await svgref.GetBoundingBox(c));
-        });
-
-        var colors = new string[] { "red", "green", "blue", "yellow", "purple" };
-
-        c.Fill = new SvgFill
-        {
-            Color = colors[new Random().Next(0, colors.Length)],
-            Opacity = (float)new Random().NextDouble()
-        };
-
-        c.Stroke = new SvgStroke
-        {
-            Color = colors[new Random().Next(0, colors.Length)],
-            Width = new Random().Next(1, 5),
-        };
-
-        g.Add(c);
-        svgref.Add(g);
+        await InvokeAsync(StateHasChanged);
     }
 
     private void OnSvgClicked(MouseEventArgs args)
