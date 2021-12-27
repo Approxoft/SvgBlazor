@@ -86,7 +86,7 @@ namespace SvgBlazor.Docs.Tests
         }
 
         [Fact]
-        public void TakesDescriptionFromInterfaceIfNoOtherIsProvided()
+        public void TakesMethodDescriptionFromInterfaceIfNoOtherIsProvided()
         {
             const string xml = "<?xml version=\"1.0\"?>" +
                         "<doc>" +
@@ -108,7 +108,7 @@ namespace SvgBlazor.Docs.Tests
         }
 
         [Fact]
-        public void TakesDescriptionFromBaseClassWhenDescriptionInInterfaceIsPresent()
+        public void TakesMethodDescriptionFromBaseClassWhenDescriptionInInterfaceIsPresent()
         {
             const string xml = "<?xml version=\"1.0\"?>" +
                         "<doc>" +
