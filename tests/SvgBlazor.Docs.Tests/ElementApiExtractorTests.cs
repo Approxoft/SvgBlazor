@@ -56,7 +56,7 @@ namespace SvgBlazor.Docs.Tests
         }
 
         [Fact]
-        public void TakesCorrectDescriptionWhenOverloadedMethodIsPresent()
+        public void TakesAppropriateDescriptionWhenOverloadedMethodIsPresent()
         {
             const string xml = "<?xml version=\"1.0\"?>" +
                         "<doc>" +
