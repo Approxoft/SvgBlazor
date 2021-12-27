@@ -70,7 +70,6 @@ namespace SvgBlazor.Docs.Extensions
         public static string GetSignature(this MethodInfo methodInfo)
         {
             string parameters = GetParameterTypes(methodInfo);
-
             return $"{methodInfo.Name}({parameters})";
         }
 
@@ -97,7 +96,11 @@ namespace SvgBlazor.Docs.Extensions
 
         private static string GetParameterTypes(MethodInfo methodInfo)
         {
-            var parametersTypes = methodInfo.GetParameters().Select(x => x.ParameterType.FullName).ToArray();
+            var parametersTypes = methodInfo
+                .GetParameters()
+                .Select(x => x.ParameterType.FullName)
+                .ToArray();
+
             return string.Join(",", parametersTypes);
         }
 
