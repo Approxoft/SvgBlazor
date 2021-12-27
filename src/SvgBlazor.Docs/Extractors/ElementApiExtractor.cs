@@ -7,9 +7,9 @@ using SvgBlazor.Docs.Models;
 
 namespace SvgBlazor.Docs.Extractors
 {
-    public class ElementApiExtractor
+    public static class ElementApiExtractor
     {
-        public IEnumerable<ElementApiMethod> ExtractApiMethods(Type type)
+        public static IEnumerable<ElementApiMethod> ExtractApiMethods(Type type)
         {
             var dict = new Dictionary<string, ElementApiMethod>();
 
@@ -30,7 +30,7 @@ namespace SvgBlazor.Docs.Extractors
             return dict.Select(p => p.Value);
         }
 
-        public IEnumerable<ElementApiProperty> ExtractApiProperties(Type type)
+        public static IEnumerable<ElementApiProperty> ExtractApiProperties(Type type)
         {
             var dict = new Dictionary<string, ElementApiProperty>();
 
@@ -51,7 +51,7 @@ namespace SvgBlazor.Docs.Extractors
             return dict.Select(p => p.Value);
         }
 
-        private void Get<T>(Dictionary<string, T> dict, Type type, Action<Type> action)
+        private static void Get<T>(Dictionary<string, T> dict, Type type, Action<Type> action)
             where T : IElementApiElement
         {
             foreach (var e in type.GetInterfaces())
@@ -67,7 +67,7 @@ namespace SvgBlazor.Docs.Extractors
             action?.Invoke(type);
         }
 
-        private void AddOrReplaceEntry<T>(
+        private static void AddOrReplaceEntry<T>(
             string key,
             Dictionary<string, T> dictionary,
             T element)
@@ -80,7 +80,7 @@ namespace SvgBlazor.Docs.Extractors
             }
         }
 
-        private ElementApiMethod GetElementApiMethod(MethodInfo info) =>
+        private static ElementApiMethod GetElementApiMethod(MethodInfo info) =>
             new ElementApiMethod
             {
                 Name = info.Name,
@@ -89,7 +89,7 @@ namespace SvgBlazor.Docs.Extractors
                 Description = info.GetDocumentation(),
             };
 
-        private ElementApiProperty GetElementApiProperty(PropertyInfo propertyInfo) =>
+        private static ElementApiProperty GetElementApiProperty(PropertyInfo propertyInfo) =>
             new ElementApiProperty
             {
                 Name = propertyInfo.Name,
@@ -98,7 +98,7 @@ namespace SvgBlazor.Docs.Extractors
                 Description = propertyInfo.GetDocumentation(),
             };
 
-        private IEnumerable<string> ParametersToString(ParameterInfo[] parameters) =>
-                parameters.Select(x => x.ParameterType.FullName + " " + x.Name).ToArray();
+        private static IEnumerable<string> ParametersToString(ParameterInfo[] parameters) =>
+            parameters.Select(x => x.ParameterType.FullName + " " + x.Name).ToArray();
     }
 }
