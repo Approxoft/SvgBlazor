@@ -29,7 +29,7 @@ namespace SvgBlazor.Docs.Tests
                         "   <member name=\"P:SvgBlazor.Docs.Tests.DummyClass.DummyProperty\">" +
                         "       <summary>Property summary.</summary>" +
                         "   </member>" +
-                        "   <member name=\"M:SvgBlazor.Docs.Tests.DummyClass.DummyMethod()\">" +
+                        "   <member name=\"M:SvgBlazor.Docs.Tests.DummyClass.DummyMethod\">" +
                         "       <summary>Method summary.</summary>" +
                         "   </member>" +
                         "   <member name=\"M:SvgBlazor.Docs.Tests.DummyClass.DummyMethodWithParameters(System.Single,System.Single)\">" +

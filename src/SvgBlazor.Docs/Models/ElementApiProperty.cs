@@ -1,6 +1,6 @@
 namespace SvgBlazor.Docs.Models
 {
-    public class ElementApiProperty
+    public class ElementApiProperty : IElementApiElement
     {
         public string Name { get; set; }
 

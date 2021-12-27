@@ -2,6 +2,7 @@
 @using System.Reflection
 @using SvgBlazor.Docs.Models
 @using SvgBlazor.Docs.Extensions
+@using SvgBlazor.Docs.Extractors
 
 <h2>@ElementType.Name API</h2>
 <h3>Properties</h3>
@@ -53,38 +54,14 @@
     [Parameter]
     public Type ElementType { get; set; }
 
-    private IEnumerable<ElementApiProperty> GetElementApiProperties()
-    {
-        foreach (var propertyInfo in ElementType.GetProperties(
-            BindingFlags.Instance |
-            BindingFlags.Static |
-            BindingFlags.Public))
-        {
-            yield return new ElementApiProperty
-            {
-                Name = propertyInfo.Name,
-                Type = propertyInfo.PropertyType.Name,
-                DeclaringType = propertyInfo.DeclaringType.Name,
-                Description = propertyInfo.GetDocumentation(),
-            };
-        };
-    }
-
     private IEnumerable<ElementApiMethod> GetElementApiMethods()
     {
-        foreach (var methodInfo in ElementType.GetMethods(
-            BindingFlags.Instance |
-            BindingFlags.Static |
-            BindingFlags.Public).Where(m => !m.IsSpecialName))
-        {
-            yield return new ElementApiMethod
-            {
-                Name = methodInfo.Name,
-                Parameters = ParametersToString(methodInfo.GetParameters()),
-                ReturnValue = methodInfo.ReturnType.Name,
-                Description = methodInfo.GetDocumentation(),
-            };
-        };
+        return ElementApiExtractor.ExtractApiMethods(ElementType);
+    }
+
+    private IEnumerable<ElementApiProperty> GetElementApiProperties()
+    {
+        return ElementApiExtractor.ExtractApiProperties(ElementType);
     }
 
     private IEnumerable<string> ParametersToString(ParameterInfo[] parameters) =>

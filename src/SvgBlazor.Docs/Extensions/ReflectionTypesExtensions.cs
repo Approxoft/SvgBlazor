@@ -55,6 +55,11 @@ namespace SvgBlazor.Docs.Extensions
             return StripXmlTags(documentation);
         }
 
+        public static void ClearLoadedXmlDocumentation()
+        {
+            LoadedXmlDocumentation.Clear();
+        }
+
         public static string GetDocumentation(this PropertyInfo propertyInfo)
         {
             string key = "P:" + FormatKeyString(propertyInfo.DeclaringType.FullName, propertyInfo.Name);
@@ -62,16 +67,22 @@ namespace SvgBlazor.Docs.Extensions
             return StripXmlTags(documentation);
         }
 
+        public static string GetSignature(this MethodInfo methodInfo)
+        {
+            string parameters = GetParameterTypes(methodInfo);
+            return $"{methodInfo.Name}({parameters})";
+        }
+
         public static string GetDocumentation(this MethodInfo methodInfo)
         {
-            var parametersTypes = methodInfo.GetParameters().Select(x => x.ParameterType.FullName).ToArray();
-            string parameters = string.Join(",", parametersTypes);
+            string parameters = GetParameterTypes(methodInfo);
 
             string key = "M:"
                 + FormatKeyString(methodInfo.DeclaringType.FullName, methodInfo.Name)
-                + $"({parameters})";
+                + (parameters.Length == 0 ? string.Empty : $"({parameters})");
 
             LoadedXmlDocumentation.TryGetValue(key, out string documentation);
+
             return StripXmlTags(documentation);
         }
 
@@ -81,6 +92,16 @@ namespace SvgBlazor.Docs.Extensions
                 xml ?? string.Empty,
                 @"<[^>]+>",
                 string.Empty).Trim();
+        }
+
+        private static string GetParameterTypes(MethodInfo methodInfo)
+        {
+            var parametersTypes = methodInfo
+                .GetParameters()
+                .Select(x => x.ParameterType.FullName)
+                .ToArray();
+
+            return string.Join(",", parametersTypes);
         }
 
         private static string FormatKeyString(string typeFullNameString, string memberNameString)
