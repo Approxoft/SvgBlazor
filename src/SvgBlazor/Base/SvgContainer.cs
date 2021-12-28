@@ -28,7 +28,7 @@ namespace SvgBlazor
         public bool MouseDown { get; private set; } = false;
 
         /// <summary>
-        /// Gets the element the mouse cursor is currently over.
+        /// Gets the element that the mouse cursor is currently over.
         /// </summary>
         public ISvgElement OverElement { get; private set; }
 
