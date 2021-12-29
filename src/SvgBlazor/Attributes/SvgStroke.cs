@@ -1,13 +1,14 @@
 ﻿using System;
 using Microsoft.AspNetCore.Components.Rendering;
 using SvgBlazor.Extensions;
+using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
     /// <summary>
     /// The SvgStroke class is responsible for providing the paint of the outline of an svg element.
     /// </summary>
-    public class SvgStroke
+    public class SvgStroke : ISvgAttribute
     {
         public SvgStroke()
         {

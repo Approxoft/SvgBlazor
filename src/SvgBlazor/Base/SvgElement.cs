@@ -31,14 +31,29 @@ namespace SvgBlazor
 
         public ElementReference ElementReference { get; set; }
 
+        /// <summary>
+        /// Gets or sets the element id.
+        /// </summary>
         public string Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the element class.
+        /// </summary>
         public string Class { get; set; }
 
+        /// <summary>
+        /// Gets or sets the element style.
+        /// </summary>
         public string Style { get; set; }
 
+        /// <summary>
+        /// Gets or sets the element fill.
+        /// </summary>
         public SvgFill Fill { get; set; } = new ();
 
+        /// <summary>
+        /// Gets or sets the element stroke.
+        /// </summary>
         public SvgStroke Stroke { get; set; } = new ();
 
         public abstract string Tag();

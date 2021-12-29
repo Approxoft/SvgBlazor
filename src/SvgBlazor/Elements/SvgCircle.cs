@@ -23,7 +23,7 @@ namespace SvgBlazor
         }
 
         /// <summary>
-        /// The x-axis coordinate of the center of the circle.
+        /// Gets or sets the x-axis coordinate of the center of the circle.
         /// </summary>
         public SvgValue CenterX
         {
@@ -32,7 +32,7 @@ namespace SvgBlazor
         }
 
         /// <summary>
-        /// The y-axis coordinate of the center of the circle.
+        /// Gets or sets the y-axis coordinate of the center of the circle.
         /// </summary>
         public SvgValue CenterY
         {
@@ -41,7 +41,7 @@ namespace SvgBlazor
         }
 
         /// <summary>
-        /// The radius of the circle.
+        /// Gets or sets the radius of the circle.
         /// </summary>
         public SvgValue Radius { get; set; }
 

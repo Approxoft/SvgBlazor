@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Rendering;
@@ -22,8 +22,14 @@ namespace SvgBlazor
             OverElement = svgcontainer.OverElement;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the mouse is down.
+        /// </summary>
         public bool MouseDown { get; private set; } = false;
 
+        /// <summary>
+        /// Gets the element that the mouse cursor is currently over.
+        /// </summary>
         public ISvgElement OverElement { get; private set; }
 
         public ISvgContainer Add(ISvgElement element)

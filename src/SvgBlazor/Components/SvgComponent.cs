@@ -18,9 +18,15 @@ namespace SvgBlazor
 
         public SvgComponent() => svg = new (this);
 
+        /// <summary>
+        /// Gets or sets the width of the svg element.
+        /// </summary>
         [Parameter]
         public float Width { get; set; }
 
+        /// <summary>
+        /// Gets or sets the height of the svg element.
+        /// </summary>
         [Parameter]
         public float Height { get; set; }
 
