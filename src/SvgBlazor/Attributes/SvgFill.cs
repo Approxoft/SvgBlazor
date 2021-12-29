@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Components.Rendering;
 using SvgBlazor.Extensions;
+using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
     /// <summary>
     /// The SvgFill determines how the interior of a given SVG element is painted.
     /// </summary>
-    public class SvgFill
+    public class SvgFill : ISvgAttribute
     {
         public SvgFill()
         {

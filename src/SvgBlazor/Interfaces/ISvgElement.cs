@@ -34,7 +34,7 @@ namespace SvgBlazor.Interfaces
         void BuildElement(RenderTreeBuilder builder);
 
         /// <summary>
-        /// Allows to perform additional steps when building this element.
+        /// Allows to perform additional steps when building this element. The method is called just after adding attributes and before reference capture.
         /// </summary>
         /// <param name="builder">RenderTreeBuilder object to be used during the build process.</param>
         void BuildElementAdditionalSteps(RenderTreeBuilder builder);
