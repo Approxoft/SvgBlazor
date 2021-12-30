@@ -9,6 +9,16 @@ namespace SvgBlazor.Docs.Extractors
 {
     public static class ElementApiExtractor
     {
+        private static readonly List<string> SignaturesToFilterOut = new List<string>
+        {
+            "GetType()",
+            "ToString()",
+            "Equals(System.Object)",
+            "Equals(System.Object,System.Object)",
+            "ReferenceEquals(System.Object,System.Object)",
+            "GetHashCode()",
+        };
+
         public static IEnumerable<ElementApiMethod> ExtractApiMethods(Type type)
         {
             var dict = new Dictionary<string, ElementApiMethod>();
@@ -21,6 +31,11 @@ namespace SvgBlazor.Docs.Extractors
                     BindingFlags.Public).Where(m => !m.IsSpecialName))
                 {
                     var signature = methodInfo.GetSignature();
+                    if (SignaturesToFilterOut.Contains(signature))
+                    {
+                        continue;
+                    }
+
                     var element = GetElementApiMethod(methodInfo);
 
                     AddOrReplaceEntry(signature, dict, element);
