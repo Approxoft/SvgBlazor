@@ -6,7 +6,7 @@
 
 <h2>@ElementType.Name API</h2>
 <h3>Properties</h3>
-<table>
+<table class="table">
     <thead>
         <tr>
             <th>Name</th>
@@ -14,18 +14,20 @@
             <th>Description</th>
         </tr>
     </thead>
-    @foreach (var property in GetElementApiProperties())
-    {
-        <tr>
-            <td>@property.Name</td>
-            <td>@property.Type</td>
-            <td>@property.Description</td>
-        </tr>
-    }
+    <tbody>
+        @foreach (var property in GetElementApiProperties())
+        {
+            <tr>
+                <td>@property.Name</td>
+                <td>@property.Type</td>
+                <td>@property.Description</td>
+            </tr>
+        }
+    </tbody>
 </table>
 
 <h3>Methods</h3>
-<table>
+<table class="table">
     <thead>
         <tr>
             <th>Name</th>
@@ -34,20 +36,22 @@
             <th>Description</th>
         </tr>
     </thead>
-    @foreach (var method in GetElementApiMethods())
-    {
-        <tr>
-            <td>@method.Name</td>
-            <td>
-                @foreach (var p in method.Parameters)
-                {
-                    <p>@p</p>
-                }
-            </td>
-            <td>@method.ReturnValue</td>
-            <td>@method.Description</td>
-        </tr>
-    }
+    <tbody>
+        @foreach (var method in GetElementApiMethods())
+        {
+            <tr>
+                <td>@method.Name</td>
+                <td>
+                    @foreach (var p in method.Parameters)
+                    {
+                        <p>@p</p>
+                    }
+                </td>
+                <td>@method.ReturnValue</td>
+                <td>@method.Description</td>
+            </tr>
+        }
+    </tbody>
 </table>
 
 @code {
