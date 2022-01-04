@@ -2,7 +2,7 @@
 @using Markdig
 @using System.IO;
 
-@((MarkupString)_htmlReadme)
+<ExampleFormattedCode FormattedCode=@_htmlReadme />
 
 @code {
     string _htmlReadme;
@@ -13,7 +13,10 @@
 
         if (!String.IsNullOrEmpty(readmeContent))
         {
-            _htmlReadme = Markdown.ToHtml(readmeContent);
+            var pipeline = new MarkdownPipelineBuilder()
+                .UseAdvancedExtensions()
+                .Build();
+            _htmlReadme = Markdown.ToHtml(readmeContent, pipeline);
         }
     }
 
