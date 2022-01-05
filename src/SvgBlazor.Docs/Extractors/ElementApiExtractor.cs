@@ -114,6 +114,6 @@ namespace SvgBlazor.Docs.Extractors
             };
 
         private static IEnumerable<string> ParametersToString(ParameterInfo[] parameters) =>
-            parameters.Select(x => x.ParameterType.FullName + " " + x.Name).ToArray();
+            parameters.Select(x => x.ParameterType.Name + " " + x.Name).ToArray();
     }
 }
