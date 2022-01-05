@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using ColorCode;
 
 namespace SvgBlazor.Docs.Generator
 {
@@ -84,15 +83,20 @@ namespace SvgBlazor.Docs.Generator
             {
                 string code = GetCodeFromFile(itemExample.FullName);
                 var outputPath = itemExample.FullName.Replace(itemExample.Extension, ".html");
-                SaveAsHtml(code, outputPath);
+                SaveAsHtml(code, outputPath, itemExample.Extension);
             }
         }
 
-        private void SaveAsHtml(string code, string outputPath)
+        private void SaveAsHtml(string code, string outputPath, string extension)
         {
-            var formatter = new HtmlFormatter();
-            var html = formatter.GetHtmlString(code, Languages.CSharp);
-            File.WriteAllText(outputPath, html);
+            var codeClass = extension switch
+            {
+                ".cs" => "language-csharp",
+                ".razor" => "language-cshtml-razor",
+                _ => throw new Exception("File extension not supported")
+            };
+            var result = $"<pre><code class=\"{codeClass}\">{code}</pre></code>";
+            File.WriteAllText(outputPath, result);
         }
 
         private string CorrectIndentations(string code)

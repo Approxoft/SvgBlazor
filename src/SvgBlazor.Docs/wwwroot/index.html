@@ -8,6 +8,7 @@
     <base href="/" />
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
+    <link href="css/atom-one-dark.min.css" rel="stylesheet" />
     <link href="SvgBlazor.Docs.styles.css" rel="stylesheet" />
 </head>
 
@@ -20,6 +21,14 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
+    <script src="js/highlight.min.js"></script>
+    <script src="js/csharp.min.js"></script>
+    <script src="js/cshtml-razor.min.js"></script>
+    <script>
+        window.highlightCodeSyntax = () => {
+            hljs.highlightAll();
+        };
+    </script>
 </body>
 
 </html>

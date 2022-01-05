@@ -2,7 +2,7 @@
 @using Markdig
 @using System.IO;
 
-@((MarkupString)_htmlReadme)
+<ExampleFormattedCode FormattedCode=@_htmlReadme />
 
 @code {
     string _htmlReadme;
