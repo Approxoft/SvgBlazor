@@ -54,5 +54,4 @@
     <None Remove="Markdig.Signed" />
     <None Remove="Highlight.js" />
   </ItemGroup>
-  </ItemGroup>
 </Project>

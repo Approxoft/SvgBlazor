@@ -13,10 +13,7 @@
 
         if (!String.IsNullOrEmpty(readmeContent))
         {
-            var pipeline = new MarkdownPipelineBuilder()
-                .UseAdvancedExtensions()
-                .Build();
-            _htmlReadme = Markdown.ToHtml(readmeContent, pipeline);
+            _htmlReadme = Markdown.ToHtml(readmeContent);
         }
     }
 

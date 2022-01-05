@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using ColorCode;
 
 namespace SvgBlazor.Docs.Generator
 {
@@ -90,9 +89,8 @@ namespace SvgBlazor.Docs.Generator
 
         private void SaveAsHtml(string code, string outputPath)
         {
-            var formatter = new HtmlFormatter();
-            var html = formatter.GetHtmlString(code, Languages.CSharp);
-            File.WriteAllText(outputPath, html);
+            var result = $"<pre><code class=\"language-csharp\">{code}</pre></code>";
+            File.WriteAllText(outputPath, result);
         }
 
         private string CorrectIndentations(string code)
