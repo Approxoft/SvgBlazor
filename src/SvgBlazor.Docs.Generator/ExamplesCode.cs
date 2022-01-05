@@ -83,13 +83,19 @@ namespace SvgBlazor.Docs.Generator
             {
                 string code = GetCodeFromFile(itemExample.FullName);
                 var outputPath = itemExample.FullName.Replace(itemExample.Extension, ".html");
-                SaveAsHtml(code, outputPath);
+                SaveAsHtml(code, outputPath, itemExample.Extension);
             }
         }
 
-        private void SaveAsHtml(string code, string outputPath)
+        private void SaveAsHtml(string code, string outputPath, string extension)
         {
-            var result = $"<pre><code class=\"language-csharp\">{code}</pre></code>";
+            var codeClass = extension switch
+            {
+                ".cs" => "language-csharp",
+                ".razor" => "language-cshtml-razor",
+                _ => throw new Exception("File extension not supported")
+            };
+            var result = $"<pre><code class=\"{codeClass}\">{code}</pre></code>";
             File.WriteAllText(outputPath, result);
         }
 
