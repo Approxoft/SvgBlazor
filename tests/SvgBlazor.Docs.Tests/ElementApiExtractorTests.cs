@@ -79,7 +79,7 @@ namespace SvgBlazor.Docs.Tests
 
             var classMethod = ElementApiExtractor
                 .ExtractApiMethods(typeof(Class1))
-                .FirstOrDefault(m => m.Name == "Method1" && m.Parameters.DefaultIfEmpty("").First() == "System.Boolean flag");
+                .FirstOrDefault(m => m.Name == "Method1" && m.Parameters.DefaultIfEmpty("").First() == "Boolean flag");
 
             Assert.Equal("Method description from the base class.", baseClassMethod.Description);
             Assert.Equal("Method description from the class.", classMethod.Description);
