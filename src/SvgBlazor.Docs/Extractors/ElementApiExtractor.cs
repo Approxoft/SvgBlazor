@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using SvgBlazor.Docs.Extensions;
 using SvgBlazor.Docs.Models;
 
 namespace SvgBlazor.Docs.Extractors
 {
-    public static class ElementApiExtractor
+    public class ElementApiExtractor
     {
         private static readonly List<string> SignaturesToFilterOut = new List<string>
         {
@@ -19,7 +18,14 @@ namespace SvgBlazor.Docs.Extractors
             "GetHashCode()",
         };
 
-        public static IEnumerable<ElementApiMethod> ExtractApiMethods(Type type)
+        private readonly XmlDoc _xmlDoc;
+
+        public ElementApiExtractor(XmlDoc xmlDoc)
+        {
+            _xmlDoc = xmlDoc;
+        }
+
+        public IEnumerable<ElementApiMethod> ExtractApiMethods(Type type)
         {
             var dict = new Dictionary<string, ElementApiMethod>();
 
@@ -30,7 +36,7 @@ namespace SvgBlazor.Docs.Extractors
                     BindingFlags.Static |
                     BindingFlags.Public).Where(m => !m.IsSpecialName))
                 {
-                    var signature = methodInfo.GetSignature();
+                    var signature = _xmlDoc.GetSignature(methodInfo);
                     if (SignaturesToFilterOut.Contains(signature))
                     {
                         continue;
@@ -45,7 +51,7 @@ namespace SvgBlazor.Docs.Extractors
             return dict.Select(p => p.Value);
         }
 
-        public static IEnumerable<ElementApiProperty> ExtractApiProperties(Type type)
+        public IEnumerable<ElementApiProperty> ExtractApiProperties(Type type)
         {
             var dict = new Dictionary<string, ElementApiProperty>();
 
@@ -95,25 +101,25 @@ namespace SvgBlazor.Docs.Extractors
             }
         }
 
-        private static ElementApiMethod GetElementApiMethod(MethodInfo info) =>
-            new ElementApiMethod
+        private static IEnumerable<string> ParametersToString(ParameterInfo[] parameters) =>
+            parameters.Select(x => x.ParameterType.Name + " " + x.Name).ToArray();
+
+        private ElementApiMethod GetElementApiMethod(MethodInfo info) =>
+            new ()
             {
                 Name = info.Name,
                 Parameters = ParametersToString(info.GetParameters()),
                 ReturnValue = info.ReturnType.Name,
-                Description = info.GetDocumentation(),
+                Description = _xmlDoc.GetDocumentation(info),
             };
 
-        private static ElementApiProperty GetElementApiProperty(PropertyInfo propertyInfo) =>
-            new ElementApiProperty
+        private ElementApiProperty GetElementApiProperty(PropertyInfo propertyInfo) =>
+            new ()
             {
                 Name = propertyInfo.Name,
                 Type = propertyInfo.PropertyType.Name,
                 DeclaringType = propertyInfo.DeclaringType.Name,
-                Description = propertyInfo.GetDocumentation(),
+                Description = _xmlDoc.GetDocumentation(propertyInfo),
             };
-
-        private static IEnumerable<string> ParametersToString(ParameterInfo[] parameters) =>
-            parameters.Select(x => x.ParameterType.Name + " " + x.Name).ToArray();
     }
 }

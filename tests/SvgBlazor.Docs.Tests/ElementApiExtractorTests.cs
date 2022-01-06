@@ -1,12 +1,12 @@
-﻿using SvgBlazor.Docs.Extensions;
-using SvgBlazor.Docs.Extractors;
+﻿using SvgBlazor.Docs.Extractors;
+using SvgBlazor.Docs.Models;
 using System;
 using System.Linq;
 using Xunit;
 
 namespace SvgBlazor.Docs.Tests
 {
-    public class ElementApiExtractorTests : IDisposable
+    public class ElementApiExtractorTests
     {
         [Fact]
         public void TakesMethodDescriptionFromOverrideWhenVirtualAndOverridenDescriptionsArePresent()
@@ -24,9 +24,9 @@ namespace SvgBlazor.Docs.Tests
                         "</members>" +
                         "</doc>";
 
-            ReflectionTypesExtensions.LoadXmlDocumentation(xml);
+            var extractor = new ElementApiExtractor(new XmlDoc(xml));
 
-            var result = ElementApiExtractor
+            var result = extractor
                 .ExtractApiMethods(typeof(Class1))
                 .FirstOrDefault(m => m.Name == "Method");
 
@@ -46,9 +46,9 @@ namespace SvgBlazor.Docs.Tests
                         "</members>" +
                         "</doc>";
 
-            ReflectionTypesExtensions.LoadXmlDocumentation(xml);
+            var extractor = new ElementApiExtractor(new XmlDoc(xml));
 
-            var result = ElementApiExtractor
+            var result = extractor
                 .ExtractApiMethods(typeof(Class1))
                 .FirstOrDefault(m => m.Name == "Method");
 
@@ -71,15 +71,15 @@ namespace SvgBlazor.Docs.Tests
                         "</members>" +
                         "</doc>";
 
-            ReflectionTypesExtensions.LoadXmlDocumentation(xml);
+            var extractor = new ElementApiExtractor(new XmlDoc(xml));
 
-            var baseClassMethod = ElementApiExtractor
+            var baseClassMethod = extractor
                 .ExtractApiMethods(typeof(Class1))
                 .FirstOrDefault(m => m.Name == "Method1");
 
-            var classMethod = ElementApiExtractor
+            var classMethod = extractor
                 .ExtractApiMethods(typeof(Class1))
-                .FirstOrDefault(m => m.Name == "Method1" && m.Parameters.DefaultIfEmpty("").First() == "System.Boolean flag");
+                .FirstOrDefault(m => m.Name == "Method1" && m.Parameters.DefaultIfEmpty("").First() == "Boolean flag");
 
             Assert.Equal("Method description from the base class.", baseClassMethod.Description);
             Assert.Equal("Method description from the class.", classMethod.Description);
@@ -98,9 +98,9 @@ namespace SvgBlazor.Docs.Tests
                         "</members>" +
                         "</doc>";
 
-            ReflectionTypesExtensions.LoadXmlDocumentation(xml);
+            var extractor = new ElementApiExtractor(new XmlDoc(xml));
 
-            var method = ElementApiExtractor
+            var method = extractor
                 .ExtractApiMethods(typeof(Class1))
                 .FirstOrDefault(m => m.Name == "BaseClassInterfaceMethod");
 
@@ -123,9 +123,9 @@ namespace SvgBlazor.Docs.Tests
                         "</members>" +
                         "</doc>";
 
-            ReflectionTypesExtensions.LoadXmlDocumentation(xml);
+            var extractor = new ElementApiExtractor(new XmlDoc(xml));
 
-            var method = ElementApiExtractor
+            var method = extractor
                 .ExtractApiMethods(typeof(Class1))
                 .FirstOrDefault(m => m.Name == "BaseClassInterfaceMethod");
 
@@ -144,9 +144,10 @@ namespace SvgBlazor.Docs.Tests
                         "   </member>" +
                         "</members>" +
                         "</doc>";
-            ReflectionTypesExtensions.LoadXmlDocumentation(xml);
 
-            var property = ElementApiExtractor
+            var extractor = new ElementApiExtractor(new XmlDoc(xml));
+
+            var property = extractor
                 .ExtractApiProperties(typeof(Class1))
                 .FirstOrDefault(p => p.Name == "IBaseClassStringProperty");
 
@@ -165,9 +166,10 @@ namespace SvgBlazor.Docs.Tests
                         "   </member>" +
                         "</members>" +
                         "</doc>";
-            ReflectionTypesExtensions.LoadXmlDocumentation(xml);
 
-            var property = ElementApiExtractor
+            var extractor = new ElementApiExtractor(new XmlDoc(xml));
+
+            var property = extractor
                 .ExtractApiProperties(typeof(Class1))
                 .FirstOrDefault(p => p.Name == "BaseClassStringProperty");
 
@@ -186,9 +188,10 @@ namespace SvgBlazor.Docs.Tests
                         "   </member>" +
                         "</members>" +
                         "</doc>";
-            ReflectionTypesExtensions.LoadXmlDocumentation(xml);
 
-            var property = ElementApiExtractor
+            var extractor = new ElementApiExtractor(new XmlDoc(xml));
+
+            var property = extractor
                 .ExtractApiProperties(typeof(Class1))
                 .FirstOrDefault(p => p.Name == "ClassProperty");
 
@@ -210,18 +213,14 @@ namespace SvgBlazor.Docs.Tests
                         "   </member>" +
                         "</members>" +
                         "</doc>";
-            ReflectionTypesExtensions.LoadXmlDocumentation(xml);
 
-            var property = ElementApiExtractor
+            var extractor = new ElementApiExtractor(new XmlDoc(xml));
+
+            var property = extractor
                 .ExtractApiProperties(typeof(Class1))
                 .FirstOrDefault(p => p.Name == "IBaseClassStringProperty");
 
             Assert.Equal("Property description from base class.", property.Description);
-        }
-
-        public void Dispose()
-        {
-            ReflectionTypesExtensions.ClearLoadedXmlDocumentation();
         }
 
         public interface IBaseClass

@@ -5,118 +5,52 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml;
+using SvgBlazor.Docs.Models;
 
 namespace SvgBlazor.Docs.Extensions
 {
     public static class ReflectionTypesExtensions
     {
-        private static readonly Dictionary<string, string> LoadedXmlDocumentation = new ();
-
-        private static readonly HashSet<Assembly> LoadedAssemblies = new ();
+        private static readonly XmlDoc XmlDocumentation = new ();
 
         public static void LoadXmlDocumentation(Assembly assembly)
         {
-            if (LoadedAssemblies.Contains(assembly))
-            {
-                return;
-            }
-
-            string resourceName = assembly.GetManifestResourceNames().FirstOrDefault(x => x.Contains($"SvgBlazor.xml"));
-
-            if (resourceName is null)
-            {
-                throw new Exception("Couldn't load documentation XML:" + resourceName);
-            }
-
-            using var resourceStream = assembly.GetManifestResourceStream(resourceName);
-            using var reader = new StreamReader(resourceStream);
-
-            LoadXmlDocumentation(reader.ReadToEnd());
-            LoadedAssemblies.Add(assembly);
+            XmlDocumentation.LoadXmlDocumentation(assembly);
         }
 
         public static void LoadXmlDocumentation(string xmlDocumentation)
         {
-            using XmlReader xmlReader = XmlReader.Create(new StringReader(xmlDocumentation));
-            while (xmlReader.Read())
-            {
-                if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "member")
-                {
-                    string raw_name = xmlReader["name"];
-                    LoadedXmlDocumentation[raw_name] = xmlReader.ReadInnerXml();
-                }
-            }
+            XmlDocumentation.LoadXmlDocumentation(xmlDocumentation);
         }
 
         public static string GetDocumentation(this Type type)
         {
-            string key = "T:" + FormatKeyString(type.FullName, null);
-            LoadedXmlDocumentation.TryGetValue(key, out string documentation);
-            return StripXmlTags(documentation);
+            return XmlDocumentation.GetDocumentation(type);
         }
 
         public static void ClearLoadedXmlDocumentation()
         {
-            LoadedXmlDocumentation.Clear();
+            XmlDocumentation.ClearLoadedXmlDocumentation();
         }
 
         public static string GetDocumentation(this PropertyInfo propertyInfo)
         {
-            string key = "P:" + FormatKeyString(propertyInfo.DeclaringType.FullName, propertyInfo.Name);
-            LoadedXmlDocumentation.TryGetValue(key, out string documentation);
-            return StripXmlTags(documentation);
+            return XmlDocumentation.GetDocumentation(propertyInfo);
         }
 
         public static string GetSignature(this MethodInfo methodInfo)
         {
-            string parameters = GetParameterTypes(methodInfo);
-            return $"{methodInfo.Name}({parameters})";
+            return XmlDocumentation.GetSignature(methodInfo);
         }
 
         public static string GetDocumentation(this MethodInfo methodInfo)
         {
-            string parameters = GetParameterTypes(methodInfo);
-
-            string key = "M:"
-                + FormatKeyString(methodInfo.DeclaringType.FullName, methodInfo.Name)
-                + (parameters.Length == 0 ? string.Empty : $"({parameters})");
-
-            LoadedXmlDocumentation.TryGetValue(key, out string documentation);
-
-            return StripXmlTags(documentation);
+            return XmlDocumentation.GetDocumentation(methodInfo);
         }
 
-        private static string StripXmlTags(string xml)
+        public static XmlDoc GetXmlDoc()
         {
-            return Regex.Replace(
-                xml ?? string.Empty,
-                @"<[^>]+>",
-                string.Empty).Trim();
-        }
-
-        private static string GetParameterTypes(MethodInfo methodInfo)
-        {
-            var parametersTypes = methodInfo
-                .GetParameters()
-                .Select(x => x.ParameterType.FullName)
-                .ToArray();
-
-            return string.Join(",", parametersTypes);
-        }
-
-        private static string FormatKeyString(string typeFullNameString, string memberNameString)
-        {
-            string key = Regex.Replace(
-                typeFullNameString,
-                @"\[.*\]",
-                string.Empty).Replace('+', '.');
-
-            if (memberNameString != null)
-            {
-                key += "." + memberNameString;
-            }
-
-            return key;
+            return XmlDocumentation;
         }
     }
 }

@@ -64,15 +64,13 @@
     [Parameter]
     public Type ElementType { get; set; }
 
-    private IEnumerable<ElementApiMethod> GetElementApiMethods()
-    {
-        return ElementApiExtractor.ExtractApiMethods(ElementType);
-    }
+    private ElementApiExtractor _extractor = new (ReflectionTypesExtensions.GetXmlDoc());
 
-    private IEnumerable<ElementApiProperty> GetElementApiProperties()
-    {
-        return ElementApiExtractor.ExtractApiProperties(ElementType);
-    }
+    private IEnumerable<ElementApiMethod> GetElementApiMethods() =>
+        _extractor.ExtractApiMethods(ElementType);
+
+    private IEnumerable<ElementApiProperty> GetElementApiProperties() =>
+        _extractor.ExtractApiProperties(ElementType);
 
     private IEnumerable<string> ParametersToString(ParameterInfo[] parameters) =>
         parameters.Select(x => (x.ParameterType.FullName + " " + x.Name)).ToArray();
