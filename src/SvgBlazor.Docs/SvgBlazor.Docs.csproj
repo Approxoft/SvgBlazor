@@ -9,14 +9,14 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <BinDocsCompiler>$(SolutionDir)src/SvgBlazor.Docs.Generator/bin/$(Configuration)/net5.0/SvgBlazor.Docs.Generator.dll</BinDocsCompiler>
-    <XmlDocumentation>$(SolutionDir)src/SvgBlazor/obj/$(Configuration)/net5.0/SvgBlazor.xml</XmlDocumentation>
+    <BinDocsGenerator>$(SolutionDir)src/SvgBlazor.Docs.Generator/bin/$(Configuration)/net6.0/SvgBlazor.Docs.Generator.dll</BinDocsGenerator>
+    <XmlDocumentation>$(SolutionDir)src/SvgBlazor/obj/$(Configuration)/net6.0/SvgBlazor.xml</XmlDocumentation>
     <ReadmeMd>$(SolutionDir)README.md</ReadmeMd>
   </PropertyGroup>
 	
   <Target Name="GenerateDocs" BeforeTargets="BeforeBuild">
     <Message Text="Generating docs..." Importance="high" />
-    <Exec Command="dotnet &quot;$(BinDocsCompiler)&quot; $(SolutionDir)" />
+    <Exec Command="dotnet &quot;$(BinDocsGenerator)&quot; $(SolutionDir)" />
 	<ItemGroup>
 	  <EmbeddedResource Include="Pages\**\*.html" Exclude="@(EmbeddedResource)" />
 	  <EmbeddedResource Include="$(XmlDocumentation)" />
