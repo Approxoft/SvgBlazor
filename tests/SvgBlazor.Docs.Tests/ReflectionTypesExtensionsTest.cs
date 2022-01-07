@@ -1,4 +1,4 @@
-using SvgBlazor.Docs.Extensions;
+using SvgBlazor.Docs.Models;
 using System;
 using Xunit;
 
@@ -38,36 +38,39 @@ namespace SvgBlazor.Docs.Tests
                         "</members>" +
                         "</doc>";
 
-        public ReflectionTypesExtensionsTest()
-        {
-            ReflectionTypesExtensions.LoadXmlDocumentation(dummyXml);
-        }
-
         [Fact]
         public void ReturnsTypeSummary()
         {
-            Assert.Equal("Type summary.", typeof(DummyClass).GetDocumentation());           
+            var xmlDoc = new XmlDoc(dummyXml);
+            Assert.Equal("Type summary.",
+                xmlDoc.GetDocumentation(typeof(DummyClass)));           
         }
 
         [Fact]
         public void ReturnsPropertySummary()
         {
+            var xmlDoc = new XmlDoc(dummyXml);
             var dummyClassType = typeof(DummyClass);
-            Assert.Equal("Property summary.", dummyClassType.GetProperty("DummyProperty").GetDocumentation());
+            Assert.Equal("Property summary.",
+                xmlDoc.GetDocumentation(dummyClassType.GetProperty("DummyProperty")));
         }
 
         [Fact]
         public void ReturnsMethodSummary()
         {
+            var xmlDoc = new XmlDoc(dummyXml);
             var dummyClassType = typeof(DummyClass);
-            Assert.Equal("Method summary.", dummyClassType.GetMethod("DummyMethod").GetDocumentation());
+            Assert.Equal("Method summary.",
+                xmlDoc.GetDocumentation(dummyClassType.GetMethod("DummyMethod")));
         }
 
         [Fact]
         public void ReturnsMethodWithParameteresSummary()
         {
+            var xmlDoc = new XmlDoc(dummyXml);
             var dummyClassType = typeof(DummyClass);
-            Assert.Equal("Method with parameters summary.", dummyClassType.GetMethod("DummyMethodWithParameters").GetDocumentation());
+            Assert.Equal("Method with parameters summary.",
+                xmlDoc.GetDocumentation(dummyClassType.GetMethod("DummyMethodWithParameters")));
         }
     }
 }

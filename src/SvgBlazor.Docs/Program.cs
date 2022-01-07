@@ -21,8 +21,6 @@ namespace SvgBlazor.Docs
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-            ReflectionTypesExtensions.LoadXmlDocumentation(Assembly.GetExecutingAssembly());
-
             await builder.Build().RunAsync();
         }
     }
