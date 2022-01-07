@@ -20,10 +20,7 @@ namespace SvgBlazor.Docs.Extractors
 
         private readonly XmlDoc _xmlDoc;
 
-        public ElementApiExtractor(XmlDoc xmlDoc)
-        {
-            _xmlDoc = xmlDoc;
-        }
+        public ElementApiExtractor(XmlDoc xmlDoc) => _xmlDoc = xmlDoc;
 
         public IEnumerable<ElementApiMethod> ExtractApiMethods(Type type)
         {

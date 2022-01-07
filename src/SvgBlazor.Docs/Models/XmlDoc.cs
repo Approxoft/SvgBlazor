@@ -14,19 +14,9 @@ namespace SvgBlazor.Docs.Models
 
         private readonly HashSet<Assembly> _loadedAssemblies = new ();
 
-        public XmlDoc()
-        {
-        }
+        public XmlDoc(Assembly assembly) => LoadXmlDocumentation(assembly);
 
-        public XmlDoc(Assembly assembly)
-        {
-            LoadXmlDocumentation(assembly);
-        }
-
-        public XmlDoc(string xmlDocumentation)
-        {
-            LoadXmlDocumentation(xmlDocumentation);
-        }
+        public XmlDoc(string xmlDocumentation) => LoadXmlDocumentation(xmlDocumentation);
 
         public void LoadXmlDocumentation(Assembly assembly)
         {
@@ -35,7 +25,9 @@ namespace SvgBlazor.Docs.Models
                 return;
             }
 
-            string resourceName = assembly.GetManifestResourceNames().FirstOrDefault(x => x.Contains($"SvgBlazor.xml"));
+            string resourceName = assembly
+                .GetManifestResourceNames()
+                .FirstOrDefault(x => x.Contains($"SvgBlazor.xml"));
 
             if (resourceName is null)
             {
@@ -67,11 +59,6 @@ namespace SvgBlazor.Docs.Models
             string key = "T:" + FormatKeyString(type.FullName, null);
             _loadedXmlDocumentation.TryGetValue(key, out string documentation);
             return StripXmlTags(documentation);
-        }
-
-        public void ClearLoadedXmlDocumentation()
-        {
-            _loadedXmlDocumentation.Clear();
         }
 
         public string GetDocumentation(PropertyInfo propertyInfo)

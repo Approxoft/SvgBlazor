@@ -11,46 +11,20 @@ namespace SvgBlazor.Docs.Extensions
 {
     public static class ReflectionTypesExtensions
     {
-        private static readonly XmlDoc XmlDocumentation = new ();
+        private static readonly XmlDoc XmlDocumentation = new (Assembly.GetExecutingAssembly());
 
-        public static void LoadXmlDocumentation(Assembly assembly)
-        {
-            XmlDocumentation.LoadXmlDocumentation(assembly);
-        }
+        public static string GetDocumentation(this Type type) =>
+            XmlDocumentation.GetDocumentation(type);
 
-        public static void LoadXmlDocumentation(string xmlDocumentation)
-        {
-            XmlDocumentation.LoadXmlDocumentation(xmlDocumentation);
-        }
+        public static string GetDocumentation(this PropertyInfo propertyInfo) =>
+            XmlDocumentation.GetDocumentation(propertyInfo);
 
-        public static string GetDocumentation(this Type type)
-        {
-            return XmlDocumentation.GetDocumentation(type);
-        }
+        public static string GetSignature(this MethodInfo methodInfo) =>
+            XmlDocumentation.GetSignature(methodInfo);
 
-        public static void ClearLoadedXmlDocumentation()
-        {
-            XmlDocumentation.ClearLoadedXmlDocumentation();
-        }
+        public static string GetDocumentation(this MethodInfo methodInfo) =>
+            XmlDocumentation.GetDocumentation(methodInfo);
 
-        public static string GetDocumentation(this PropertyInfo propertyInfo)
-        {
-            return XmlDocumentation.GetDocumentation(propertyInfo);
-        }
-
-        public static string GetSignature(this MethodInfo methodInfo)
-        {
-            return XmlDocumentation.GetSignature(methodInfo);
-        }
-
-        public static string GetDocumentation(this MethodInfo methodInfo)
-        {
-            return XmlDocumentation.GetDocumentation(methodInfo);
-        }
-
-        public static XmlDoc GetXmlDoc()
-        {
-            return XmlDocumentation;
-        }
+        public static XmlDoc GetXmlDoc() => XmlDocumentation;
     }
 }
