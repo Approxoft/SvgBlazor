@@ -71,7 +71,6 @@ namespace SvgBlazor
         [Parameter]
         public EventCallback<MouseEventArgs> OnMouseMove { get; set; }
 
-
         /// <summary>
         /// Gets or sets the OnMouseUp event callback.
         /// </summary>

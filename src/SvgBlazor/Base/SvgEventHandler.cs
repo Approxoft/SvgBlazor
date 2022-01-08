@@ -18,7 +18,6 @@ namespace SvgBlazor
         {
         }
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SvgEventHandler"/> class with provided SvgEventHandler.
         /// </summary>

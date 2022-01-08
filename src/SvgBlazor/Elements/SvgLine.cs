@@ -31,7 +31,7 @@ namespace SvgBlazor
         }
 
         /// <summary>
-        /// Start point x-axis coordinate.
+        /// Gets or sets start point x-axis coordinate.
         /// </summary>
         public SvgValue X1
         {
@@ -40,7 +40,7 @@ namespace SvgBlazor
         }
 
         /// <summary>
-        /// Start point y-axis coordinate.
+        /// Gets or sets start point y-axis coordinate.
         /// </summary>
         public SvgValue Y1
         {
