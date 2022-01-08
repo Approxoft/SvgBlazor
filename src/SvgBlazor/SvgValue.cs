@@ -19,21 +19,42 @@ namespace SvgBlazor
 
         private ValueUnit _unit = ValueUnit.NoUnit;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgValue"/> class.
+        /// </summary>
         public SvgValue()
         {
             _numberFormatInfo = new NumberFormatInfo();
             _numberFormatInfo.NumberDecimalSeparator = ".";
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgValue"/> class with provided value and unit.
+        /// </summary>
+        /// <param name="value">Initial int value.</param>
+        /// <param name="unit">Initial unit.</param>
         public SvgValue(int value, ValueUnit unit = ValueUnit.NoUnit)
             : this() => SetValue((int)value, unit);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgValue"/> class with provided value and unit.
+        /// </summary>
+        /// <param name="value">Initial int value.</param>
+        /// <param name="unit">Initial unit.</param>
         public SvgValue(float value, ValueUnit unit = ValueUnit.NoUnit)
             : this() => SetValue(value, unit);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgValue"/> class with provided value.
+        /// </summary>
+        /// <param name="value">Initial string value.</param>
         public SvgValue(string value)
             : this() => SetValue(value);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgValue"/> class with provided SvgValue.
+        /// </summary>
+        /// <param name="value">Initial SvgValue.</param>
         public SvgValue(SvgValue value)
             : this()
         {
@@ -50,6 +71,9 @@ namespace SvgBlazor
             String,
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static string Auto { get; } = "auto";
 
         public static implicit operator SvgValue(int value) => new SvgValue(value);

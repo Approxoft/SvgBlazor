@@ -3,6 +3,9 @@ using System.ComponentModel;
 
 namespace SvgBlazor
 {
+    /// <summary>
+    /// The lengthAdjust attribute sets how the text is stretched to the length specified by the textLength attribute.
+    /// </summary>
     public enum TextLengthAdjust
     {
         /// <summary>

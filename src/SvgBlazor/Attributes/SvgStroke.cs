@@ -10,10 +10,17 @@ namespace SvgBlazor
     /// </summary>
     public class SvgStroke : ISvgAttribute
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgStroke"/> class.
+        /// </summary>
         public SvgStroke()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgStroke"/> class with provided stroke.
+        /// </summary>
+        /// <param name="svgstroke">Initial SVG stroke.</param>
         public SvgStroke(SvgStroke svgstroke)
         {
             Color = svgstroke.Color;
@@ -66,6 +73,7 @@ namespace SvgBlazor
         /// </summary>
         public SvgValue Width { get; set; }
 
+        /// <inheritdoc/>
         public void RenderAttributes(RenderTreeBuilder builder)
         {
             builder.AddAttribute(0, "stroke", Color);

@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace SvgBlazor.Interfaces
 {
+    /// <summary>
+    /// Provides methods to manage container elements.
+    /// </summary>
     public interface ISvgContainer : ISvgElement
     {
         /// <summary>
