@@ -63,7 +63,7 @@ namespace SvgBlazor
         }
 
         /// <summary>
-        /// Adds a point to path.
+        /// Adds a point to the path.
         /// </summary>
         /// <param name="point">A point to add.</param>
         public virtual void AddPoint(PointF point)

@@ -18,7 +18,7 @@ namespace SvgBlazor
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SvgG"/> class with privided SvgG.
+        /// Initializes a new instance of the <see cref="SvgG"/> class with provided SvgG.
         /// </summary>
         /// <param name="svgg">Initial SvgG.</param>
         public SvgG(SvgG svgg)

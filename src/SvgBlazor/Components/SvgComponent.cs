@@ -124,7 +124,7 @@ namespace SvgBlazor
         /// <summary>
         /// Gets the bounding box of the element.
         /// </summary>
-        /// <param name="element">The element from which the bounding box domension is taken.</param>
+        /// <param name="element">The element from which the bounding box dimension is taken.</param>
         /// <returns>The RectangleF with bounding box dimension.</returns>
         /// <exception cref="Exception">Thrown if no reference to the SvgBlazor.js object was loaded.</exception>
         public async Task<RectangleF> GetBoundingBox(ISvgElement element)

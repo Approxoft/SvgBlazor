@@ -18,7 +18,7 @@ namespace SvgBlazor
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SvgLine"/> class with privided SvgLine.
+        /// Initializes a new instance of the <see cref="SvgLine"/> class with provided SvgLine.
         /// </summary>
         /// <param name="svgline">Initial SvgLine.</param>
         public SvgLine(SvgLine svgline)

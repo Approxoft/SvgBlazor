@@ -18,7 +18,7 @@ namespace SvgBlazor
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SvgEllipse"/> class with privided SvgEllipse.
+        /// Initializes a new instance of the <see cref="SvgEllipse"/> class with provided SvgEllipse.
         /// </summary>
         /// <param name="svgellipse">Initial SvgEllipse.</param>
         public SvgEllipse(SvgEllipse svgellipse)
