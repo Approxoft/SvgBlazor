@@ -20,10 +20,17 @@ namespace SvgBlazor
 
         private string _pointsString;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgPolygon"/> class.
+        /// </summary>
         public SvgPolygon()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgPolygon"/> class with provided SvgPolygon.
+        /// </summary>
+        /// <param name="svgpolygon">Initial SvgPolygon.</param>
         public SvgPolygon(SvgPolygon svgpolygon)
             : base(svgpolygon)
         {
@@ -31,6 +38,9 @@ namespace SvgBlazor
             _pointsString = svgpolygon._pointsString;
         }
 
+        /// <summary>
+        /// Gets or sets the points of the polygon.
+        /// </summary>
         public IEnumerable<PointF> Points
         {
             get => _points;
@@ -42,20 +52,29 @@ namespace SvgBlazor
             }
         }
 
+        /// <inheritdoc/>
         public override string Tag() => "polygon";
 
+        /// <inheritdoc/>
         public override void AddAttributes(RenderTreeBuilder builder)
         {
             base.AddAttributes(builder);
             builder.AddAttribute(0, "points", _pointsString);
         }
 
+        /// <summary>
+        /// Adds a point to the path.
+        /// </summary>
+        /// <param name="point">A point to add.</param>
         public virtual void AddPoint(PointF point)
         {
             _points.Add(point);
             PointsToString();
         }
 
+        /// <summary>
+        /// Removes all points from the path.
+        /// </summary>
         public virtual void ClearPoints()
         {
             _points.Clear();

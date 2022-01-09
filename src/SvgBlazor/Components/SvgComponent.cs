@@ -11,11 +11,22 @@ using SvgBlazor.Interop;
 
 namespace SvgBlazor
 {
+    /// <summary>
+    /// SvgComponent is the main class of the library. It provides a context for displaying basic SVG elements.
+    /// </summary>
+    /// <remarks>
+    /// SvgComponent also allows direct display of content between SvgComponent tags but this is just
+    /// a convenience for the user. The main idea of both the component and the library is to allow
+    /// creating and operating on svg elements directly from C# code.
+    /// </remarks>
     public class SvgComponent : ComponentBase, IAsyncDisposable
     {
         private readonly SvgElementConnector svg;
         private IJSObjectReference _module;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgComponent"/> class.
+        /// </summary>
         public SvgComponent() => svg = new (this);
 
         /// <summary>
@@ -42,31 +53,55 @@ namespace SvgBlazor
         [Parameter]
         public float? ViewBoxHeight { get; set; }
 
+        /// <summary>
+        /// Gets or sets the OnClick event callback.
+        /// </summary>
         [Parameter]
         public EventCallback<MouseEventArgs> OnClick { get; set; }
 
+        /// <summary>
+        /// Gets or sets the OnMouseDown event callback.
+        /// </summary>
         [Parameter]
         public EventCallback<MouseEventArgs> OnMouseDown { get; set; }
 
+        /// <summary>
+        /// Gets or sets the OnMouseMove event callback.
+        /// </summary>
         [Parameter]
         public EventCallback<MouseEventArgs> OnMouseMove { get; set; }
 
+        /// <summary>
+        /// Gets or sets the OnMouseUp event callback.
+        /// </summary>
         [Parameter]
         public EventCallback<MouseEventArgs> OnMouseUp { get; set; }
 
+        /// <summary>
+        /// Gets or sets the child content of the component.
+        /// </summary>
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 
         [Inject]
         private IJSRuntime JSRuntime { get; set; }
 
+        /// <summary>
+        /// Refreshes the state of the component. When applicable, this will cause the component to be re-rendered.
+        /// </summary>
         public void Refresh() => StateHasChanged();
 
+        /// <inheritdoc />
         public async ValueTask DisposeAsync()
         {
              await _module.DisposeAsync();
         }
 
+        /// <summary>
+        /// Adds the given element to the SvgComponent.
+        /// </summary>
+        /// <param name="element">Element to be added.</param>
+        /// <returns>The container to which the element was added.</returns>
         public ISvgContainer Add(ISvgElement element)
         {
             svg.Add(element);
@@ -74,6 +109,11 @@ namespace SvgBlazor
             return svg;
         }
 
+        /// <summary>
+        /// Removes the given element from the SvgComponent.
+        /// </summary>
+        /// <param name="element">Element to be removed.</param>
+        /// <returns>The container from which the element was removed.</returns>
         public ISvgContainer Remove(ISvgElement element)
         {
             svg.Remove(element);
@@ -81,6 +121,12 @@ namespace SvgBlazor
             return svg;
         }
 
+        /// <summary>
+        /// Gets the bounding box of the element.
+        /// </summary>
+        /// <param name="element">The element from which the bounding box dimension is taken.</param>
+        /// <returns>The RectangleF with bounding box dimension.</returns>
+        /// <exception cref="Exception">Thrown if no reference to the SvgBlazor.js object was loaded.</exception>
         public async Task<RectangleF> GetBoundingBox(ISvgElement element)
         {
             if (_module is null)
@@ -92,6 +138,7 @@ namespace SvgBlazor
                 .InvokeAsync<RectangleF>("BBox", element.ElementReference);
         }
 
+        /// <inheritdoc/>
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -100,6 +147,7 @@ namespace SvgBlazor
             }
         }
 
+        /// <inheritdoc/>
         protected override void OnParametersSet()
         {
             svg.Width = Width;
@@ -108,6 +156,7 @@ namespace SvgBlazor
             svg.ViewBoxWidth = ViewBoxWidth;
         }
 
+        /// <inheritdoc/>
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             builder.OpenElement(0, svg.Tag());

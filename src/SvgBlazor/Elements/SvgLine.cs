@@ -10,10 +10,17 @@ namespace SvgBlazor
     /// </summary>
     public partial class SvgLine : SvgElement
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgLine"/> class.
+        /// </summary>
         public SvgLine()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgLine"/> class with provided SvgLine.
+        /// </summary>
+        /// <param name="svgline">Initial SvgLine.</param>
         public SvgLine(SvgLine svgline)
             : base(svgline)
         {
@@ -24,7 +31,7 @@ namespace SvgBlazor
         }
 
         /// <summary>
-        /// Start point x-axis coordinate.
+        /// Gets or sets start point x-axis coordinate.
         /// </summary>
         public SvgValue X1
         {
@@ -33,7 +40,7 @@ namespace SvgBlazor
         }
 
         /// <summary>
-        /// Start point y-axis coordinate.
+        /// Gets or sets start point y-axis coordinate.
         /// </summary>
         public SvgValue Y1
         {
@@ -42,17 +49,19 @@ namespace SvgBlazor
         }
 
         /// <summary>
-        /// End point x-axis coordinate.
+        /// Gets or sets the end point x-axis coordinate.
         /// </summary>
         public SvgValue X2 { get; set; }
 
         /// <summary>
-        /// End point y-axis coordinate.
+        /// Gets or sets the end point y-axis coordinate.
         /// </summary>
         public SvgValue Y2 { get; set; }
 
+        /// <inheritdoc/>
         public override string Tag() => "line";
 
+        /// <inheritdoc/>
         public override void AddAttributes(RenderTreeBuilder builder)
         {
             base.AddAttributes(builder);

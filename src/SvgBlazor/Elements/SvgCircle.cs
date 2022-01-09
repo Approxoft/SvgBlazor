@@ -10,10 +10,17 @@ namespace SvgBlazor
     /// </summary>
     public class SvgCircle : SvgElement
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgCircle"/> class.
+        /// </summary>
         public SvgCircle()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgCircle"/> class with provided SvgCircle.
+        /// </summary>
+        /// <param name="svgcircle">Initial SvgCircle.</param>
         public SvgCircle(SvgCircle svgcircle)
             : base(svgcircle)
         {
@@ -45,8 +52,10 @@ namespace SvgBlazor
         /// </summary>
         public SvgValue Radius { get; set; }
 
+        /// <inheritdoc/>
         public override string Tag() => "circle";
 
+        /// <inheritdoc/>
         public override void AddAttributes(RenderTreeBuilder builder)
         {
             base.AddAttributes(builder);

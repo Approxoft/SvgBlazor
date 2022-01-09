@@ -11,10 +11,17 @@ namespace SvgBlazor
     /// </summary>
     public class SvgText : SvgElement
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgText"/> class.
+        /// </summary>
         public SvgText()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgText"/> class with provided SvgText.
+        /// </summary>
+        /// <param name="svgtext">Initial SvgText.</param>
         public SvgText(SvgText svgtext)
             : base(svgtext)
         {
@@ -56,8 +63,10 @@ namespace SvgBlazor
         /// </summary>
         public SvgValue TextLength { get; set; }
 
+        /// <inheritdoc/>
         public override string Tag() => "text";
 
+        /// <inheritdoc/>
         public override void AddAttributes(RenderTreeBuilder builder)
         {
             base.AddAttributes(builder);

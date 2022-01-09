@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace SvgBlazor.Interfaces
 {
+    /// <summary>
+    /// Adds event handling.
+    /// </summary>
     public interface ISvgEventHandler
     {
         /// <summary>

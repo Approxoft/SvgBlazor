@@ -19,7 +19,6 @@ namespace SvgBlazor.Docs.Examples
                     new PointF(0, 80),
                     new PointF(100, 0),
                     new PointF(200, 80),
-
                 },
                 Fill = new SvgFill { Color = "#aabbcc" },
             };

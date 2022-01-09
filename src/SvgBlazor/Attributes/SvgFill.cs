@@ -9,15 +9,22 @@ namespace SvgBlazor
     /// </summary>
     public class SvgFill : ISvgAttribute
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgFill"/> class.
+        /// </summary>
         public SvgFill()
         {
         }
 
-        public SvgFill(SvgFill svgfill)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgFill"/> class with provided Fill.
+        /// </summary>
+        /// <param name="svgFill">Initial SVG fill.</param>
+        public SvgFill(SvgFill svgFill)
         {
-            Color = svgfill.Color;
-            Opacity = svgfill.Opacity;
-            Rule = svgfill.Rule;
+            Color = svgFill.Color;
+            Opacity = svgFill.Opacity;
+            Rule = svgFill.Rule;
         }
 
         /// <summary>
@@ -35,6 +42,7 @@ namespace SvgBlazor
         /// </summary>
         public FillRule? Rule { get; set; }
 
+        /// <inheritdoc/>
         public void RenderAttributes(RenderTreeBuilder builder)
         {
             builder.AddAttribute(0, "fill", Color);

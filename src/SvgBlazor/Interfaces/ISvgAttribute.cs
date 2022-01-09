@@ -2,6 +2,9 @@
 
 namespace SvgBlazor.Interfaces
 {
+    /// <summary>
+    /// The interface that represents the SvgAttribute.
+    /// </summary>
     public interface ISvgAttribute
     {
         /// <summary>

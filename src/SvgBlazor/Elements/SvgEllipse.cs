@@ -10,10 +10,17 @@ namespace SvgBlazor
     /// </summary>
     public class SvgEllipse : SvgElement
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgEllipse"/> class.
+        /// </summary>
         public SvgEllipse()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgEllipse"/> class with provided SvgEllipse.
+        /// </summary>
+        /// <param name="svgellipse">Initial SvgEllipse.</param>
         public SvgEllipse(SvgEllipse svgellipse)
             : base(svgellipse)
         {
@@ -51,8 +58,10 @@ namespace SvgBlazor
         /// </summary>
         public SvgValue RadiusY { get; set; }
 
+        /// <inheritdoc/>
         public override string Tag() => "ellipse";
 
+        /// <inheritdoc/>
         public override void AddAttributes(RenderTreeBuilder builder)
         {
             base.AddAttributes(builder);

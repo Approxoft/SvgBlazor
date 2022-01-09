@@ -9,14 +9,21 @@ using SvgBlazor.Interfaces;
 namespace SvgBlazor
 {
     /// <summary>
-    /// The root class for svg drawings.
+    /// The root class for SVG drawings.
     /// </summary>
     public partial class Svg : SvgContainer
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Svg"/> class.
+        /// </summary>
         public Svg()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Svg"/> class with provided Svg element.
+        /// </summary>
+        /// <param name="svg">Initial Svg element.</param>
         public Svg(Svg svg)
             : base(svg)
         {
@@ -46,8 +53,10 @@ namespace SvgBlazor
         /// </summary>
         public float? ViewBoxHeight { get; set; }
 
+        /// <inheritdoc/>
         public override string Tag() => "svg";
 
+        /// <inheritdoc/>
         public override void AddAttributes(RenderTreeBuilder builder)
         {
             base.AddAttributes(builder);

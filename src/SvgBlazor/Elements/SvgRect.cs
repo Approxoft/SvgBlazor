@@ -10,10 +10,17 @@ namespace SvgBlazor
     /// </summary>
     public class SvgRect : SvgElement
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgRect"/> class.
+        /// </summary>
         public SvgRect()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgRect"/> class with provided SvgRect.
+        /// </summary>
+        /// <param name="svgrect">Initial SvgRect.</param>
         public SvgRect(SvgRect svgrect)
             : base(svgrect)
         {
@@ -24,27 +31,29 @@ namespace SvgBlazor
         }
 
         /// <summary>
-        /// The width of the rect.
+        /// Gets or sets the width of the rect.
         /// </summary>
         public SvgValue Width { get; set; }
 
         /// <summary>
-        /// The height of the rect.
+        /// Gets or sets the height of the rect.
         /// </summary>
         public SvgValue Height { get; set; }
 
         /// <summary>
-        /// The horizontal corner radius of the rect. Defaults to Ry (if specified).
+        /// Gets or sets the horizontal corner radius of the rect. Defaults to Ry (if specified).
         /// </summary>
         public SvgValue Rx { get; set; }
 
         /// <summary>
-        /// The vertical corner radius of the rect. Defaults to Rx (if specified).
+        /// Gets or sets the vertical corner radius of the rect. Defaults to Rx (if specified).
         /// </summary>
         public SvgValue Ry { get; set; }
 
+        /// <inheritdoc/>
         public override string Tag() => "rect";
 
+        /// <inheritdoc/>
         public override void AddAttributes(RenderTreeBuilder builder)
         {
             base.AddAttributes(builder);

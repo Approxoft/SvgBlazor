@@ -9,10 +9,17 @@ namespace SvgBlazor
     /// </summary>
     public class SvgPath : SvgElement
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgPath"/> class.
+        /// </summary>
         public SvgPath()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgPath"/> class with provided SvgPath.
+        /// </summary>
+        /// <param name="svgpath">Initial SvgPath.</param>
         public SvgPath(SvgPath svgpath)
             : base(svgpath)
         {
@@ -24,8 +31,10 @@ namespace SvgBlazor
         /// </summary>
         public string Path { get; set; }
 
+        /// <inheritdoc/>
         public override string Tag() => "path";
 
+        /// <inheritdoc/>
         public override void AddAttributes(RenderTreeBuilder builder)
         {
             base.AddAttributes(builder);

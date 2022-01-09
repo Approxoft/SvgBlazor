@@ -6,14 +6,24 @@ using SvgBlazor.Interfaces;
 
 namespace SvgBlazor
 {
+    /// <summary>
+    /// The base class for SVG elements.
+    /// </summary>
     public abstract class SvgElement : SvgEventHandler, ISvgElement
     {
         private ISvgElement _parent;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgElement"/> class.
+        /// </summary>
         public SvgElement()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgElement"/> class with provided SvgElement.
+        /// </summary>
+        /// <param name="element">Initial SvgElement.</param>
         public SvgElement(SvgElement element)
             : base(element)
         {
@@ -25,10 +35,13 @@ namespace SvgBlazor
             Fill = element.Fill;
         }
 
+        /// <inheritdoc/>
         public SvgValue X { get; set; } = 0;
 
+        /// <inheritdoc/>
         public SvgValue Y { get; set; } = 0;
 
+        /// <inheritdoc/>
         public ElementReference ElementReference { get; set; }
 
         /// <summary>
@@ -56,8 +69,10 @@ namespace SvgBlazor
         /// </summary>
         public SvgStroke Stroke { get; set; } = new ();
 
+        /// <inheritdoc/>
         public abstract string Tag();
 
+        /// <inheritdoc/>
         public virtual void BuildElement(RenderTreeBuilder builder)
         {
             builder.OpenElement(0, Tag());
@@ -67,10 +82,15 @@ namespace SvgBlazor
             builder.CloseElement();
         }
 
+        /// <inheritdoc/>
         public virtual void BuildElementAdditionalSteps(RenderTreeBuilder builder)
         {
         }
 
+        /// <summary>
+        /// Adds RenderTreeBuilder attributes.
+        /// </summary>
+        /// <param name="builder">The RenderTreeBuilder used to add attributes.</param>
         public virtual void AddAttributes(RenderTreeBuilder builder)
         {
             builder.AddAttribute(1, "id", Id);
@@ -87,24 +107,31 @@ namespace SvgBlazor
             Stroke.RenderAttributes(builder);
         }
 
+        /// <inheritdoc/>
         public virtual void SetParent(ISvgElement svgContainer) => _parent = svgContainer;
 
+        /// <inheritdoc/>
         public virtual ISvgElement Parent() => _parent;
 
+        /// <inheritdoc/>
         public virtual void Refresh() => _parent.Refresh();
 
+        /// <inheritdoc/>
         public virtual void ElementMouseOver(ISvgElement element, MouseEventArgs args)
             => _parent?.ElementMouseOver(element, args);
 
+        /// <inheritdoc/>
         public virtual void ElementMouseOut(ISvgElement element, MouseEventArgs args)
             => _parent?.ElementMouseOut(element, args);
 
+        /// <inheritdoc/>
         public override async Task OnMouseOverHandler(MouseEventArgs args)
         {
             ElementMouseOver(this, args);
             await base.OnMouseOverHandler(args);
         }
 
+        /// <inheritdoc/>
         public override async Task OnMouseOutHandler(MouseEventArgs args)
         {
             ElementMouseOut(this, args);
