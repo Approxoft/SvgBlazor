@@ -4,15 +4,8 @@
 
 <ExampleTitle>Svg</ExampleTitle>
 <ElementDescription ElementType="@typeof(Svg)" />
-<p>SvgComponent is the main class of the library. It provides a context for displaying basic svg elements. SvgComponent also allows direct display of content between SvgComponent tags but this is just a convenience for the user. The main idea of both the component and the library is to allow creating and operating on svg elements directly from C# code.</p>
 <p>SvgComponent can be created as follows:</p>
-<p>@("<SvgComponent @ref=\"svgref\" Width=\"500\" Height=\"500\"/>")</p>
-<p>Parameters:</p>
-<ul>
-    <li>@("Width - width of the SvgComponent")</li>
-    <li>@("Height - height of the SvgComponent")</li>
-    <li>@("@ref - reference to the SvgComponent in C# code")</li>
-</ul>
+<ExampleCode ItemName="SvgComponentBasicInit"/>
 
 <h1>Adding elements</h1>
 <p>Adding an element is done by creating one of the available elements and then passing it to the Add method on an existing SvgComponent reference:</p>

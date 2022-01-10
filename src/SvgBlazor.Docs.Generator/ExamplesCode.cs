@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Web;
 using System.Text.RegularExpressions;
 
 namespace SvgBlazor.Docs.Generator
@@ -95,7 +96,10 @@ namespace SvgBlazor.Docs.Generator
                 ".razor" => "language-cshtml-razor",
                 _ => throw new Exception("File extension not supported")
             };
-            var result = $"<pre><code class=\"{codeClass}\">{code}</pre></code>";
+
+            var encodedCode = HttpUtility.HtmlEncode(code);
+            var result = $"<pre><code class=\"{codeClass}\">{encodedCode}</code></pre>";
+            
             File.WriteAllText(outputPath, result);
         }
 

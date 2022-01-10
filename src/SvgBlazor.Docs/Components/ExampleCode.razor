@@ -26,6 +26,8 @@
             using (var reader = new StreamReader(resourceStream))
             {
                 codeMarkup = reader.ReadToEnd();
+
+                Console.WriteLine(codeMarkup);
             }
         }
     }
