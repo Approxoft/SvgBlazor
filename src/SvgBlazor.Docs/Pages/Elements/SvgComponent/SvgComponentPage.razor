@@ -1,14 +1,15 @@
 @page "/elements/svgcomponent"
 @inject IJSRuntime JS
+@using SvgBlazor.Docs.Pages.Elements.SvgComponent.Examples
 
 <ExampleTitle>SvgComponent</ExampleTitle>
 <ElementDescription ElementType="@typeof(SvgComponent)" />
 <p>SvgComponent can be created as follows:</p>
 <ExampleCode ItemName="SvgComponentBasicInit" />
 
-<h1>Adding elements</h1>
+<h5>Adding elements</h5>
 
-@*<SvgComponentSimpleAddExample />*@
+<SvgComponentSimpleAddExample />
 <ExampleCode ItemName="SvgComponentSimpleAddExample" />
 
 <p>List of available elements:</p>
@@ -23,17 +24,17 @@
     <li><NavLink href="elements/text">SvgText</NavLink></li>
 </ul>
 
-<h1>Removing elements</h1>
-@*<SvgComponentRemoveExample />*@
+<h5>Removing elements</h5>
+<SvgComponentRemoveExample />
 <p>Click an element to remove</p>
 <ExampleCode ItemName="SvgComponentRemoveExample" />
 
-<h1>BoudingBox calculation</h1>
-@*<SvgComponentGetBoundingBoxExample />*@
+<h5>BoudingBox calculation</h5>
+<SvgComponentGetBoundingBoxExample />
 <ExampleCode ItemName="SvgComponentGetBoundingBoxExample" />
 
-<h1>Playground</h1>
-@*<SvgComponentPlaygroundExample />*@
+<h5>Playground</h5>
+<SvgComponentPlaygroundExample />
 <p>Click an element to remove</p>
 <ExampleCode ItemName="SvgComponentPlaygroundExample" />
 <ExampleCodeHighlighter />
