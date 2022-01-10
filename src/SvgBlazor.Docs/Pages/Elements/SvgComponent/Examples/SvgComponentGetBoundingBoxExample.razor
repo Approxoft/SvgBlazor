@@ -1,7 +1,12 @@
 ﻿@using System.Drawing
 
 <SvgComponent @ref="svgref" Width="100" Height="100" />
-<p>Boudning box: @boundingBox</p>
+<button @onclick="OnButtonClickedCalculateBoundingBox">Calculate the bounding box</button>
+
+@if (!boundingBox.IsEmpty)
+{
+    <p>Boudning box: @boundingBox</p>
+}
 
 @code
 {
@@ -22,9 +27,13 @@
             };
 
             svgref.Add(circle);
-
-            boundingBox = await svgref.GetBoundingBox(circle);
-            StateHasChanged();
         }
+    }
+
+    private async Task OnButtonClickedCalculateBoundingBox()
+    {
+        boundingBox = await svgref.GetBoundingBox(circle);
+
+        StateHasChanged();
     }
 }

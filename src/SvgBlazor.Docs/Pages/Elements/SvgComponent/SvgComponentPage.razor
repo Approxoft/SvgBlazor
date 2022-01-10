@@ -1,0 +1,39 @@
+@page "/elements/svgcomponent"
+@inject IJSRuntime JS
+
+<ExampleTitle>SvgComponent</ExampleTitle>
+<ElementDescription ElementType="@typeof(SvgComponent)" />
+<p>SvgComponent can be created as follows:</p>
+<ExampleCode ItemName="SvgComponentBasicInit" />
+
+<h1>Adding elements</h1>
+
+@*<SvgComponentSimpleAddExample />*@
+<ExampleCode ItemName="SvgComponentSimpleAddExample" />
+
+<p>List of available elements:</p>
+<ul>
+    <li><NavLink href="elements/circle">SvgCircle</NavLink></li>
+    <li><NavLink href="elements/ellipse">SvgEllipse</NavLink></li>
+    <li><NavLink href="elements/g">SvgG</NavLink></li>
+    <li><NavLink href="elements/line">SvgLine</NavLink></li>
+    <li><NavLink href="elements/path">SvgPath</NavLink></li>
+    <li><NavLink href="elements/polygon">SvgPolygon</NavLink></li>
+    <li><NavLink href="elements/rect">SvgRect</NavLink></li>
+    <li><NavLink href="elements/text">SvgText</NavLink></li>
+</ul>
+
+<h1>Removing elements</h1>
+@*<SvgComponentRemoveExample />*@
+<p>Click an element to remove</p>
+<ExampleCode ItemName="SvgComponentRemoveExample" />
+
+<h1>BoudingBox calculation</h1>
+@*<SvgComponentGetBoundingBoxExample />*@
+<ExampleCode ItemName="SvgComponentGetBoundingBoxExample" />
+
+<h1>Playground</h1>
+@*<SvgComponentPlaygroundExample />*@
+<p>Click an element to remove</p>
+<ExampleCode ItemName="SvgComponentPlaygroundExample" />
+<ExampleCodeHighlighter />

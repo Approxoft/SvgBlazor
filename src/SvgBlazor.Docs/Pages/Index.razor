@@ -1,8 +1,8 @@
 ﻿@page "/"
 @using Markdig
 @using System.IO;
-
-<ExampleFormattedCode FormattedCode=@_htmlReadme />
+@((MarkupString)_htmlReadme)
+<ExampleCodeHighlighter />
 
 @code {
     string _htmlReadme;
@@ -14,8 +14,6 @@
         if (!String.IsNullOrEmpty(readmeContent))
         {
             _htmlReadme = Markdown.ToHtml(readmeContent);
-            Console.WriteLine("HtmlReadme");
-            Console.WriteLine(_htmlReadme);
         }
     }
 

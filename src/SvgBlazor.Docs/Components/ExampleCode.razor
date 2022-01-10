@@ -1,6 +1,6 @@
 ﻿@using System.IO;
 
-<ExampleFormattedCode FormattedCode=@codeMarkup/>
+@((MarkupString)codeMarkup)
 
 @code {
     private string codeMarkup;
@@ -26,8 +26,6 @@
             using (var reader = new StreamReader(resourceStream))
             {
                 codeMarkup = reader.ReadToEnd();
-
-                Console.WriteLine(codeMarkup);
             }
         }
     }

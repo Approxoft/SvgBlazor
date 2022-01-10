@@ -1,4 +1,4 @@
-﻿<SvgComponent @ref="svgref" Width="500" Height="500" OnClick="OnSvgClicked" />
+﻿<SvgComponent @ref="svgref" Width="500" Height="500" />
 <button @onclick="OnAddElement">Add random element</button>
 
 @code {
@@ -59,16 +59,5 @@
         };
 
         svgref.Add(c);
-
-        svgref.Refresh();
-
-
-        var bb = await svgref.GetBoundingBox(c);
-        Console.WriteLine("bb=" + bb);
-    }
-
-    private void OnSvgClicked(MouseEventArgs args)
-    {
-        Console.WriteLine("Svg clicked");
     }
 }

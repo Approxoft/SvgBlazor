@@ -1,10 +1,6 @@
 ﻿@inject IJSRuntime JS
-@((MarkupString)FormattedCode)
 
 @code {
-    [Parameter]
-    public string FormattedCode { get; set; }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
