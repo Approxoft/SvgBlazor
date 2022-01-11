@@ -98,8 +98,7 @@ namespace SvgBlazor.Docs.Generator
             };
 
             var encodedCode = HttpUtility.HtmlEncode(code);
-            var result = $"<pre><code class=\"{codeClass}\">{encodedCode}</code></pre>";
-            
+            var result = $"<code class=\"{codeClass}\">{encodedCode}</code>";
             File.WriteAllText(outputPath, result);
         }
 

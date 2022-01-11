@@ -1,8 +1,8 @@
 ﻿@page "/"
+@inject IJSRuntime JS
 @using Markdig
 @using System.IO;
 @((MarkupString)_htmlReadme)
-<ExampleCodeHighlighter />
 
 @code {
     string _htmlReadme;
@@ -33,5 +33,13 @@
         using var reader = new StreamReader(resourceStream);
 
         return reader.ReadToEnd();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("highlightAllCode");
+        }
     }
 }

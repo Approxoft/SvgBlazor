@@ -1,12 +1,14 @@
 ﻿@using System.IO;
-
-@((MarkupString)codeMarkup)
+@inject IJSRuntime JS
+<pre @ref="componentref">@((MarkupString)codeMarkup)</pre>
 
 @code {
     private string codeMarkup;
 
     [Parameter]
     public string ItemName { get; set; }
+
+    ElementReference componentref;
 
     protected override void OnInitialized()
     {
@@ -27,6 +29,14 @@
             {
                 codeMarkup = reader.ReadToEnd();
             }
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("highlightCodeElement", componentref);
         }
     }
 }
