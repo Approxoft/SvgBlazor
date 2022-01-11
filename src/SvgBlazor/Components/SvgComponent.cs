@@ -138,6 +138,7 @@ namespace SvgBlazor
                 .InvokeAsync<RectangleF>("BBox", element.ElementReference);
         }
 
+        /// <inheritdoc/>
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -148,6 +149,7 @@ namespace SvgBlazor
             await base.OnAfterRenderAsync(firstRender);
         }
 
+        /// <inheritdoc/>
         protected override void OnParametersSet()
         {
             svg.Width = Width;
