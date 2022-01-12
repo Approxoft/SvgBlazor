@@ -1,5 +1,4 @@
 @page "/elements/svgcomponent"
-@inject IJSRuntime JS
 @using SvgBlazor.Docs.Pages.Elements.SvgComponent.Examples
 
 <ExampleTitle>SvgComponent</ExampleTitle>
@@ -16,11 +15,6 @@
 <ExampleComponent Height=100 ExampleCode="@(new SvgComponentRemoveExample())" />
 
 <h5>BoudingBox calculation</h5>
-<SvgComponentGetBoundingBoxExample />
-<ExampleCode ItemName="SvgComponentGetBoundingBoxExample" />
-
-<h5>Playground</h5>
-<SvgComponentPlaygroundExample />
-<p>Click an element to remove</p>
-<ExampleCode ItemName="SvgComponentPlaygroundExample" />
+<SvgComponentGetBoundingBoxExample/>
+<ExampleCode ItemName="SvgComponentGetBoundingBoxExample" Class="language-csharp" />
 <ElementApiDocs ElementType="@typeof(SvgComponent)" />

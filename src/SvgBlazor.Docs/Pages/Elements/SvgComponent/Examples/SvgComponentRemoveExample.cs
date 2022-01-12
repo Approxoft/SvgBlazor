@@ -12,9 +12,10 @@ namespace SvgBlazor.Docs.Examples
             /* #example-code-start */
             var text = new SvgText
             {
-                X = 25,
-                Y = 25,
+                X = 35,
+                Y = 50,
                 Text = "Click me to remove",
+                Stroke = new SvgStroke { Color = "red", },
             };
 
             text.OnClick = EventCallback.Factory.Create<MouseEventArgs>(text, (args) =>

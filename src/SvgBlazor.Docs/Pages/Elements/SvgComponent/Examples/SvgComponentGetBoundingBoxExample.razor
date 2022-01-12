@@ -1,6 +1,6 @@
 ﻿@using System.Drawing
 
-<SvgComponent @ref="svgref" Width="100" Height="100" />
+<SvgComponent @ref="svg" Width="100" Height="100" />
 <button @onclick="OnButtonClickedCalculateBoundingBox">Calculate the bounding box</button>
 
 @if (!boundingBox.IsEmpty)
@@ -10,9 +10,10 @@
 
 @code
 {
+    @*#example-code-start*@
     private RectangleF boundingBox;
 
-    private SvgComponent svgref;
+    private SvgComponent svg;
     private SvgCircle circle;
 
     protected override void OnAfterRender(bool firstRender)
@@ -26,12 +27,14 @@
                 Radius = 25,
             };
 
-            svgref.Add(circle);
+            svg.Add(circle);
         }
     }
 
     private async Task OnButtonClickedCalculateBoundingBox()
     {
-        boundingBox = await svgref.GetBoundingBox(circle);
+        boundingBox = await svg.GetBoundingBox(circle);
     }
+
+    @*#example-code-end*@
 }
