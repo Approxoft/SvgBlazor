@@ -25,25 +25,8 @@
     <script src="js/highlight.min.js"></script>
     <script src="js/csharp.min.js"></script>
     <script src="js/cshtml-razor.min.js"></script>
-    <script>
-        window.highlightAllCode = () => {
-            hljs.highlightAll();
-        };
-    </script>
-    <script>
-        window.highlightCodeElement = (element) => {
-            if (element && element.children.length > 0) {
-                var firstChild = element.children[0];
+    <script src="js/SvgBlazor.Docs.js"></script>
 
-                if (firstChild.children.length > 0) {
-                    var firstGrandchild = firstChild.children[0];
-                    hljs.highlightElement(firstGrandchild);
-                } else {
-                    hljs.highlightElement(firstChild);
-                }
-            }
-    };
-    </script>
 </body>
 
 </html>

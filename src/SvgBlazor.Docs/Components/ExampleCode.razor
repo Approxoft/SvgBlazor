@@ -4,41 +4,41 @@
 <h5>Code:</h5>
 <pre @ref="elementReference">@((MarkupString)codeMarkup)</pre>
 
-    @code {
-        private string codeMarkup;
+@code {
+    private string codeMarkup;
 
-        [Parameter]
-        public string ItemName { get; set; }
+    [Parameter]
+    public string ItemName { get; set; }
 
-        ElementReference elementReference;
+    ElementReference elementReference;
 
-        protected override void OnInitialized()
+    protected override void OnInitialized()
+    {
+        var resourceName = typeof(ExampleCode)
+            .Assembly
+            .GetManifestResourceNames()
+            .FirstOrDefault(x => x.Contains($"{ItemName}.html"));
+
+        if (resourceName is null)
         {
-            var resourceName = typeof(ExampleCode)
-                .Assembly
-                .GetManifestResourceNames()
-                .FirstOrDefault(x => x.Contains($"{ItemName}.html"));
-
-            if (resourceName is null)
-            {
-                codeMarkup = "<p>No code</p>";
-                return;
-            }
-
-            using (var resourceStream = typeof(ExampleCode).Assembly.GetManifestResourceStream(resourceName))
-            {
-                using (var reader = new StreamReader(resourceStream))
-                {
-                    codeMarkup = reader.ReadToEnd();
-                }
-            }
+            codeMarkup = "<p>No code</p>";
+            return;
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        using (var resourceStream = typeof(ExampleCode).Assembly.GetManifestResourceStream(resourceName))
         {
-            if (firstRender)
+            using (var reader = new StreamReader(resourceStream))
             {
-                await JS.InvokeVoidAsync("highlightCodeElement", elementReference);
+                codeMarkup = reader.ReadToEnd();
             }
         }
     }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("highlightCodeElement", elementReference);
+        }
+    }
+}
