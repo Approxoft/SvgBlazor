@@ -1,42 +1,44 @@
 ﻿@using System.IO;
 @inject IJSRuntime JS
-<pre @ref="componentref">@((MarkupString)codeMarkup)</pre>
 
-@code {
-    private string codeMarkup;
+<h5>Code:</h5>
+<pre @ref="elementReference">@((MarkupString)codeMarkup)</pre>
 
-    [Parameter]
-    public string ItemName { get; set; }
+    @code {
+        private string codeMarkup;
 
-    ElementReference componentref;
+        [Parameter]
+        public string ItemName { get; set; }
 
-    protected override void OnInitialized()
-    {
-        var resourceName = typeof(ExampleCode)
-            .Assembly
-            .GetManifestResourceNames()
-            .FirstOrDefault(x => x.Contains($"{ItemName}.html"));
+        ElementReference elementReference;
 
-        if (resourceName is null)
+        protected override void OnInitialized()
         {
-            codeMarkup = "<p>No code</p>";
-            return;
+            var resourceName = typeof(ExampleCode)
+                .Assembly
+                .GetManifestResourceNames()
+                .FirstOrDefault(x => x.Contains($"{ItemName}.html"));
+
+            if (resourceName is null)
+            {
+                codeMarkup = "<p>No code</p>";
+                return;
+            }
+
+            using (var resourceStream = typeof(ExampleCode).Assembly.GetManifestResourceStream(resourceName))
+            {
+                using (var reader = new StreamReader(resourceStream))
+                {
+                    codeMarkup = reader.ReadToEnd();
+                }
+            }
         }
 
-        using (var resourceStream = typeof(ExampleCode).Assembly.GetManifestResourceStream(resourceName))
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            using (var reader = new StreamReader(resourceStream))
+            if (firstRender)
             {
-                codeMarkup = reader.ReadToEnd();
+                await JS.InvokeVoidAsync("highlightCodeElement", elementReference);
             }
         }
     }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await JS.InvokeVoidAsync("highlightCodeElement", componentref);
-        }
-    }
-}

@@ -33,7 +33,5 @@
     private async Task OnButtonClickedCalculateBoundingBox()
     {
         boundingBox = await svgref.GetBoundingBox(circle);
-
-        StateHasChanged();
     }
 }

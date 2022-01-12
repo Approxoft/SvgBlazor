@@ -8,25 +8,12 @@
 <ExampleCode ItemName="SvgComponentBasicInit" />
 
 <h5>Adding elements</h5>
-<SvgComponentSimpleAddExample />
-<ExampleCode ItemName="SvgComponentSimpleAddExample" />
-
-<p>List of available elements:</p>
-<ul>
-    <li><NavLink href="elements/circle">SvgCircle</NavLink></li>
-    <li><NavLink href="elements/ellipse">SvgEllipse</NavLink></li>
-    <li><NavLink href="elements/g">SvgG</NavLink></li>
-    <li><NavLink href="elements/line">SvgLine</NavLink></li>
-    <li><NavLink href="elements/path">SvgPath</NavLink></li>
-    <li><NavLink href="elements/polygon">SvgPolygon</NavLink></li>
-    <li><NavLink href="elements/rect">SvgRect</NavLink></li>
-    <li><NavLink href="elements/text">SvgText</NavLink></li>
-</ul>
+<p>Adding an element is done by creating one of the available elements and then passing it to the Add method on an existing SvgComponent reference:</p>
+<ExampleComponent Width=100 Height=100 ExampleCode="@(new SvgComponentSimpleAddExample())" />
 
 <h5>Removing elements</h5>
-<SvgComponentRemoveExample />
-<p>Click an element to remove</p>
-<ExampleCode ItemName="SvgComponentRemoveExample" />
+<p>Removing an element is done by passing its reference to the Remove method on an existing SvgComponent reference:</p>
+<ExampleComponent Height=100 ExampleCode="@(new SvgComponentRemoveExample())" />
 
 <h5>BoudingBox calculation</h5>
 <SvgComponentGetBoundingBoxExample />
@@ -36,3 +23,4 @@
 <SvgComponentPlaygroundExample />
 <p>Click an element to remove</p>
 <ExampleCode ItemName="SvgComponentPlaygroundExample" />
+<ElementApiDocs ElementType="@typeof(SvgComponent)" />
