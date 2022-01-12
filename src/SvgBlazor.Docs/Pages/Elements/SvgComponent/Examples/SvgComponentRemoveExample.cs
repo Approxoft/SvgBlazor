@@ -14,7 +14,7 @@ namespace SvgBlazor.Docs.Examples
             {
                 X = 25,
                 Y = 25,
-                Text = "Click to remove",
+                Text = "Click me to remove",
             };
 
             text.OnClick = EventCallback.Factory.Create<MouseEventArgs>(text, (args) =>
