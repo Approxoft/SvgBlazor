@@ -1,0 +1,20 @@
+@page "/elements/svgcomponent"
+@using SvgBlazor.Docs.Pages.Elements.SvgComponent.Examples
+
+<ExampleTitle>SvgComponent</ExampleTitle>
+<ElementDescription ElementType="@typeof(SvgComponent)" />
+<p>SvgComponent can be created as follows:</p>
+<ExampleCode ItemName="SvgComponentBasicInit" />
+
+<h5>Adding elements</h5>
+<p>Adding an element is done by creating one of the available elements and then passing it to the Add method on an existing SvgComponent reference:</p>
+<ExampleComponent Width=100 Height=100 ExampleCode="@(new SvgComponentSimpleAddExample())" />
+
+<h5>Removing elements</h5>
+<p>Removing an element is done by passing its reference to the Remove method on an existing SvgComponent reference:</p>
+<ExampleComponent Height=100 ExampleCode="@(new SvgComponentRemoveExample())" />
+
+<h5>BoudingBox calculation</h5>
+<SvgComponentGetBoundingBoxExample/>
+<ExampleCode ItemName="SvgComponentGetBoundingBoxExample" />
+<ElementApiDocs ElementType="@typeof(SvgComponent)" />

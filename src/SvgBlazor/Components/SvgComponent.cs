@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
@@ -145,6 +145,8 @@ namespace SvgBlazor
             {
                 await LoadSvgBlazorJsModule();
             }
+
+            await base.OnAfterRenderAsync(firstRender);
         }
 
         /// <inheritdoc/>

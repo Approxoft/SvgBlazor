@@ -1,12 +1,17 @@
-﻿@using System.IO;
+﻿@using System.IO
+@using System.Text.RegularExpressions
+@inject IJSRuntime JS
 
-<ExampleFormattedCode FormattedCode=@codeMarkup/>
+<h5>Code:</h5>
+<pre @ref="elementReference">@((MarkupString)codeMarkup)</pre>
 
 @code {
     private string codeMarkup;
 
     [Parameter]
     public string ItemName { get; set; }
+
+    ElementReference elementReference;
 
     protected override void OnInitialized()
     {
@@ -27,6 +32,14 @@
             {
                 codeMarkup = reader.ReadToEnd();
             }
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("highlightCodeElement", elementReference);
         }
     }
 }
