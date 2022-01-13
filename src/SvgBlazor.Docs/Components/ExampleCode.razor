@@ -11,9 +11,6 @@
     [Parameter]
     public string ItemName { get; set; }
 
-    [Parameter]
-    public string Class { get; set; }
-
     ElementReference elementReference;
 
     protected override void OnInitialized()
@@ -34,13 +31,6 @@
             using (var reader = new StreamReader(resourceStream))
             {
                 codeMarkup = reader.ReadToEnd();
-
-                if (string.IsNullOrWhiteSpace(Class))
-                {
-                    return;
-                }
-
-                codeMarkup = ReplaceClass(codeMarkup);
             }
         }
     }
@@ -51,12 +41,5 @@
         {
             await JS.InvokeVoidAsync("highlightCodeElement", elementReference);
         }
-    }
-
-    private string ReplaceClass(string str)
-    {
-        var regexString = "<code(.*)>";
-        var newCodeElement = $"<code class=\"{Class}\">";
-        return Regex.Replace(str, regexString, newCodeElement);
     }
 }
