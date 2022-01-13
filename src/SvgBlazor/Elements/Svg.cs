@@ -11,7 +11,7 @@ namespace SvgBlazor
     /// <summary>
     /// The root class for SVG drawings.
     /// </summary>
-    public partial class Svg : SvgContainer
+    public class Svg : SvgContainer
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Svg"/> class.
