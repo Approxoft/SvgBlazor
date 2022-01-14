@@ -9,7 +9,7 @@ using SvgBlazor.Interfaces;
 namespace SvgBlazor
 {
     /// <summary>
-    /// The root class for SVG drawings.
+    /// The root element for SVG drawings.
     /// </summary>
     public class Svg : SvgContainer
     {
