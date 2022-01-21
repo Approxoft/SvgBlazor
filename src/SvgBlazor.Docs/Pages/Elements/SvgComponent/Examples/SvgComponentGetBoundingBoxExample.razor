@@ -4,14 +4,12 @@
     <SvgComponent @ref="svg" Width="100" Height="100" />
 </div>
 <div>
-    <div>
-        <button type="button"
-                class="btn btn-primary ml-4"
-                @onclick="OnButtonClickedCalculateBoundingBox">
-            Calculate the bounding box
-        </button>
-        <p class="mt-4">Bounding box: @(boundingBox.IsEmpty ? "Click the button to calculate" : boundingBox)</p>
-    </div>
+    <button type="button"
+            class="btn btn-primary ml-4"
+            @onclick="OnButtonClickedCalculateBoundingBox">
+        Calculate the bounding box
+    </button>
+    <p class="mt-4">Bounding box: @(boundingBox.IsEmpty ? "Click the button to calculate" : boundingBox)</p>
 </div>
 
 @code
