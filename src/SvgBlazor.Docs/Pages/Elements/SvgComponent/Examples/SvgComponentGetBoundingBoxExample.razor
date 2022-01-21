@@ -1,12 +1,24 @@
 ﻿@using System.Drawing
 
-<SvgComponent @ref="svg" Width="100" Height="100" />
-<button @onclick="OnButtonClickedCalculateBoundingBox">Calculate the bounding box</button>
+<div>
+    <div>
+        <SvgComponent @ref="svg" Width="100" Height="100" />
+    </div>
+    <div>
+        <button type="button"
+                class="btn btn-primary"
+                @onclick="OnButtonClickedCalculateBoundingBox">
+            Calculate the bounding box
+        </button>
+    </div>
 
-@if (!boundingBox.IsEmpty)
-{
-    <p>Boudning box: @boundingBox</p>
-}
+    @if (!boundingBox.IsEmpty)
+    {
+        <div class="mt-4">
+            <p>Boudning box: @boundingBox</p>
+        </div>
+    }
+</div>
 
 @code
 {
