@@ -4,19 +4,19 @@
 <ExampleTitle>Fill</ExampleTitle>
 <ElementDescription ElementType="@typeof(SvgFill)" />
 
-<h5>Color property</h5>
+<h3>Color property</h3>
 <p>@( typeof(SvgFill).GetProperty("Color").GetDocumentation() )</p>
 <div><ExampleComponent Width="400" ExampleCode="@(new FillColorExample())" /></div>
 
-<h5>Opacity property</h5>
+<h3>Opacity property</h3>
 <p>@( typeof(SvgFill).GetProperty("Opacity").GetDocumentation() )</p>
 <div><ExampleComponent Width="400" ExampleCode="@(new FillOpacityExample())" /></div>
 
-<h5>Fill rule property</h5>
+<h3>Fill rule property</h3>
 <p>@( typeof(SvgFill).GetProperty("Rule").GetDocumentation() )</p>
-<h6>NonZero</h6>
+<h4>NonZero</h4>
 <div><ExampleComponent Width="400" ExampleCode="@(new FillRuleNonZeroExample())" /></div>
-<h6>EvenOdd</h6>
+<h4>EvenOdd</h4>
 <div><ExampleComponent Width="400" ExampleCode="@(new FillRuleEvenOddExample())" /></div>
 
 <ElementApiDocs ElementType="@typeof(SvgFill)" />
