@@ -1,3 +1,6 @@
+// Copyright (c) Approxoft. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
 using Microsoft.AspNetCore.Components.Rendering;
 using SvgBlazor.Extensions;
 using SvgBlazor.Interfaces;

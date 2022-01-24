@@ -1,4 +1,7 @@
-﻿using SvgBlazor.Docs.Interfaces;
+﻿// Copyright (c) Approxoft. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
+using SvgBlazor.Docs.Interfaces;
 
 namespace SvgBlazor.Docs.Examples
 {
