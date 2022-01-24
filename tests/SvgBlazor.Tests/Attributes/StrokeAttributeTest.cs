@@ -1,4 +1,7 @@
-﻿using System.Drawing;
+﻿// Copyright (c) Approxoft. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
+using System.Drawing;
 using Microsoft.AspNetCore.Components.Rendering;
 using Xunit;
 using Bunit;
