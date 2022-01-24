@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <PackageId>SvgBlazor</PackageId>
+    <Authors>Approxoft</Authors>
+    <Company>Approxoft</Company>
+    <PackageDescription>The .NET Blazor SVG library.</PackageDescription>
+    <RepositoryUrl>https://github.com/Approxoft/SvgBlazor</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup>
