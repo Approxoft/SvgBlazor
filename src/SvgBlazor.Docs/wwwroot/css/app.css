@@ -67,19 +67,19 @@ a, .btn-link {
 
 #loading-icon {
     width: auto;
-    height: 35%;
+    height: 16%;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
-    animation: pulse 1.5s alternate infinite ease-in-out;
+    animation: pulse 1.0s alternate infinite ease-in-out;
     -webkit-filter: drop-shadow(0px 0px 7px rgba(0, 0, 0, .5));
     filter: drop-shadow(0px 0px 7px rgba(0, 0, 0, .5));
 }
 
 @keyframes pulse {
     0% { transform: scale(1.0); }
-    100% { transform: scale(1.1); }
+    100% { transform: scale(1.08); }
 }
