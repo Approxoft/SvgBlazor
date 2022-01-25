@@ -1,0 +1,13 @@
+name: Push Docs CI/CD
+
+on:
+  push:
+    branches: [ main ]
+
+  pull_request:
+    branches: [ main ]
+jobs:
+  main:
+    uses: Approxoft/SvgBlazor/.github/workflows/base-workflow.yml@main
+    with:
+      publish-docs: true

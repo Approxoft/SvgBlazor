@@ -7,6 +7,14 @@ on:
         required: false
         type: string
         default: '0.0.0'
+      dotnet-version:
+        required: false
+        type: string
+        default: '6.0.x'
+      publish-docs:
+        required: false
+        type: boolean
+        default: false  
       publish-nuget:
         required: false
         type: boolean
@@ -22,13 +30,32 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: ${{ inputs.dotnet-version }}
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+  publish-docs:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.publish-docs == true }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ inputs.dotnet-version }}
+    - name: Build
+      run: dotnet build -c Release
+    - name: Publish docs project
+      run: dotnet publish ./src/SvgBlazor.Docs/SvgBlazor.Docs.csproj -c Release -o docsrelease --nologo
+    - name: Commit wwwroot to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: docsrelease/wwwroot
   publish-and-pack:
     runs-on: ubuntu-latest
     if: ${{ inputs.publish-nuget == true }}
@@ -37,7 +64,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: ${{ inputs.dotnet-version }}
     - name: Pack
       run: dotnet pack ./src/SvgBlazor/SvgBlazor.csproj -o output -c Release /p:Version=${{ inputs.version }}
     - name: Publish
