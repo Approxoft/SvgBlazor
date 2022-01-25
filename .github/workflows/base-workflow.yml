@@ -1,0 +1,44 @@
+name: Base workflow
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        required: false
+        type: string
+        default: '0.0.0'
+      publish-nuget:
+        required: false
+        type: boolean
+        default: false
+    secrets:
+      nuget-api-key:
+        required: false
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+  publish-and-pack:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.publish-nuget == true }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Pack
+      run: dotnet pack ./src/SvgBlazor/SvgBlazor.csproj -o output -c Release /p:Version=${{ inputs.version }}
+    - name: Publish
+      run: dotnet nuget push output/SvgBlazor.${{ inputs.version }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.nuget-api-key }} --skip-duplicate

@@ -1,0 +1,16 @@
+name: Manual deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Provide version number (e.g.: 1.0.0)'
+        required: true
+jobs:
+  main:
+    uses: Approxoft/SvgBlazor/.github/workflows/base-workflow.yml@main
+    with:
+      publish-nuget: true
+      version: ${{ github.event.inputs.version }}
+    secrets:
+      nuget-api-key: ${{ secrets.NUGET_API_KEY }}
