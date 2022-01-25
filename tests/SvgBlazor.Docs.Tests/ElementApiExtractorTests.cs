@@ -1,4 +1,7 @@
-﻿using SvgBlazor.Docs.Extractors;
+﻿// Copyright (c) Approxoft. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
+using SvgBlazor.Docs.Extractors;
 using SvgBlazor.Docs.Models;
 using System;
 using System.Linq;
