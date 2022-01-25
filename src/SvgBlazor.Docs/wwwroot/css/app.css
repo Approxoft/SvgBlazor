@@ -81,5 +81,5 @@ a, .btn-link {
 
 @keyframes pulse {
     0% { transform: scale(1.0); }
-    100% { transform: scale(1.08); }
+    100% { transform: scale(1.1); }
 }
