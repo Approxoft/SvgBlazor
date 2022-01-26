@@ -14,14 +14,14 @@ dotnet add package SvgBlazor
 
 ### 2. Imports
 Once the installation is complete, add SvgBlazor in _Imports.razor:
-```
+```razor
 @using SvgBlazor
 ```
 
 ### 3. Create a SVG component
 Add a SvgComponent tag in your .razor file and capture it's reference by using @ref property:
 
-```
+```razor
 <SvgComponent Width="200" Height="200" @ref="svgComponent" />
 
 @code {
