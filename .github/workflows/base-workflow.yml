@@ -51,7 +51,7 @@ jobs:
     - name: Publish docs project
       run: dotnet publish ./src/SvgBlazor.Docs/SvgBlazor.Docs.csproj -c Release -o docsrelease --nologo
     - name: Change base-tag
-      run: sed -i 's/<base href="\/" \/>/<base href="\/SvgBlazorTest\/" \/>/g' docsrelease/wwwroot/index.html
+      run: sed -i 's/<base href="\/" \/>/<base href="\/SvgBlazor\/" \/>/g' docsrelease/wwwroot/index.html
     - name: Add .nojekyll file
       run: touch docsrelease/wwwroot/.nojekyll
     - name: Commit wwwroot to GitHub Pages
