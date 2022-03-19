@@ -71,6 +71,11 @@ namespace SvgBlazor
         /// </summary>
         public TextAnchor? TextAnchor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the dominant baseline of the text.
+        /// </summary>
+        public TextDominantBaseline? DominantBaseline { get; set; }
+
         /// <inheritdoc/>
         public override string Tag() => "text";
 
@@ -83,20 +88,24 @@ namespace SvgBlazor
             builder.AddAttribute(2, "dx", ShiftX);
             builder.AddAttribute(3, "dy", ShiftY);
             builder.AddAttribute(4, "rotate", Rotate);
+            builder.AddAttribute(5, "textLength", TextLength);
 
             if (LengthAdjust is not null)
             {
-                builder.AddAttribute(5, "lengthAdjust", LengthAdjust.ToDescriptionString());
+                builder.AddAttribute(6, "lengthAdjust", LengthAdjust.ToDescriptionString());
             }
-
-            builder.AddAttribute(6, "textLength", TextLength);
 
             if (TextAnchor is not null)
             {
                 builder.AddAttribute(7, "text-anchor", TextAnchor.ToDescriptionString());
             }
 
-            builder.AddContent(8, Text);
+            if (DominantBaseline is not null)
+            {
+                builder.AddAttribute(8, "dominant-baseline", DominantBaseline.ToDescriptionString());
+            }
+
+            builder.AddContent(9, Text);
         }
     }
 }
