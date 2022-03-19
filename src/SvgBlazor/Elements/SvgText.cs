@@ -59,12 +59,17 @@ namespace SvgBlazor
         /// <summary>
         /// Gets or sets how the text should fit the length set in `TextLength` attribute.
         /// </summary>
-        public TextLengthAdjust LengthAdjust { get; set; }
+        public TextLengthAdjust? LengthAdjust { get; set; }
 
         /// <summary>
         /// Gets or sets width that the text should be scaled to fit.
         /// </summary>
         public SvgValue TextLength { get; set; }
+
+        /// <summary>
+        /// Gets or sets the anchor of the text.
+        /// </summary>
+        public TextAnchor? TextAnchor { get; set; }
 
         /// <inheritdoc/>
         public override string Tag() => "text";
@@ -78,10 +83,20 @@ namespace SvgBlazor
             builder.AddAttribute(2, "dx", ShiftX);
             builder.AddAttribute(3, "dy", ShiftY);
             builder.AddAttribute(4, "rotate", Rotate);
-            builder.AddAttribute(5, "lengthAdjust", LengthAdjust.ToDescriptionString());
+
+            if (LengthAdjust is not null)
+            {
+                builder.AddAttribute(5, "lengthAdjust", LengthAdjust.ToDescriptionString());
+            }
+
             builder.AddAttribute(6, "textLength", TextLength);
 
-            builder.AddContent(7, Text);
+            if (TextAnchor is not null)
+            {
+                builder.AddAttribute(7, "text-anchor", TextAnchor.ToDescriptionString());
+            }
+
+            builder.AddContent(8, Text);
         }
     }
 }

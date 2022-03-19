@@ -52,6 +52,26 @@ namespace SvgBlazor.Tests
             Assert.Contains("Test string", element.TextContent);
         }
 
+        [Theory]
+        [InlineData(TextAnchor.Start, "start")]
+        [InlineData(TextAnchor.Middle, "middle")]
+        [InlineData(TextAnchor.End, "end")]
+        public void RendersSvgTextWithTextAnchor(TextAnchor anchor, string expected)
+        {
+            var comp = RenderComponent<SvgComponent>();
+
+            comp.InvokeAsync(() => comp.Instance.Add(new SvgText
+            {
+                TextAnchor = anchor,
+                Text = "Test string",
+            }));
+
+            comp.Render();
+            var element = comp.Find("text");
+            Assert.Contains(expected, element.GetAttribute("text-anchor"));
+            Assert.Contains("Test string", element.TextContent);
+        }
+
         [Fact]
         public void CopyConstructor()
         {
