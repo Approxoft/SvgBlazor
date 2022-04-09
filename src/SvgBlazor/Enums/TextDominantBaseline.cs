@@ -5,6 +5,9 @@ using System.ComponentModel;
 
 namespace SvgBlazor
 {
+    /// <summary>
+    /// Specifies the baseline used to align the text.
+    /// </summary>
     public enum TextDominantBaseline
     {
         /// <summary>
