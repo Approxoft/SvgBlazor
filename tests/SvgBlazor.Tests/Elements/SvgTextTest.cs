@@ -72,6 +72,30 @@ namespace SvgBlazor.Tests
             Assert.Contains("Test string", element.TextContent);
         }
 
+        [Theory]
+        [InlineData(TextDominantBaseline.Auto, "auto")]
+        [InlineData(TextDominantBaseline.TextBottom, "text-bottom")]
+        [InlineData(TextDominantBaseline.Alphabetic, "alphabetic")]
+        [InlineData(TextDominantBaseline.Ideographic, "ideographic")]
+        [InlineData(TextDominantBaseline.Middle, "middle")]
+        [InlineData(TextDominantBaseline.Central, "central")]
+        [InlineData(TextDominantBaseline.Mathematical, "mathematical")]
+        [InlineData(TextDominantBaseline.TextTop, "text-top")]
+        public void RendersSvgTextWithDominantBaseline(TextDominantBaseline baseline, string expected)
+        {
+            var comp = RenderComponent<SvgComponent>();
+
+            comp.InvokeAsync(() => comp.Instance.Add(new SvgText
+            {
+                DominantBaseline = baseline,
+                Text = "Test string",
+            }));
+
+            var element = comp.Find("text");
+            Assert.Contains(expected, element.GetAttribute("dominant-baseline"));
+            Assert.Contains("Test string", element.TextContent);
+        }
+
         [Fact]
         public void CopyConstructor()
         {
