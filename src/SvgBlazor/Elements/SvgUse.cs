@@ -16,8 +16,14 @@ namespace SvgBlazor
         /// </summary>
         public SvgElement Element { get; set; }
 
+        /// <summary>
+        /// Gets or sets the width of the duplicated element.
+        /// </summary>
         public SvgValue Width { get; set; }
 
+        /// <summary>
+        /// Gets or sets the height of the duplicated element.
+        /// </summary>
         public SvgValue Height { get; set; }
 
         public override string Tag() => "use";

@@ -13,16 +13,16 @@ namespace SvgBlazor.Tests.Elements
             
             comp.InvokeAsync(() => comp.Instance.Add(new SvgUse
             {
-                X = 10,
-                Y = 10,
+                X = 20,
+                Y = 30,
                 Element = new SvgCircle { Id = "circleId", CenterX = 10, CenterY = 10 },
                 Fill = new SvgFill { Color = "blue" },
             }));
 
             var element = comp.Find("use");
-			var expected = @"<use href=""#circleId"" x=""10"" y=""10"">";
-
-            element.MarkupMatches(expected);
+            Assert.Contains("#circleId", element.GetAttribute("href"));
+            Assert.Contains("20", element.GetAttribute("x"));
+            Assert.Contains("30", element.GetAttribute("y"));
         }
 	}
 }
