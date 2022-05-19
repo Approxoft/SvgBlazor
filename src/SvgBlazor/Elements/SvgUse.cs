@@ -26,8 +26,10 @@ namespace SvgBlazor
         /// </summary>
         public SvgValue Height { get; set; }
 
+        /// <inheritdoc/>
         public override string Tag() => "use";
 
+        /// <inheritdoc/>
         public override void AddAttributes(RenderTreeBuilder builder)
         {
             if (Element is null)

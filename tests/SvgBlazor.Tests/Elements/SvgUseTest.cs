@@ -4,13 +4,13 @@ using Xunit;
 
 namespace SvgBlazor.Tests.Elements
 {
-	public class SvgUseTest : TestContextWithSvgBlazorJsModule
+    public class SvgUseTest : TestContextWithSvgBlazorJsModule
     {
-		[Fact]
-		public void RendersSvgWithDuplicatedElement()
+        [Fact]
+        public void RendersSvgWithDuplicatedElement()
         {
             var comp = RenderComponent<SvgComponent>();
-            
+
             comp.InvokeAsync(() => comp.Instance.Add(new SvgUse
             {
                 X = 20,
@@ -24,5 +24,5 @@ namespace SvgBlazor.Tests.Elements
             Assert.Contains("20", element.GetAttribute("x"));
             Assert.Contains("30", element.GetAttribute("y"));
         }
-	}
+    }
 }
