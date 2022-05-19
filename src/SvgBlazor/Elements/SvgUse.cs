@@ -49,6 +49,8 @@ namespace SvgBlazor
             builder.AddAttribute(3, "y", Y);
             builder.AddAttribute(4, "width", Width);
             builder.AddAttribute(5, "height", Height);
+
+            base.AddAttributes(builder);
         }
     }
 }
