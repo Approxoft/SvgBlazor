@@ -10,7 +10,7 @@ namespace SvgBlazor.Interfaces
     /// <summary>
     /// The interface that represents the SvgElement.
     /// </summary>
-    public interface ISvgElement : ISvgEventHandler
+    public interface ISvgElement
     {
         /// <summary>
         /// Gets or sets the x position of the element.
@@ -63,17 +63,33 @@ namespace SvgBlazor.Interfaces
         void Refresh();
 
         /// <summary>
-        /// Called when the mouse cursor moves over the element.
+        /// Gets or sets the OnClick event callback.
         /// </summary>
-        /// <param name="element">Element sending the event.</param>
-        /// <param name="args">MouseEventArgs associated with the event.</param>
-        void ElementMouseOver(ISvgElement element, MouseEventArgs args);
+        public EventCallback<MouseEventArgs> OnClick { get; set; }
 
         /// <summary>
-        /// Called when the mouse cursor moves outside the element.
+        /// Gets or sets the OnMouseDown event callback.
         /// </summary>
-        /// <param name="element">Element sending the event.</param>
-        /// <param name="args">MouseEventArgs associated with the event.</param>
-        void ElementMouseOut(ISvgElement element, MouseEventArgs args);
+        public EventCallback<MouseEventArgs> OnMouseDown { get; set; }
+
+        /// <summary>
+        /// Gets or sets the OnMouseMove event callback.
+        /// </summary>
+        public EventCallback<MouseEventArgs> OnMouseMove { get; set; }
+
+        /// <summary>
+        /// Gets or sets the OnMouseUp event callback.
+        /// </summary>
+        public EventCallback<MouseEventArgs> OnMouseUp { get; set; }
+
+        /// <summary>
+        /// Gets or sets the OnMouseOver event callback.
+        /// </summary>
+        public EventCallback<MouseEventArgs> OnMouseOver { get; set; }
+
+        /// <summary>
+        /// Gets or sets the OnMouseOut event callback.
+        /// </summary>
+        public EventCallback<MouseEventArgs> OnMouseOut { get; set; }
     }
 }
