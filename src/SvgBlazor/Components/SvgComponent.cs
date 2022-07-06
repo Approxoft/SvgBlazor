@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using SvgBlazor.Interfaces;
-using SvgBlazor.Interop;
 
 namespace SvgBlazor
 {
@@ -24,13 +23,8 @@ namespace SvgBlazor
     /// </remarks>
     public class SvgComponent : ComponentBase, IAsyncDisposable
     {
-        private readonly SvgElementConnector svg;
+        private readonly Svg svg = new Svg();
         private IJSObjectReference _module;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SvgComponent"/> class.
-        /// </summary>
-        public SvgComponent() => svg = new (this);
 
         /// <summary>
         /// Gets or sets the width of the svg element.
@@ -60,25 +54,61 @@ namespace SvgBlazor
         /// Gets or sets the OnClick event callback.
         /// </summary>
         [Parameter]
-        public EventCallback<MouseEventArgs> OnClick { get; set; }
+        public EventCallback<MouseEventArgs> OnClick
+        {
+            get => svg.OnClick;
+            set => svg.OnClick = value;
+        }
 
         /// <summary>
         /// Gets or sets the OnMouseDown event callback.
         /// </summary>
         [Parameter]
-        public EventCallback<MouseEventArgs> OnMouseDown { get; set; }
+        public EventCallback<MouseEventArgs> OnMouseDown
+        {
+            get => svg.OnMouseDown;
+            set => svg.OnMouseDown = value;
+        }
 
         /// <summary>
         /// Gets or sets the OnMouseMove event callback.
         /// </summary>
         [Parameter]
-        public EventCallback<MouseEventArgs> OnMouseMove { get; set; }
+        public EventCallback<MouseEventArgs> OnMouseMove
+        {
+            get => svg.OnMouseMove;
+            set => svg.OnMouseMove = value;
+        }
 
         /// <summary>
         /// Gets or sets the OnMouseUp event callback.
         /// </summary>
         [Parameter]
-        public EventCallback<MouseEventArgs> OnMouseUp { get; set; }
+        public EventCallback<MouseEventArgs> OnMouseUp
+        {
+            get => svg.OnMouseUp;
+            set => svg.OnMouseUp = value;
+        }
+
+        /// <summary>
+        /// Gets or sets the OnMouseOver event callback.
+        /// </summary>
+        [Parameter]
+        public EventCallback<MouseEventArgs> OnMouseOver
+        {
+            get => svg.OnMouseOver;
+            set => svg.OnMouseOver = value;
+        }
+
+        /// <summary>
+        /// Gets or sets the OnMouseOut event callback.
+        /// </summary>
+        [Parameter]
+        public EventCallback<MouseEventArgs> OnMouseOut
+        {
+            get => svg.OnMouseOut;
+            set => svg.OnMouseOut = value;
+        }
 
         /// <summary>
         /// Gets or sets the child content of the component.
@@ -165,18 +195,6 @@ namespace SvgBlazor
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             builder.OpenElement(0, svg.Tag());
-            var onClickHandler = EventCallback.Factory.Create<MouseEventArgs>(this, svg.OnClickHandler);
-            builder.AddAttribute(1, "onclick", onClickHandler);
-
-            var onMouseDownHandler = EventCallback.Factory.Create<MouseEventArgs>(this, svg.OnMouseDownHandler);
-            builder.AddAttribute(2, "onmousedown", onMouseDownHandler);
-
-            var onMouseMoveHandler = EventCallback.Factory.Create<MouseEventArgs>(this, svg.OnMouseMoveHandler);
-            builder.AddAttribute(3, "onmousemove", onMouseMoveHandler);
-
-            var onMouseUpHandler = EventCallback.Factory.Create<MouseEventArgs>(this, svg.OnMouseUpHandler);
-            builder.AddAttribute(4, "onmouseup", onMouseUpHandler);
-
             svg.AddAttributes(builder);
             svg.BuildElementAdditionalSteps(builder);
             builder.CloseComponent();

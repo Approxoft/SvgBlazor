@@ -12,7 +12,7 @@ namespace SvgBlazor
     /// <summary>
     /// The base class for SVG elements.
     /// </summary>
-    public abstract class SvgElement : SvgEventHandler, ISvgElement
+    public abstract class SvgElement : ISvgElement
     {
         private ISvgElement _parent;
 
@@ -28,7 +28,6 @@ namespace SvgBlazor
         /// </summary>
         /// <param name="element">Initial SvgElement.</param>
         public SvgElement(SvgElement element)
-            : base(element)
         {
             X = element.X;
             Y = element.Y;
@@ -73,6 +72,24 @@ namespace SvgBlazor
         public SvgStroke Stroke { get; set; } = new ();
 
         /// <inheritdoc/>
+        public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+        /// <inheritdoc/>
+        public EventCallback<MouseEventArgs> OnMouseDown { get; set; }
+
+        /// <inheritdoc/>
+        public EventCallback<MouseEventArgs> OnMouseMove { get; set; }
+
+        /// <inheritdoc/>
+        public EventCallback<MouseEventArgs> OnMouseUp { get; set; }
+
+        /// <inheritdoc/>
+        public EventCallback<MouseEventArgs> OnMouseOver { get; set; }
+
+        /// <inheritdoc/>
+        public EventCallback<MouseEventArgs> OnMouseOut { get; set; }
+
+        /// <inheritdoc/>
         public abstract string Tag();
 
         /// <inheritdoc/>
@@ -100,11 +117,41 @@ namespace SvgBlazor
             builder.AddAttribute(2, "class", Class);
             builder.AddAttribute(3, "style", Style);
 
-            var onMouseOverHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseOverHandler);
-            builder.AddAttribute(4, "onmouseover", onMouseOverHandler);
+            if (OnClick.HasDelegate)
+            {
+                var onClickHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnClickHandler);
+                builder.AddAttribute(4, "onclick", onClickHandler);
+            }
 
-            var onMouseOutHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseOutHandler);
-            builder.AddAttribute(5, "onmouseout", onMouseOutHandler);
+            if (OnMouseDown.HasDelegate)
+            {
+                var onMouseDownHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseDownHandler);
+                builder.AddAttribute(5, "onmousedown", onMouseDownHandler);
+            }
+
+            if (OnMouseMove.HasDelegate)
+            {
+                var onMouseMoveHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseMoveHandler);
+                builder.AddAttribute(6, "onmousemove", onMouseMoveHandler);
+            }
+
+            if (OnMouseUp.HasDelegate)
+            {
+                var onMouseUpHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseUpHandler);
+                builder.AddAttribute(7, "onmouseup", onMouseUpHandler);
+            }
+
+            if (OnMouseOver.HasDelegate)
+            {
+                var onMouseOverHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseOverHandler);
+                builder.AddAttribute(8, "onmouseover", onMouseOverHandler);
+            }
+
+            if (OnMouseOut.HasDelegate)
+            {
+                var onMouseOutHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseOutHandler);
+                builder.AddAttribute(9, "onmouseout", onMouseOutHandler);
+            }
 
             Fill.RenderAttributes(builder);
             Stroke.RenderAttributes(builder);
@@ -119,26 +166,16 @@ namespace SvgBlazor
         /// <inheritdoc/>
         public virtual void Refresh() => _parent.Refresh();
 
-        /// <inheritdoc/>
-        public virtual void ElementMouseOver(ISvgElement element, MouseEventArgs args)
-            => _parent?.ElementMouseOver(element, args);
+        private async Task OnMouseOverHandler(MouseEventArgs args) => await OnMouseOver.InvokeAsync(args);
 
-        /// <inheritdoc/>
-        public virtual void ElementMouseOut(ISvgElement element, MouseEventArgs args)
-            => _parent?.ElementMouseOut(element, args);
+        private async Task OnMouseOutHandler(MouseEventArgs args) => await OnMouseOut.InvokeAsync(args);
 
-        /// <inheritdoc/>
-        public override async Task OnMouseOverHandler(MouseEventArgs args)
-        {
-            ElementMouseOver(this, args);
-            await base.OnMouseOverHandler(args);
-        }
+        private async Task OnClickHandler(MouseEventArgs args) => await OnClick.InvokeAsync();
 
-        /// <inheritdoc/>
-        public override async Task OnMouseOutHandler(MouseEventArgs args)
-        {
-            ElementMouseOut(this, args);
-            await base.OnMouseOutHandler(args);
-        }
+        private async Task OnMouseDownHandler(MouseEventArgs args) => await OnMouseDown.InvokeAsync(args);
+
+        private async Task OnMouseMoveHandler(MouseEventArgs args) => await OnMouseMove.InvokeAsync(args);
+
+        private async Task OnMouseUpHandler(MouseEventArgs args) => await OnMouseUp.InvokeAsync(args);
     }
 }

@@ -12,7 +12,7 @@ namespace SvgBlazor.Tests
     public class ElementTest : TestContextWithSvgBlazorJsModule
     {
         [Fact]
-        public void RendersSvgElementWithParameters()
+        public void ElementWithParameters()
         {
             var comp = RenderComponent<SvgComponent>();
 
@@ -32,44 +32,47 @@ namespace SvgBlazor.Tests
         }
 
         [Fact]
-        public void SvgElementMouseOverMouseOut()
+        public void ElementOnMouseOut()
         {
             var comp = RenderComponent<SvgComponent>();
-
             bool elementEventHandled = false;
+
             comp.InvokeAsync(() => comp.Instance.Add(new DummyElement()
             {
-                OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, (args) => { elementEventHandled = true; })
+                OnMouseOut = EventCallback.Factory.Create<MouseEventArgs>(this, (args) => { elementEventHandled = true; })
             }));
 
-            comp.Render();
+            comp.Find("dummy").MouseOut();
+            Assert.True(elementEventHandled);
+        }
+
+        [Fact]
+        public void ElementOnMouseOver()
+        {
+            var comp = RenderComponent<SvgComponent>();
+            bool elementEventHandled = false;
+
+            comp.InvokeAsync(() => comp.Instance.Add(new DummyElement()
+            {
+                OnMouseOver = EventCallback.Factory.Create<MouseEventArgs>(this, (args) => { elementEventHandled = true; })
+            }));
 
             comp.Find("dummy").MouseOver();
-            comp.Find("svg").Click();
             Assert.True(elementEventHandled);
-
-            elementEventHandled = false;
-
-            comp.Find("dummy").MouseOut();
-            comp.Find("svg").Click();
-            Assert.False(elementEventHandled);
         }
 
         [Fact]
         public void ElementOnClick()
         {
             var comp = RenderComponent<SvgComponent>();
-
             bool elementEventHandled = false;
+
             comp.InvokeAsync(() => comp.Instance.Add(new DummyElement()
             {
                 OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, (args) => { elementEventHandled = true; })
             }));
 
-            comp.Render();
-
-            comp.Find("dummy").MouseOver();
-            comp.Find("svg").Click();
+            comp.Find("dummy").Click();
             Assert.True(elementEventHandled);
         }
 
@@ -77,17 +80,14 @@ namespace SvgBlazor.Tests
         public void ElementOnMouseDown()
         {
             var comp = RenderComponent<SvgComponent>();
-
             bool elementEventHandled = false;
+
             comp.InvokeAsync(() => comp.Instance.Add(new DummyElement()
             {
                 OnMouseDown = EventCallback.Factory.Create<MouseEventArgs>(this, (args) => { elementEventHandled = true; })
             }));
 
-            comp.Render();
-
-            comp.Find("dummy").MouseOver();
-            comp.Find("svg").MouseDown();
+            comp.Find("dummy").MouseDown();
             Assert.True(elementEventHandled);
         }
 
@@ -95,17 +95,14 @@ namespace SvgBlazor.Tests
         public void ElementOnMouseUp()
         {
             var comp = RenderComponent<SvgComponent>();
-
             bool elementEventHandled = false;
+
             comp.InvokeAsync(() => comp.Instance.Add(new DummyElement()
             {
                 OnMouseUp = EventCallback.Factory.Create<MouseEventArgs>(this, (args) => { elementEventHandled = true; })
             }));
 
-            comp.Render();
-
-            comp.Find("dummy").MouseOver();
-            comp.Find("svg").MouseUp();
+            comp.Find("dummy").MouseUp();
             Assert.True(elementEventHandled);
         }
 
@@ -113,17 +110,14 @@ namespace SvgBlazor.Tests
         public void ElementOnMouseMove()
         {
             var comp = RenderComponent<SvgComponent>();
-
             bool elementEventHandled = false;
+
             comp.InvokeAsync(() => comp.Instance.Add(new DummyElement()
             {
                 OnMouseMove = EventCallback.Factory.Create<MouseEventArgs>(this, (args) => { elementEventHandled = true; })
             }));
 
-            comp.Render();
-
-            comp.Find("dummy").MouseOver();
-            comp.Find("svg").MouseMove();
+            comp.Find("dummy").MouseMove();
             Assert.True(elementEventHandled);
         }
 
