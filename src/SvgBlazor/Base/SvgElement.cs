@@ -166,46 +166,16 @@ namespace SvgBlazor
         /// <inheritdoc/>
         public virtual void Refresh() => _parent.Refresh();
 
-        /// <summary>
-        /// Handles the MouseOver event.
-        /// </summary>
-        /// <param name="args">The MouseEventArgs.</param>
-        /// <returns>Result of the asynchronous operation.</returns>
-        public async Task OnMouseOverHandler(MouseEventArgs args) => await OnMouseOver.InvokeAsync(args);
+        private async Task OnMouseOverHandler(MouseEventArgs args) => await OnMouseOver.InvokeAsync(args);
 
-        /// <summary>
-        /// Handles the MouseOut event.
-        /// </summary>
-        /// <param name="args">The MouseEventArgs.</param>
-        /// <returns>Result of the asynchronous operation.</returns>
-        public async Task OnMouseOutHandler(MouseEventArgs args) => await OnMouseOut.InvokeAsync(args);
+        private async Task OnMouseOutHandler(MouseEventArgs args) => await OnMouseOut.InvokeAsync(args);
 
-        /// <summary>
-        /// Handles the OnClick event.
-        /// </summary>
-        /// <param name="args">The MouseEventArgs.</param>
-        /// <returns>Result of the asynchronous operation.</returns>
-        public async Task OnClickHandler(MouseEventArgs args) => await OnClick.InvokeAsync();
+        private async Task OnClickHandler(MouseEventArgs args) => await OnClick.InvokeAsync();
 
-        /// <summary>
-        /// Handles the MouseDown event.
-        /// </summary>
-        /// <param name="args">The MouseEventArgs.</param>
-        /// <returns>Result of the asynchronous operation.</returns>
-        public async Task OnMouseDownHandler(MouseEventArgs args) => await OnMouseDown.InvokeAsync(args);
+        private async Task OnMouseDownHandler(MouseEventArgs args) => await OnMouseDown.InvokeAsync(args);
 
-        /// <summary>
-        /// Handles the MouseMove event.
-        /// </summary>
-        /// <param name="args">The MouseEventArgs.</param>
-        /// <returns>Result of the asynchronous operation.</returns>
-        public async Task OnMouseMoveHandler(MouseEventArgs args) => await OnMouseMove.InvokeAsync(args);
+        private async Task OnMouseMoveHandler(MouseEventArgs args) => await OnMouseMove.InvokeAsync(args);
 
-        /// <summary>
-        /// Handles the MouseUp event.
-        /// </summary>
-        /// <param name="args">The MouseEventArgs.</param>
-        /// <returns>Result of the asynchronous operation.</returns>
-        public async Task OnMouseUpHandler(MouseEventArgs args) => await OnMouseUp.InvokeAsync(args);
+        private async Task OnMouseUpHandler(MouseEventArgs args) => await OnMouseUp.InvokeAsync(args);
     }
 }
