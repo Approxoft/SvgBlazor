@@ -90,6 +90,9 @@ namespace SvgBlazor
         public EventCallback<MouseEventArgs> OnMouseOut { get; set; }
 
         /// <inheritdoc/>
+        public EventCallback<MouseEventArgs> OnMouseEnter { get; set; }
+
+        /// <inheritdoc/>
         public abstract string Tag();
 
         /// <inheritdoc/>
@@ -153,6 +156,12 @@ namespace SvgBlazor
                 builder.AddAttribute(9, "onmouseout", onMouseOutHandler);
             }
 
+            if (OnMouseEnter.HasDelegate)
+            {
+                var onMouseOutHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseOutEnterHandler);
+                builder.AddAttribute(9, "onmouseenter", onMouseOutHandler);
+            }
+
             Fill.RenderAttributes(builder);
             Stroke.RenderAttributes(builder);
         }
@@ -177,5 +186,7 @@ namespace SvgBlazor
         private async Task OnMouseMoveHandler(MouseEventArgs args) => await OnMouseMove.InvokeAsync(args);
 
         private async Task OnMouseUpHandler(MouseEventArgs args) => await OnMouseUp.InvokeAsync(args);
+
+        private async Task OnMouseOutEnterHandler(MouseEventArgs args) => await OnMouseEnter.InvokeAsync(args);
     }
 }

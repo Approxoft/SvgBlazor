@@ -91,5 +91,10 @@ namespace SvgBlazor.Interfaces
         /// Gets or sets the OnMouseOut event callback.
         /// </summary>
         public EventCallback<MouseEventArgs> OnMouseOut { get; set; }
+
+        /// <summary>
+        /// Gets or sets the OnMouseEnter event callback.
+        /// </summary>
+        public EventCallback<MouseEventArgs> OnMouseEnter { get; set; }
     }
 }
