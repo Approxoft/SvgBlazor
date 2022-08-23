@@ -110,6 +110,12 @@ namespace SvgBlazor
         public float ToFloat() => _floatValue;
 
         /// <summary>
+        /// Returns an int that represents the current object.
+        /// </summary>
+        /// <returns>The int value.</returns>
+        public int ToInt() => (int)_floatValue;
+
+        /// <summary>
         /// Returns a string that represents the current object.
         /// </summary>
         /// <remarks>

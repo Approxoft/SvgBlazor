@@ -158,8 +158,8 @@ namespace SvgBlazor
 
             if (OnMouseEnter.HasDelegate)
             {
-                var onMouseOutHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseOutEnterHandler);
-                builder.AddAttribute(9, "onmouseenter", onMouseOutHandler);
+                var onMouseEnterHandler = EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseEnterHandler);
+                builder.AddAttribute(9, "onmouseenter", onMouseEnterHandler);
             }
 
             Fill.RenderAttributes(builder);
@@ -187,6 +187,6 @@ namespace SvgBlazor
 
         private async Task OnMouseUpHandler(MouseEventArgs args) => await OnMouseUp.InvokeAsync(args);
 
-        private async Task OnMouseOutEnterHandler(MouseEventArgs args) => await OnMouseEnter.InvokeAsync(args);
+        private async Task OnMouseEnterHandler(MouseEventArgs args) => await OnMouseEnter.InvokeAsync(args);
     }
 }

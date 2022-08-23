@@ -111,6 +111,16 @@ namespace SvgBlazor
         }
 
         /// <summary>
+        /// Gets or sets the OnMouseEnter event callback.
+        /// </summary>
+        [Parameter]
+        public EventCallback<MouseEventArgs> OnMouseEnter
+        {
+            get => svg.OnMouseEnter;
+            set => svg.OnMouseEnter = value;
+        }
+
+        /// <summary>
         /// Gets or sets the child content of the component.
         /// </summary>
         [Parameter]
