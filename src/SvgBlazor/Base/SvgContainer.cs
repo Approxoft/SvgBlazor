@@ -59,7 +59,10 @@ namespace SvgBlazor
         {
             foreach (var element in _elements)
             {
-                element.BuildElement(builder);
+                if (element.IsRenderable)
+                {
+                    element.BuildElement(builder);
+                }
             }
         }
     }

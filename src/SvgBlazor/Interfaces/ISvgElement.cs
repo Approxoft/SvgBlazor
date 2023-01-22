@@ -28,6 +28,11 @@ namespace SvgBlazor.Interfaces
         ElementReference ElementReference { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether the element should be rendered.
+        /// </summary>
+        bool IsRenderable { get; set; }
+
+        /// <summary>
         /// Provides the tag to be used when rendering this element.
         /// </summary>
         /// <returns>The tag of the element.</returns>
@@ -96,5 +101,8 @@ namespace SvgBlazor.Interfaces
         /// Gets or sets the OnMouseEnter event callback.
         /// </summary>
         public EventCallback<MouseEventArgs> OnMouseEnter { get; set; }
+
+        // TODO: provide description
+        public EventCallback<WheelEventArgs> OnWheel { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Approxoft. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
@@ -93,6 +94,12 @@ namespace SvgBlazor
         public EventCallback<MouseEventArgs> OnMouseEnter { get; set; }
 
         /// <inheritdoc/>
+        public EventCallback<WheelEventArgs> OnWheel { get; set; }
+
+        /// <inheritdoc/>
+        public bool IsRenderable { get; set; } = true;
+
+        /// <inheritdoc/>
         public abstract string Tag();
 
         /// <inheritdoc/>
@@ -162,6 +169,12 @@ namespace SvgBlazor
                 builder.AddAttribute(9, "onmouseenter", onMouseEnterHandler);
             }
 
+            if (OnWheel.HasDelegate)
+            {
+                var onWheelHandler = EventCallback.Factory.Create<WheelEventArgs>(this, OnWheelHandler);
+                builder.AddAttribute(9, "onwheel", onWheelHandler);
+            }
+
             Fill.RenderAttributes(builder);
             Stroke.RenderAttributes(builder);
         }
@@ -188,5 +201,7 @@ namespace SvgBlazor
         private async Task OnMouseUpHandler(MouseEventArgs args) => await OnMouseUp.InvokeAsync(args);
 
         private async Task OnMouseEnterHandler(MouseEventArgs args) => await OnMouseEnter.InvokeAsync(args);
+
+        private async Task OnWheelHandler(WheelEventArgs args) => await OnWheel.InvokeAsync(args);
     }
 }

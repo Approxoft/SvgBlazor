@@ -39,6 +39,18 @@ namespace SvgBlazor
         public float Height { get; set; }
 
         /// <summary>
+        /// Gets or sets the optional position x of the viewbox. Defaults to zero.
+        /// </summary>
+        [Parameter]
+        public float? ViewBoxX { get; set; }
+
+        /// <summary>
+        /// Gets or sets the optional position y of the viewbox. Defaults to zero.
+        /// </summary>
+        [Parameter]
+        public float? ViewBoxY { get; set; }
+
+        /// <summary>
         /// Gets or sets the optional width of the viewbox. If not set, the `Width` value will be used.
         /// </summary>
         [Parameter]
@@ -120,6 +132,14 @@ namespace SvgBlazor
             set => svg.OnMouseEnter = value;
         }
 
+        // TODO: provide description
+        [Parameter]
+        public EventCallback<WheelEventArgs> OnWheel
+        {
+            get => svg.OnWheel;
+            set => svg.OnWheel = value;
+        }
+
         /// <summary>
         /// Gets or sets the child content of the component.
         /// </summary>
@@ -170,7 +190,7 @@ namespace SvgBlazor
         /// <param name="element">The element from which the bounding box dimension is taken.</param>
         /// <returns>The RectangleF with bounding box dimension.</returns>
         /// <exception cref="Exception">Thrown if no reference to the SvgBlazor.js object was loaded.</exception>
-        public async Task<RectangleF> GetBoundingBox(ISvgElement element)
+        public async Task<RectangleF> GetBoundingBox(ISvgElement element) // TODO: this should be removed
         {
             if (_module is null)
             {
@@ -186,10 +206,15 @@ namespace SvgBlazor
         {
             if (firstRender)
             {
-                await LoadSvgBlazorJsModule();
+               // await LoadSvgBlazorJsModule(); // TODO: this should be removed
             }
 
             await base.OnAfterRenderAsync(firstRender);
+        }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
         }
 
         /// <inheritdoc/>
@@ -199,6 +224,8 @@ namespace SvgBlazor
             svg.Height = Height;
             svg.ViewBoxHeight = ViewBoxHeight;
             svg.ViewBoxWidth = ViewBoxWidth;
+            svg.ViewBoxX = ViewBoxX;
+            svg.ViewBoxY = ViewBoxY;
         }
 
         /// <inheritdoc/>
@@ -210,7 +237,7 @@ namespace SvgBlazor
             builder.CloseComponent();
         }
 
-        private async Task LoadSvgBlazorJsModule() =>
-            _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/SvgBlazor/SvgBlazor.js");
+        //private async Task LoadSvgBlazorJsModule() => // TODO: this should be removed
+        //    _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/SvgBlazor/SvgBlazor.js");
     }
 }

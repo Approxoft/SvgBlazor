@@ -47,6 +47,18 @@ namespace SvgBlazor
         public float Height { get; set; }
 
         /// <summary>
+        /// Gets or sets the optional position x of the viewbox. Defaults to zero.
+        /// </summary>
+        [Parameter]
+        public float? ViewBoxX { get; set; }
+
+        /// <summary>
+        /// Gets or sets the optional position y of the viewbox. Defaults to zero.
+        /// </summary>
+        [Parameter]
+        public float? ViewBoxY { get; set; }
+
+        /// <summary>
         /// Gets or sets the optional width of the viewbox. If not set, the 'Width' value will be used.
         /// </summary>
         public float? ViewBoxWidth { get; set; }
@@ -63,7 +75,7 @@ namespace SvgBlazor
         public override void AddAttributes(RenderTreeBuilder builder)
         {
             base.AddAttributes(builder);
-            builder.AddAttribute(1, "viewBox", string.Format("0 0 {0} {1}", ViewBoxWidth ?? Width, ViewBoxHeight ?? Height));
+            builder.AddAttribute(1, "viewBox", string.Format("{0} {1} {2} {3}", ViewBoxX ?? 0, ViewBoxY ?? 0, ViewBoxWidth ?? Width, ViewBoxHeight ?? Height));
             builder.AddAttribute(2, "width", Width);
             builder.AddAttribute(3, "height", Height);
         }
