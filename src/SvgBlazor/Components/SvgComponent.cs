@@ -33,16 +33,16 @@ namespace SvgBlazor
         public SvgComponent() => svg = new (this);
 
         /// <summary>
-        /// Gets or sets the width of the svg element.
+        /// Gets or sets the width of the svg element. Optional.
         /// </summary>
         [Parameter]
-        public float Width { get; set; }
+        public float? Width { get; set; }
 
         /// <summary>
-        /// Gets or sets the height of the svg element.
+        /// Gets or sets the height of the svg element. Optional.
         /// </summary>
         [Parameter]
-        public float Height { get; set; }
+        public float? Height { get; set; }
 
         /// <summary>
         /// Gets or sets the optional width of the viewbox. If not set, the `Width` value will be used.
