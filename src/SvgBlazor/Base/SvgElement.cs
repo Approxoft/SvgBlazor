@@ -52,9 +52,7 @@ namespace SvgBlazor
         /// </summary>
         public string Id { get; set; }
 
-        /// <summary>
-        /// Gets or sets the element class.
-        /// </summary>
+        /// <inheritdoc/>
         public string Class { get; set; }
 
         /// <summary>
@@ -192,7 +190,7 @@ namespace SvgBlazor
 
         private async Task OnMouseOutHandler(MouseEventArgs args) => await OnMouseOut.InvokeAsync(args);
 
-        private async Task OnClickHandler(MouseEventArgs args) => await OnClick.InvokeAsync();
+        private async Task OnClickHandler(MouseEventArgs args) => await OnClick.InvokeAsync(args);
 
         private async Task OnMouseDownHandler(MouseEventArgs args) => await OnMouseDown.InvokeAsync(args);
 

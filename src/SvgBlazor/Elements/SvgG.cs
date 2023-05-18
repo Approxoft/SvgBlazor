@@ -8,17 +8,10 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace SvgBlazor
 {
-    public class SvgPoint
+    public record SvgPoint(double X, double Y)
     {
-        public SvgPoint(double x, double y)
-        {
-            X = x;
-            Y = y;
-        }
-
-        public double X { get; set; }
-
-        public double Y { get; set; }
+        public static SvgPoint operator + (SvgPoint point1, SvgPoint point2) =>
+            new SvgPoint(point1.X + point2.X, point1.Y + point2.Y);
     }
 
     /// <summary>
@@ -30,6 +23,8 @@ namespace SvgBlazor
         public SvgPoint? Translate { get; set; } // TODO: move to SvgElement
 
         public SvgPoint? Scale { get; set; } // TODO: move to SvgElement
+
+        public SvgPoint? TransformOrigin { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SvgG"/> class.
@@ -70,9 +65,9 @@ namespace SvgBlazor
 
         private string? MakeTransformOrigin() // TODO: move to seperate class + unit test
         {
-            if (Translate is not null)
+            if (TransformOrigin is not null)
             {
-                return $"{Translate.X} {Translate.Y}";
+                return $"{TransformOrigin.X} {TransformOrigin.Y}";
             }
 
             return null;

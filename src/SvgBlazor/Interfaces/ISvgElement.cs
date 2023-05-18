@@ -28,6 +28,11 @@ namespace SvgBlazor.Interfaces
         ElementReference ElementReference { get; set; }
 
         /// <summary>
+        /// Gets or sets the element class.
+        /// </summary>
+        string Class { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether the element should be rendered.
         /// </summary>
         bool IsRenderable { get; set; }

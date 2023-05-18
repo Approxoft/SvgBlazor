@@ -24,6 +24,9 @@ namespace SvgBlazor
     public class SvgComponent : ComponentBase, IAsyncDisposable
     {
         private readonly Svg svg = new Svg();
+
+        public ISvgContainer SvgContainer => svg;
+
         private IJSObjectReference _module;
 
         /// <summary>
@@ -157,7 +160,7 @@ namespace SvgBlazor
         /// <inheritdoc />
         public async ValueTask DisposeAsync()
         {
-             await _module.DisposeAsync();
+             //await _module.DisposeAsync();
         }
 
         /// <summary>
@@ -176,11 +179,17 @@ namespace SvgBlazor
         /// Removes the given element from the SvgComponent.
         /// </summary>
         /// <param name="element">Element to be removed.</param>
+        /// <param name="refreshAfterRemoval">Should refresh be called after removal.</param>
         /// <returns>The container from which the element was removed.</returns>
-        public ISvgContainer Remove(ISvgElement element)
+        public ISvgContainer Remove(ISvgElement element, bool refreshAfterRemoval = true)
         {
             svg.Remove(element);
-            Refresh();
+
+            if (refreshAfterRemoval)
+            {
+                Refresh();
+            }
+
             return svg;
         }
 
